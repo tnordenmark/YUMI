@@ -1,0 +1,35 @@
+This Sources file outlines where to find the third party tools (tools authored entirely by others) that are either used in YUMI or in the case of NSIS, used to create it.
+The binarysources.zip file can be found at http://www.pendrivelinux.com/downloads/Sources/USB-Installers/YUMI/ and contains the sources for grub.exe, syslinux.exe, 7zip, and fat32format.exe. 
+
+NSIS is the platform I used to create this tool!
+NSIS (Nullsoft Scriptable Install System):
+
+Homepage: http://nsis.sourceforge.net/Main_Page
+Binary/Source: http://nsis.sourceforge.net/Download
+
+
+grub.exe (Grub4DOS)
+
+Homepage: http://sourceforge.net/projects/grub4dos/files/
+Source: http://sourceforge.net/projects/grub4dos/files/GRUB4DOS/grub4dos%200.4.4/grub4dos-0.4.4-src.zip/download
+Binary: http://sourceforge.net/projects/grub4dos/files/GRUB4DOS/grub4dos%200.4.4/grub4dos-0.4.4.zip/download
+
+
+syslinux.exe (Syslinux)
+
+Homepage: http://syslinux.zytor.com
+Binary/Source: http://www.kernel.org/pub/linux/utils/boot/syslinux/Testing/4.06/syslinux-4.06-pre1.zip
+
+
+7z 465 (7zip):
+
+Homepage: http://www.7-zip.org
+Binary: http://downloads.sourceforge.net/sevenzip/7za465.zip
+Source: http://downloads.sourceforge.net/sevenzip/7z465.tar.bz2
+
+
+Fat32format (Fat32format.exe)
+
+Homepage: http://www.ridgecrop.demon.co.uk
+Binary: http://www.ridgecrop.demon.co.uk/download/fat32format.zip
+Source: http://www.ridgecrop.demon.co.uk/download/fat32formatsrc.zip
