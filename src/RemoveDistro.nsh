@@ -4,7 +4,7 @@
  ${If} $DistroName == "PING (Partimg Is Not Ghost)"  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\PING" 
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label PING (Partimage Is Not Ghost)" "APPEND /multiboot/menu/ping.cfg" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label PING (Partimg Is Not Ghost)" "APPEND /multiboot/menu/ping.cfg" 
  Delete "$BootDir\multiboot\menu\ping.cfg"
  
  ${ElseIf} $DistroName == "Archlinux" ;
@@ -22,7 +22,7 @@
  ${ElseIf} $DistroName == "CAELinux (Computer Aided Engineering)" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\caelinux"  
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label CAELinux" "APPEND /multiboot/menu/cae.cfg" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label CAELinux (Computer Aided Engineering)" "APPEND /multiboot/menu/cae.cfg" 
  Delete "$BootDir\multiboot\menu\cae.cfg"    
  
  ${ElseIf} $DistroName == "Tails (Anonymous Browsing)"
@@ -246,12 +246,12 @@
  RMDir /R  "$BootDir\multiboot\semplice"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Semplice" "APPEND /multiboot/menu/semplice.cfg"   
  Delete "$BootDir\multiboot\menu\semplice.cfg"  
- 
- ${ElseIf} $DistroName == "Debian Net Installer 6.0.4 32bit" ;
+
+ ${ElseIf} $DistroName == "AntiX" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- RMDir /R  "$BootDir\multiboot\debianinst"
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Debian Net Installer" "APPEND /multiboot/menu/debianinst.cfg"   
- Delete "$BootDir\multiboot\menu\debianinst.cfg"  
+ RMDir /R  "$BootDir\multiboot\antix"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label AntiX" "APPEND /multiboot/menu/antix.cfg"   
+ Delete "$BootDir\multiboot\menu\antix.cfg" 
  
  ${ElseIf} $DistroName == "Debian Live 6.0.4 Gnome 32bit" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -321,7 +321,7 @@
  ${ElseIf} $DistroName == "Kon-Boot Floppy Image"
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
  Delete "$BootDir\multiboot\konboot.img"
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Boot Konboot" "APPEND /multiboot/menu/konboot.cfg" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Konboot" "APPEND /multiboot/menu/konboot.cfg" 
  Delete "$BootDir\multiboot\menu\konboot.cfg"  
  
  ${ElseIf} $DistroName == "Linux Live Tools for OCZ"
@@ -484,8 +484,8 @@
  ${ElseIf} $DistroName == "Terralinux" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\terralinux" 
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Terralinux" "APPEND /multiboot/menu/terralinux.cfg"  
- Delete "$BootDir\multiboot\menu\terralinux.cfg"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Terralinux" "APPEND /multiboot/menu/terra.cfg"  
+ Delete "$BootDir\multiboot\menu\terra.cfg"  
  
  ${ElseIf} $DistroName == "Dreamlinux" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -552,6 +552,24 @@
  RMDir /R "$BootDir\multiboot\ubuntu1104"  
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu 11.04" "APPEND /multiboot/menu/ub1104.cfg" 
  Delete "$BootDir\multiboot\menu\ub1104.cfg"  
+ 
+ ${ElseIf} $DistroName == "KXStudio 12.04" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\KXStudio1204"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label KXStudio 12.04" "APPEND /multiboot/menu/kxstudio.cfg" 
+ Delete "$BootDir\multiboot\menu\kxstudio.cfg"   
+ 
+ ${ElseIf} $DistroName == "Ubuntu 12.10 Daily Build" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\ubuntu1210"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu 12.10" "APPEND /multiboot/menu/ub1210.cfg" 
+ Delete "$BootDir\multiboot\menu\ub1210.cfg"   
+ 
+ ${ElseIf} $DistroName == "Ubuntu 12.10 amd64 Daily Build" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\ubuntu121064"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu 12.10 amd64" "APPEND /multiboot/menu/u121064.cfg" 
+ Delete "$BootDir\multiboot\menu\u121064.cfg"    
  
  ${ElseIf} $DistroName == "Ubuntu 12.04" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -694,8 +712,8 @@
  ${ElseIf} $DistroName == "Xubuntu 11.10 amd64" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\xubuntu111064"  
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Xubuntu 11.10 amd64" "APPEND /multiboot/menu/xubuntu111064.cfg"  
- Delete "$BootDir\multiboot\menu\xubuntu111064.cfg" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Xubuntu 11.10 amd64" "APPEND /multiboot/menu/xu111064.cfg"  
+ Delete "$BootDir\multiboot\menu\xu111064.cfg" 
  
  ${ElseIf} $DistroName == "Kubuntu 11.10 amd64" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -760,8 +778,8 @@
  ${ElseIf} $DistroName == "Xubuntu 11.04 x64" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\xubuntu1104x64"  
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Xubuntu 11.04 x64" "APPEND /multiboot/menu/xubuntu1104x64.cfg"  
- Delete "$BootDir\multiboot\menu\xubuntu1104x64.cfg"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Xubuntu 11.04 x64" "APPEND /multiboot/menu/xu110464.cfg"  
+ Delete "$BootDir\multiboot\menu\xu110464.cfg"
  
  ${ElseIf} $DistroName == "Kubuntu 11.04 x64" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -853,22 +871,46 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint 13 Mate 32bit" "APPEND /multiboot/menu/mate13.cfg" 
  Delete "$BootDir\multiboot\menu\mate13.cfg"  
  
+ ${ElseIf} $DistroName == "Linux Mint 13 KDE 32bit"  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintkde1332"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint 13 KDE 32bit" "APPEND /multiboot/menu/LMKDE13.cfg" 
+ Delete "$BootDir\multiboot\menu\LMKDE13.cfg"   
+ 
+ ${ElseIf} $DistroName == "Linux Mint 13 XFCE 32bit"  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintxfce1332"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint 13 XFCE 32bit" "APPEND /multiboot/menu/LMXFCE13.cfg" 
+ Delete "$BootDir\multiboot\menu\LMXFCE13.cfg"   
+ 
+ ${ElseIf} $DistroName == "Linux Mint 13 KDE 64bit"  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintkde1364"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint 13 KDE 64bit" "APPEND /multiboot/menu/LMK1364.cfg" 
+ Delete "$BootDir\multiboot\menu\LMK1364.cfg"   
+ 
+ ${ElseIf} $DistroName == "Linux Mint 13 XFCE 64bit"  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintxfce1364"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint 13 XFCE 64bit" "APPEND /multiboot/menu/LMXF1364.cfg" 
+ Delete "$BootDir\multiboot\menu\LMXF1364.cfg"    
+ 
  ${ElseIf} $DistroName == "Linux Mint 13 Mate 64bit"  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\mintmate1364"
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint mate 13 64bit" "APPEND /multiboot/menu/mate1364.cfg" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint 13 Mate 64bit" "APPEND /multiboot/menu/mate1364.cfg" 
  Delete "$BootDir\multiboot\menu\mate1364.cfg"   
 
  ${ElseIf} $DistroName == "Linux Mint 13 Cinnamon 32bit"  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\mintcin1332"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint Cinnamon 13 32bit" "APPEND /multiboot/menu/mcin13.cfg" 
- Delete "$BootDir\multiboot\menu\mcin32.cfg"  
+ Delete "$BootDir\multiboot\menu\mcin13.cfg"  
  
  ${ElseIf} $DistroName == "Linux Mint 13 Cinnamon 64bit"  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\mintcin1364"
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint Cinnamon 64bit" "APPEND /multiboot/menu/mcin1364.cfg" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint Cinnamon 13 64bit" "APPEND /multiboot/menu/mcin1364.cfg" 
  Delete "$BootDir\multiboot\menu\mcin1364.cfg"   
  
  ${ElseIf} $DistroName == "Linux Mint 12 Gnome 32bit"  
@@ -911,7 +953,13 @@
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\pmint2"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Peppermint Two" "APPEND /multiboot/menu/pmint2.cfg"  
- Delete "$BootDir\multiboot\menu\pmint2.cfg"  
+ Delete "$BootDir\multiboot\menu\pmint2.cfg" 
+
+ ${ElseIf} $DistroName == "Peppermint Three" 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\pmint3"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Peppermint Three" "APPEND /multiboot/menu/pmint3.cfg"  
+ Delete "$BootDir\multiboot\menu\pmint3.cfg"   
 
  ${ElseIf} $DistroName == "EasyPeasy (NetBook Distro)" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -1190,7 +1238,7 @@
  Delete "$BootDir\bootmgr.efi"  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Windows Vista/7/8 Installer" "COM32 /multiboot/chain.c32 fs ntldr=/bootmgr"  
-  
+
  ${ElseIf} $DistroName == "Ultimate Boot CD (Diagnostics Tools)" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
  Delete "$BootDir\multiboot\ISOS\ubcd.iso"  
@@ -1233,6 +1281,12 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label HP Automatic Firmware Update 9.30" "APPEND --config-file=/multiboot/menu/fw930.lst" 
  Delete "$BootDir\multiboot\menu\fw930.lst"   
  
+ ${ElseIf} $DistroName == "HP Automatic Firmware Update 10.10 (DVD)" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ RMDir /R "$BootDir\multiboot\HP\fwdvd10"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label HP Automatic Firmware Update 10.10" "APPEND --config-file=/multiboot/menu/fw1010.lst" 
+ Delete "$BootDir\multiboot\menu\fw1010.lst"   
+  
 ; ##################################### ADD NEW DISTRO ######################################## 
  ${EndIf}
  

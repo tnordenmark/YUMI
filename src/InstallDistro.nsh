@@ -4,7 +4,7 @@
  ${If} $DistroName == "PING (Partimg Is Not Ghost)"  
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\PING\" -y' 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- ${WriteToFile} "label PING (Partimage Is Not Ghost)$\r$\nmenu label PING (Partimage Is Not Ghost)$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/ping.cfg" $R0
+ ${WriteToFile} "label PING (Partimg Is Not Ghost)$\r$\nmenu label PING (Partimg Is Not Ghost)$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/ping.cfg" $R0
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\ping.cfg "Menu\ping.cfg"  
@@ -31,7 +31,7 @@
  ${ElseIf} $DistroName == "CAELinux (Computer Aided Engineering)"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\caelinux\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- ${WriteToFile} "label CAELinux$\r$\nmenu label CAELinux$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/cae.cfg" $R0
+ ${WriteToFile} "label CAELinux (Computer Aided Engineering)$\r$\nmenu label CAELinux (Computer Aided Engineering)$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/cae.cfg" $R0
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\cae.cfg "Menu\cae.cfg"  
@@ -105,7 +105,7 @@
  ${ElseIf} $DistroName == "Fedora 15 KDE 32bit"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\fedoraKDE\" -y' 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
- ${WriteToFile} "label Fedora 15 KDE 64bit$\r$\nmenu label Fedora 15 KDE$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/fed15K.cfg" $R0 
+ ${WriteToFile} "label Fedora 15 KDE$\r$\nmenu label Fedora 15 KDE$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/fed15K.cfg" $R0 
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\fed15K.cfg "Menu\fed15K.cfg"  
@@ -372,14 +372,14 @@
  File /oname=$PLUGINSDIR\semplice.cfg "Menu\semplice.cfg"  
  CopyFiles "$PLUGINSDIR\semplice.cfg" "$BootDir\multiboot\menu\semplice.cfg"  
  
-; ${ElseIf} $DistroName == "Debian Net Installer 6.0.4 32bit"
-; ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\debian\" -y' 
-; ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
-; ${WriteToFile} "label Debian Net Installer$\r$\nmenu label Debian Net Installer$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/debianinst.cfg" $R0
-; SetShellVarContext all
-; InitPluginsDir
-; File /oname=$PLUGINSDIR\debianinst.cfg "Menu\debianinst.cfg"  
-; CopyFiles "$PLUGINSDIR\debianinst.cfg" "$BootDir\multiboot\menu\debianinst.cfg"  
+ ${ElseIf} $DistroName == "AntiX"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\antix\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label AntiX$\r$\nmenu label AntiX$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/antix.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\antix.cfg "Menu\antix.cfg"  
+ CopyFiles "$PLUGINSDIR\antix.cfg" "$BootDir\multiboot\menu\antix.cfg"  
  
  ${ElseIf} $DistroName == "Debian Live 6.0.4 Gnome 32bit"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\debian\" -y' 
@@ -409,7 +409,7 @@
  CopyFiles "$PLUGINSDIR\deblxde.cfg" "$BootDir\multiboot\menu\deblxde.cfg" 
  
  ${ElseIf} $DistroName == "Debian Live 6.0.4 XFCE 32bit"
- ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\debainxfce\" -y' 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\debianxfce\" -y' 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
  ${WriteToFile} "label Debian Live XFCE$\r$\nmenu label Debian Live XFCE$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/debxfce.cfg" $R0
  SetShellVarContext all
@@ -474,7 +474,7 @@
  ${ElseIf} $DistroName == "gpxe (Net Bootable Distros)"
  CopyFiles $ISOFile "$BootDir\$PathName"
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
- ${WriteToFile} "label GPXE$\r$\nmenu label Run a Linux OS from the Internet - GPXE$\r$\nMENU INDENT 1$\r$\nkernel /multiboot/gpxe.lkrn" $R0
+ ${WriteToFile} "label GPXE$\r$\nmenu label GPXE$\r$\nMENU INDENT 1$\r$\nkernel /multiboot/gpxe.lkrn" $R0
  
  ${ElseIf} $DistroName == "Kon-Boot Floppy Image"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -pkon-boot -o"$EXEDIR\TEMPYUMI" -y' 
@@ -483,7 +483,7 @@
  CopyFiles $BootDir\multiboot\FD0-konboot-v1.1-2in1\FD0-konboot-v1.1-2in1.img "$BootDir\multiboot\konboot.img"
  RMDir /R "$BootDir\multiboot\FD0-konboot-v1.1-2in1"
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
- ${WriteToFile} "label Boot Konboot$\r$\nmenu label Konboot$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/konboot.cfg" $R0 
+ ${WriteToFile} "label Konboot$\r$\nmenu label Konboot$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/konboot.cfg" $R0 
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\konboot.cfg "Menu\konboot.cfg"  
@@ -517,10 +517,8 @@
  ${WriteToFile} "label Balder DOS image (FreeDOS)$\r$\nmenu label Balder DOS image (FreeDOS)$\r$\nMENU INDENT 1$\r$\nkernel /multiboot/memdisk$\r$\nappend initrd=/multiboot/balder10.img" $R0 
  
  ${ElseIf} $DistroName == "DBAN (Hard Drive Nuker)"
- ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -o"$BootDir\multiboot\DBAN\" -y' 
-; DBAN OLD CopyFiles $ISOFile "$BootDir\$PathName" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -o"$BootDir\multiboot\DBAN\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
-; DBAN OLD ${WriteToFile} "label DBAN (Hard Drive Nuker)$\r$\nmenu label DBAN (Hard Drive Nuker)$\r$\nMENU INDENT 1$\r$\nLINUX /multiboot/memdisk$\r$\nINITRD /multiboot/ISOS/dban-1.0.7_i386.iso$\r$\nAPPEND iso raw" $R0 
  ${WriteToFile} "label DBAN (Hard Drive Nuker)$\r$\nmenu label DBAN (Hard Drive Nuker)$\r$\nMENU INDENT 1$\r$\nCONFIG /multiboot/menu/DBAN.cfg" $R0 
  SetShellVarContext all
  InitPluginsDir
@@ -915,6 +913,24 @@
  File /oname=$PLUGINSDIR\lu1104.cfg "Menu\lu1104.cfg"  
  CopyFiles "$PLUGINSDIR\lu1104.cfg" "$BootDir\multiboot\menu\lu1104.cfg"  
 
+ ${ElseIf} $DistroName == "Ubuntu 12.10 Daily Build"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntu1210\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Ubuntu 12.10$\r$\nmenu label Ubuntu 12.10$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/ub1210.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\ub1210.cfg "Menu\ub1210.cfg"  
+ CopyFiles "$PLUGINSDIR\ub1210.cfg" "$BootDir\multiboot\menu\ub1210.cfg"  
+ 
+ ${ElseIf} $DistroName == "Ubuntu 12.10 amd64 Daily Build"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntu121064\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Ubuntu 12.10 amd64$\r$\nmenu label Ubuntu 12.10 amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/u121064.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\u121064.cfg "Menu\u121064.cfg"  
+ CopyFiles "$PLUGINSDIR\u121064.cfg" "$BootDir\multiboot\menu\u121064.cfg"   
+ 
  ${ElseIf} $DistroName == "Ubuntu 12.04"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntu1204\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -1104,7 +1120,7 @@
  ${ElseIf} $DistroName == "Kubuntu 12.04 DVD amd64"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\kubuntu1204dvd64\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- ${WriteToFile} "label Kubuntu 12.04 amd64$\r$\nmenu label Kubuntu 12.04 amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/k1204dv64.cfg" $R0
+ ${WriteToFile} "label Kubuntu 12.04 DVD amd64$\r$\nmenu label Kubuntu 12.04 DVD amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/k1204dv64.cfg" $R0
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\k1204dv64.cfg "Menu\k1204dv64.cfg"  
@@ -1227,6 +1243,15 @@
  InitPluginsDir
  File /oname=$PLUGINSDIR\netb1010.cfg "Menu\netb1010.cfg"  
  CopyFiles "$PLUGINSDIR\netb1010.cfg" "$BootDir\multiboot\menu\netb1010.cfg" 
+ 
+ ${ElseIf} $DistroName == "KXStudio 12.04"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\KXStudio1204\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label KXStudio 12.04$\r$\nmenu label KXStudio 12.04$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/kxstudio.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\kxstudio.cfg "Menu\kxstudio.cfg"  
+ CopyFiles "$PLUGINSDIR\kxstudio.cfg" "$BootDir\multiboot\menu\kxstudio.cfg"  
 
  ${ElseIf} $DistroName == "Linux Mint 10" 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\mint\" -y'  
@@ -1294,16 +1319,52 @@
  ${ElseIf} $DistroName == "Linux Mint 13 Mate 32bit" 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\mintmate1332\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- ${WriteToFile} "label Linux Mint 13 Mate 32bit$\r$\nmenu label Linux Mint Mate 13 32bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/mate13.cfg" $R0
+ ${WriteToFile} "label Linux Mint 13 Mate 32bit$\r$\nmenu label Linux Mint 13 Mate 32bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/mate13.cfg" $R0
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\mate13.cfg "Menu\mate13.cfg"  
  CopyFiles "$PLUGINSDIR\mate13.cfg" "$BootDir\multiboot\menu\mate13.cfg"  
  
+ ${ElseIf} $DistroName == "Linux Mint 13 KDE 32bit" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\mintkde1332\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Linux Mint 13 KDE 32bit$\r$\nmenu label Linux Mint 13 KDE 32bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/LMKDE13.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\LMKDE13.cfg "Menu\LMKDE13.cfg"  
+ CopyFiles "$PLUGINSDIR\LMKDE13.cfg" "$BootDir\multiboot\menu\LMKDE13.cfg"   
+ 
+ ${ElseIf} $DistroName == "Linux Mint 13 XFCE 32bit" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\mintxfce1332\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Linux Mint 13 XFCE 32bit$\r$\nmenu label Linux Mint 13 XFCE 32bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/LMXFCE13.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\LMXFCE13.cfg "Menu\LMXFCE13.cfg"  
+ CopyFiles "$PLUGINSDIR\LMXFCE13.cfg" "$BootDir\multiboot\menu\LMXFCE13.cfg"  
+ 
+ ${ElseIf} $DistroName == "Linux Mint 13 KDE 64bit" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\mintkde1364\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Linux Mint 13 KDE 64bit$\r$\nmenu label Linux Mint 13 KDE 64bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/LMK1364.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\LMK1364.cfg "Menu\LMK1364.cfg"  
+ CopyFiles "$PLUGINSDIR\LMK1364.cfg" "$BootDir\multiboot\menu\LMK1364.cfg"   
+ 
+ ${ElseIf} $DistroName == "Linux Mint 13 XFCE 64bit" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\mintxfce1364\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Linux Mint 13 XFCE 64bit$\r$\nmenu label Linux Mint 13 XFCE 64bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/LMXF1364.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\LMXF1364.cfg "Menu\LMXF1364.cfg"  
+ CopyFiles "$PLUGINSDIR\LMXF1364.cfg" "$BootDir\multiboot\menu\LMXF1364.cfg"   
+ 
  ${ElseIf} $DistroName == "Linux Mint 13 Mate 64bit" 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\mintmate1364\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- ${WriteToFile} "label Linux Mint Mate 13 64bit$\r$\nmenu label Linux Mint Mate 13 64bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/mate1364.cfg" $R0
+ ${WriteToFile} "label Linux Mint 13 Mate 64bit$\r$\nmenu label Linux Mint 13 Mate 64bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/mate1364.cfg" $R0
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\mate1364.cfg "Menu\mate1364.cfg"  
@@ -1397,7 +1458,16 @@
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\pmint2.cfg "Menu\pmint2.cfg" 
- CopyFiles "$PLUGINSDIR\pmint2.cfg" "$BootDir\multiboot\menu\pmint2.cfg"   
+ CopyFiles "$PLUGINSDIR\pmint2.cfg" "$BootDir\multiboot\menu\pmint2.cfg"  
+
+ ${ElseIf} $DistroName == "Peppermint Three" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\pmint3\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Peppermint Three$\r$\nmenu label Peppermint Three$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/pmint3.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\pmint3.cfg "Menu\pmint3.cfg" 
+ CopyFiles "$PLUGINSDIR\pmint3.cfg" "$BootDir\multiboot\menu\pmint3.cfg"   
 
  ${ElseIf} $DistroName == "EasyPeasy (NetBook Distro)" 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\easypeasy\" -y'  
@@ -1411,7 +1481,7 @@
  ${ElseIf} $DistroName == "EEEBuntu (NetBook Distro)" 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\eeebuntu\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- ${WriteToFile} "label EEEBuntu (NetBook Distro)$\r$\nmenu label EEEbuntu (NetBook Distro)$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/eeebuntu.cfg" $R0
+ ${WriteToFile} "label EEEBuntu (NetBook Distro)$\r$\nmenu label EEEBuntu (NetBook Distro)$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/eeebuntu.cfg" $R0
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\eeebuntu.cfg "Menu\eeebuntu.cfg"  
@@ -1512,7 +1582,7 @@
  ${ElseIf} $DistroName == "Partition Wizard (Partition Tools)"  
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\pwiz\" -y'
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- ${WriteToFile} "label Partition Wizard 5 (Partition Tools)$\r$\nmenu label Partition Wizard (Partition Tools)$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/pwiz.cfg" $R0
+ ${WriteToFile} "label Partition Wizard (Partition Tools)$\r$\nmenu label Partition Wizard (Partition Tools)$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/pwiz.cfg" $R0
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\pwiz.cfg "Menu\pwiz.cfg"  
@@ -1897,6 +1967,18 @@
  InitPluginsDir
  File /oname=$PLUGINSDIR\fw930.lst "Menu\fw930.lst"  
  CopyFiles "$PLUGINSDIR\fw930.lst" "$BootDir\multiboot\menu\fw930.lst"  
+ 
+ ${ElseIf} $DistroName == "HP Automatic Firmware Update 10.10 (DVD)"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -o"$EXEDIR\TEMPYUMI" -y' 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$EXEDIR\TEMPYUMI\FW10*.iso" -o"$BootDir\multiboot\HP\fwdvd10\" -y' 
+ RMDir /R "$EXEDIR\TEMPYUMI"
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label HP Automatic Firmware Update 10.10$\r$\nmenu label HP Automatic Firmware Update 10.10$\r$\nMENU INDENT 1$\r$\nKERNEL /multiboot/grub.exe$\r$\nAPPEND --config-file=/multiboot/menu/fw1010.lst" $R0
+ ${AndIfNot} ${FileExists} $BootDir\multiboot\menu\fw1010.lst
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\fw1010.lst "Menu\fw1010.lst"  
+ CopyFiles "$PLUGINSDIR\fw1010.lst" "$BootDir\multiboot\menu\fw1010.lst"   
  
  ${ElseIf} $DistroName == "Slacko Puppy 5.3"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\slacko53\" -y'  

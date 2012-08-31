@@ -8,3 +8,8 @@ background=000000
 
 title --- Directly Bootable ISOs ---
 root
+
+title <-- Back to Main Menu
+root (hd0,0)
+chainloader (hd0)+1
+rootnoverify (hd0)

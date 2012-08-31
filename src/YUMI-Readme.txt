@@ -22,6 +22,12 @@ Additional instructions for MultiBootISOs can be found HERE: http://www.pendrive
 
 Changelog:
 
+08/25/12 Version 0.0.7.0: Update to support Ubuntu, Edubuntu, Xubuntu, Kubuntu 12.04.1.
+08/17/12 Version 0.0.6.9: Force YUMI to remember Drive Letter on subsequent ISO/Distro installs.
+08/15/12 Version 0.0.6.8: Added HP Automatic Firmware Update 10.10 (DVD) entry. Re-Enabled built in Fat32 Format Option per request.
+08/11/12 Version 0.0.6.7: Fixed various removal bugs. Added AntiX entry.
+08/02/12 Version 0.0.6.6: Added Ubuntu 12.10 Daily Build. Removed Internal Format Option (not necessary). Fix Linux Mint 13 Cinnamon removal bug.
+07/25/12 Version 0.0.6.5: Added Peppermint Three, KXStudio 12.04, Linux Mint 13 KDE + XFCE entries. Fixed Debian 6.04 XFCE entry.
 07/02/12 Version 0.0.6.4: Added Semplice, and Ophcrack no-tables entry. Update to support Knoppix 6.7.1 CD. Fix Liberte config to support multiple revisions. Fix Tinycore boot issue.
 06/19/12 Version 0.0.6.3: Update to support TAILS 0.12, and Liberte 2012.2. Correct missing .cfg issue with OpenSUSE.
 06/09/12 Version 0.0.6.2: Added Liberte, Knoppix 7 DVD, Web Converger, and Debian Live 6.0.4 64bit entries. Shorten cfg files to <=8 characters to prevent potential boot issues.
