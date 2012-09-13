@@ -336,7 +336,7 @@
  File /oname=$PLUGINSDIR\knoppix6.cfg "Menu\knoppix6.cfg"  
  CopyFiles "$PLUGINSDIR\knoppix6.cfg" "$BootDir\multiboot\menu\knoppix6.cfg"   
  
- ${ElseIf} $DistroName == "KNOPPIX 7 DVD"
+ ${ElseIf} $DistroName == "KNOPPIX 7"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\knoppix\" -y' 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
  ${WriteToFile} "label KNOPPIX$\r$\nmenu label KNOPPIX$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/knoppix.cfg" $R0 
@@ -352,8 +352,11 @@
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\crunchbang.cfg "Menu\crunchbang.cfg"  
- CopyFiles "$PLUGINSDIR\crunchbang.cfg" "$BootDir\multiboot\menu\crunchbang.cfg"  
- 
+ CopyFiles "$PLUGINSDIR\crunchbang.cfg" "$BootDir\multiboot\menu\crunchbang.cfg" 
+  ReadEnvStr $R0 COMSPEC ; grab commandline
+  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\crunchbang\pool\main\l\linux-kernel-di-i386-2.6\*.ude *.udeb" ; rename broken udeb files    
+  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\crunchbang\pool\main\l\linux-kernel-di-i386-2.6\*.u *.udeb" ; rename broken udeb files 
+  
  ${ElseIf} $DistroName == "Web Converger (Web Kiosk)"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\webcon\" -y' 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
@@ -573,7 +576,7 @@
  File /oname=$PLUGINSDIR\slitaz.cfg "Menu\slitaz.cfg"  
  CopyFiles "$PLUGINSDIR\slitaz.cfg" "$BootDir\multiboot\menu\slitaz.cfg" 
  
- ${ElseIf} $DistroName == "Puppy Linux (Another Tiny Distro)" 
+ ${ElseIf} $DistroName == "Lucid Puppy Linux" 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\puppy\" -y' 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  ${WriteToFile} "label Puppy$\r$\nmenu label Puppy$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/puppy.cfg" $R0
@@ -656,6 +659,24 @@
  InitPluginsDir
  File /oname=$PLUGINSDIR\ophvista.cfg "Menu\ophvista.cfg"
  CopyFiles "$PLUGINSDIR\ophvista.cfg" "$BootDir\multiboot\menu\ophvista.cfg"  
+ 
+ ${ElseIf} $DistroName == "Scientific Linux CERN 6.3"  
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\slc63\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Scientific Linux CERN 6.3$\r$\nmenu label Scientific Linux CERN 6.3$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/slc63.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\slc63.cfg "Menu\slc63.cfg"  
+ CopyFiles "$PLUGINSDIR\slc63.cfg" "$BootDir\multiboot\menu\slc63.cfg"   
+
+ ${ElseIf} $DistroName == "Calculate Linux Desktop"  
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\cld\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Calculate Linux Desktop$\r$\nmenu label Calculate Linux Desktop$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/cld.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\cld.cfg "Menu\cld.cfg"  
+ CopyFiles "$PLUGINSDIR\cld.cfg" "$BootDir\multiboot\menu\cld.cfg"  
  
  ${ElseIf} $DistroName == "YlmF OS (Looks like Windows)" 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x!isolinux -x![BOOT] -o"$BootDir\multiboot\ylmf\" -y'  
@@ -1513,6 +1534,16 @@
  InitPluginsDir
  File /oname=$PLUGINSDIR\slax.cfg "Menu\slax.cfg"  
  CopyFiles "$PLUGINSDIR\slax.cfg" "$BootDir\multiboot\menu\slax.cfg"
+ 
+ ${ElseIf} $DistroName == "WifiSlax"  
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -x!boot -o"$BootDir\" -y'  
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -ir!boot -o"$BootDir\wifislax\" -y'   
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label WifiSlax$\r$\nmenu label WifiSlax$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/wifislax.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\wifislax.cfg "Menu\wifislax.cfg"  
+ CopyFiles "$PLUGINSDIR\wifislax.cfg" "$BootDir\multiboot\menu\wifislax.cfg" 
  
  ${ElseIf} $DistroName == "Porteus"   
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\porteus\" -y' 

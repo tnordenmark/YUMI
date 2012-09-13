@@ -79,6 +79,15 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
  !insertmacro FileNames "OpenSUSE 11.4 KDE i686" multiboot\opensuseKDE\boot\syslinux\initrd 
  !insertmacro FileNames "OpenSUSE 11.4 KDE x64" multiboot\opensuseKDE64\boot\syslinux\initrd  
  
+    !insertmacro FileNames " " " "
+    !insertmacro FileNames "--- Puppy Linux 32/64 Bit ---" " "
+	!insertmacro FileNames " " " "   
+	
+ !insertmacro FileNames "Lucid Puppy Linux" multiboot\puppy\vmlinuz  
+ !insertmacro FileNames "Racy Puppy Linux" multiboot\racypuppy\vmlinuz 
+ !insertmacro FileNames "Slacko Puppy 5.3" multiboot\slacko53\vmlinuz  
+ !insertmacro FileNames "Wary Puppy Linux" multiboot\warypuppy\vmlinuz  
+ 
    !insertmacro FileNames " " " "
    !insertmacro FileNames "--- Ubuntu 32/64 Bit ---" " "
    !insertmacro FileNames " " " "
@@ -148,7 +157,8 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
  !insertmacro FileNames "AntiX" multiboot\antix\antiX\vmlinuz 	
  !insertmacro FileNames "Archlinux" multiboot\archlinux\arch\boot\i686\archiso.img
  !insertmacro FileNames "Bodhi" multiboot\bodhi\casper\vmlinuz	
- !insertmacro FileNames "CAELinux (Computer Aided Engineering)" multiboot\caelinux\casper\vmlinuz	 
+ !insertmacro FileNames "CAELinux (Computer Aided Engineering)" multiboot\caelinux\casper\vmlinuz	
+ !insertmacro FileNames "Calculate Linux Desktop" multiboot\cld\boot\vmlinuz	  
  !insertmacro FileNames "CentOS" multiboot\centos\LiveOS\squashfs.img 
  !insertmacro FileNames "CentOS 64bit" multiboot\centos64\LiveOS\squashfs.img  
  !insertmacro FileNames "Crunchbang 10" multiboot\crunchbang\live\vmlinuz1    
@@ -157,7 +167,7 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
  !insertmacro FileNames "Fuduntu" multiboot\fuduntu\isolinux\vmlinuz0
  !insertmacro FileNames "gpxe (Net Bootable Distros)" multiboot\gpxe.lkrn
  !insertmacro FileNames "KNOPPIX 6.7.1 CD" multiboot\knoppix6\KNOPPIX  
- !insertmacro FileNames "KNOPPIX 7 DVD" multiboot\knoppix\KNOPPIX  
+ !insertmacro FileNames "KNOPPIX 7" multiboot\knoppix\KNOPPIX  
  !insertmacro FileNames "KXStudio 12.04" multiboot\KXStudio1204\casper\vmlinuz 
  !insertmacro FileNames "Mandriva 2011" multiboot\mandriva\LiveOS\squashfs.img 
  !insertmacro FileNames "Netrunner" multiboot\netrunner\casper\vmlinuz 
@@ -170,13 +180,10 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
  !insertmacro FileNames "Pear Linux" multiboot\pear\casper\vmlinuz  
  !insertmacro FileNames "Pinguy OS 11" multiboot\pinguy\casper\vmlinuz 
  !insertmacro FileNames "Porteus" multiboot\porteus\boot\vmlinuz 
- !insertmacro FileNames "Puppy Linux (Another Tiny Distro)" multiboot\puppy\vmlinuz 
- !insertmacro FileNames "Racy Puppy Linux" multiboot\racypuppy\vmlinuz 
- !insertmacro FileNames "Slacko Puppy 5.3" multiboot\slacko53\vmlinuz  
- !insertmacro FileNames "Wary Puppy Linux" multiboot\warypuppy\vmlinuz 
 ; !insertmacro FileNames "Fatdog64 (64bit Puppy Linux)" multiboot\fatdog64\vmlinuz 
 ; !insertmacro FileNames "Samurai-WTF" multiboot\samurai\casper\vmlinuz  
  !insertmacro FileNames "SalineOS" multiboot\saline\live\vmlinuz  
+ !insertmacro FileNames "Scientific Linux CERN 6.3" multiboot\slc63\isolinux\vmlinuz   
  !insertmacro FileNames "Semplice Linux" multiboot\semplice\live\vmlinuz  
  !insertmacro FileNames "SLAX (Tiny Slackware Based Distro)" multiboot\Slax612\boot\vmlinuz    
  !insertmacro FileNames "Slitaz (Another Tiny Distro)" multiboot\slitaz\boot\rootfs1.gz
@@ -185,10 +192,11 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
  !insertmacro FileNames "Sugar on a Stick" multiboot\sos\isolinux\vmlinuz0 
  !insertmacro FileNames "System Rescue CD" multiboot\systemrescuecd\isolinux\rescuecd 
  !insertmacro FileNames "Tails (Anonymous Browsing)" multiboot\tails\live\vmlinuz 
- !insertmacro FileNames "Liberte (Anonymous Browsing)" multiboot\liberte\liberte\boot\syslinux\syslinux.cfg  
+ !insertmacro FileNames "Liberte (Anonymous Browsing)" multiboot\liberte\liberte\boot\syslinux\syslinux.exe 
  !insertmacro FileNames "Terralinux" multiboot\terralinux\casper\vmlinuz  
  !insertmacro FileNames "TinyCore (A Tiny Linux Distribution)" multiboot\tinycore\boot\core.gz
  !insertmacro FileNames "Ultimate Edition 3" multiboot\ultimateed\casper\vmlinuz
+ !insertmacro FileNames "WifiSlax" wifislax\boot\vmlinuz    
  !insertmacro FileNames "WifiWay 3.4" multiboot\wifiway34\boot\vmlinuz  
  !insertmacro FileNames "WifiWay 2" multiboot\wifiway\boot\vmlinuz 
  !insertmacro FileNames "XBMC" multiboot\xbmc\live\vmlinuz  
@@ -279,7 +287,7 @@ FunctionEnd
 
 Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO File name before extraction), Download2Get (Download Link), Path2Name (Final destination/Name of File), GimmeSize (Size of the File), Config2Use (Config File to Write To), File2Check (file to check for before adding Menu entry), Homepage, OfficialName
  !insertmacro SetISOFileNames "AntiX" antiX-12-486.iso "http://sourceforge.net/projects/antix-linux/files/Final/antiX-12-486.iso/download" antiX-12-486.iso "698" linux.cfg multiboot\antix\antiX\vmlinuz "http://sourceforge.net/projects/antix-linux/" "AntiX"   
- !insertmacro SetISOFileNames "Archlinux" archlinux-2011.08.19-core-dual.iso "http://mirrors.us.kernel.org/archlinux/iso/2011.08.19/archlinux-2011.08.19-core-dual.iso" archlinux-2011.08.19-core-dual.iso "673" linux.cfg multiboot\archlinux\arch\boot\i686\archiso.img "http://www.archlinux.org" "Archlinux"  
+ !insertmacro SetISOFileNames "Archlinux" archlinux*dual.iso "http://mirrors.us.kernel.org/archlinux/iso/latest/archlinux-2012.08.04-dual.iso" archlinux-dual.iso "384" linux.cfg multiboot\archlinux\arch\boot\i686\archiso.img "http://www.archlinux.org" "Archlinux"  
  !insertmacro SetISOFileNames "Bodhi" bodhi*.iso "http://sourceforge.net/projects/bodhilinux/files/latest/download" bodhi.iso "380" linux.cfg multiboot\bodhi\casper\vmlinuz "http://www.bodhilinux.com" "Bodhi"  
  !insertmacro SetISOFileNames "Dr.Web Live CD" drweb-livecd*.iso "http://download.geo.drweb.com/pub/drweb/livecd/drweb-livecd-600.iso" drweb.iso "176" antivirus.cfg boot\vmlinuz "http://www.freedrweb.com/livecd/" "Dr.Web"  
  !insertmacro SetISOFileNames "CAELinux (Computer Aided Engineering)" caelinux*.iso "ftp://cae-linux:salome@caelinux.dyndns.org/distrib/caelinux2011/caelinux2011.iso" CAE.iso "4094" linux.cfg multiboot\caelinux\casper\vmlinuz "http://caelinux.com" "CAELinux"  
@@ -330,14 +338,18 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "Debian Live 6.0.4 LXDE 64bit" debian-live-6.0.4-amd64-lxde-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/amd64/iso-hybrid/debian-live-6.0.4-amd64-lxde-desktop.iso" debian-live-664-lxde.iso "789" linux.cfg multiboot\debianlxde64\live\vmlinuz "http://live.debian.net" "Debian Live"
  !insertmacro SetISOFileNames "Debian Live 6.0.4 XFCE 64bit" debian-live-6.0.4-amd64-xfce-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/amd64/iso-hybrid/debian-live-6.0.4-amd64-xfce-desktop.iso" debian-live-664-xfce.iso "809" linux.cfg multiboot\debianxfce64\live\vmlinuz "http://live.debian.net" "Debian Live"
  !insertmacro SetISOFileNames "Web Converger (Web Kiosk)" webc*.iso "http://dl.webconverger.com/latest.iso" Webc.iso "426" linux.cfg multiboot\webcon\live\vmlinuz "http://webconverger.com/" "Web Converger"
+;Revisit !insertmacro SetISOFileNames "Calculate Linux Desktop" cld*.iso "ftp://ftp.gtlib.gatech.edu/pub/calculate/CLDG/12.0/i686/cldg-12.0-i686.iso" cld*.iso "1800" linux.cfg multiboot\cld\boot\vmlinuz "http://www.calculate-linux.org/" "Calculate Linux"
+ !insertmacro SetISOFileNames "WifiSlax" wifislax*.iso "http://www.downloadwireless.net/isos/wifislax-4.2-final.iso" wifislax*.iso "393" linux.cfg wifislax\boot\vmlinuz "http://www.wifislax.com" "WifiSlax"
 
+ !insertmacro SetISOFileNames "Scientific Linux CERN 6.3" boot.iso "http://linux.web.cern.ch/linux/scientific6/docs/repository/cern/slc6X/x86_64/images/boot.iso" boot.iso "231" linux.cfg multiboot\slc63\isolinux\vmlinuz "http://linux.web.cern.ch/linux/" "Scientific Linux"
  !insertmacro SetISOFileNames "Tails (Anonymous Browsing)" tails*.iso "https://archive.torproject.org/amnesia.boum.org/tails/stable/tails-i386-0.12/tails-i386-0.12.iso" tails.iso "764" linux.cfg multiboot\tails\live\vmlinuz "http://amnesia.boum.org" "Tails"
  !insertmacro SetISOFileNames "Offline NT Password & Registy Editor" cd110511.zip "http://pogostick.net/~pnh/ntpasswd/cd110511.zip" cd110511.zip "8" system.cfg multiboot\offnt\initrd.cgz "http://www.pogostick.net/~pnh/ntpasswd/" "Offline NT"
  !insertmacro SetISOFileNames "TinyCore (A Tiny Linux Distribution)" tinycore-current.iso "http://distro.ibiblio.org/tinycorelinux/4.x/x86/release/TinyCore-current.iso" TinyCore-current.iso "10" linux.cfg multiboot\tinycore\boot\core.gz "http://www.tinycorelinux.com" "TinyCore"
  !insertmacro SetISOFileNames "MultiCore" multicore-current.iso "http://distro.ibiblio.org/pub/linux/distributions/tinycorelinux/3.x/release/multicore-current.iso" multicore-current.iso "46" linux.cfg multiboot\multicore\boot\microcore.gz "http://www.tinycorelinux.com" "MultiCore"
 
  !insertmacro SetISOFileNames "Slitaz (Another Tiny Distro)" slitaz-4.0.iso "http://distro.ibiblio.org/slitaz/iso/4.0/slitaz-4.0.iso" slitaz.iso "36" linux.cfg multiboot\slitaz\boot\rootfs1.gz "http://www.slitaz.org" "SliTaZ"
- !insertmacro SetISOFileNames "Puppy Linux (Another Tiny Distro)" lupu-5*.iso "http://distro.ibiblio.org/pub/linux/distributions/puppylinux/puppy-5.2.8/lupu-528.iso" lupu.iso "129" linux.cfg multiboot\puppy\vmlinuz "http://www.puppylinux.org" "Puppy Linux"
+
+ !insertmacro SetISOFileNames "Lucid Puppy Linux" lupu-5*.iso "http://distro.ibiblio.org/pub/linux/distributions/puppylinux/puppy-5.2.8/lupu-528.005.iso" lupu.iso "133" linux.cfg multiboot\puppy\vmlinuz "http://www.puppylinux.org" "Puppy Linux"
  !insertmacro SetISOFileNames "Fatdog64 (64bit Puppy Linux)" Fatdog64*.iso "http://distro.ibiblio.org/pub/linux/distributions/fatdog/iso/Fatdog64-521.iso" Fatdog64.iso "195" linux.cfg multiboot\fatdog64\vmlinuz "http://www.puppylinuxforum.org/thread-180.html" "Fatdog64"
  !insertmacro SetISOFileNames "Racy Puppy Linux" racy-5*.iso "http://distro.ibiblio.org/quirky/racy-5.2.2/racy-5.2.2.iso" racy.iso "112" linux.cfg multiboot\racypuppy\vmlinuz "http://puppylinux.org/main/New%20Racy%20Puppy.htm" "Racy Puppy Linux" 
  !insertmacro SetISOFileNames "Slacko Puppy 5.3" slacko*.iso "http://ftp.nluug.nl/ftp/pub/os/Linux/distr/puppylinux/puppy-5.3.1/slacko-5.3.1-SCSI-MAIN.iso" slacko.iso "126" linux.cfg multiboot\slacko53\vmlinuz "http://puppylinux.org/wikka/Puppy53" "Slacko Puppy 5.3" 
@@ -357,7 +369,7 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "Sugar on a Stick" Fedora-14-i686-Live-SoaS.iso "http://download.fedoraproject.org/pub/alt/spins/linux/releases/14/Spins/i686/Fedora-14-i686-Live-SoaS.iso" Fedora-14-i686-Live-SoaS.iso "477" linux.cfg multiboot\sos\isolinux\vmlinuz0 "http://wiki.sugarlabs.org/go/Sugar_on_a_Stick" "Sugar On A Stick"
  !insertmacro SetISOFileNames "Rip Linux (Recovery Distro)" RIPLinuX*.iso "http://www.tux.org/pub/people/kent-robotti/looplinux/rip/" RIPLinuX.iso "110" system.cfg multiboot\rip\boot\rootfs.cgz "http://www.tux.org/pub/people/kent-robotti/looplinux/rip/" "RIP Linux"
  !insertmacro SetISOFileNames "KNOPPIX 6.7.1 CD" KNOPPIX_V6.7.1CD-*.iso "ftp://mirrors.kernel.org/knoppix-dvd/CD/KNOPPIX_V6.7.1CD-2011-09-14-EN.iso" KNOPPIX_V6.7.1CD.iso "700" linux.cfg multiboot\knoppix6\KNOPPIX "http://knopper.net" "KNOPPIX"
- !insertmacro SetISOFileNames "KNOPPIX 7 DVD" KNOPPIX_V7.0*.iso "http://ftp.knoppix.nl/os/Linux/distr/knoppix/DVD/KNOPPIX_V7.0.2DVD-2012-05-30-EN.iso" KNOPPIX_V7.iso "4084" linux.cfg multiboot\knoppix\KNOPPIX "http://knopper.net" "KNOPPIX"
+ !insertmacro SetISOFileNames "KNOPPIX 7" KNOPPIX_V7.0*.iso "http://ftp.knoppix.nl/os/Linux/distr/knoppix/KNOPPIX_V7.0.4CD-2012-08-20-EN.iso" KNOPPIX_V7.iso "700" linux.cfg multiboot\knoppix\KNOPPIX "http://knopper.net" "KNOPPIX"
  !insertmacro SetISOFileNames "Ultimate Boot CD (Diagnostics Tools)" ubcd5*.iso "http://lug.mtu.edu/ubcd/ubcd511.iso" multiboot\ISOS\ubcd.iso "360" system.cfg multiboot\ISOS\ubcd.iso "http://www.ultimatebootcd.com" "Ultimate Boot CD"
  !insertmacro SetISOFileNames "Ophcrack (no tables)" ophcrack-notables-livecd-3.4.0.iso "http://sourceforge.net/projects/ophcrack/files/ophcrack-livecd/3.4.0/ophcrack-notables-livecd-3.4.0.iso/download" ophcrack-notables-livecd-3.4.0.iso "47" system.cfg multiboot\ophcracknt\boot\rootfs.gz "http://ophcrack.sourceforge.net" "Ophcrack"
  !insertmacro SetISOFileNames "Ophcrack XP (Password Finder)" ophcrack-xp-livecd-3.4.0.iso "http://downloads.sourceforge.net/ophcrack/ophcrack-xp-livecd-3.4.0.iso" ophcrack-xp-livecd-3.4.0.iso "425" system.cfg multiboot\ophcrack\boot\rootfs.gz "http://ophcrack.sourceforge.net" "Ophcrack"
@@ -367,7 +379,7 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "Deft 7 (Forensics)" deft*7.1.iso "ftp://ftp.cc.uoc.gr/mirrors/linux/deftlinux/deft7.1.iso" deft7.1.iso "2432" system.cfg multiboot\deft\casper\vmlinuz "http://www.deftlinux.net/" "Deft"
  !insertmacro SetISOFileNames "Matriux (Penetration Testing)" Matriux-Krypton*.iso "http://sourceforge.net/projects/matriux/files/matriux-krypton-v1-2/Matriux-Krypton-v1.2.iso/download" Matriux.iso "2217" system.cfg multiboot\matriux\live\vmlinuz "http://www.matriux.com" "Matriux"
  !insertmacro SetISOFileNames "Pear Linux" comice_os*.iso "http://sourceforge.net/projects/pearoslinux/files/latest/download" comice_os.iso "1122" linux.cfg multiboot\pear\casper\vmlinuz "http://pear-os-linux.fr/" "Pear Linux"
- !insertmacro SetISOFileNames "Liberte (Anonymous Browsing)" liberte-2012.2.zip "http://sourceforge.net/projects/liberte/files/2012.2/liberte-2012.2.zip/download" Liberte.zip "219" linux.cfg multiboot\liberte\liberte\boot\syslinux\isolinux.cfg "http://dee.su/liberte" "Liberte"
+ !insertmacro SetISOFileNames "Liberte (Anonymous Browsing)" liberte-2012*.zip "http://sourceforge.net/projects/liberte/files/2012.3/liberte-2012.3.zip/download" Liberte.zip "219" linux.cfg multiboot\liberte\liberte\boot\syslinux\syslinux.exe "http://dee.su/liberte" "Liberte"
 
  !insertmacro SetISOFileNames "Fuduntu" Fuduntu-2012.1-i686-LiveDVD.iso "http://sourceforge.net/projects/fuduntu/files/latest/download" fuduntu.iso "894" linux.cfg multiboot\fuduntu\isolinux\vmlinuz0 "http://www.fuduntu.org/" "Fuduntu"
  !insertmacro SetISOFileNames "KXStudio 12.04" KXStudio_12.04*.iso "http://superb-sea2.dl.sourceforge.net/project/kxstudio/Live/KXStudio_12.04-LiveDVD_32bit.iso" KXStudio.iso "1632" linux.cfg multiboot\KXStudio1204\casper\vmlinuz "http://kxstudio.sourceforge.net/Main_Page" "KXStudio"
@@ -380,8 +392,8 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
 
  !insertmacro SetISOFileNames "Xubuntu 12.04" xubuntu-12.04*desktop-i386.iso "http://cdimage.ubuntu.com/xubuntu/releases/12.04.1/release/xubuntu-12.04.1-desktop-i386.iso" xubuntu-12.04-desktop-i386.iso "680" linux.cfg multiboot\xubuntu1204\casper\vmlinuz "http://xubuntu.org" "Xubuntu"
  !insertmacro SetISOFileNames "Kubuntu 12.04" kubuntu-12.04*desktop-i386.iso "http://cdimage.ubuntu.com/kubuntu/releases/12.04.1/release/kubuntu-12.04.1-desktop-i386.iso" kubuntu-12.04-desktop-i386.iso "698" linux.cfg multiboot\kubuntu1204\casper\vmlinuz "http://kubuntu.org" "Kubuntu"
- !insertmacro SetISOFileNames "Kubuntu 12.04 DVD" kubuntu-12.04*dvd-i386.iso "http://cdimage.ubuntu.com/kubuntu/releases/precise/release/kubuntu-12.04-dvd-i386.iso" kubuntu-12.04-dvd-i386.iso "3300" linux.cfg multiboot\kubuntu1204dvd\casper\vmlinuz "http://kubuntu.org" "Kubuntu"
- !insertmacro SetISOFileNames "Kubuntu 12.04 DVD amd64" kubuntu*12.04-dvd-amd64.iso "http://cdimage.ubuntu.com/kubuntu/releases/precise/release/kubuntu-12.04-dvd-amd64.iso" kubuntu-12.04-dvd-amd64.iso "3200" linux.cfg multiboot\kubuntu1204dvd64\casper\vmlinuz "http://kubuntu.org" "Kubuntu"
+ !insertmacro SetISOFileNames "Kubuntu 12.04 DVD" kubuntu-12.04*dvd-i386.iso "http://cdimage.ubuntu.com/kubuntu/releases/precise/release/kubuntu-12.04.1-dvd-i386.iso" kubuntu-12.04-dvd-i386.iso "3300" linux.cfg multiboot\kubuntu1204dvd\casper\vmlinuz "http://kubuntu.org" "Kubuntu"
+ !insertmacro SetISOFileNames "Kubuntu 12.04 DVD amd64" kubuntu*12.04-dvd-amd64.iso "http://cdimage.ubuntu.com/kubuntu/releases/precise/release/kubuntu-12.04.1-dvd-amd64.iso" kubuntu-12.04-dvd-amd64.iso "3200" linux.cfg multiboot\kubuntu1204dvd64\casper\vmlinuz "http://kubuntu.org" "Kubuntu"
 
  !insertmacro SetISOFileNames "Lubuntu 12.04" lubuntu-12.04*desktop-i386.iso "http://cdimages.ubuntu.com/lubuntu/releases/12.04/release/lubuntu-12.04-desktop-i386.iso" lubuntu-12.04-desktop-i386.iso "688" linux.cfg multiboot\lubuntu1204\casper\vmlinuz "http://lubuntu.net" "Lubuntu" 
  !insertmacro SetISOFileNames "Mythbuntu 12.04" mythbuntu-12.04*desktop-i386.iso "http://cdimage.ubuntu.com/mythbuntu/releases/12.04.1/release/mythbuntu-12.04.1-desktop-i386.iso" mythbuntu-12.04-desktop-i386.iso "667" linux.cfg multiboot\mythbuntu1204\casper\vmlinuz "http://www.mythbuntu.org" "Mythbuntu"

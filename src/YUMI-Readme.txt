@@ -22,6 +22,7 @@ Additional instructions for MultiBootISOs can be found HERE: http://www.pendrive
 
 Changelog:
 
+09/05/12 Version 0.0.7.1: Added Scientific Linux CERN 6.3 and WifiSlax entries. Update to support Lucid Puppy v5.2.8, Archlinux 2012.08.04, Liberte 2012.3.
 08/25/12 Version 0.0.7.0: Update to support Ubuntu, Edubuntu, Xubuntu, Kubuntu 12.04.1.
 08/17/12 Version 0.0.6.9: Force YUMI to remember Drive Letter on subsequent ISO/Distro installs.
 08/15/12 Version 0.0.6.8: Added HP Automatic Firmware Update 10.10 (DVD) entry. Re-Enabled built in Fat32 Format Option per request.

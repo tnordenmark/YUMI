@@ -223,7 +223,7 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label KNOPPIX 6" "APPEND /multiboot/menu/knoppix6.cfg"   
  Delete "$BootDir\multiboot\menu\knoppix6.cfg"   
  
- ${ElseIf} $DistroName == "KNOPPIX 7 DVD" ;
+ ${ElseIf} $DistroName == "KNOPPIX 7" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
  RMDir /R "$BootDir\multiboot\knoppix"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label KNOPPIX" "APPEND /multiboot/menu/knoppix.cfg"   
@@ -370,41 +370,47 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Tinycore" "APPEND /multiboot/menu/tinycore.cfg"   
  Delete "$BootDir\multiboot\menu\tinycore.cfg" 
  
- ${ElseIf} $DistroName == "MultiCore" ;
+ ${ElseIf} $DistroName == "MultiCore" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\multicore" 
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Multicore" "APPEND /multiboot/menu/multicore.cfg"   
  Delete "$BootDir\multiboot\menu\multicore.cfg"  
  
- ${ElseIf} $DistroName == "Slitaz (Another Tiny Distro)" ;
+ ${ElseIf} $DistroName == "Slitaz (Another Tiny Distro)" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\slitaz"  
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label SliTaz 4.0" "APPEND /multiboot/menu/slitaz.cfg" 
  Delete "$BootDir\multiboot\menu\slitaz.cfg" 
  
- ${ElseIf} $DistroName == "Puppy Linux (Another Tiny Distro)" ;
+ ${ElseIf} $DistroName == "Lucid Puppy Linux" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\puppy"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Puppy" "APPEND /multiboot/menu/puppy.cfg"
  Delete "$BootDir\multiboot\menu\puppy.cfg" 
  
- ${ElseIf} $DistroName == "Fatdog64 (64bit Puppy Linux)" ;
+ ${ElseIf} $DistroName == "Fatdog64 (64bit Puppy Linux)" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\fatdog64"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Fatdog64" "APPEND /multiboot/menu/fatdog64.cfg"
  Delete "$BootDir\multiboot\menu\fatdog64.cfg"  
 
- ${ElseIf} $DistroName == "Wary Puppy Linux" ;
+ ${ElseIf} $DistroName == "Wary Puppy Linux" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\warypuppy"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Wary Puppy" "APPEND /multiboot/menu/warypup.cfg"
  Delete "$BootDir\multiboot\menu\warypup.cfg"   
  
- ${ElseIf} $DistroName == "Racy Puppy Linux" ;
+ ${ElseIf} $DistroName == "Racy Puppy Linux" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\racypuppy"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Racy Puppy" "APPEND /multiboot/menu/racypuppy.cfg"
  Delete "$BootDir\multiboot\menu\racypuppy.cfg"  
+ 
+ ${ElseIf} $DistroName == "Scientific Linux CERN 6.3" 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\slc63"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Scientific Linux CERN 6.3" "APPEND /multiboot/menu/slc63.cfg"
+ Delete "$BootDir\multiboot\menu\slc63.cfg"  
 
  ${ElseIf} $DistroName == "Damn Small Linux (DSL)" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -990,6 +996,12 @@
  RMDir /R "$BootDir\multiboot\Slax612" 
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label SLAX" "APPEND /multiboot/menu/slax.cfg"  
  Delete "$BootDir\multiboot\menu\slax.cfg"
+ 
+ ${ElseIf} $DistroName == "WifiSlax"   
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\wifislax" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label WifiSlax" "APPEND /multiboot/menu/wifislax.cfg"  
+ Delete "$BootDir\multiboot\menu\wifislax.cfg" 
  
  ${ElseIf} $DistroName == "Porteus"   
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
