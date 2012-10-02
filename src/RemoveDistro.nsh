@@ -388,11 +388,17 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Puppy" "APPEND /multiboot/menu/puppy.cfg"
  Delete "$BootDir\multiboot\menu\puppy.cfg" 
  
- ${ElseIf} $DistroName == "Fatdog64 (64bit Puppy Linux)" 
+ ${ElseIf} $DistroName == "Fatdog64 (Firefox)" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- RMDir /R "$BootDir\multiboot\fatdog64"
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Fatdog64" "APPEND /multiboot/menu/fatdog64.cfg"
- Delete "$BootDir\multiboot\menu\fatdog64.cfg"  
+ RMDir /R "$BootDir\multiboot\fatdogff"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Fatdog64 Firefox" "APPEND /multiboot/menu/fatdogff.cfg"
+ Delete "$BootDir\multiboot\menu\fatdogff.cfg"   
+ 
+ ${ElseIf} $DistroName == "Fatdog64 (Seamonkey)" 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\fatdogsm"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Fatdog64 Seamonkey" "APPEND /multiboot/menu/fatdogsm.cfg"
+ Delete "$BootDir\multiboot\menu\fatdogsm.cfg"  
 
  ${ElseIf} $DistroName == "Wary Puppy Linux" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -1233,10 +1239,12 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Slacko Puppy 5.3" "APPEND /multiboot/menu/slacko53.cfg"  
  Delete "$BootDir\multiboot\menu\slacko53.cfg"    
   
- ${ElseIf} $DistroName == "Hiren's Boot CD" 
+ ${ElseIf} $DistroName == "Hiren's Boot CD 15.X" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\HBCD"  
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Hiren's Boot CD" "COM32 /multiboot/chain.c32 fs grldr=/HBCD/grldr"   
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Hiren's Boot CD" "COM32 /multiboot/chain.c32 fs grldr=/HBCD/grldr"  ; to remove older version entry!
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Hiren's Boot CD 15.X" "COM32 /HBCD/Boot/chain.c32 fs grldr=/HBCD/grldr"   
+
  
  ${ElseIf} $DistroName == "Windows Vista/7/8 Installer" 
  RMDir /R "$BootDir\sources"  

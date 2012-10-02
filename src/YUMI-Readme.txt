@@ -22,6 +22,9 @@ Additional instructions for MultiBootISOs can be found HERE: http://www.pendrive
 
 Changelog:
 
+09/26/12 Version 0.0.7.4: Update to fix Hirens 15.1 entry.
+09/21/12 Version 0.0.7.3: Update to use Syslinux 4.06-pre7 for better boot support. Update to support DBAN 2.2.7. 
+09/18/12 Version 0.0.7.2: Update to support System Rescue CD 3.0.0 (via fat32 formatted USB only!). Added FatDog64.
 09/05/12 Version 0.0.7.1: Added Scientific Linux CERN 6.3 and WifiSlax entries. Update to support Lucid Puppy v5.2.8, Archlinux 2012.08.04, Liberte 2012.3.
 08/25/12 Version 0.0.7.0: Update to support Ubuntu, Edubuntu, Xubuntu, Kubuntu 12.04.1.
 08/17/12 Version 0.0.6.9: Force YUMI to remember Drive Letter on subsequent ISO/Distro installs.

@@ -18,7 +18,7 @@ Binary: http://sourceforge.net/projects/grub4dos/files/GRUB4DOS/grub4dos%200.4.4
 syslinux.exe (Syslinux)
 
 Homepage: http://syslinux.zytor.com
-Binary/Source: http://www.kernel.org/pub/linux/utils/boot/syslinux/Testing/4.06/syslinux-4.06-pre1.zip
+Binary/Source: http://www.kernel.org/pub/linux/utils/boot/syslinux/Testing/4.06/syslinux-4.06-pre7.zip
 
 
 7z 465 (7zip):

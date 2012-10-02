@@ -158,7 +158,7 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
  !insertmacro FileNames "Archlinux" multiboot\archlinux\arch\boot\i686\archiso.img
  !insertmacro FileNames "Bodhi" multiboot\bodhi\casper\vmlinuz	
  !insertmacro FileNames "CAELinux (Computer Aided Engineering)" multiboot\caelinux\casper\vmlinuz	
- !insertmacro FileNames "Calculate Linux Desktop" multiboot\cld\boot\vmlinuz	  
+; !insertmacro FileNames "Calculate Linux Desktop" multiboot\cld\boot\vmlinuz	  
  !insertmacro FileNames "CentOS" multiboot\centos\LiveOS\squashfs.img 
  !insertmacro FileNames "CentOS 64bit" multiboot\centos64\LiveOS\squashfs.img  
  !insertmacro FileNames "Crunchbang 10" multiboot\crunchbang\live\vmlinuz1    
@@ -180,7 +180,8 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
  !insertmacro FileNames "Pear Linux" multiboot\pear\casper\vmlinuz  
  !insertmacro FileNames "Pinguy OS 11" multiboot\pinguy\casper\vmlinuz 
  !insertmacro FileNames "Porteus" multiboot\porteus\boot\vmlinuz 
-; !insertmacro FileNames "Fatdog64 (64bit Puppy Linux)" multiboot\fatdog64\vmlinuz 
+ !insertmacro FileNames "Fatdog64 (Firefox)" multiboot\fatdogff\vmlinuz  
+ !insertmacro FileNames "Fatdog64 (Seamonkey)" multiboot\fatdogsm\vmlinuz 
 ; !insertmacro FileNames "Samurai-WTF" multiboot\samurai\casper\vmlinuz  
  !insertmacro FileNames "SalineOS" multiboot\saline\live\vmlinuz  
  !insertmacro FileNames "Scientific Linux CERN 6.3" multiboot\slc63\isolinux\vmlinuz   
@@ -190,7 +191,7 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
  !insertmacro FileNames "Sn0wL1nuX 11" multiboot\snowlinux\casper\vmlinuz
  !insertmacro FileNames "Sn0wL1nuX 11 64bit" multiboot\snowlinux64\casper\vmlinuz
  !insertmacro FileNames "Sugar on a Stick" multiboot\sos\isolinux\vmlinuz0 
- !insertmacro FileNames "System Rescue CD" multiboot\systemrescuecd\isolinux\rescuecd 
+ !insertmacro FileNames "System Rescue CD" multiboot\systemrescuecd\isolinux\rescue64
  !insertmacro FileNames "Tails (Anonymous Browsing)" multiboot\tails\live\vmlinuz 
  !insertmacro FileNames "Liberte (Anonymous Browsing)" multiboot\liberte\liberte\boot\syslinux\syslinux.exe 
  !insertmacro FileNames "Terralinux" multiboot\terralinux\casper\vmlinuz  
@@ -271,7 +272,7 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
  !insertmacro FileNames "HP Automatic Firmware Update 9.30 (DVD)" multiboot\HP\fwdvd\system\initrd.img
  !insertmacro FileNames "HP Automatic Firmware Update 10.10 (DVD)" multiboot\HP\fwdvd10\system\initrd.img 
 
- !insertmacro FileNames "Hiren's Boot CD" HBCD\menu.lst  ; does install to root of drive
+ !insertmacro FileNames "Hiren's Boot CD 15.X" HBCD\menu.lst  ; does install to root of drive
  !insertmacro FileNames "Kon-Boot Floppy Image" multiboot\konboot.img
  !insertmacro FileNames "Windows Vista/7/8 Installer" bootmgr  ; does install to root of drive
  
@@ -350,7 +351,8 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "Slitaz (Another Tiny Distro)" slitaz-4.0.iso "http://distro.ibiblio.org/slitaz/iso/4.0/slitaz-4.0.iso" slitaz.iso "36" linux.cfg multiboot\slitaz\boot\rootfs1.gz "http://www.slitaz.org" "SliTaZ"
 
  !insertmacro SetISOFileNames "Lucid Puppy Linux" lupu-5*.iso "http://distro.ibiblio.org/pub/linux/distributions/puppylinux/puppy-5.2.8/lupu-528.005.iso" lupu.iso "133" linux.cfg multiboot\puppy\vmlinuz "http://www.puppylinux.org" "Puppy Linux"
- !insertmacro SetISOFileNames "Fatdog64 (64bit Puppy Linux)" Fatdog64*.iso "http://distro.ibiblio.org/pub/linux/distributions/fatdog/iso/Fatdog64-521.iso" Fatdog64.iso "195" linux.cfg multiboot\fatdog64\vmlinuz "http://www.puppylinuxforum.org/thread-180.html" "Fatdog64"
+ !insertmacro SetISOFileNames "Fatdog64 (Firefox)" Fatdog64*Firefox.iso "http://ftp.nluug.nl/ibiblio/distributions/fatdog/iso/Fatdog64-601-Firefox.iso" Fatdog64ff.iso "197" linux.cfg multiboot\fatdogff\vmlinuz "http://www.puppylinuxforum.org/thread-180.html" "Fatdog64"
+ !insertmacro SetISOFileNames "Fatdog64 (Seamonkey)" Fatdog64*Seamonkey.iso "http://ftp.nluug.nl/ibiblio/distributions/fatdog/iso/Fatdog64-601-Seamonkey.iso" Fatdog64sm.iso "202" linux.cfg multiboot\fatdogsm\vmlinuz "http://www.puppylinuxforum.org/thread-180.html" "Fatdog64"
  !insertmacro SetISOFileNames "Racy Puppy Linux" racy-5*.iso "http://distro.ibiblio.org/quirky/racy-5.2.2/racy-5.2.2.iso" racy.iso "112" linux.cfg multiboot\racypuppy\vmlinuz "http://puppylinux.org/main/New%20Racy%20Puppy.htm" "Racy Puppy Linux" 
  !insertmacro SetISOFileNames "Slacko Puppy 5.3" slacko*.iso "http://ftp.nluug.nl/ftp/pub/os/Linux/distr/puppylinux/puppy-5.3.1/slacko-5.3.1-SCSI-MAIN.iso" slacko.iso "126" linux.cfg multiboot\slacko53\vmlinuz "http://puppylinux.org/wikka/Puppy53" "Slacko Puppy 5.3" 
  !insertmacro SetISOFileNames "Wary Puppy Linux" wary-5*.iso "http://distro.ibiblio.org/quirky/wary-5.1.3/wary-5.1.3.iso" wary.iso "119" linux.cfg multiboot\warypuppy\vmlinuz "http://puppylinux.org/main/Long-Term-Supported%20WaryPuppy.htm" "Wary Puppy Linux"
@@ -522,7 +524,7 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
 
  !insertmacro SetISOFileNames "Jolicloud (NetBook Distro)" joli*.iso "http://www.jolicloud.com/download/jolicloud-iso" jolicloud.iso "691" netbook.cfg multiboot\jolicloud\casper\vmlinuz "http://www.jolicloud.com" "Jolicloud"
  !insertmacro SetISOFileNames "EASEUS Disk Copy (Disk Cloning Tool)" *.iso "http://majorgeeks.com/EaseUs_Disk_Copy_d4845.html" dc.iso "64" system.cfg multiboot\diskcopy\initrd.img "http://www.easeus.com" "EASEUS Disk Copy"
- !insertmacro SetISOFileNames "Hiren's Boot CD" Hiren*.iso "NONE" Hirens.iso "393" other.cfg HBCD\menu.lst "" ""
+ !insertmacro SetISOFileNames "Hiren's Boot CD 15.X" Hiren*15*.iso "NONE" Hirens.iso "393" other.cfg HBCD\menu.lst "" ""
  !insertmacro SetISOFileNames "Kon-Boot Floppy Image" kon-boot-all.zip "http://www.mediafire.com/file/74qrm2h4oof17o7/kon-boot-all.zip" multiboot\konboot.img "2" other.cfg multiboot\konboot.img "http://www.piotrbania.com/all/kon-boot/" "Kon-Boot" 
  !insertmacro SetISOFileNames "Linux Live Tools for OCZ" ocz_tools*.zip "http://bit.ly/xbyDjF" multiboot\ocz\boot\vmlinuz "50" other.cfg multiboot\ocz\boot\vmlinuz "http://www.ocztechnologyforum.com/forum/showthread.php?99275-NEW!-Bootable-Linux-based-tools-for-OCZ-SSD-s" "OCZ" 
  !insertmacro SetISOFileNames "Windows Vista/7/8 Installer" *.iso "NONE" win.iso "300" other.cfg bootmgr "" ""
@@ -535,9 +537,9 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "SalineOS" SalineOS*.iso "http://www.salineos.com/server/SalineOS-1.0-i386-PSE.iso" SalineOS*.iso "931" linux.cfg multiboot\saline\live\vmlinuz "http://www.salineos.com" "SalineOS"
  !insertmacro SetISOFileNames "Zorin OS" zorin*.iso "http://zorin-os.com/free.html" zorin.iso "670" linux.cfg multiboot\zorin\casper\vmlinuz "http://zorin-os.com/" "Zorin OS"
  
- !insertmacro SetISOFileNames "System Rescue CD" systemrescuecd-x86*.iso "http://sourceforge.net/projects/systemrescuecd/files/latest/download" systemrescuecd-x86.iso "353" system.cfg multiboot\systemrescuecd\isolinux\rescuecd "http://www.sysresccd.org" "System Rescue"
+ !insertmacro SetISOFileNames "System Rescue CD" systemrescuecd-x86*.iso "http://sourceforge.net/projects/systemrescuecd/files/latest/download" systemrescuecd-x86.iso "353" system.cfg multiboot\systemrescuecd\isolinux\rescue64 "http://www.sysresccd.org" "System Rescue"
  !insertmacro SetISOFileNames "Trinity Rescue Kit" trinity-rescue-kit.3.4-build*.iso "ftp://ftp.osuosl.org/pub/trk/trinity-rescue-kit.3.4-build-372.iso" trinity-rescue-kit.3.4.iso "146" system.cfg TRK\initrd.trk "http://trinityhome.org" "TRK"
- !insertmacro SetISOFileNames "DBAN (Hard Drive Nuker)" dban-2.2.6_i586.iso "http://sourceforge.net/projects/dban/files/dban/dban-2.2.6/dban-2.2.6_i586.iso/download" dban-2.2.6_i586.iso "2" system.cfg multiboot\DBAN\DBAN.BZI "http://www.dban.org" "DBAN"
+ !insertmacro SetISOFileNames "DBAN (Hard Drive Nuker)" dban-2.2.*_i586.iso "http://sourceforge.net/projects/dban/files/dban/dban-2.2.7/dban-2.2.7_i586.iso/download" dban-2.2.7_i586.iso "2" system.cfg multiboot\DBAN\DBAN.BZI "http://www.dban.org" "DBAN"
  !insertmacro SetISOFileNames "DRBL (Diskless Remote Boot in Linux)" drbl-live*.iso "http://sourceforge.net/projects/drbl/files/drbl_live_stable/1.0.5-6/drbl-live-xfce-1.0.5-6-i686.iso/download" drbl-live*.iso "394" system.cfg multiboot\DRBL\live\vmlinuz "http://drbl.sourceforge.net" "DRBL"
  !insertmacro SetISOFileNames "XBMC" xbmc*.iso "http://mirrors.xbmc.org/releases/live/xbmc-10.1-live.iso" xbmc.iso "420" linux.cfg multiboot\xbmc\live\vmlinuz "http://xbmc.org/" "XBMC"
  !insertmacro SetISOFileNames "XBMCbuntu" xbmcbuntu*.iso "http://mirrors.xbmc.org/releases/XBMCbuntu/xbmcbuntu-11.0.iso" xbmcbuntu.iso "623" linux.cfg multiboot\xbmcbuntu\casper\vmlinuz "http://xbmc.org/" "XBMC"

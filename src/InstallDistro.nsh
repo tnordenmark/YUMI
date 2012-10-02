@@ -585,14 +585,23 @@
  File /oname=$PLUGINSDIR\puppy.cfg "Menu\puppy.cfg"  
  CopyFiles "$PLUGINSDIR\puppy.cfg" "$BootDir\multiboot\menu\puppy.cfg"  
  
- ${ElseIf} $DistroName == "Fatdog64 (64bit Puppy Linux)" 
- ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\fatdog64\" -y' 
+ ${ElseIf} $DistroName == "Fatdog64 (Firefox)" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\fatdogff\" -y' 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- ${WriteToFile} "label Fatdog64$\r$\nmenu label Fatdog64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/fatdog64.cfg" $R0
+ ${WriteToFile} "label Fatdog64 Firefox$\r$\nmenu label Fatdog64 Firefox$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/fatdogff.cfg" $R0
  SetShellVarContext all
  InitPluginsDir
- File /oname=$PLUGINSDIR\fatdog64.cfg "Menu\fatdog64.cfg"  
- CopyFiles "$PLUGINSDIR\fatdog64.cfg" "$BootDir\multiboot\menu\fatdog64.cfg"   
+ File /oname=$PLUGINSDIR\fatdogff.cfg "Menu\fatdogff.cfg"  
+ CopyFiles "$PLUGINSDIR\fatdogff.cfg" "$BootDir\multiboot\menu\fatdogff.cfg"    
+ 
+ ${ElseIf} $DistroName == "Fatdog64 (Seamonkey)" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\fatdogsm\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Fatdog64 Seamonkey$\r$\nmenu label Fatdog64 Seamonkey$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/fatdogsm.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\fatdogsm.cfg "Menu\fatdogsm.cfg"  
+ CopyFiles "$PLUGINSDIR\fatdogsm.cfg" "$BootDir\multiboot\menu\fatdogsm.cfg"   
  
  ${ElseIf} $DistroName == "Wary Puppy Linux" 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\warypuppy\" -y' 
@@ -1919,13 +1928,13 @@
  CopyFiles "$PLUGINSDIR\fsecure.cfg" "$BootDir\multiboot\menu\fsecure.cfg"  
  CreateDirectory "$BootDir\fsecure\rescuecd"
  
- ${ElseIf} $DistroName == "Hiren's Boot CD"
+ ${ElseIf} $DistroName == "Hiren's Boot CD 15.X"
  ;ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -o"$EXEDIR\TEMPYUMI" -y' 
  ;ExecWait '"$PLUGINSDIR\7zG.exe" x "$EXEDIR\TEMPYUMI\Hiren*.iso" -ir!HBCD -o"$BootDir\" -y' 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -ir!HBCD -o"$BootDir\" -y' 
  ;RMDir /R "$EXEDIR\TEMPYUMI"
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- ${WriteToFile} "label Hiren's Boot CD$\r$\nmenu label Hiren's Boot CD$\r$\nMENU INDENT 1$\r$\nCOM32 /multiboot/chain.c32 fs grldr=/HBCD/grldr" $R0
+ ${WriteToFile} "label Hiren's Boot CD 15.X$\r$\nmenu label Hiren's Boot CD 15.X$\r$\nMENU INDENT 1$\r$\nCOM32 /HBCD/Boot/chain.c32 fs grldr=/HBCD/grldr" $R0
  
  ${ElseIf} $DistroName == "HP SmartStart 8.60 x32"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -o"$EXEDIR\TEMPYUMI" -y' 
