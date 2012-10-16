@@ -14,14 +14,16 @@ Credits, Resources, and Third Party Tools used:
   
 * Created with NSIS Installer ©1995-2012 Contributors http://nsis.sourceforge.net (needed to compile the YUMI.nsi script)  
 * Syslinux ©1994-2012 H. Peter Anvin http://syslinux.zytor.com (unmodified binary used)
-* grub.exe Grub4DOS © the Gna! people http://www.gnu.org/software/grub (unmodified binary used) : Official Grub4DOS link: http://gna.org/projects/grub4dos/
+* grub.exe Grub4DOS © the Gna! people + Chenall https://code.google.com/p/grub4dos-chenall/ (unmodified binary used) : Official Grub4DOS: http://gna.org/projects/grub4dos/
 * 7-Zip is ©1991-2012 Igor Pavlovis http://7-zip.org (unmodified binaries were used)
 * Fat32format.exe © Tom Thornhill Ridgecorp Consultants http://www.ridgecrop.demon.co.uk (unmodified binary used)
+* Firadisk.img ©2009-2011 Panot Joonkhiaw Karyonix http://reboot.pro/8804/
 
 Additional instructions for MultiBootISOs can be found HERE: http://www.pendrivelinux.com/yumi-multiboot-usb-creator/
 
 Changelog:
 
+10/05/12 - 10/10/12 Version 0.0.7.5: Update to support Windows XP Install from USB via ISO (Kudos to Alexandr Zarubkin for suggestion). Update Debian Live entries to support 6.0.5.
 09/26/12 Version 0.0.7.4: Update to fix Hirens 15.1 entry.
 09/21/12 Version 0.0.7.3: Update to use Syslinux 4.06-pre7 for better boot support. Update to support DBAN 2.2.7. 
 09/18/12 Version 0.0.7.2: Update to support System Rescue CD 3.0.0 (via fat32 formatted USB only!). Added FatDog64.

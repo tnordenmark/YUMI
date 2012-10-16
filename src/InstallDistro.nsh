@@ -384,7 +384,7 @@
  File /oname=$PLUGINSDIR\antix.cfg "Menu\antix.cfg"  
  CopyFiles "$PLUGINSDIR\antix.cfg" "$BootDir\multiboot\menu\antix.cfg"  
  
- ${ElseIf} $DistroName == "Debian Live 6.0.4 Gnome 32bit"
+ ${ElseIf} $DistroName == "Debian Live 6 Gnome 32bit"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\debian\" -y' 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
  ${WriteToFile} "label Debian Live$\r$\nmenu label Debian Live$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/debian.cfg" $R0
@@ -393,7 +393,7 @@
  File /oname=$PLUGINSDIR\debian.cfg "Menu\debian.cfg"  
  CopyFiles "$PLUGINSDIR\debian.cfg" "$BootDir\multiboot\menu\debian.cfg" 
  
- ${ElseIf} $DistroName == "Debian Live 6.0.4 KDE 32bit"
+ ${ElseIf} $DistroName == "Debian Live 6 KDE 32bit"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\debiankde\" -y' 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
  ${WriteToFile} "label Debian Live KDE$\r$\nmenu label Debian Live KDE$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/debkde.cfg" $R0
@@ -402,7 +402,7 @@
  File /oname=$PLUGINSDIR\debkde.cfg "Menu\debkde.cfg"  
  CopyFiles "$PLUGINSDIR\debkde.cfg" "$BootDir\multiboot\menu\debkde.cfg" 
 
- ${ElseIf} $DistroName == "Debian Live 6.0.4 LXDE 32bit"
+ ${ElseIf} $DistroName == "Debian Live 6 LXDE 32bit"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\debianlxde\" -y' 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
  ${WriteToFile} "label Debian Live LXDE$\r$\nmenu label Debian Live LXDE$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/deblxde.cfg" $R0
@@ -411,7 +411,7 @@
  File /oname=$PLUGINSDIR\deblxde.cfg "Menu\deblxde.cfg"  
  CopyFiles "$PLUGINSDIR\deblxde.cfg" "$BootDir\multiboot\menu\deblxde.cfg" 
  
- ${ElseIf} $DistroName == "Debian Live 6.0.4 XFCE 32bit"
+ ${ElseIf} $DistroName == "Debian Live 6 XFCE 32bit"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\debianxfce\" -y' 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
  ${WriteToFile} "label Debian Live XFCE$\r$\nmenu label Debian Live XFCE$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/debxfce.cfg" $R0
@@ -420,7 +420,7 @@
  File /oname=$PLUGINSDIR\debxfce.cfg "Menu\debxfce.cfg"  
  CopyFiles "$PLUGINSDIR\debxfce.cfg" "$BootDir\multiboot\menu\debxfce.cfg"  
  
- ${ElseIf} $DistroName == "Debian Live 6.0.4 Gnome 64bit"
+ ${ElseIf} $DistroName == "Debian Live 6 Gnome 64bit"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\debian64\" -y' 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
  ${WriteToFile} "label Debian Live 64$\r$\nmenu label Debian Live 64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/debian64.cfg" $R0
@@ -429,7 +429,7 @@
  File /oname=$PLUGINSDIR\debian64.cfg "Menu\debian64.cfg"  
  CopyFiles "$PLUGINSDIR\debian64.cfg" "$BootDir\multiboot\menu\debian64.cfg" 
  
- ${ElseIf} $DistroName == "Debian Live 6.0.4 KDE 64bit"
+ ${ElseIf} $DistroName == "Debian Live 6 KDE 64bit"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\debainkde64\" -y' 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
  ${WriteToFile} "label Debian Live KDE 64$\r$\nmenu label Debian Live KDE 64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/debk64.cfg" $R0
@@ -438,7 +438,7 @@
  File /oname=$PLUGINSDIR\debk64.cfg "Menu\debk64.cfg"  
  CopyFiles "$PLUGINSDIR\debk64.cfg" "$BootDir\multiboot\menu\debk64.cfg" 
 
- ${ElseIf} $DistroName == "Debian Live 6.0.4 LXDE 64bit"
+ ${ElseIf} $DistroName == "Debian Live 6 LXDE 64bit"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\debianlxde64\" -y' 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
  ${WriteToFile} "label Debian Live LXDE 64$\r$\nmenu label Debian Live LXDE 64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/debl64.cfg" $R0
@@ -447,7 +447,7 @@
  File /oname=$PLUGINSDIR\debl64.cfg "Menu\debl64.cfg"  
  CopyFiles "$PLUGINSDIR\debl64.cfg" "$BootDir\multiboot\menu\debl64.cfg" 
  
- ${ElseIf} $DistroName == "Debian Live 6.0.4 XFCE 64bit"
+ ${ElseIf} $DistroName == "Debian Live 6 XFCE 64bit"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\debianxfce64\" -y' 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
  ${WriteToFile} "label Debian Live XFCE 64$\r$\nmenu label Debian Live XFCE 64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/debx64.cfg" $R0
@@ -2050,6 +2050,15 @@
  InitPluginsDir
  File /oname=$PLUGINSDIR\ubcd.lst "Menu\ubcd.lst"  
  CopyFiles "$PLUGINSDIR\ubcd.lst" "$BootDir\multiboot\menu\ubcd.lst"   
+ 
+ ${ElseIf} $DistroName == "Windows XP Installer" 
+ CopyFiles $ISOFile "$BootDir\multiboot\ISOS\$NameThatISO"
+ ${AndIf} ${FileExists} $BootDir\multiboot\ISOS\$NameThatISO 
+ ${WriteToFile} "title Begin Install of Windows XP from $NameThatISO (Stage 1)$\r$\nfind --set-root /multiboot/ISOS/$NameThatISO$\r$\nmap (hd0) (hd1)$\r$\nmap (hd1) (hd0)$\r$\nmap --mem /multiboot/ISOS/firadisk.img (fd0)$\r$\nmap --mem /multiboot/ISOS/firadisk.img (fd1)$\r$\nmap --mem /multiboot/ISOS/$NameThatISO (0xff)$\r$\nmap --hook$\r$\nchainloader (0xff)/I386/SETUPLDR.BIN$\r$\n$\r$\ntitle Continue Windows XP Install from $NameThatISO (Stage 2)$\r$\nfind --set-root /multiboot/ISOS/$NameThatISO$\r$\nmap (hd0) (hd1)$\r$\nmap (hd1) (hd0)$\r$\nmap --mem /multiboot/ISOS/$NameThatISO (0xff)$\r$\nmap --hook$\r$\nchainloader (hd0)+1$\r$\n$\r$\ntitle Boot Windows XP - If fails, reboot with USB removed (Stage 3)$\r$\nmap (hd1) (hd0)$\r$\nmap (hd0) (hd1)$\r$\nroot (hd1,0)$\r$\nfind --set-root /ntldr$\r$\nchainloader /ntldr" $R0  
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\firadisk.img "firadisk.img"  
+ CopyFiles "$PLUGINSDIR\firadisk.img" "$BootDir\multiboot\ISOS\firadisk.img"   
  
 ; ##################################### ADD NEW DISTRO ########################################
   

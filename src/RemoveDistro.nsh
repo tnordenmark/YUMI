@@ -253,49 +253,49 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label AntiX" "APPEND /multiboot/menu/antix.cfg"   
  Delete "$BootDir\multiboot\menu\antix.cfg" 
  
- ${ElseIf} $DistroName == "Debian Live 6.0.4 Gnome 32bit" ;
+ ${ElseIf} $DistroName == "Debian Live 6 Gnome 32bit" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R  "$BootDir\multiboot\debian"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Debian Live" "APPEND /multiboot/menu/debian.cfg"   
  Delete "$BootDir\multiboot\menu\debian.cfg" 
  
- ${ElseIf} $DistroName == "Debian Live 6.0.4 KDE 32bit" ;
+ ${ElseIf} $DistroName == "Debian Live 6 KDE 32bit" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R  "$BootDir\multiboot\debiankde"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Debian Live KDE" "APPEND /multiboot/menu/debkde.cfg"   
  Delete "$BootDir\multiboot\menu\debkde.cfg" 
 
- ${ElseIf} $DistroName == "Debian Live 6.0.4 LXDE 32bit" ;
+ ${ElseIf} $DistroName == "Debian Live 6 LXDE 32bit" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R  "$BootDir\multiboot\debianlxde"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Debian Live LXDE" "APPEND /multiboot/menu/deblxde.cfg"   
  Delete "$BootDir\multiboot\menu\deblxde.cfg" 
 
- ${ElseIf} $DistroName == "Debian Live 6.0.4 XFCE 32bit" ;
+ ${ElseIf} $DistroName == "Debian Live 6 XFCE 32bit" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R  "$BootDir\multiboot\debianxfce"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Debian Live XFCE" "APPEND /multiboot/menu/debxfce.cfg"   
  Delete "$BootDir\multiboot\menu\debxfce.cfg"  
  
- ${ElseIf} $DistroName == "Debian Live 6.0.4 Gnome 64bit" ;
+ ${ElseIf} $DistroName == "Debian Live 6 Gnome 64bit" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R  "$BootDir\multiboot\debian64"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Debian Live 64" "APPEND /multiboot/menu/debian64.cfg"   
  Delete "$BootDir\multiboot\menu\debian64.cfg" 
  
- ${ElseIf} $DistroName == "Debian Live 6.0.4 KDE 64bit" ;
+ ${ElseIf} $DistroName == "Debian Live 6 KDE 64bit" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R  "$BootDir\multiboot\debiankde64"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Debian Live KDE 64" "APPEND /multiboot/menu/debk64.cfg"   
  Delete "$BootDir\multiboot\menu\debk64.cfg" 
 
- ${ElseIf} $DistroName == "Debian Live 6.0.4 LXDE 64bit" ;
+ ${ElseIf} $DistroName == "Debian Live 6 LXDE 64bit" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R  "$BootDir\multiboot\debianlxde64"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Debian Live LXDE 64" "APPEND /multiboot/menu/debl64.cfg"   
  Delete "$BootDir\multiboot\menu\debl64.cfg" 
 
- ${ElseIf} $DistroName == "Debian Live 6.0.4 XFCE 64bit" ;
+ ${ElseIf} $DistroName == "Debian Live 6 XFCE 64bit" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R  "$BootDir\multiboot\debxfce64"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Debian Live XFCE 64" "APPEND /multiboot/menu/debx64.cfg"   

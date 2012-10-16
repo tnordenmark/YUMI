@@ -1,14 +1,14 @@
 Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check for on the drive)
     !insertmacro FileNames "--- Debian Live 32/64 Bit ---" " "
 	!insertmacro FileNames " " " "
- !insertmacro FileNames "Debian Live 6.0.4 Gnome 32bit" multiboot\debian\live\vmlinuz 
- !insertmacro FileNames "Debian Live 6.0.4 KDE 32bit" multiboot\debiankde\live\vmlinuz 
- !insertmacro FileNames "Debian Live 6.0.4 LXDE 32bit" multiboot\debianlxde\live\vmlinuz 
- !insertmacro FileNames "Debian Live 6.0.4 XFCE 32bit" multiboot\debianxfce\live\vmlinuz 
- !insertmacro FileNames "Debian Live 6.0.4 Gnome 64bit" multiboot\debian64\live\vmlinuz 
- !insertmacro FileNames "Debian Live 6.0.4 KDE 64bit" multiboot\debiankde64\live\vmlinuz 
- !insertmacro FileNames "Debian Live 6.0.4 LXDE 64bit" multiboot\debianlxde64\live\vmlinuz 
- !insertmacro FileNames "Debian Live 6.0.4 XFCE 64bit" multiboot\debianxfce64\live\vmlinuz  
+ !insertmacro FileNames "Debian Live 6 Gnome 32bit" multiboot\debian\live\vmlinuz 
+ !insertmacro FileNames "Debian Live 6 KDE 32bit" multiboot\debiankde\live\vmlinuz 
+ !insertmacro FileNames "Debian Live 6 LXDE 32bit" multiboot\debianlxde\live\vmlinuz 
+ !insertmacro FileNames "Debian Live 6 XFCE 32bit" multiboot\debianxfce\live\vmlinuz 
+ !insertmacro FileNames "Debian Live 6 Gnome 64bit" multiboot\debian64\live\vmlinuz 
+ !insertmacro FileNames "Debian Live 6 KDE 64bit" multiboot\debiankde64\live\vmlinuz 
+ !insertmacro FileNames "Debian Live 6 LXDE 64bit" multiboot\debianlxde64\live\vmlinuz 
+ !insertmacro FileNames "Debian Live 6 XFCE 64bit" multiboot\debianxfce64\live\vmlinuz  
  
 	!insertmacro FileNames " " " " 
     !insertmacro FileNames "--- Fedora 32/64 Bit ---" " "
@@ -275,6 +275,7 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
  !insertmacro FileNames "Hiren's Boot CD 15.X" HBCD\menu.lst  ; does install to root of drive
  !insertmacro FileNames "Kon-Boot Floppy Image" multiboot\konboot.img
  !insertmacro FileNames "Windows Vista/7/8 Installer" bootmgr  ; does install to root of drive
+ !insertmacro FileNames "Windows XP Installer" multiboot\ISOS\TEST1.iso 
  
    !insertmacro FileNames " "  " " 	
    !insertmacro FileNames "----------------- Bootable ISOs ----------------"  " " 
@@ -330,14 +331,14 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "Sn0wL1nuX 11 64bit" Sn0wL1nuX-11-Desktop-amd64.iso "http://sourceforge.net/projects/sn0wl1nux/files/11/Sn0wL1nuX-11-Desktop-amd64.iso/download" Sn0wL1nuX-11-Desktop-amd64.iso "1300" linux.cfg multiboot\snowlinux64\casper\vmlinuz "http://sn0wl1nux.forumdoandroid.com" "Sn0wL1nuX" 
  !insertmacro SetISOFileNames "Semplice Linux" semplice_2.0.2_203.0.iso "http://semplice-linux.org/download/" semplice.iso "610" linux.cfg multiboot\semplice\live\vmlinuz "http://semplice-linux.org" "Semplice Linux" 
  
- !insertmacro SetISOFileNames "Debian Live 6.0.4 Gnome 32bit" debian-live-6.0.4-i386-gnome-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/i386/iso-hybrid/debian-live-6.0.4-i386-gnome-desktop.iso" debian-live-6-gnome.iso "1141" linux.cfg multiboot\debian\live\vmlinuz "http://live.debian.net" "Debian Live"
- !insertmacro SetISOFileNames "Debian Live 6.0.4 KDE 32bit" debian-live-6.0.4-i386-kde-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/i386/iso-hybrid/debian-live-6.0.4-i386-kde-desktop.iso" debian-live-6-kde.iso "1000" linux.cfg multiboot\debiankde\live\vmlinuz "http://live.debian.net" "Debian Live"
- !insertmacro SetISOFileNames "Debian Live 6.0.4 LXDE 32bit" debian-live-6.0.4-i386-lxde-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/i386/iso-hybrid/debian-live-6.0.4-i386-lxde-desktop.iso" debian-live-6-lxde.iso "752" linux.cfg multiboot\debianlxde\live\vmlinuz "http://live.debian.net" "Debian Live"
- !insertmacro SetISOFileNames "Debian Live 6.0.4 XFCE 32bit" debian-live-6.0.4-i386-xfce-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/i386/iso-hybrid/debian-live-6.0.4-i386-xfce-desktop.iso" debian-live-6-xfce.iso "809" linux.cfg multiboot\debianxfce\live\vmlinuz "http://live.debian.net" "Debian Live"
- !insertmacro SetISOFileNames "Debian Live 6.0.4 Gnome 64bit" debian-live-6.0.4-amd64-gnome-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/amd64/iso-hybrid/debian-live-6.0.4-amd64-gnome-desktop.iso" debian-live-664-gnome.iso "1173" linux.cfg multiboot\debian64\live\vmlinuz "http://live.debian.net" "Debian Live"
- !insertmacro SetISOFileNames "Debian Live 6.0.4 KDE 64bit" debian-live-6.0.4-amd64-kde-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/amd64/iso-hybrid/debian-live-6.0.4-amd64-kde-desktop.iso" debian-live-664-kde.iso "1091" linux.cfg multiboot\debiankde64\live\vmlinuz "http://live.debian.net" "Debian Live"
- !insertmacro SetISOFileNames "Debian Live 6.0.4 LXDE 64bit" debian-live-6.0.4-amd64-lxde-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/amd64/iso-hybrid/debian-live-6.0.4-amd64-lxde-desktop.iso" debian-live-664-lxde.iso "789" linux.cfg multiboot\debianlxde64\live\vmlinuz "http://live.debian.net" "Debian Live"
- !insertmacro SetISOFileNames "Debian Live 6.0.4 XFCE 64bit" debian-live-6.0.4-amd64-xfce-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/amd64/iso-hybrid/debian-live-6.0.4-amd64-xfce-desktop.iso" debian-live-664-xfce.iso "809" linux.cfg multiboot\debianxfce64\live\vmlinuz "http://live.debian.net" "Debian Live"
+ !insertmacro SetISOFileNames "Debian Live 6 Gnome 32bit" debian-live-6.0*-i386-gnome-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/i386/iso-hybrid/debian-live-6.0.5-i386-gnome-desktop.iso" debian-live-6-gnome.iso "1141" linux.cfg multiboot\debian\live\vmlinuz "http://live.debian.net" "Debian Live"
+ !insertmacro SetISOFileNames "Debian Live 6 KDE 32bit" debian-live-6.0*-i386-kde-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/i386/iso-hybrid/debian-live-6.0.5-i386-kde-desktop.iso" debian-live-6-kde.iso "1000" linux.cfg multiboot\debiankde\live\vmlinuz "http://live.debian.net" "Debian Live"
+ !insertmacro SetISOFileNames "Debian Live 6 LXDE 32bit" debian-live-6.0*-i386-lxde-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/i386/iso-hybrid/debian-live-6.0.5-i386-lxde-desktop.iso" debian-live-6-lxde.iso "752" linux.cfg multiboot\debianlxde\live\vmlinuz "http://live.debian.net" "Debian Live"
+ !insertmacro SetISOFileNames "Debian Live 6 XFCE 32bit" debian-live-6.0*-i386-xfce-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/i386/iso-hybrid/debian-live-6.0.5-i386-xfce-desktop.iso" debian-live-6-xfce.iso "809" linux.cfg multiboot\debianxfce\live\vmlinuz "http://live.debian.net" "Debian Live"
+ !insertmacro SetISOFileNames "Debian Live 6 Gnome 64bit" debian-live-6.0*-amd64-gnome-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/amd64/iso-hybrid/debian-live-6.0.5-amd64-gnome-desktop.iso" debian-live-664-gnome.iso "1173" linux.cfg multiboot\debian64\live\vmlinuz "http://live.debian.net" "Debian Live"
+ !insertmacro SetISOFileNames "Debian Live 6 KDE 64bit" debian-live-6.0*-amd64-kde-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/amd64/iso-hybrid/debian-live-6.0.5-amd64-kde-desktop.iso" debian-live-664-kde.iso "1091" linux.cfg multiboot\debiankde64\live\vmlinuz "http://live.debian.net" "Debian Live"
+ !insertmacro SetISOFileNames "Debian Live 6 LXDE 64bit" debian-live-6.0*-amd64-lxde-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/amd64/iso-hybrid/debian-live-6.0.5-amd64-lxde-desktop.iso" debian-live-664-lxde.iso "789" linux.cfg multiboot\debianlxde64\live\vmlinuz "http://live.debian.net" "Debian Live"
+ !insertmacro SetISOFileNames "Debian Live 6 XFCE 64bit" debian-live-6.0*-amd64-xfce-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/amd64/iso-hybrid/debian-live-6.0.5-amd64-xfce-desktop.iso" debian-live-664-xfce.iso "809" linux.cfg multiboot\debianxfce64\live\vmlinuz "http://live.debian.net" "Debian Live"
  !insertmacro SetISOFileNames "Web Converger (Web Kiosk)" webc*.iso "http://dl.webconverger.com/latest.iso" Webc.iso "426" linux.cfg multiboot\webcon\live\vmlinuz "http://webconverger.com/" "Web Converger"
 ;Revisit !insertmacro SetISOFileNames "Calculate Linux Desktop" cld*.iso "ftp://ftp.gtlib.gatech.edu/pub/calculate/CLDG/12.0/i686/cldg-12.0-i686.iso" cld*.iso "1800" linux.cfg multiboot\cld\boot\vmlinuz "http://www.calculate-linux.org/" "Calculate Linux"
  !insertmacro SetISOFileNames "WifiSlax" wifislax*.iso "http://www.downloadwireless.net/isos/wifislax-4.2-final.iso" wifislax*.iso "393" linux.cfg wifislax\boot\vmlinuz "http://www.wifislax.com" "WifiSlax"
@@ -546,6 +547,6 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  
  !insertmacro SetISOFileNames "Try an Unlisted ISO" *.iso "NONE" "" "1" menu.lst "" "" "" 
  !insertmacro SetISOFileNames "Try an Unlisted ISO (Run from RAM)" *.iso "NONE" "" "1" menu.lst "" "" ""  
- 
+ !insertmacro SetISOFileNames "Windows XP Installer" *.iso "NONE" "" "1" menu.lst "" "" ""  
  ; ##################################### ADD NEW DISTRO ########################################
 FunctionEnd

@@ -2,7 +2,7 @@ This Sources file outlines where to find the third party tools (tools authored e
 The binarysources.zip file can be found at http://www.pendrivelinux.com/downloads/Sources/USB-Installers/YUMI/ and contains the sources for grub.exe, syslinux.exe, 7zip, and fat32format.exe. 
 
 NSIS is the platform I used to create this tool!
-NSIS (Nullsoft Scriptable Install System):
+NSIS (Nullsoft Scriptable Install System)
 
 Homepage: http://nsis.sourceforge.net/Main_Page
 Binary/Source: http://nsis.sourceforge.net/Download
@@ -21,7 +21,7 @@ Homepage: http://syslinux.zytor.com
 Binary/Source: http://www.kernel.org/pub/linux/utils/boot/syslinux/Testing/4.06/syslinux-4.06-pre7.zip
 
 
-7z 465 (7zip):
+7z 465 (7zip)
 
 Homepage: http://www.7-zip.org
 Binary: http://downloads.sourceforge.net/sevenzip/7za465.zip
@@ -33,3 +33,10 @@ Fat32format (Fat32format.exe)
 Homepage: http://www.ridgecrop.demon.co.uk
 Binary: http://www.ridgecrop.demon.co.uk/download/fat32format.zip
 Source: http://www.ridgecrop.demon.co.uk/download/fat32formatsrc.zip
+
+
+File/Ram Disk Driver (Firadisk.img)
+
+Homepage: http://reboot.pro/8804/
+Binary: http://www.mediafire.com/file/zqbzl5sa77tlmpl/firadisk-driver-0.0.1.30-f6.7z
+Source: http://www.mediafire.com/file/vbd2dwas2rckdj5/firadisk-src-0.0.1.30.7z
