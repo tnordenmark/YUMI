@@ -25,11 +25,17 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label CAELinux (Computer Aided Engineering)" "APPEND /multiboot/menu/cae.cfg" 
  Delete "$BootDir\multiboot\menu\cae.cfg"    
  
- ${ElseIf} $DistroName == "Tails (Anonymous Browsing)"
+ ${ElseIf} $DistroName == "Tails 0.13 (Anonymous Browsing)"
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
  RMDir /R "$BootDir\multiboot\tails"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Tails (Anonymous Browsing)" "APPEND /multiboot/menu/tails.cfg"  
  Delete "$BootDir\multiboot\menu\tails.cfg"  
+ 
+ ${ElseIf} $DistroName == "Tails 0.14 (Anonymous Browsing)"
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ RMDir /R "$BootDir\multiboot\tails014"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Tails 0.14 (Anonymous Browsing)" "APPEND /multiboot/menu/tails014.cfg"  
+ Delete "$BootDir\multiboot\menu\tails014.cfg"   
  
  ${ElseIf} $DistroName == "Liberte (Anonymous Browsing)"
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
@@ -202,8 +208,14 @@
  ${ElseIf} $DistroName == "Pinguy OS 11" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\pinguy"  
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Pinguy OS 11.04" "APPEND /multiboot/menu/pinguy1104.cfg" 
- Delete "$BootDir\multiboot\menu\pinguy1104.cfg"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Pinguy OS 11.04" "APPEND /multiboot/menu/pguy1104.cfg" 
+ Delete "$BootDir\multiboot\menu\pguy1104.cfg"  
+ 
+ ${ElseIf} $DistroName == "Pinguy OS 12.04" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\pinguy1204"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Pinguy OS 12.04" "APPEND /multiboot/menu/pguy1204.cfg" 
+ Delete "$BootDir\multiboot\menu\pguy1204.cfg"   
  
  ${ElseIf} $DistroName == "Sn0wL1nuX 11" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -388,6 +400,12 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Puppy" "APPEND /multiboot/menu/puppy.cfg"
  Delete "$BootDir\multiboot\menu\puppy.cfg" 
  
+ ${ElseIf} $DistroName == "Precise Puppy Linux" 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\precisepuppy"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Precise Puppy" "APPEND /multiboot/menu/ppuppy.cfg"
+ Delete "$BootDir\multiboot\menu\ppuppy.cfg" 
+ 
  ${ElseIf} $DistroName == "Fatdog64 (Firefox)" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\fatdogff"
@@ -571,17 +589,89 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label KXStudio 12.04" "APPEND /multiboot/menu/kxstudio.cfg" 
  Delete "$BootDir\multiboot\menu\kxstudio.cfg"   
  
- ${ElseIf} $DistroName == "Ubuntu 12.10 Daily Build" ;
+ ${ElseIf} $DistroName == "Ubuntu 12.10" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\ubuntu1210"  
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu 12.10" "APPEND /multiboot/menu/ub1210.cfg" 
  Delete "$BootDir\multiboot\menu\ub1210.cfg"   
  
- ${ElseIf} $DistroName == "Ubuntu 12.10 amd64 Daily Build" ;
+ ${ElseIf} $DistroName == "Ubuntu 12.10 amd64" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\ubuntu121064"  
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu 12.10 amd64" "APPEND /multiboot/menu/u121064.cfg" 
- Delete "$BootDir\multiboot\menu\u121064.cfg"    
+ Delete "$BootDir\multiboot\menu\u121064.cfg"   
+ 
+ ${ElseIf} $DistroName == "Ubuntu Server 12.10" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\ubuntuserv1210"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu Server 12.10" "APPEND /multiboot/menu/usrv1210.cfg" 
+ Delete "$BootDir\multiboot\menu\usrv1210.cfg" 
+
+ ${ElseIf} $DistroName == "Ubuntu Server 12.10 amd64" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\ubuntuserv121064"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu Server 12.10 amd64" "APPEND /multiboot/menu/us121064.cfg" 
+ Delete "$BootDir\multiboot\menu\us121064.cfg" 
+
+ ${ElseIf} $DistroName == "Ubuntu Studio 12.10" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\ubuntustud1210" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu Studio 12.10" "APPEND /multiboot/menu/ustu1210.cfg" 
+ Delete "$BootDir\multiboot\menu\ustu1210.cfg"  
+
+ ${ElseIf} $DistroName == "Ubuntu Studio 12.10 amd64" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\ubuntustud121064" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu Studio 12.10 amd64" "APPEND /multiboot/menu/uo121064.cfg" 
+ Delete "$BootDir\multiboot\menu\uo121064.cfg"   
+
+ ${ElseIf} $DistroName == "Edubuntu 12.10" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\edubuntu1210" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Edubuntu 12.10" "APPEND /multiboot/menu/edu1210.cfg" 
+ Delete "$BootDir\multiboot\menu\edu1210.cfg"  
+
+ ${ElseIf} $DistroName == "Edubuntu 12.10 amd64" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\edubuntu121064" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Edubuntu 12.10 amd64" "APPEND /multiboot/menu/ed121064.cfg" 
+ Delete "$BootDir\multiboot\menu\ed121064.cfg" 
+ 
+ ${ElseIf} $DistroName == "Kubuntu 12.10" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\kubuntu1210"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Kubuntu 12.10" "APPEND /multiboot/menu/ku1210.cfg"  
+ Delete "$BootDir\multiboot\menu\ku1210.cfg" 
+ 
+ ${ElseIf} $DistroName == "Kubuntu 12.10 amd64" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\kubuntu121064"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Kubuntu 12.10 amd64" "APPEND /multiboot/menu/ku121064.cfg"  
+ Delete "$BootDir\multiboot\menu\ku121064.cfg"  
+
+ ${ElseIf} $DistroName == "Lubuntu 12.10" ; 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\lubuntu1210"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Lubuntu 12.10" "APPEND /multiboot/menu/lu1210.cfg"   
+ Delete "$BootDir\multiboot\menu\lu1210.cfg" 
+ 
+ ${ElseIf} $DistroName == "Lubuntu 12.10 amd64" ; 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\lubuntu121064"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Lubuntu 12.10 amd64" "APPEND /multiboot/menu/lu121064.cfg"   
+ Delete "$BootDir\multiboot\menu\lu121064.cfg"  
+
+ ${ElseIf} $DistroName == "Xubuntu 12.10" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\xubuntu1210"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Xubuntu 12.10" "APPEND /multiboot/menu/xu1210.cfg"  
+ Delete "$BootDir\multiboot\menu\xu1210.cfg"  
+
+ ${ElseIf} $DistroName == "Xubuntu 12.10 amd64" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\xubuntu121064"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Xubuntu 12.10 amd64" "APPEND /multiboot/menu/xu121064.cfg"  
+ Delete "$BootDir\multiboot\menu\xu121064.cfg"  
  
  ${ElseIf} $DistroName == "Ubuntu 12.04" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -601,7 +691,7 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu 12.04 DVD amd64" "APPEND /multiboot/menu/u1204d64.cfg" 
  Delete "$BootDir\multiboot\menu\u1204d64.cfg"   
  
- ${ElseIf} $DistroName == "Pear Linux" ;
+ ${ElseIf} $DistroName == "Pear Linux 6" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\pear"  
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Pear Linux" "APPEND /multiboot/menu/pear.cfg" 
@@ -695,7 +785,13 @@
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\mythbuntu120464"  
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Mythbuntu 12.04 amd64" "APPEND /multiboot/menu/my120464.cfg"   
- Delete "$BootDir\multiboot\menu\my120464.cfg"   
+ Delete "$BootDir\multiboot\menu\my120464.cfg"  
+
+ ${ElseIf} $DistroName == "Lubuntu 12.04 amd64" ; 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\lubuntu120464"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Lubuntu 12.04 amd64" "APPEND /multiboot/menu/lu120464.cfg"   
+ Delete "$BootDir\multiboot\menu\lu120464.cfg" 
 
  ${ElseIf} $DistroName == "Xubuntu 12.04 amd64" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -713,13 +809,7 @@
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\kubuntu1204dvd64"  
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Kubuntu 12.04 DVD amd64" "APPEND /multiboot/menu/k1204dv64.cfg"  
- Delete "$BootDir\multiboot\menu\k1204dv64.cfg"  
-
- ${ElseIf} $DistroName == "Lubuntu 12.04 amd64" ; 
- ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- RMDir /R "$BootDir\multiboot\lubuntu120464"  
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Lubuntu 12.04 amd64" "APPEND /multiboot/menu/lu120464.cfg"   
- Delete "$BootDir\multiboot\menu\lu120464.cfg"  
+ Delete "$BootDir\multiboot\menu\k1204dv64.cfg"    
  
  ${ElseIf} $DistroName == "Xubuntu 11.10 amd64" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 

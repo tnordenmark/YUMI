@@ -23,7 +23,10 @@ Additional instructions for MultiBootISOs can be found HERE: http://www.pendrive
 
 Changelog:
 
-10/05/12 - 10/10/12 Version 0.0.7.5: Update to support Windows XP Install from USB via ISO (Kudos to Alexandr Zarubkin for suggestion). Update Debian Live entries to support 6.0.5.
+10/29/12 Version 0.0.7.8: Correct Lubuntu 12.10 amd64 menu entry. Added support for Ubuntu Studio 12.10.
+10/24/12 Version 0.0.7.7: Update to support Precise Puppy, PinguyOS, Pear Linux 6, and Tails 0.14. Updated to use Syslinux 4.06 and 7zip 920.
+10/19/12 Version 0.0.7.6: Update to support Edubuntu, Ubuntu, Kubuntu, Lubuntu, and Xubuntu 12.10.
+10/10/12 Version 0.0.7.5: Update to support Windows XP Install from USB via ISO (Kudos to Alexandr Zarubkin for suggestion). Update Debian Live entries to support 6.0.5.
 09/26/12 Version 0.0.7.4: Update to fix Hirens 15.1 entry.
 09/21/12 Version 0.0.7.3: Update to use Syslinux 4.06-pre7 for better boot support. Update to support DBAN 2.2.7. 
 09/18/12 Version 0.0.7.2: Update to support System Rescue CD 3.0.0 (via fat32 formatted USB only!). Added FatDog64.

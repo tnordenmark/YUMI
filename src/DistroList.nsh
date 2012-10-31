@@ -2,12 +2,12 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
     !insertmacro FileNames "--- Debian Live 32/64 Bit ---" " "
 	!insertmacro FileNames " " " "
  !insertmacro FileNames "Debian Live 6 Gnome 32bit" multiboot\debian\live\vmlinuz 
+ !insertmacro FileNames "Debian Live 6 Gnome 64bit" multiboot\debian64\live\vmlinuz  
  !insertmacro FileNames "Debian Live 6 KDE 32bit" multiboot\debiankde\live\vmlinuz 
+ !insertmacro FileNames "Debian Live 6 KDE 64bit" multiboot\debiankde64\live\vmlinuz  
  !insertmacro FileNames "Debian Live 6 LXDE 32bit" multiboot\debianlxde\live\vmlinuz 
+ !insertmacro FileNames "Debian Live 6 LXDE 64bit" multiboot\debianlxde64\live\vmlinuz  
  !insertmacro FileNames "Debian Live 6 XFCE 32bit" multiboot\debianxfce\live\vmlinuz 
- !insertmacro FileNames "Debian Live 6 Gnome 64bit" multiboot\debian64\live\vmlinuz 
- !insertmacro FileNames "Debian Live 6 KDE 64bit" multiboot\debiankde64\live\vmlinuz 
- !insertmacro FileNames "Debian Live 6 LXDE 64bit" multiboot\debianlxde64\live\vmlinuz 
  !insertmacro FileNames "Debian Live 6 XFCE 64bit" multiboot\debianxfce64\live\vmlinuz  
  
 	!insertmacro FileNames " " " " 
@@ -15,43 +15,44 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
 	!insertmacro FileNames " " " "
 	
  !insertmacro FileNames "Fedora 17 GNOME 32bit" multiboot\fedora17\isolinux\vmlinuz0 
+ !insertmacro FileNames "Fedora 17 GNOME 64bit" multiboot\fedora6417\isolinux\vmlinuz0  
  !insertmacro FileNames "Fedora 17 KDE 32bit" multiboot\fedoraKDE17\isolinux\vmlinuz0
+ !insertmacro FileNames "Fedora 17 KDE 64bit" multiboot\fedoraKDE6417\isolinux\vmlinuz0 
  !insertmacro FileNames "Fedora 17 LXDE 32bit" multiboot\fedoraLXDE17\isolinux\vmlinuz0 
- !insertmacro FileNames "Fedora 17 XFCE 32bit" multiboot\fedoraXFCE17\isolinux\vmlinuz0 
- !insertmacro FileNames "Fedora 17 GNOME 64bit" multiboot\fedora6417\isolinux\vmlinuz0 
- !insertmacro FileNames "Fedora 17 KDE 64bit" multiboot\fedoraKDE6417\isolinux\vmlinuz0    
- !insertmacro FileNames "Fedora 17 LXDE 64bit" multiboot\fedoraLXDE6417\isolinux\vmlinuz0
+ !insertmacro FileNames "Fedora 17 LXDE 64bit" multiboot\fedoraLXDE6417\isolinux\vmlinuz0 
+ !insertmacro FileNames "Fedora 17 XFCE 32bit" multiboot\fedoraXFCE17\isolinux\vmlinuz0    
  !insertmacro FileNames "Fedora 17 XFCE 64bit" multiboot\fedoraXFCE6417\isolinux\vmlinuz0  
  
  !insertmacro FileNames "Fedora 16 GNOME 32bit" multiboot\fedora16\isolinux\vmlinuz0 
+ !insertmacro FileNames "Fedora 16 GNOME 64bit" multiboot\fedora6416\isolinux\vmlinuz0  
  !insertmacro FileNames "Fedora 16 KDE 32bit" multiboot\fedoraKDE16\isolinux\vmlinuz0
+ !insertmacro FileNames "Fedora 16 KDE 64bit" multiboot\fedoraKDE6416\isolinux\vmlinuz0  
  !insertmacro FileNames "Fedora 16 LXDE 32bit" multiboot\fedoraLXDE16\isolinux\vmlinuz0 
+ !insertmacro FileNames "Fedora 16 LXDE 64bit" multiboot\fedoraLXDE6416\isolinux\vmlinuz0 
  !insertmacro FileNames "Fedora 16 XFCE 32bit" multiboot\fedoraXFCE16\isolinux\vmlinuz0 
- !insertmacro FileNames "Fedora 16 GNOME 64bit" multiboot\fedora6416\isolinux\vmlinuz0 
- !insertmacro FileNames "Fedora 16 KDE 64bit" multiboot\fedoraKDE6416\isolinux\vmlinuz0    
- !insertmacro FileNames "Fedora 16 LXDE 64bit" multiboot\fedoraLXDE6416\isolinux\vmlinuz0
  !insertmacro FileNames "Fedora 16 XFCE 64bit" multiboot\fedoraXFCE6416\isolinux\vmlinuz0  
  
- !insertmacro FileNames "Fedora 15 GNOME 32bit" multiboot\fedora\isolinux\vmlinuz0 
+ !insertmacro FileNames "Fedora 15 GNOME 32bit" multiboot\fedora\isolinux\vmlinuz0
+ !insertmacro FileNames "Fedora 15 GNOME 64bit" multiboot\fedora64\isolinux\vmlinuz0  
  !insertmacro FileNames "Fedora 15 KDE 32bit" multiboot\fedoraKDE\isolinux\vmlinuz0
+ !insertmacro FileNames "Fedora 15 KDE 64bit" multiboot\fedoraKDE64\isolinux\vmlinuz0  
  !insertmacro FileNames "Fedora 15 LXDE 32bit" multiboot\fedoraLXDE\isolinux\vmlinuz0 
- !insertmacro FileNames "Fedora 15 XFCE 32bit" multiboot\fedoraXFCE\isolinux\vmlinuz0 
- !insertmacro FileNames "Fedora 15 GNOME 64bit" multiboot\fedora64\isolinux\vmlinuz0 
- !insertmacro FileNames "Fedora 15 KDE 64bit" multiboot\fedoraKDE64\isolinux\vmlinuz0    
- !insertmacro FileNames "Fedora 15 LXDE 64bit" multiboot\fedoraLXDE64\isolinux\vmlinuz0
+ !insertmacro FileNames "Fedora 15 LXDE 64bit" multiboot\fedoraLXDE64\isolinux\vmlinuz0 
+ !insertmacro FileNames "Fedora 15 XFCE 32bit" multiboot\fedoraXFCE\isolinux\vmlinuz0    
  !insertmacro FileNames "Fedora 15 XFCE 64bit" multiboot\fedoraXFCE64\isolinux\vmlinuz0  
  
     !insertmacro FileNames " " " "
     !insertmacro FileNames "--- Linux Mint 32/64 Bit ---" " "
 	!insertmacro FileNames " " " "  
- !insertmacro FileNames "Linux Mint 13 KDE 32bit" multiboot\mintkde1332\casper\vmlinuz 
- !insertmacro FileNames "Linux Mint 13 KDE 64bit" multiboot\mintkde1364\casper\vmlinuz  
- !insertmacro FileNames "Linux Mint 13 XFCE 32bit" multiboot\mintxfce1332\casper\vmlinuz  
- !insertmacro FileNames "Linux Mint 13 XFCE 64bit" multiboot\mintxfce1364\casper\vmlinuz 
- !insertmacro FileNames "Linux Mint 13 Mate 32bit" multiboot\mintmate1332\casper\vmlinuz  
- !insertmacro FileNames "Linux Mint 13 Mate 64bit" multiboot\mintmate1364\casper\vmlinuz 	
  !insertmacro FileNames "Linux Mint 13 Cinnamon 32bit" multiboot\mintcin1332\casper\vmlinuz  
  !insertmacro FileNames "Linux Mint 13 Cinnamon 64bit" multiboot\mintcin1364\casper\vmlinuz 
+ !insertmacro FileNames "Linux Mint 13 KDE 32bit" multiboot\mintkde1332\casper\vmlinuz 
+ !insertmacro FileNames "Linux Mint 13 KDE 64bit" multiboot\mintkde1364\casper\vmlinuz  
+ !insertmacro FileNames "Linux Mint 13 Mate 32bit" multiboot\mintmate1332\casper\vmlinuz  
+ !insertmacro FileNames "Linux Mint 13 Mate 64bit" multiboot\mintmate1364\casper\vmlinuz 	
+ !insertmacro FileNames "Linux Mint 13 XFCE 32bit" multiboot\mintxfce1332\casper\vmlinuz  
+ !insertmacro FileNames "Linux Mint 13 XFCE 64bit" multiboot\mintxfce1364\casper\vmlinuz 
+ 
  !insertmacro FileNames "Linux Mint 12 Gnome 32bit" multiboot\mint1232\casper\vmlinuz  
  !insertmacro FileNames "Linux Mint 12 Gnome 64bit" multiboot\mint1264\casper\vmlinuz   
  !insertmacro FileNames "Linux Mint 12 KDE 32bit" multiboot\mint1232KDE\casper\vmlinuz  
@@ -60,7 +61,8 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
  !insertmacro FileNames "LMDE 201204 Mate/Cinnamon 32bit" multiboot\mintdeb\casper\vmlinuz  
  !insertmacro FileNames "LMDE 201204 Mate/Cinnamon 64bit" multiboot\mintdeb64\casper\vmlinuz   
  !insertmacro FileNames "LMDE 201204 XFCE 32bit" multiboot\mintxfce\casper\vmlinuz  
- !insertmacro FileNames "LMDE 201204 XFCE 64bit" multiboot\mintxfce64\casper\vmlinuz    
+ !insertmacro FileNames "LMDE 201204 XFCE 64bit" multiboot\mintxfce64\casper\vmlinuz 
+ 
  !insertmacro FileNames "Linux Mint 11 32bit" multiboot\mint1132\casper\vmlinuz  
  !insertmacro FileNames "Linux Mint 11 64bit" multiboot\mint1164\casper\vmlinuz 
  ; !insertmacro FileNames "Linux Mint 10" multiboot\mint\casper\vmlinuz  
@@ -83,7 +85,8 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
     !insertmacro FileNames "--- Puppy Linux 32/64 Bit ---" " "
 	!insertmacro FileNames " " " "   
 	
- !insertmacro FileNames "Lucid Puppy Linux" multiboot\puppy\vmlinuz  
+ !insertmacro FileNames "Lucid Puppy Linux" multiboot\puppy\vmlinuz 
+ !insertmacro FileNames "Precise Puppy Linux" multiboot\precisepuppy\vmlinuz  
  !insertmacro FileNames "Racy Puppy Linux" multiboot\racypuppy\vmlinuz 
  !insertmacro FileNames "Slacko Puppy 5.3" multiboot\slacko53\vmlinuz  
  !insertmacro FileNames "Wary Puppy Linux" multiboot\warypuppy\vmlinuz  
@@ -91,62 +94,75 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
    !insertmacro FileNames " " " "
    !insertmacro FileNames "--- Ubuntu 32/64 Bit ---" " "
    !insertmacro FileNames " " " "
- !insertmacro FileNames "Ubuntu 12.10 Daily Build" multiboot\ubuntu1210\casper\vmlinuz    
+ !insertmacro FileNames "Ubuntu 12.10" multiboot\ubuntu1210\casper\vmlinuz 
+ !insertmacro FileNames "Ubuntu 12.10 amd64" multiboot\ubuntu121064\casper\vmlinuz
+ !insertmacro FileNames "Ubuntu Server 12.10" multiboot\ubuntuserv1210\install\vmlinuz 
+ !insertmacro FileNames "Ubuntu Server 12.10 amd64" multiboot\ubuntuserv121064\install\vmlinuz 
+ !insertmacro FileNames "Ubuntu Studio 12.10" multiboot\ubuntustud1210\casper\vmlinuz 
+ !insertmacro FileNames "Ubuntu Studio 12.10 amd64" multiboot\ubuntustud121064\casper\vmlinuz   
+ !insertmacro FileNames "Edubuntu 12.10" multiboot\edubuntu1210\casper\vmlinuz  
+ !insertmacro FileNames "Edubuntu 12.10 amd64" multiboot\edubuntu121064\casper\vmlinuz 
+ !insertmacro FileNames "Kubuntu 12.10" multiboot\kubuntu1210\casper\vmlinuz 
+ !insertmacro FileNames "Kubuntu 12.10 amd64" multiboot\kubuntu121064\casper\vmlinuz  
+ !insertmacro FileNames "Lubuntu 12.10" multiboot\lubuntu1210\casper\vmlinuz 
+ !insertmacro FileNames "Lubuntu 12.10 amd64" multiboot\lubuntu121064\casper\vmlinuz  
+ ; Not ready !insertmacro FileNames "Mythbuntu 12.04" multiboot\mythbuntu1204\casper\vmlinuz 
+ ; Not ready !insertmacro FileNames "Mythbuntu 12.04 amd64" multiboot\mythbuntu120464\casper\vmlinuz 
+ !insertmacro FileNames "Xubuntu 12.10" multiboot\xubuntu1210\casper\vmlinuz 
+ !insertmacro FileNames "Xubuntu 12.10 amd64" multiboot\xubuntu121064\casper\vmlinuz  
+ 
  !insertmacro FileNames "Ubuntu 12.04" multiboot\ubuntu1204\casper\vmlinuz 
- !insertmacro FileNames "Ubuntu 12.04 DVD" multiboot\ubuntu1204dvd\casper\vmlinuz   
- !insertmacro FileNames "Edubuntu 12.04" multiboot\edubuntu1204\casper\vmlinuz  
- !insertmacro FileNames "Kubuntu 12.04" multiboot\kubuntu1204\casper\vmlinuz 
- !insertmacro FileNames "Kubuntu 12.04 DVD" multiboot\kubuntu1204dvd\casper\vmlinuz 
- !insertmacro FileNames "Lubuntu 12.04" multiboot\lubuntu1204\casper\vmlinuz 
- !insertmacro FileNames "Xubuntu 12.04" multiboot\xubuntu1204\casper\vmlinuz
- !insertmacro FileNames "Mythbuntu 12.04" multiboot\mythbuntu1204\casper\vmlinuz
+ !insertmacro FileNames "Ubuntu 12.04 amd64" multiboot\ubuntu120464\casper\vmlinuz 
+ !insertmacro FileNames "Ubuntu 12.04 DVD" multiboot\ubuntu1204dvd\casper\vmlinuz     
+ !insertmacro FileNames "Ubuntu 12.04 DVD amd64" multiboot\ubuntu1204dvd64\casper\vmlinuz     
  !insertmacro FileNames "Ubuntu Server 12.04" multiboot\ubuntuserv1204\install\vmlinuz 
- !insertmacro FileNames "Ubuntu Studio 12.04" multiboot\ubuntustud1204\casper\vmlinuz 
- !insertmacro FileNames "Ubuntu 12.10 amd64 Daily Build" multiboot\ubuntu121064\casper\vmlinuz    
- !insertmacro FileNames "Ubuntu 12.04 amd64" multiboot\ubuntu120464\casper\vmlinuz   
- !insertmacro FileNames "Ubuntu 12.04 DVD amd64" multiboot\ubuntu1204dvd64\casper\vmlinuz  
- !insertmacro FileNames "Edubuntu 12.04 amd64" multiboot\edubuntu120464\casper\vmlinuz   
- !insertmacro FileNames "Kubuntu 12.04 amd64" multiboot\kubuntu120464\casper\vmlinuz
- !insertmacro FileNames "Kubuntu 12.04 DVD amd64" multiboot\kubuntu1204dvd64\casper\vmlinuz 
- !insertmacro FileNames "Lubuntu 12.04 amd64" multiboot\lubuntu120464\casper\vmlinuz 
- !insertmacro FileNames "Xubuntu 12.04 amd64" multiboot\xubuntu120464\casper\vmlinuz  
- !insertmacro FileNames "Mythbuntu 12.04 amd64" multiboot\mythbuntu120464\casper\vmlinuz  
  !insertmacro FileNames "Ubuntu Server 12.04 amd64" multiboot\ubuntuserv120464\install\vmlinuz
- !insertmacro FileNames "Ubuntu Studio 12.04 amd64" multiboot\ubuntustud120464\casper\vmlinuz   
+ !insertmacro FileNames "Ubuntu Studio 12.04" multiboot\ubuntustud1204\casper\vmlinuz 
+ !insertmacro FileNames "Ubuntu Studio 12.04 amd64" multiboot\ubuntustud120464\casper\vmlinuz    
+ !insertmacro FileNames "Edubuntu 12.04" multiboot\edubuntu1204\casper\vmlinuz  
+ !insertmacro FileNames "Edubuntu 12.04 amd64" multiboot\edubuntu120464\casper\vmlinuz 
+ !insertmacro FileNames "Kubuntu 12.04" multiboot\kubuntu1204\casper\vmlinuz 
+ !insertmacro FileNames "Kubuntu 12.04 amd64" multiboot\kubuntu120464\casper\vmlinuz  
+ !insertmacro FileNames "Kubuntu 12.04 DVD" multiboot\kubuntu1204dvd\casper\vmlinuz 
+ !insertmacro FileNames "Kubuntu 12.04 DVD amd64" multiboot\kubuntu1204dvd64\casper\vmlinuz  
+ !insertmacro FileNames "Lubuntu 12.04" multiboot\lubuntu1204\casper\vmlinuz 
+ !insertmacro FileNames "Lubuntu 12.04 amd64" multiboot\lubuntu120464\casper\vmlinuz  
+ !insertmacro FileNames "Mythbuntu 12.04" multiboot\mythbuntu1204\casper\vmlinuz 
+ !insertmacro FileNames "Mythbuntu 12.04 amd64" multiboot\mythbuntu120464\casper\vmlinuz 
+ !insertmacro FileNames "Xubuntu 12.04" multiboot\xubuntu1204\casper\vmlinuz 
+ !insertmacro FileNames "Xubuntu 12.04 amd64" multiboot\xubuntu120464\casper\vmlinuz  
  
  !insertmacro FileNames "Ubuntu 11.10" multiboot\ubuntu1110\casper\vmlinuz 
+ !insertmacro FileNames "Ubuntu 11.10 amd64" multiboot\ubuntu111064\casper\vmlinuz  
+ !insertmacro FileNames "Ubuntu Server 11.10" multiboot\ubuntuserv1110\install\vmlinuz 
  !insertmacro FileNames "Edubuntu 11.10" multiboot\edubuntu1110\casper\vmlinuz 
  !insertmacro FileNames "Kubuntu 11.10" multiboot\kubuntu1110\casper\vmlinuz 
- !insertmacro FileNames "Lubuntu 11.10" multiboot\lubuntu1110\casper\vmlinuz 
- !insertmacro FileNames "Xubuntu 11.10" multiboot\xubuntu1110\casper\vmlinuz 
- !insertmacro FileNames "Ubuntu Server 11.10" multiboot\ubuntuserv1110\install\vmlinuz  
- 
- !insertmacro FileNames "Ubuntu 11.10 amd64" multiboot\ubuntu111064\casper\vmlinuz 
- !insertmacro FileNames "Kubuntu 11.10 amd64" multiboot\kubuntu111064\casper\vmlinuz 
- !insertmacro FileNames "Lubuntu 11.10 amd64" multiboot\lubuntu111064\casper\vmlinuz 
+ !insertmacro FileNames "Kubuntu 11.10 amd64" multiboot\kubuntu111064\casper\vmlinuz  
+ !insertmacro FileNames "Lubuntu 11.10" multiboot\lubuntu1110\casper\vmlinuz
+ !insertmacro FileNames "Lubuntu 11.10 amd64" multiboot\lubuntu111064\casper\vmlinuz  
+ !insertmacro FileNames "Xubuntu 11.10" multiboot\xubuntu1110\casper\vmlinuz  
  !insertmacro FileNames "Xubuntu 11.10 amd64" multiboot\xubuntu111064\casper\vmlinuz   
    
  !insertmacro FileNames "Ubuntu 11.04" multiboot\ubuntu1104\casper\vmlinuz 
+ !insertmacro FileNames "Ubuntu 11.04 x64" multiboot\ubuntu1104x64\casper\vmlinuz   
  !insertmacro FileNames "Edubuntu 11.04" multiboot\edubuntu1104\casper\vmlinuz 
  !insertmacro FileNames "Kubuntu 11.04" multiboot\kubuntu1104\casper\vmlinuz 
+ !insertmacro FileNames "Kubuntu 11.04 x64" multiboot\kubuntu1104x64\casper\vmlinuz 
  !insertmacro FileNames "Lubuntu 11.04" multiboot\lubuntu1104\casper\vmlinuz 
  !insertmacro FileNames "Xubuntu 11.04" multiboot\xubuntu1104\casper\vmlinuz 
-
- !insertmacro FileNames "Ubuntu 11.04 x64" multiboot\ubuntu1104x64\casper\vmlinuz  
- !insertmacro FileNames "Kubuntu 11.04 x64" multiboot\kubuntu1104x64\casper\vmlinuz 
  !insertmacro FileNames "Xubuntu 11.04 x64" multiboot\xubuntu1104x64\casper\vmlinuz
  
- !insertmacro FileNames "Ubuntu 10.10" multiboot\ubuntu\casper\vmlinuz 
+ !insertmacro FileNames "Ubuntu 10.10" multiboot\ubuntu\casper\vmlinuz  
  !insertmacro FileNames "Edubuntu 10.10" multiboot\edubuntu\casper\vmlinuz  
  !insertmacro FileNames "Kubuntu 10.10" multiboot\kubuntu\casper\vmlinuz 
  !insertmacro FileNames "Lubuntu 10.10" multiboot\lubuntu\casper\vmlinuz
  !insertmacro FileNames "Xubuntu 10.10" multiboot\xubuntu\casper\vmlinuz  
  
- !insertmacro FileNames "Ubuntu 10.04" multiboot\ubuntu1004\casper\vmlinuz  
- !insertmacro FileNames "Kubuntu 10.04" multiboot\kubuntu1004\casper\vmlinuz 
- !insertmacro FileNames "Xubuntu 10.04" multiboot\xubuntu1004\casper\vmlinuz  
+ !insertmacro FileNames "Ubuntu 10.04" multiboot\ubuntu1004\casper\vmlinuz 
  !insertmacro FileNames "Ubuntu 10.04 x64" multiboot\ubuntu1004x64\casper\vmlinuz  
+ !insertmacro FileNames "Kubuntu 10.04" multiboot\kubuntu1004\casper\vmlinuz
  !insertmacro FileNames "Kubuntu 10.04 x64" multiboot\kubuntu1004x64\casper\vmlinuz 
+ !insertmacro FileNames "Xubuntu 10.04" multiboot\xubuntu1004\casper\vmlinuz    
  !insertmacro FileNames "Xubuntu 10.04 x64" multiboot\xubuntu1004x64\casper\vmlinuz  
 ; REVISIT !insertmacro FileNames "Ubuntu Rescue Remix (System Rescue)" multiboot\URR\casper\vmlinuz 
 	
@@ -177,8 +193,9 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
  !insertmacro FileNames "Peppermint One" multiboot\pmint\casper\vmlinuz  
  !insertmacro FileNames "Peppermint Two" multiboot\pmint2\casper\vmlinuz  
  !insertmacro FileNames "Peppermint Three" multiboot\pmint3\casper\vmlinuz   
- !insertmacro FileNames "Pear Linux" multiboot\pear\casper\vmlinuz  
+ !insertmacro FileNames "Pear Linux 6" multiboot\pear\casper\vmlinuz  
  !insertmacro FileNames "Pinguy OS 11" multiboot\pinguy\casper\vmlinuz 
+ !insertmacro FileNames "Pinguy OS 12.04" multiboot\pinguy1204\casper\vmlinuz  
  !insertmacro FileNames "Porteus" multiboot\porteus\boot\vmlinuz 
  !insertmacro FileNames "Fatdog64 (Firefox)" multiboot\fatdogff\vmlinuz  
  !insertmacro FileNames "Fatdog64 (Seamonkey)" multiboot\fatdogsm\vmlinuz 
@@ -192,7 +209,8 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
  !insertmacro FileNames "Sn0wL1nuX 11 64bit" multiboot\snowlinux64\casper\vmlinuz
  !insertmacro FileNames "Sugar on a Stick" multiboot\sos\isolinux\vmlinuz0 
  !insertmacro FileNames "System Rescue CD" multiboot\systemrescuecd\isolinux\rescue64
- !insertmacro FileNames "Tails (Anonymous Browsing)" multiboot\tails\live\vmlinuz 
+ !insertmacro FileNames "Tails 0.13 (Anonymous Browsing)" multiboot\tails\live\vmlinuz 
+ !insertmacro FileNames "Tails 0.14 (Anonymous Browsing)" multiboot\tails014\live\vmlinuz  
  !insertmacro FileNames "Liberte (Anonymous Browsing)" multiboot\liberte\liberte\boot\syslinux\syslinux.exe 
  !insertmacro FileNames "Terralinux" multiboot\terralinux\casper\vmlinuz  
  !insertmacro FileNames "TinyCore (A Tiny Linux Distribution)" multiboot\tinycore\boot\core.gz
@@ -325,7 +343,7 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "Fedora 17 XFCE 32bit" Fedora-17-i686-Live-XFCE.iso "http://download.fedoraproject.org/pub/alt/releases/17/Spins/i686/Fedora-17-i686-Live-XFCE.iso" Fedora-17-i686-Live-XFCE.iso "624" linux.cfg multiboot\fedoraXFCE17\isolinux\vmlinuz0 "http://fedoraproject.org" "Fedora" 
  !insertmacro SetISOFileNames "Fedora 17 LXDE 64bit" Fedora-17-x86_64-Live-LXDE.iso "http://download.fedoraproject.org/pub/alt/releases/17/Spins/x86_64/Fedora-17-x86_64-Live-LXDE.iso" Fedora-17-x86_64-Live-LXDE.iso "590" linux.cfg multiboot\fedoraLXDE6417\isolinux\vmlinuz0 "http://fedoraproject.org" "Fedora" 
  !insertmacro SetISOFileNames "Fedora 17 XFCE 64bit" Fedora-17-x86_64-Live-XFCE.iso "http://download.fedoraproject.org/pub/alt/releases/17/Spins/x86_64/Fedora-17-x86_64-Live-XFCE.iso" Fedora-17-x86_64-Live-XFCE.iso "670" linux.cfg multiboot\fedoraXFCE6417\isolinux\vmlinuz0 "http://fedoraproject.org" "Fedora"   
- 
+ !insertmacro SetISOFileNames "Pinguy OS 12.04" Pinguy_OS_12.04*.iso "http://downloads.sourceforge.net/project/pinguy-os/Pinguy_OS_12.04_LTS/Pinguy_OS_12.04-shell-i686.iso" Pinguy_OS_12.04.iso "1610" linux.cfg multiboot\pinguy1204\casper\vmlinuz "http://pinguy-os.sourceforge.net" "Pinguy" 
  !insertmacro SetISOFileNames "Pinguy OS 11" Pinguy_OS_11.04*i686.iso "http://sourceforge.net/projects/pinguy-os/files/Pinguy_OS_11.04/Pinguy_OS_11.04.1_i686.iso/download" Pinguy_OS_11.04_i686.iso "1610" linux.cfg multiboot\pinguy\casper\vmlinuz "http://pinguy-os.sourceforge.net" "Pinguy" 
  !insertmacro SetISOFileNames "Sn0wL1nuX 11" Sn0wL1nuX-11-Desktop-i386.iso "http://sourceforge.net/projects/sn0wl1nux/files/11/Sn0wL1nuX-11-Desktop-i386.iso/download" Sn0wL1nuX-11-Desktop-i386.iso "1008" linux.cfg multiboot\snowlinux\casper\vmlinuz "http://sn0wl1nux.forumdoandroid.com" "Sn0wL1nuX" 
  !insertmacro SetISOFileNames "Sn0wL1nuX 11 64bit" Sn0wL1nuX-11-Desktop-amd64.iso "http://sourceforge.net/projects/sn0wl1nux/files/11/Sn0wL1nuX-11-Desktop-amd64.iso/download" Sn0wL1nuX-11-Desktop-amd64.iso "1300" linux.cfg multiboot\snowlinux64\casper\vmlinuz "http://sn0wl1nux.forumdoandroid.com" "Sn0wL1nuX" 
@@ -344,13 +362,15 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "WifiSlax" wifislax*.iso "http://www.downloadwireless.net/isos/wifislax-4.2-final.iso" wifislax*.iso "393" linux.cfg wifislax\boot\vmlinuz "http://www.wifislax.com" "WifiSlax"
 
  !insertmacro SetISOFileNames "Scientific Linux CERN 6.3" boot.iso "http://linux.web.cern.ch/linux/scientific6/docs/repository/cern/slc6X/x86_64/images/boot.iso" boot.iso "231" linux.cfg multiboot\slc63\isolinux\vmlinuz "http://linux.web.cern.ch/linux/" "Scientific Linux"
- !insertmacro SetISOFileNames "Tails (Anonymous Browsing)" tails*.iso "https://archive.torproject.org/amnesia.boum.org/tails/stable/tails-i386-0.12/tails-i386-0.12.iso" tails.iso "764" linux.cfg multiboot\tails\live\vmlinuz "http://amnesia.boum.org" "Tails"
+ !insertmacro SetISOFileNames "Tails 0.13 (Anonymous Browsing)" tails*0.13*.iso "https://archive.torproject.org/amnesia.boum.org/tails/stable/" tails013.iso "764" linux.cfg multiboot\tails\live\vmlinuz "http://amnesia.boum.org" "Tails"
+ !insertmacro SetISOFileNames "Tails 0.14 (Anonymous Browsing)" tails*0.14*.iso "https://archive.torproject.org/amnesia.boum.org/tails/testing/" tails014.iso "764" linux.cfg multiboot\tails014\live\vmlinuz "http://amnesia.boum.org" "Tails"
+
  !insertmacro SetISOFileNames "Offline NT Password & Registy Editor" cd110511.zip "http://pogostick.net/~pnh/ntpasswd/cd110511.zip" cd110511.zip "8" system.cfg multiboot\offnt\initrd.cgz "http://www.pogostick.net/~pnh/ntpasswd/" "Offline NT"
  !insertmacro SetISOFileNames "TinyCore (A Tiny Linux Distribution)" tinycore-current.iso "http://distro.ibiblio.org/tinycorelinux/4.x/x86/release/TinyCore-current.iso" TinyCore-current.iso "10" linux.cfg multiboot\tinycore\boot\core.gz "http://www.tinycorelinux.com" "TinyCore"
  !insertmacro SetISOFileNames "MultiCore" multicore-current.iso "http://distro.ibiblio.org/pub/linux/distributions/tinycorelinux/3.x/release/multicore-current.iso" multicore-current.iso "46" linux.cfg multiboot\multicore\boot\microcore.gz "http://www.tinycorelinux.com" "MultiCore"
 
  !insertmacro SetISOFileNames "Slitaz (Another Tiny Distro)" slitaz-4.0.iso "http://distro.ibiblio.org/slitaz/iso/4.0/slitaz-4.0.iso" slitaz.iso "36" linux.cfg multiboot\slitaz\boot\rootfs1.gz "http://www.slitaz.org" "SliTaZ"
-
+ !insertmacro SetISOFileNames "Precise Puppy Linux" precise*.iso "http://distro.ibiblio.org/quirky/precise-5.4/precise-5.4.iso" precise.iso "156" linux.cfg multiboot\precisepuppy\vmlinuz "http://bkhome.org/blog/?viewDetailed=03063" "Precise Puppy"
  !insertmacro SetISOFileNames "Lucid Puppy Linux" lupu-5*.iso "http://distro.ibiblio.org/pub/linux/distributions/puppylinux/puppy-5.2.8/lupu-528.005.iso" lupu.iso "133" linux.cfg multiboot\puppy\vmlinuz "http://www.puppylinux.org" "Puppy Linux"
  !insertmacro SetISOFileNames "Fatdog64 (Firefox)" Fatdog64*Firefox.iso "http://ftp.nluug.nl/ibiblio/distributions/fatdog/iso/Fatdog64-601-Firefox.iso" Fatdog64ff.iso "197" linux.cfg multiboot\fatdogff\vmlinuz "http://www.puppylinuxforum.org/thread-180.html" "Fatdog64"
  !insertmacro SetISOFileNames "Fatdog64 (Seamonkey)" Fatdog64*Seamonkey.iso "http://ftp.nluug.nl/ibiblio/distributions/fatdog/iso/Fatdog64-601-Seamonkey.iso" Fatdog64sm.iso "202" linux.cfg multiboot\fatdogsm\vmlinuz "http://www.puppylinuxforum.org/thread-180.html" "Fatdog64"
@@ -381,14 +401,27 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "Ubuntu Rescue Remix (System Rescue)" ubuntu-rescue-remix-10-04.iso "http://ubuntu-rescue-remix.org/files/URR/iso/ubuntu-rescue-remix-10-04.iso" ubuntu-rescue-remix-10-04.iso "171" system.cfg multiboot\URR\casper\vmlinuz "http://ubuntu-rescue-remix.org" "URR"
  !insertmacro SetISOFileNames "Deft 7 (Forensics)" deft*7.1.iso "ftp://ftp.cc.uoc.gr/mirrors/linux/deftlinux/deft7.1.iso" deft7.1.iso "2432" system.cfg multiboot\deft\casper\vmlinuz "http://www.deftlinux.net/" "Deft"
  !insertmacro SetISOFileNames "Matriux (Penetration Testing)" Matriux-Krypton*.iso "http://sourceforge.net/projects/matriux/files/matriux-krypton-v1-2/Matriux-Krypton-v1.2.iso/download" Matriux.iso "2217" system.cfg multiboot\matriux\live\vmlinuz "http://www.matriux.com" "Matriux"
- !insertmacro SetISOFileNames "Pear Linux" comice_os*.iso "http://sourceforge.net/projects/pearoslinux/files/latest/download" comice_os.iso "1122" linux.cfg multiboot\pear\casper\vmlinuz "http://pear-os-linux.fr/" "Pear Linux"
+ !insertmacro SetISOFileNames "Pear Linux 6" pearlinux-6*.iso "http://downloads.sourceforge.net/project/pearlinuxprivat/Pear%20Linux%206%20Release/pearlinux-6-x86.iso" pearlinux-6*.iso "630" linux.cfg multiboot\pear\casper\vmlinuz "http://pear-os-linux.fr/" "Pear Linux"
  !insertmacro SetISOFileNames "Liberte (Anonymous Browsing)" liberte-2012*.zip "http://sourceforge.net/projects/liberte/files/2012.3/liberte-2012.3.zip/download" Liberte.zip "219" linux.cfg multiboot\liberte\liberte\boot\syslinux\syslinux.exe "http://dee.su/liberte" "Liberte"
 
  !insertmacro SetISOFileNames "Fuduntu" Fuduntu-2012.1-i686-LiveDVD.iso "http://sourceforge.net/projects/fuduntu/files/latest/download" fuduntu.iso "894" linux.cfg multiboot\fuduntu\isolinux\vmlinuz0 "http://www.fuduntu.org/" "Fuduntu"
  !insertmacro SetISOFileNames "KXStudio 12.04" KXStudio_12.04*.iso "http://superb-sea2.dl.sourceforge.net/project/kxstudio/Live/KXStudio_12.04-LiveDVD_32bit.iso" KXStudio.iso "1632" linux.cfg multiboot\KXStudio1204\casper\vmlinuz "http://kxstudio.sourceforge.net/Main_Page" "KXStudio"
- !insertmacro SetISOFileNames "Ubuntu 12.10 Daily Build" quantal-desktop-i386.iso "http://cdimage.ubuntu.com/daily-live/current/quantal-desktop-i386.iso" quantal-desktop-i386.iso "744" linux.cfg multiboot\ubuntu1210\casper\vmlinuz "http://cdimage.ubuntu.com/daily-live/current/" "Ubuntu 12.10"
- !insertmacro SetISOFileNames "Ubuntu 12.10 amd64 Daily Build" quantal-desktop-amd64.iso "http://cdimage.ubuntu.com/daily-live/current/quantal-desktop-amd64.iso" quantal-desktop-amd64.iso "755" linux.cfg multiboot\ubuntu121064\casper\vmlinuz "http://cdimage.ubuntu.com/daily-live/current/" "Ubuntu 12.10"
-
+ 
+ !insertmacro SetISOFileNames "Ubuntu 12.10" ubuntu-12.10*desktop-i386.iso "http://www.ubuntu.com/start-download?distro=desktop&bits=32&release=quantal" ubuntu-12.10-desktop.iso "744" linux.cfg multiboot\ubuntu1210\casper\vmlinuz "http://ubuntu.com" "Ubuntu 12.10"
+ !insertmacro SetISOFileNames "Ubuntu 12.10 amd64" ubuntu-12.10*desktop-amd64.iso "http://www.ubuntu.com/start-download?distro=desktop&bits=64&release=quantal" ubuntu-12.10-desktop-amd64.iso "755" linux.cfg multiboot\ubuntu121064\casper\vmlinuz "http://ubuntu.com" "Ubuntu 12.10"
+ !insertmacro SetISOFileNames "Kubuntu 12.10" kubuntu-12.10*desktop-i386.iso "http://cdimage.ubuntu.com/kubuntu/releases/12.10/release/kubuntu-12.10-desktop-i386.iso" kubuntu-12.10-desktop-i386.iso "953" linux.cfg multiboot\kubuntu1210\casper\vmlinuz "http://kubuntu.org" "Kubuntu"
+ !insertmacro SetISOFileNames "Kubuntu 12.10 amd64" kubuntu-12.10*desktop-amd64.iso "http://cdimage.ubuntu.com/kubuntu/releases/12.10/release/kubuntu-12.10-desktop-amd64.iso" kubuntu-12.10-desktop-amd64.iso "698" linux.cfg multiboot\kubuntu121064\casper\vmlinuz "http://kubuntu.org" "Kubuntu"
+ !insertmacro SetISOFileNames "Edubuntu 12.10" edubuntu-12.10*dvd-i386.iso "http://cdimage.ubuntu.com/edubuntu/releases/12.10/release/edubuntu-12.10-dvd-i386.iso" edubuntu-12.10-dvd-i386.iso "2723" linux.cfg multiboot\edubuntu1210\casper\vmlinuz "http://edubuntu.org" "Edubuntu" 
+ !insertmacro SetISOFileNames "Edubuntu 12.10 amd64" edubuntu-12.10*dvd-amd64.iso "http://cdimage.ubuntu.com/edubuntu/releases/12.10/release/edubuntu-12.10-dvd-amd64.iso" edubuntu-12.10-dvd-amd64.iso "2742" linux.cfg multiboot\edubuntu121064\casper\vmlinuz "http://edubuntu.org" "Edubuntu" 
+ !insertmacro SetISOFileNames "Lubuntu 12.10" lubuntu-12.10*desktop-i386.iso "http://cdimages.ubuntu.com/lubuntu/releases/12.10/release/lubuntu-12.10-desktop-i386.iso" lubuntu-12.10-desktop-i386.iso "692" linux.cfg multiboot\lubuntu1210\casper\vmlinuz "http://lubuntu.net" "Lubuntu" 
+ !insertmacro SetISOFileNames "Lubuntu 12.10 amd64" lubuntu-12.10*desktop-amd64.iso "http://cdimages.ubuntu.com/lubuntu/releases/12.10/release/lubuntu-12.10-desktop-amd64.iso" lubuntu-12.10-desktop-amd64.iso "688" linux.cfg multiboot\lubuntu121064\casper\vmlinuz "http://lubuntu.net" "Lubuntu" 
+ !insertmacro SetISOFileNames "Xubuntu 12.10" xubuntu-12.10*desktop-i386.iso "http://cdimage.ubuntu.com/xubuntu/releases/12.10/release/xubuntu-12.10-desktop-i386.iso" xubuntu-12.10-desktop-i386.iso "693" linux.cfg multiboot\xubuntu1210\casper\vmlinuz "http://xubuntu.org" "Xubuntu"
+ !insertmacro SetISOFileNames "Xubuntu 12.10 amd64" xubuntu-12.10*desktop-amd64.iso "http://cdimage.ubuntu.com/xubuntu/releases/12.10/release/xubuntu-12.10-desktop-amd64.iso" xubuntu-12.10-desktop-amd64.iso "680" linux.cfg multiboot\xubuntu121064\casper\vmlinuz "http://xubuntu.org" "Xubuntu"
+ !insertmacro SetISOFileNames "Ubuntu Server 12.10" ubuntu-12.10*server-i386.iso "http://releases.ubuntu.com/precise/ubuntu-12.10-server-i386.iso" ubuntu-12.10-server-i386.iso "672" linux.cfg multiboot\ubuntuserv1210\install\vmlinuz "http://ubuntu.com" "Ubuntu"
+ !insertmacro SetISOFileNames "Ubuntu Server 12.10 amd64" ubuntu-12.10*server-amd64.iso "http://releases.ubuntu.com/precise/ubuntu-12.10-server-amd64.iso" ubuntu-12.10-server-amd64.iso "673" linux.cfg multiboot\ubuntuserv121064\install\vmlinuz "http://ubuntu.com" "Ubuntu"
+ !insertmacro SetISOFileNames "Ubuntu Studio 12.10" ubuntustudio-12.10*dvd-i386.iso "http://cdimage.ubuntu.com/ubuntustudio/releases/12.10/release/ubuntustudio-12.10-dvd-i386.iso" ubuntustudio-12.10-dvd-i386.iso "1949" linux.cfg multiboot\ubuntustud1204\casper\vmlinuz "http://ubuntustudio.org" "Ubuntu Studio" 
+ !insertmacro SetISOFileNames "Ubuntu Studio 12.10 amd64" ubuntustudio-12.10*dvd-amd64.iso "http://cdimage.ubuntu.com/ubuntustudio/releases/12.10/release/ubuntustudio-12.10-dvd-amd64.iso" ubuntustudio-12.10-dvd-amd64.iso "2018" linux.cfg multiboot\ubuntustud120464\casper\vmlinuz "http://ubuntustudio.org" "Ubuntu Studio"  
+ 
  !insertmacro SetISOFileNames "Ubuntu 12.04" ubuntu-12.04*desktop-i386.iso "http://releases.ubuntu.com/precise/ubuntu-12.04.1-desktop-i386.iso" ubuntu-12.04.1-desktop-i386.iso "701" linux.cfg multiboot\ubuntu1204\casper\vmlinuz "http://ubuntu.com" "Ubuntu"
  !insertmacro SetISOFileNames "Ubuntu 12.04 DVD" ubuntu-12.04*dvd-i386.iso "http://cdimage.ubuntu.com/releases/precise/release/ubuntu-12.04.1-dvd-i386.iso" ubuntu-12.04.1-dvd-i386.iso "1500" linux.cfg multiboot\ubuntu1204dvd\casper\vmlinuz "http://ubuntu.com" "Ubuntu"
  !insertmacro SetISOFileNames "Ubuntu 12.04 DVD amd64" ubuntu-12.04*dvd-amd64.iso "http://cdimage.ubuntu.com/releases/precise/release/ubuntu-12.04.1-dvd-amd64.iso" ubuntu-12.04.1-dvd-amd64.iso "1500" linux.cfg multiboot\ubuntu1204dvd64\casper\vmlinuz "http://ubuntu.com" "Ubuntu"
@@ -403,7 +436,7 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "Ubuntu Server 12.04" ubuntu-12.04*server-i386.iso "http://releases.ubuntu.com/precise/ubuntu-12.04.1-server-i386.iso" ubuntu-12.04-server-i386.iso "672" linux.cfg multiboot\ubuntuserv1204\install\vmlinuz "http://ubuntu.com" "Ubuntu"
  !insertmacro SetISOFileNames "Ubuntu Server 12.04 amd64" ubuntu-12.04*server-amd64.iso "http://releases.ubuntu.com/precise/ubuntu-12.04.1-server-amd64.iso" ubuntu-12.04-server-amd64.iso "673" linux.cfg multiboot\ubuntuserv120464\install\vmlinuz "http://ubuntu.com" "Ubuntu"
  !insertmacro SetISOFileNames "Edubuntu 12.04" edubuntu-12.04*dvd-i386.iso "http://cdimage.ubuntu.com/edubuntu/releases/12.04.1/release/edubuntu-12.04.1-dvd-i386.iso" edubuntu-12.04-dvd-i386.iso "2723" linux.cfg multiboot\edubuntu1204\casper\vmlinuz "http://edubuntu.org" "Edubuntu" 
- !insertmacro SetISOFileNames "Edubuntu 12.04 amd64" edubuntu-12.04*dvd-amd64.iso "http://cdimage.ubuntu.com/edubuntu/releases/12.04.1/release/edubuntu-12.04*dvd-amd64.iso" edubuntu-12.04-dvd-amd64.iso "2742" linux.cfg multiboot\edubuntu120464\casper\vmlinuz "http://edubuntu.org" "Edubuntu" 
+ !insertmacro SetISOFileNames "Edubuntu 12.04 amd64" edubuntu-12.04*dvd-amd64.iso "http://cdimage.ubuntu.com/edubuntu/releases/12.04.1/release/edubuntu-12.04.1-dvd-amd64.iso" edubuntu-12.04-dvd-amd64.iso "2742" linux.cfg multiboot\edubuntu120464\casper\vmlinuz "http://edubuntu.org" "Edubuntu" 
 
  !insertmacro SetISOFileNames "Ubuntu Studio 12.04" ubuntustudio-12.04*dvd-i386.iso "http://cdimage.ubuntu.com/ubuntustudio/releases/12.04.1/release/ubuntustudio-12.04.1-dvd-i386.iso" ubuntustudio-12.04-dvd-i386.iso "1949" linux.cfg multiboot\ubuntustud1204\casper\vmlinuz "http://ubuntustudio.org" "Ubuntu Studio" 
  !insertmacro SetISOFileNames "Ubuntu Studio 12.04 amd64" ubuntustudio-12.04*dvd-amd64.iso "http://cdimage.ubuntu.com/ubuntustudio/releases/12.04.1/release/ubuntustudio-12.04.1-dvd-amd64.iso" ubuntustudio-12.04-dvd-amd64.iso "2018" linux.cfg multiboot\ubuntustud120464\casper\vmlinuz "http://ubuntustudio.org" "Ubuntu Studio" 

@@ -6,7 +6,7 @@ splashimage=/multiboot/menu/yumi.xpm.gz
 foreground=FFFFFF
 background=000000
 
-title --- Directly Bootable ISOs ---
+title --- Directly Bootable ISOs + Windows XP ---
 root
 
 title <-- Back to Main Menu

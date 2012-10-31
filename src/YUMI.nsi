@@ -1,13 +1,14 @@
 ; YUMI (Your Universal Multiboot Installer) Copyright ©2012 Lance http://www.pendrivelinux.com (See YUMI-Copying.txt and YUMI-Readme.txt for more information, Credits, and Licensing)
 ; 7-Zip Copyright ©1991-2012 Igor Pavlovis http://7-zip.org (unmodified binaries were used)
 ; Syslinux ©1994-2012 H. Peter Anvin http://syslinux.zytor.com (unmodified binary used)
-; grub.exe Grub4DOS © the Gna! people http://www.gnu.org/software/grub (unmodified binary used) : Official Grub4DOS link: http://gna.org/projects/grub4dos/
+; Firadisk.img ©2009-2011 Panot Joonkhiaw Karyonix http://reboot.pro/8804/ (unmodified binary used)
+; grub.exe Grub4DOS © the Gna! people + Chenall https://code.google.com/p/grub4dos-chenall/ (unmodified binary used) : Official Grub4DOS: http://gna.org/projects/grub4dos/
 ; Fat32format.exe © Tom Thornhill Ridgecorp Consultants http://www.ridgecrop.demon.co.uk (unmodified binary used)
 ; NSIS Installer ©1995-2012 Contributors http://nsis.sourceforge.net - Install NSIS to compile this script. http://nsis.sourceforge.net/Download
 
 !define NAME "YUMI"
 !define FILENAME "YUMI"
-!define VERSION "0.0.7.4"
+!define VERSION "0.0.7.8"
 !define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\nsis1-install.ico"
 
 ; MoreInfo Plugin - Adds Version Tab fields to Properties. Plugin created by onad http://nsis.sourceforge.net/MoreInfo_plug-in
@@ -943,7 +944,7 @@ Function Config2Write
  ${ElseIf} $Config2Use == "other.cfg"
   ${WriteToSysFile} "label Other Operating Systems and Tools$\r$\nmenu label Other Operating Systems and Tools ->$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/other.cfg" $R0 
  ${ElseIf} $Config2Use == "menu.lst"
-  ${WriteToSysFile} "label Directly Bootable ISOs$\r$\nmenu label Directly Bootable ISOs ->$\r$\nMENU INDENT 1$\r$\nKERNEL /multiboot/grub.exe$\r$\nAPPEND --config-file=/multiboot/menu/menu.lst" $R0 
+  ${WriteToSysFile} "label Directly Bootable ISOs$\r$\nmenu label Directly Bootable ISOs or Windows XP ->$\r$\nMENU INDENT 1$\r$\nKERNEL /multiboot/grub.exe$\r$\nAPPEND --config-file=/multiboot/menu/menu.lst" $R0 
   CopyFiles "$PLUGINSDIR\yumi.xpm.gz" "$BootDir\multiboot\menu\yumi.xpm.gz" 
  ${EndIf} 
 FunctionEnd

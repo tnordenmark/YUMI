@@ -37,7 +37,7 @@
  File /oname=$PLUGINSDIR\cae.cfg "Menu\cae.cfg"  
  CopyFiles "$PLUGINSDIR\cae.cfg" "$BootDir\multiboot\menu\cae.cfg"   
  
- ${ElseIf} $DistroName == "Tails (Anonymous Browsing)"
+ ${ElseIf} $DistroName == "Tails 0.13 (Anonymous Browsing)"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x!isolinux -x![BOOT] -o"$BootDir\multiboot\tails\" -y' 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
  ${WriteToFile} "label Tails (Anonymous Browsing)$\r$\nmenu label Tails (Anonymous Browsing)$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/tails.cfg" $R0
@@ -45,6 +45,15 @@
  InitPluginsDir
  File /oname=$PLUGINSDIR\tails.cfg "Menu\tails.cfg"  
  CopyFiles "$PLUGINSDIR\tails.cfg" "$BootDir\multiboot\menu\tails.cfg"   
+ 
+ ${ElseIf} $DistroName == "Tails 0.14 (Anonymous Browsing)"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x!isolinux -x![BOOT] -o"$BootDir\multiboot\tails014\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label Tails 0.14 (Anonymous Browsing)$\r$\nmenu label Tails 0.14 (Anonymous Browsing)$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/tails014.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\tails014.cfg "Menu\tails014.cfg"  
+ CopyFiles "$PLUGINSDIR\tails014.cfg" "$BootDir\multiboot\menu\tails014.cfg"  
  
  ${ElseIf} $DistroName == "Liberte (Anonymous Browsing)"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x!isolinux -x![BOOT] -o"$BootDir\multiboot\liberte\" -y' 
@@ -303,11 +312,20 @@
  ${ElseIf} $DistroName == "Pinguy OS 11"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\pinguy\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- ${WriteToFile} "label Pinguy OS 11.04$\r$\nmenu label Pinguy OS 11.04$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/pinguy1104.cfg" $R0
+ ${WriteToFile} "label Pinguy OS 11.04$\r$\nmenu label Pinguy OS 11.04$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/pguy1104.cfg" $R0
  SetShellVarContext all
  InitPluginsDir
- File /oname=$PLUGINSDIR\pinguy1104.cfg "Menu\pinguy1104.cfg"  
- CopyFiles "$PLUGINSDIR\pinguy1104.cfg" "$BootDir\multiboot\menu\pinguy1104.cfg" 
+ File /oname=$PLUGINSDIR\pguy1104.cfg "Menu\pguy1104.cfg"  
+ CopyFiles "$PLUGINSDIR\pguy1104.cfg" "$BootDir\multiboot\menu\pguy1104.cfg" 
+ 
+ ${ElseIf} $DistroName == "Pinguy OS 12.04"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\pinguy1204\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Pinguy OS 12.04$\r$\nmenu label Pinguy OS 12.04$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/pguy1204.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\pguy1204.cfg "Menu\pguy1204.cfg"  
+ CopyFiles "$PLUGINSDIR\pguy1204.cfg" "$BootDir\multiboot\menu\pguy1204.cfg"  
 
  ${ElseIf} $DistroName == "Sn0wL1nuX 11"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\snowlinux\" -y'  
@@ -583,7 +601,16 @@
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\puppy.cfg "Menu\puppy.cfg"  
- CopyFiles "$PLUGINSDIR\puppy.cfg" "$BootDir\multiboot\menu\puppy.cfg"  
+ CopyFiles "$PLUGINSDIR\puppy.cfg" "$BootDir\multiboot\menu\puppy.cfg" 
+
+ ${ElseIf} $DistroName == "Precise Puppy Linux" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\precisepuppy\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Precise Puppy$\r$\nmenu label Precise Puppy$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/ppuppy.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\ppuppy.cfg "Menu\ppuppy.cfg"  
+ CopyFiles "$PLUGINSDIR\ppuppy.cfg" "$BootDir\multiboot\menu\ppuppy.cfg"   
  
  ${ElseIf} $DistroName == "Fatdog64 (Firefox)" 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\fatdogff\" -y' 
@@ -943,7 +970,7 @@
  File /oname=$PLUGINSDIR\lu1104.cfg "Menu\lu1104.cfg"  
  CopyFiles "$PLUGINSDIR\lu1104.cfg" "$BootDir\multiboot\menu\lu1104.cfg"  
 
- ${ElseIf} $DistroName == "Ubuntu 12.10 Daily Build"
+ ${ElseIf} $DistroName == "Ubuntu 12.10"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntu1210\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  ${WriteToFile} "label Ubuntu 12.10$\r$\nmenu label Ubuntu 12.10$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/ub1210.cfg" $R0
@@ -952,14 +979,126 @@
  File /oname=$PLUGINSDIR\ub1210.cfg "Menu\ub1210.cfg"  
  CopyFiles "$PLUGINSDIR\ub1210.cfg" "$BootDir\multiboot\menu\ub1210.cfg"  
  
- ${ElseIf} $DistroName == "Ubuntu 12.10 amd64 Daily Build"
+ ${ElseIf} $DistroName == "Ubuntu 12.10 amd64"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntu121064\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  ${WriteToFile} "label Ubuntu 12.10 amd64$\r$\nmenu label Ubuntu 12.10 amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/u121064.cfg" $R0
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\u121064.cfg "Menu\u121064.cfg"  
- CopyFiles "$PLUGINSDIR\u121064.cfg" "$BootDir\multiboot\menu\u121064.cfg"   
+ CopyFiles "$PLUGINSDIR\u121064.cfg" "$BootDir\multiboot\menu\u121064.cfg" 
+ 
+ ${ElseIf} $DistroName == "Ubuntu Server 12.10"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntuserv1210\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Ubuntu Server 12.10$\r$\nmenu label Ubuntu Server 12.10$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/usrv1210.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\usrv1210.cfg "Menu\usrv1210.cfg"  
+ CopyFiles "$PLUGINSDIR\usrv1210.cfg" "$BootDir\multiboot\menu\usrv1210.cfg"
+  ReadEnvStr $R0 COMSPEC ; grab commandline
+  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv1210\pool\main\l\linux\*.ude *.udeb" ; rename broken udeb files   
+ 
+ ${ElseIf} $DistroName == "Ubuntu Server 12.10 amd64"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntuserv121064\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Ubuntu Server 12.10 amd64$\r$\nmenu label Ubuntu Server 12.10 amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/us121064.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\us121064.cfg "Menu\us121064.cfg"  
+ CopyFiles "$PLUGINSDIR\us121064.cfg" "$BootDir\multiboot\menu\us121064.cfg" 
+  ReadEnvStr $R0 COMSPEC ; grab commandline
+  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv121064\pool\main\l\linux\*.ude *.udeb" ; rename broken udeb files  
+  
+ ${ElseIf} $DistroName == "Ubuntu Studio 12.10" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntustud1210\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Ubuntu Studio 12.10$\r$\nmenu label Ubuntu Studio 12.10$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/ustu1210.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\ustu1210.cfg "Menu\ustu1210.cfg"  
+ CopyFiles "$PLUGINSDIR\ustu1210.cfg" "$BootDir\multiboot\menu\ustu1210.cfg" 
+
+ ${ElseIf} $DistroName == "Ubuntu Studio 12.10 amd64" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntustud121064\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Ubuntu Studio 12.10 amd64$\r$\nmenu label Ubuntu Studio 12.10 amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/uo121064.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\uo121064.cfg "Menu\uo121064.cfg"  
+ CopyFiles "$PLUGINSDIR\uo121064.cfg" "$BootDir\multiboot\menu\uo121064.cfg"     
+
+ ${ElseIf} $DistroName == "Edubuntu 12.10" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\edubuntu1210\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Edubuntu 12.10$\r$\nmenu label Edubuntu 12.10$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/edu1210.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\edu1210.cfg "Menu\edu1210.cfg"  
+ CopyFiles "$PLUGINSDIR\edu1210.cfg" "$BootDir\multiboot\menu\edu1210.cfg" 
+ 
+ ${ElseIf} $DistroName == "Edubuntu 12.10 amd64" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\edubuntu121064\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Edubuntu 12.10 amd64$\r$\nmenu label Edubuntu 12.10 amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/ed121064.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\ed121064.cfg "Menu\ed121064.cfg"   
+ CopyFiles "$PLUGINSDIR\ed121064.cfg" "$BootDir\multiboot\menu\ed121064.cfg"  
+
+ ${ElseIf} $DistroName == "Kubuntu 12.10"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\kubuntu1210\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Kubuntu 12.10$\r$\nmenu label Kubuntu 12.10$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/ku1210.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\ku1210.cfg "Menu\ku1210.cfg"  
+ CopyFiles "$PLUGINSDIR\ku1210.cfg" "$BootDir\multiboot\menu\ku1210.cfg" 
+
+ ${ElseIf} $DistroName == "Kubuntu 12.10 amd64"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\kubuntu121064\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Kubuntu 12.10 amd64$\r$\nmenu label Kubuntu 12.10 amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/ku121064.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\ku121064.cfg "Menu\ku121064.cfg"  
+ CopyFiles "$PLUGINSDIR\ku121064.cfg" "$BootDir\multiboot\menu\ku121064.cfg"   
+ 
+ ${ElseIf} $DistroName == "Lubuntu 12.10" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\lubuntu1210\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Lubuntu 12.10$\r$\nmenu label Lubuntu 12.10$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/lu1210.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\lu1210.cfg "Menu\lu1210.cfg"  
+ CopyFiles "$PLUGINSDIR\lu1210.cfg" "$BootDir\multiboot\menu\lu1210.cfg"  
+
+ ${ElseIf} $DistroName == "Lubuntu 12.10 amd64" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\lubuntu121064\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Lubuntu 12.10 amd64$\r$\nmenu label Lubuntu 12.10 amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/lu121064.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\lu121064.cfg "Menu\lu121064.cfg"  
+ CopyFiles "$PLUGINSDIR\lu121064.cfg" "$BootDir\multiboot\menu\lu121064.cfg" 
+
+ ${ElseIf} $DistroName == "Xubuntu 12.10"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\xubuntu1210\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Xubuntu 12.10$\r$\nmenu label Xubuntu 12.10$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/xu1210.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\xu1210.cfg "Menu\xu1210.cfg"  
+ CopyFiles "$PLUGINSDIR\xu1210.cfg" "$BootDir\multiboot\menu\xu1210.cfg" 
+ 
+ ${ElseIf} $DistroName == "Xubuntu 12.10 amd64"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\xubuntu121064\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Xubuntu 12.10 amd64$\r$\nmenu label Xubuntu 12.10 amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/xu121064.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\xu121064.cfg "Menu\xu121064.cfg"  
+ CopyFiles "$PLUGINSDIR\xu121064.cfg" "$BootDir\multiboot\menu\xu121064.cfg" 
  
  ${ElseIf} $DistroName == "Ubuntu 12.04"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntu1204\" -y'  
@@ -1463,7 +1602,7 @@
  File /oname=$PLUGINSDIR\m12LXDE.cfg "Menu\m12LXDE.cfg"  
  CopyFiles "$PLUGINSDIR\m12LXDE.cfg" "$BootDir\multiboot\menu\m12LXDE.cfg"   
 
- ${ElseIf} $DistroName == "Pear Linux" 
+ ${ElseIf} $DistroName == "Pear Linux 6" 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\pear\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  ${WriteToFile} "label Pear Linux$\r$\nmenu label Pear Linux$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/pear.cfg" $R0
