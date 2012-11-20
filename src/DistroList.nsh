@@ -71,6 +71,7 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
     !insertmacro FileNames "--- OpenSUSE Live 32/64 Bit ---" " " 
 	!insertmacro FileNames " " " "
 
+; NOT READY !insertmacro FileNames "OpenSUSE 12.2 GNOME i686" multiboot\opensuse122\boot\syslinux\initrd	
  !insertmacro FileNames "OpenSUSE 12.1 GNOME i686" multiboot\opensuse12\boot\syslinux\initrd
  !insertmacro FileNames "OpenSUSE 12.1 GNOME x64" multiboot\opensuse6412\boot\syslinux\initrd 
  !insertmacro FileNames "OpenSUSE 12.1 KDE i686" multiboot\opensuseKDE12\boot\syslinux\initrd 
@@ -190,9 +191,10 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
  !insertmacro FileNames "OSGeo Live" multiboot\osgeo\casper\vmlinuz 
 ; REVISIT !insertmacro FileNames "MultiCore" multiboot\multicore\boot\microcore.gz 
  !insertmacro FileNames "PCLinuxOS" multiboot\pclos\isolinux\vmlinuz 
- !insertmacro FileNames "Peppermint One" multiboot\pmint\casper\vmlinuz  
- !insertmacro FileNames "Peppermint Two" multiboot\pmint2\casper\vmlinuz  
- !insertmacro FileNames "Peppermint Three" multiboot\pmint3\casper\vmlinuz   
+; !insertmacro FileNames "Peppermint One" multiboot\pmint\casper\vmlinuz  
+; !insertmacro FileNames "Peppermint Two" multiboot\pmint2\casper\vmlinuz  
+ !insertmacro FileNames "Peppermint Three" multiboot\pmint3\casper\vmlinuz
+ !insertmacro FileNames "Peppermint Three 64bit" multiboot\pmint364\casper\vmlinuz 
  !insertmacro FileNames "Pear Linux 6" multiboot\pear\casper\vmlinuz  
  !insertmacro FileNames "Pinguy OS 11" multiboot\pinguy\casper\vmlinuz 
  !insertmacro FileNames "Pinguy OS 12.04" multiboot\pinguy1204\casper\vmlinuz  
@@ -221,7 +223,8 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
  !insertmacro FileNames "XBMC" multiboot\xbmc\live\vmlinuz  
  !insertmacro FileNames "XBMCbuntu" multiboot\xbmcbuntu\casper\vmlinuz   
  !insertmacro FileNames "YlmF OS (Looks like Windows)" multiboot\YLMF\casper\vmlinuz 
- !insertmacro FileNames "Zorin OS" multiboot\zorin\casper\vmlinuz  
+ !insertmacro FileNames "Zorin OS Lite" multiboot\zorin\casper\vmlinuz 
+ !insertmacro FileNames "Zorin OS Lite 64bit" multiboot\zorin64\casper\vmlinuz  
   
    !insertmacro FileNames " "  " " 
    !insertmacro FileNames "------------ NetBook Distributions ------------"  " "	
@@ -237,12 +240,14 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
    !insertmacro FileNames "--------------- Antivirus Tools ---------------"  " " 
    !insertmacro FileNames " "  " "   
    
- !insertmacro FileNames "Acronis Antimalware CD" multiboot\acronis\casper\vmlinuz   
+ !insertmacro FileNames "Acronis Antimalware CD" multiboot\acronis\casper\vmlinuz 
+ !insertmacro FileNames "AOSS (Malware Scanner)" system\stage1    
  !insertmacro FileNames "AVG Rescue CD (Antivirus Scanner)" multiboot\avg\isolinux\vmlinuz
  !insertmacro FileNames "AVIRA AntiVir Rescue CD (Virus Scanner)" antivir\vmlinuz ; Antivir, Avupdate, and system folder stored at root of USB! To be Fixed
  !insertmacro FileNames "Bitdefender Rescue Disk (Antivirus Scanner)" multiboot\bitdefender\casper\vmlinuz
  !insertmacro FileNames "Dr.Web Live CD" boot\module\drweb_bases.dwm
  !insertmacro FileNames "F-Secure Rescue CD" multiboot\fsecure\boot\isolinux\linux
+ !insertmacro FileNames "GDATA Rescue CD" multiboot\gdata\boot\linux36 
 ; needs work !insertmacro FileNames "G DATA (Virus Scanner)" multiboot\gdata\boot\linux26
  !insertmacro FileNames "Kaspersky Rescue Disk (Antivirus Scanner)" multiboot\kav\boot\rescue.igz ; rescue folder is stored at root of USB! To be Fixed
  !insertmacro FileNames "Panda SafeCD" multiboot\panda\live\vmlinuz1 
@@ -310,9 +315,11 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "Archlinux" archlinux*dual.iso "http://mirrors.us.kernel.org/archlinux/iso/latest/archlinux-2012.08.04-dual.iso" archlinux-dual.iso "384" linux.cfg multiboot\archlinux\arch\boot\i686\archiso.img "http://www.archlinux.org" "Archlinux"  
  !insertmacro SetISOFileNames "Bodhi" bodhi*.iso "http://sourceforge.net/projects/bodhilinux/files/latest/download" bodhi.iso "380" linux.cfg multiboot\bodhi\casper\vmlinuz "http://www.bodhilinux.com" "Bodhi"  
  !insertmacro SetISOFileNames "Dr.Web Live CD" drweb-livecd*.iso "http://download.geo.drweb.com/pub/drweb/livecd/drweb-livecd-600.iso" drweb.iso "176" antivirus.cfg boot\vmlinuz "http://www.freedrweb.com/livecd/" "Dr.Web"  
+ !insertmacro SetISOFileNames "AOSS (Malware Scanner)" AOSS.iso "http://download.pctools.com/mirror/AOSS.iso" AOSS.iso "223" antivirus.cfg system\stage1 "http://www.pctools.com/aoss/" "AOSS"  
+
  !insertmacro SetISOFileNames "CAELinux (Computer Aided Engineering)" caelinux*.iso "ftp://cae-linux:salome@caelinux.dyndns.org/distrib/caelinux2011/caelinux2011.iso" CAE.iso "4094" linux.cfg multiboot\caelinux\casper\vmlinuz "http://caelinux.com" "CAELinux"  
- !insertmacro SetISOFileNames "Rescatux" rescatux_cdrom_usb_hybrid*.iso "http://sourceforge.net/projects/rescatux.berlios/files/rescatux_cdrom_usb_hybrid_i386_486-amd64_0.30b4_sg2d.iso/download" rescatux.iso "305" system.cfg multiboot\rescatux\live\vmlinuz "http://www.supergrubdisk.org/rescatux/" "Rescatux" 
- !insertmacro SetISOFileNames "CentOS" CentOS-6*.iso "http://mirrors.kernel.org/centos/6/isos/i386/CentOS-6.2-i386-LiveCD.iso" CentOS-6-LiveCD.iso "685" linux.cfg multiboot\centos\LiveOS\squashfs.img "http://www.centos.org" "CentOS"
+ !insertmacro SetISOFileNames "Rescatux" rescatux_cdrom_usb_hybrid*.iso "http://sourceforge.net/projects/rescatux.berlios/files/latest/download" rescatux.iso "305" system.cfg multiboot\rescatux\live\vmlinuz "http://www.supergrubdisk.org/rescatux/" "Rescatux" 
+ !insertmacro SetISOFileNames "CentOS" CentOS-6*.iso "http://mirrors.kernel.org/centos/6/isos/i386/CentOS-6.3-i386-LiveCD.iso" CentOS-6-LiveCD.iso "685" linux.cfg multiboot\centos\LiveOS\squashfs.img "http://www.centos.org" "CentOS"
  !insertmacro SetISOFileNames "CentOS 64bit" CentOS-6*64-Live*.iso "http://mirrors.kernel.org/centos/6/isos/x86_64/CentOS-6.2-x86_64-LiveCD.iso" CentOS-6_64-Live.iso "690" linux.cfg multiboot\centos64\LiveOS\squashfs.img "http://www.centos.org" "CentOS"
  !insertmacro SetISOFileNames "gpxe (Net Bootable Distros)" *gpxe.lkrn "http://rom-o-matic.net/gpxe/gpxe-git/gpxe.git/contrib/rom-o-matic/" multiboot\gpxe.lkrn "2" linux.cfg multiboot\gpxe.lkrn "http://etherboot.org" "GPXE"
  !insertmacro SetISOFileNames "Crunchbang 10" crunchbang-10*.iso "http://crunchbanglinux.org/downloads/" crunchbang-10.iso "691" linux.cfg multiboot\crunchbang\live\vmlinuz1 "http://crunchbanglinux.org" "Crunchbang"
@@ -488,7 +495,8 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "Dreamlinux" dreamlinux*.iso "http://download.linux-live-cd.org/iso/Dreamlinux/Dreamlinux-5.iso" Dreamlinux.iso "988" linux.cfg multiboot\dreamlinux\boot\vmlinuz "http://www.dreamlinux.info/" "Dreamlinux" 
  
  !insertmacro SetISOFileNames "Samurai-WTF" samurai-0.9.5.iso "http://sourceforge.net/projects/samurai/files/samurai/samurai-0.9.5/samurai-0.9.5.iso/download" samurai-0.9.5.iso "1410" linux.cfg multiboot\samurai\casper\vmlinuz "http://samurai.inguardians.com/" "Samurai"
-
+ 
+ !insertmacro SetISOFileNames "OpenSUSE 12.2 GNOME i686" openSUSE-12.2-GNOME-LiveCD-i686.iso "http://suse.mirrors.tds.net/pub/opensuse/distribution/12.2/iso/openSUSE-12.2-GNOME-LiveCD-i686.iso" openSUSE-12.2-GNOME-LiveCD-i686.iso "695" linux.cfg multiboot\opensuse122\openSUSE-12.2-livecd-gnome-read-only.i686-2.8.0 "http://software.opensuse.org" "OpenSUSE" 
  !insertmacro SetISOFileNames "OpenSUSE 12.1 GNOME i686" openSUSE-12.1-GNOME-LiveCD-i686.iso "http://suse.mirrors.tds.net/pub/opensuse/distribution/12.1/iso/openSUSE-12.1-GNOME-LiveCD-i686.iso" openSUSE-12.1-GNOME-LiveCD-i686.iso "695" linux.cfg multiboot\opensuse12\openSUSE-12.1-livecd-gnome-read-only.i686-2.8.0 "http://software.opensuse.org" "OpenSUSE" 
  !insertmacro SetISOFileNames "OpenSUSE 12.1 GNOME x64" openSUSE-12.1-GNOME-LiveCD-x86_64.iso "http://suse.mirrors.tds.net/pub/opensuse/distribution/12.1/iso/openSUSE-12.1-GNOME-LiveCD-x86_64.iso" openSUSE-12.1-GNOME-LiveCD-x86_64.iso "695" linux.cfg multiboot\opensuse6412\openSUSE-12.1-livecd-gnome-read-only.x86_64-2.8.0 "http://software.opensuse.org" "OpenSUSE" 
  !insertmacro SetISOFileNames "OpenSUSE 12.1 KDE i686" openSUSE-12.1-KDE-LiveCD-i686.iso "http://suse.mirrors.tds.net/pub/opensuse/distribution/12.1/iso/openSUSE-12.1-KDE-LiveCD-i686.iso" openSUSE-12.1-KDE-LiveCD-i686.iso "695" linux.cfg multiboot\opensuseKDE12\openSUSE-12.1-livecd-kde-read-only.i686-2.8.0 "http://software.opensuse.org" "OpenSUSE" 
@@ -526,9 +534,10 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
 
  !insertmacro SetISOFileNames "Linux Mint 11 32bit" linuxmint-11-gnome*32bit.iso "http://ftp.heanet.ie/pub/linuxmint.com/stable/11/linuxmint-11-gnome-dvd-32bit.iso" linuxmint-11-gnome-32bit.iso "867" linux.cfg multiboot\mint1132\casper\vmlinuz "http://www.linuxmint.com" "Linux Mint"
  !insertmacro SetISOFileNames "Linux Mint 11 64bit" linuxmint-11-gnome*64bit.iso "http://ftp.heanet.ie/pub/linuxmint.com/stable/11/linuxmint-11-gnome-dvd-64bit.iso" linuxmint-11-gnome-64bit.iso "867" linux.cfg multiboot\mint1164\casper\vmlinuz "http://www.linuxmint.com" "Linux Mint" 
- !insertmacro SetISOFileNames "Peppermint One" Peppermint-One*.iso "http://peppermintos.info/archive/Peppermint-One-06172010.iso" Peppermint-One.iso "444" linux.cfg multiboot\pmint\casper\vmlinuz "http://peppermintos.com" "Peppermint"
- !insertmacro SetISOFileNames "Peppermint Two" Peppermint-Two*.iso "http://peppermintos.info/dl1/Peppermint-Two-i386-06052011.iso" Peppermint-Two.iso "444" linux.cfg multiboot\pmint2\casper\vmlinuz "http://peppermintos.com" "Peppermint"
- !insertmacro SetISOFileNames "Peppermint Three" Peppermint-3*.iso "http://peppermintos.info/dl1/Peppermint-3-20120722-i386.iso" Peppermint-3.iso "532" linux.cfg multiboot\pmint3\casper\vmlinuz "http://peppermintos.com" "Peppermint"
+ !insertmacro SetISOFileNames "Peppermint One" Peppermint-One*.iso "http://peppermintos.com/download/" Peppermint-One.iso "444" linux.cfg multiboot\pmint\casper\vmlinuz "http://peppermintos.com" "Peppermint"
+ !insertmacro SetISOFileNames "Peppermint Two" Peppermint-Two*.iso "http://peppermintos.com/download/" Peppermint-Two.iso "444" linux.cfg multiboot\pmint2\casper\vmlinuz "http://peppermintos.com" "Peppermint"
+ !insertmacro SetISOFileNames "Peppermint Three" Peppermint-3*i386.iso "http://peppermintos.com/download/" Peppermint-3-32.iso "532" linux.cfg multiboot\pmint3\casper\vmlinuz "http://peppermintos.com" "Peppermint"
+ !insertmacro SetISOFileNames "Peppermint Three 64bit" Peppermint-3*amd64.iso "http://peppermintos.com/download/" Peppermint-3-64.iso "532" linux.cfg multiboot\pmint364\casper\vmlinuz "http://peppermintos.com" "Peppermint"
 
  !insertmacro SetISOFileNames "Netrunner" netrunner4*.iso "http://www.netrunner-os.com/wp-content/plugins/download-monitor/download.php?id=15" netrunner.iso "1141" linux.cfg multiboot\netrunner\casper\vmlinuz "http://www.netrunner-os.com" "Netrunner"
  !insertmacro SetISOFileNames "OSGeo Live" osgeo-live*.iso "http://download.osgeo.org/livedvd/release/5.5/osgeo-live-5.5.iso" osgeo.iso "4566" linux.cfg multiboot\osgeo\casper\vmlinuz "http://live.osgeo.org" "OSGeo Live"
@@ -569,7 +578,8 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
 
  !insertmacro SetISOFileNames "Mandriva 2011" Mandriva.2011.i586.1.iso "http://www.mandriva.com/en/downloads/download.html?product=Mandriva.2011.i586.1.iso" Mandriva.2011.i586.1.iso "1700" linux.cfg multiboot/mandriva/LiveOS/squashfs.img "http://www.mandriva.com" "Mandriva"
  !insertmacro SetISOFileNames "SalineOS" SalineOS*.iso "http://www.salineos.com/server/SalineOS-1.0-i386-PSE.iso" SalineOS*.iso "931" linux.cfg multiboot\saline\live\vmlinuz "http://www.salineos.com" "SalineOS"
- !insertmacro SetISOFileNames "Zorin OS" zorin*.iso "http://zorin-os.com/free.html" zorin.iso "670" linux.cfg multiboot\zorin\casper\vmlinuz "http://zorin-os.com/" "Zorin OS"
+ !insertmacro SetISOFileNames "Zorin OS Lite" zorin*.iso "http://zorin-os.com/free.html" zorin.iso "641" linux.cfg multiboot\zorin\casper\vmlinuz "http://zorin-os.com/" "Zorin OS"
+ !insertmacro SetISOFileNames "Zorin OS Lite 64bit" zorin*.iso "http://zorin-os.com/free.html" zorin64.iso "641" linux.cfg multiboot\zorin64\casper\vmlinuz "http://zorin-os.com/" "Zorin OS"
  
  !insertmacro SetISOFileNames "System Rescue CD" systemrescuecd-x86*.iso "http://sourceforge.net/projects/systemrescuecd/files/latest/download" systemrescuecd-x86.iso "353" system.cfg multiboot\systemrescuecd\isolinux\rescue64 "http://www.sysresccd.org" "System Rescue"
  !insertmacro SetISOFileNames "Trinity Rescue Kit" trinity-rescue-kit.3.4-build*.iso "ftp://ftp.osuosl.org/pub/trk/trinity-rescue-kit.3.4-build-372.iso" trinity-rescue-kit.3.4.iso "146" system.cfg TRK\initrd.trk "http://trinityhome.org" "TRK"
@@ -577,7 +587,8 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "DRBL (Diskless Remote Boot in Linux)" drbl-live*.iso "http://sourceforge.net/projects/drbl/files/drbl_live_stable/1.0.5-6/drbl-live-xfce-1.0.5-6-i686.iso/download" drbl-live*.iso "394" system.cfg multiboot\DRBL\live\vmlinuz "http://drbl.sourceforge.net" "DRBL"
  !insertmacro SetISOFileNames "XBMC" xbmc*.iso "http://mirrors.xbmc.org/releases/live/xbmc-10.1-live.iso" xbmc.iso "420" linux.cfg multiboot\xbmc\live\vmlinuz "http://xbmc.org/" "XBMC"
  !insertmacro SetISOFileNames "XBMCbuntu" xbmcbuntu*.iso "http://mirrors.xbmc.org/releases/XBMCbuntu/xbmcbuntu-11.0.iso" xbmcbuntu.iso "623" linux.cfg multiboot\xbmcbuntu\casper\vmlinuz "http://xbmc.org/" "XBMC"
- 
+ !insertmacro SetISOFileNames "GDATA Rescue CD" bootcd.iso "" bootcd.iso "233" antivirus.cfg multiboot\gdata\boot\linux36 "http://www.gdatasoftware.com//" "GDATA"
+
  !insertmacro SetISOFileNames "Try an Unlisted ISO" *.iso "NONE" "" "1" menu.lst "" "" "" 
  !insertmacro SetISOFileNames "Try an Unlisted ISO (Run from RAM)" *.iso "NONE" "" "1" menu.lst "" "" ""  
  !insertmacro SetISOFileNames "Windows XP Installer" *.iso "NONE" "" "1" menu.lst "" "" ""  

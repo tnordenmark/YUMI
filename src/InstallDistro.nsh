@@ -472,7 +472,25 @@
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\debx64.cfg "Menu\debx64.cfg"  
- CopyFiles "$PLUGINSDIR\debx64.cfg" "$BootDir\multiboot\menu\debx64.cfg"   
+ CopyFiles "$PLUGINSDIR\debx64.cfg" "$BootDir\multiboot\menu\debx64.cfg"  
+ 
+ ${ElseIf} $DistroName == "AOSS (Malware Scanner)"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label AOSS$\r$\nmenu label AOSS$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/aoss.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\aoss.cfg "Menu\aoss.cfg"  
+ CopyFiles "$PLUGINSDIR\aoss.cfg" "$BootDir\multiboot\menu\aoss.cfg"  
+
+ ${ElseIf} $DistroName == "GDATA Rescue CD"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\gdata\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label GDATA Rescue CD$\r$\nmenu label GDATA Rescue CD$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/gdata.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\gdata.cfg "Menu\gdata.cfg"  
+ CopyFiles "$PLUGINSDIR\gdata.cfg" "$BootDir\multiboot\menu\gdata.cfg"  
  
  ${ElseIf} $DistroName == "Panda SafeCD"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\panda\" -y' 
@@ -1636,7 +1654,16 @@
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\pmint3.cfg "Menu\pmint3.cfg" 
- CopyFiles "$PLUGINSDIR\pmint3.cfg" "$BootDir\multiboot\menu\pmint3.cfg"   
+ CopyFiles "$PLUGINSDIR\pmint3.cfg" "$BootDir\multiboot\menu\pmint3.cfg" 
+
+ ${ElseIf} $DistroName == "Peppermint Three 64bit" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\pmint364\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Peppermint Three 64bit$\r$\nmenu label Peppermint Three 64bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/pmint364.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\pmint364.cfg "Menu\pmint364.cfg" 
+ CopyFiles "$PLUGINSDIR\pmint364.cfg" "$BootDir\multiboot\menu\pmint364.cfg"   
 
  ${ElseIf} $DistroName == "EasyPeasy (NetBook Distro)" 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\easypeasy\" -y'  
@@ -1919,6 +1946,24 @@
  File /oname=$PLUGINSDIR\trinity.cfg "Menu\trinity.cfg"  
  CopyFiles "$PLUGINSDIR\trinity.cfg" "$BootDir\multiboot\menu\trinity.cfg"  
  
+ ${ElseIf} $DistroName == "OpenSUSE 12.2 GNOME i686" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\opensuse122\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label OpenSUSE 12.2 Gnome i686$\r$\nmenu label OpenSUSE 12.2 Gnome i686$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/suse122.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ Rename "$BootDir\multiboot\opensuse122\boot\i386\loader\" "$BootDir\multiboot\opensuse122\boot\syslinux\"
+ File /oname=$PLUGINSDIR\suse122.cfg "Menu\suse122.cfg" 
+ File /oname=$PLUGINSDIR\config122.isoclient "Menu\config122.isoclient" 
+ File /oname=$PLUGINSDIR\mbrid "mbrid"  
+ Rename "$BootDir\multiboot\opensuse122\config.isoclient" "$BootDir\multiboot\opensuse122\oldconfig.isoclient"
+ CopyFiles "$PLUGINSDIR\config122.isoclient" "$BootDir\multiboot\opensuse122\config.isoclient" 
+ CopyFiles "$PLUGINSDIR\suse122.cfg" "$BootDir\multiboot\menu\suse122.cfg" 
+ CopyFiles "$PLUGINSDIR\mbrid" "$BootDir\multiboot\opensuse122\boot\grub\mbrid"
+ StrCpy $SUSEDIR "opensuse122"
+ Call MBRID 
+ CopyFiles "$BootDir\multiboot\opensuse122\boot\grub\mbrid" "$BootDir\boot\grub\mbrid" 
+ 
  ${ElseIf} $DistroName == "OpenSUSE 12.1 GNOME i686" 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\opensuse12\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -2048,7 +2093,7 @@
  Call MBRID 
  CopyFiles "$BootDir\multiboot\opensuseKDE64\boot\grub\mbrid" "$BootDir\boot\grub\mbrid" 
  
- ${ElseIf} $DistroName == "Zorin OS"
+ ${ElseIf} $DistroName == "Zorin OS Lite"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\zorin\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  ${WriteToFile} "label Zorin OS$\r$\nmenu label Zorin OS$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/zorin.cfg" $R0
@@ -2056,6 +2101,15 @@
  InitPluginsDir
  File /oname=$PLUGINSDIR\zorin.cfg "Menu\zorin.cfg"  
  CopyFiles "$PLUGINSDIR\zorin.cfg" "$BootDir\multiboot\menu\zorin.cfg" 
+ 
+ ${ElseIf} $DistroName == "Zorin OS Lite 64bit"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\zorin64\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Zorin OS 64bit$\r$\nmenu label Zorin OS 64bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/zorin64.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\zorin64.cfg "Menu\zorin64.cfg"  
+ CopyFiles "$PLUGINSDIR\zorin64.cfg" "$BootDir\multiboot\menu\zorin64.cfg"  
  
  ${ElseIf} $DistroName == "F-Secure Rescue CD"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\fsecure\" -y'  
@@ -2073,7 +2127,8 @@
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -ir!HBCD -o"$BootDir\" -y' 
  ;RMDir /R "$EXEDIR\TEMPYUMI"
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- ${WriteToFile} "label Hiren's Boot CD 15.X$\r$\nmenu label Hiren's Boot CD 15.X$\r$\nMENU INDENT 1$\r$\nCOM32 /HBCD/Boot/chain.c32 fs grldr=/HBCD/grldr" $R0
+ ${WriteToFile} "label Hiren's Boot CD 15.X$\r$\nmenu label Hiren's Boot CD 15.X$\r$\nMENU INDENT 1$\r$\nCOM32 /HBCD/Boot/chain.c32 ntldr=/HBCD/grldr" $R0
+ ;${WriteToFile} "label Hiren's Boot CD 15.X$\r$\nmenu label Hiren's Boot CD 15.X$\r$\nMENU INDENT 1$\r$\nKERNEL /multiboot/grub.exe$\r$\nAPPEND --config-file=/HBCD/menu.lst" $R0 
  
  ${ElseIf} $DistroName == "HP SmartStart 8.60 x32"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -o"$EXEDIR\TEMPYUMI" -y' 

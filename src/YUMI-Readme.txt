@@ -23,6 +23,7 @@ Additional instructions for MultiBootISOs can be found HERE: http://www.pendrive
 
 Changelog:
 
+11/13/12 Version 0.0.7.9: Update to support Zorin OS Lite 6.1 32/64 bit, Peppermint OS 32/64 bit, Cent OS 6.3, Hiren's 15.2, GDATA Rescue CD, and AOSS CD.
 10/29/12 Version 0.0.7.8: Correct Lubuntu 12.10 amd64 menu entry. Added support for Ubuntu Studio 12.10.
 10/24/12 Version 0.0.7.7: Update to support Precise Puppy, PinguyOS, Pear Linux 6, and Tails 0.14. Updated to use Syslinux 4.06 and 7zip 920.
 10/19/12 Version 0.0.7.6: Update to support Edubuntu, Ubuntu, Kubuntu, Lubuntu, and Xubuntu 12.10.

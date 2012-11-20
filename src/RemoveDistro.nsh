@@ -301,25 +301,40 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Debian Live KDE 64" "APPEND /multiboot/menu/debk64.cfg"   
  Delete "$BootDir\multiboot\menu\debk64.cfg" 
 
- ${ElseIf} $DistroName == "Debian Live 6 LXDE 64bit" ;
+ ${ElseIf} $DistroName == "Debian Live 6 LXDE 64bit" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R  "$BootDir\multiboot\debianlxde64"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Debian Live LXDE 64" "APPEND /multiboot/menu/debl64.cfg"   
  Delete "$BootDir\multiboot\menu\debl64.cfg" 
 
- ${ElseIf} $DistroName == "Debian Live 6 XFCE 64bit" ;
+ ${ElseIf} $DistroName == "Debian Live 6 XFCE 64bit" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R  "$BootDir\multiboot\debxfce64"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Debian Live XFCE 64" "APPEND /multiboot/menu/debx64.cfg"   
- Delete "$BootDir\multiboot\menu\debx64.cfg"   
+ Delete "$BootDir\multiboot\menu\debx64.cfg"  
+
+ ${ElseIf} $DistroName == "AOSS (Malware Scanner)"
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ; RMDir /R "$BootDir\multiboot\aoss" 
+ RMDir /R "$BootDir\Documents" 
+ RMDir /R "$BootDir\scripts" 
+ RMDir /R "$BootDir\system" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label AOSS" "APPEND /multiboot/menu/aoss.cfg"     
+ Delete "$BootDir\multiboot\menu\aoss.cfg"  
  
- ${ElseIf} $DistroName == "Panda SafeCD" ;
+ ${ElseIf} $DistroName == "GDATA Rescue CD" 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ RMDir /R "$BootDir\multiboot\gdata" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label GDATA Rescue CD" "APPEND /multiboot/menu/gdata.cfg"     
+ Delete "$BootDir\multiboot\menu\gdata.cfg"   
+ 
+ ${ElseIf} $DistroName == "Panda SafeCD" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
  RMDir /R "$BootDir\multiboot\panda" 
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Panda Safe CD (Antivirus)" "APPEND /multiboot/menu/panda.cfg"     
  Delete "$BootDir\multiboot\menu\panda.cfg"  
  
- ${ElseIf} $DistroName == "Sugar on a Stick" ;
+ ${ElseIf} $DistroName == "Sugar on a Stick" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
  RMDir /R "$BootDir\multiboot\sos" 
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Sugar on a Stick" "APPEND /multiboot/menu/sugar.cfg"     
@@ -1061,7 +1076,13 @@
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\pmint3"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Peppermint Three" "APPEND /multiboot/menu/pmint3.cfg"  
- Delete "$BootDir\multiboot\menu\pmint3.cfg"   
+ Delete "$BootDir\multiboot\menu\pmint3.cfg"  
+
+ ${ElseIf} $DistroName == "Peppermint Three 64bit" 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\pmint364"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Peppermint Three 64bit" "APPEND /multiboot/menu/pmint364.cfg"  
+ Delete "$BootDir\multiboot\menu\pmint364.cfg"    
 
  ${ElseIf} $DistroName == "EasyPeasy (NetBook Distro)" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -1256,6 +1277,12 @@
  RMDir /R "$BootDir\trk3" 
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Trinity Rescue Kit" "APPEND /multiboot/menu/trinity.cfg"  
  Delete "$BootDir\multiboot\menu\trinity.cfg"  
+ 
+ ${ElseIf} $DistroName == "OpenSUSE 12.2 GNOME i686" 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\opensuse122" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label OpenSUSE 12.2 Gnome i686" "APPEND /multiboot/menu/suse122.cfg"    
+ Delete "$BootDir\multiboot\menu\suse122.cfg" 
 
  ${ElseIf} $DistroName == "OpenSUSE 12.1 GNOME i686" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -1305,11 +1332,17 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label OpenSUSE 11.4 Gnome x64" "APPEND /multiboot/menu/suse64.cfg"   
  Delete "$BootDir\multiboot\menu\suse64.cfg"
  
- ${ElseIf} $DistroName == "Zorin OS" 
+ ${ElseIf} $DistroName == "Zorin OS Lite" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\zorin"  
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Zorin OS" "APPEND /multiboot/menu/zorin.cfg" 
  Delete "$BootDir\multiboot\menu\zorin.cfg"  
+ 
+ ${ElseIf} $DistroName == "Zorin OS Lite 64bit" 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\zorin"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Zorin OS Lite 64bit" "APPEND /multiboot/menu/zorin64.cfg" 
+ Delete "$BootDir\multiboot\menu\zorin64.cfg"   
 
  ${ElseIf} $DistroName == "F-Secure Rescue CD"
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
