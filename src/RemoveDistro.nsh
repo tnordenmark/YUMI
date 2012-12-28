@@ -35,7 +35,13 @@
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
  RMDir /R "$BootDir\multiboot\tails014"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Tails 0.14 (Anonymous Browsing)" "APPEND /multiboot/menu/tails014.cfg"  
- Delete "$BootDir\multiboot\menu\tails014.cfg"   
+ Delete "$BootDir\multiboot\menu\tails014.cfg"  
+
+ ${ElseIf} $DistroName == "Tails 0.15 (Anonymous Browsing)"
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ RMDir /R "$BootDir\multiboot\tails015"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Tails 0.15 (Anonymous Browsing)" "APPEND /multiboot/menu/tails015.cfg"  
+ Delete "$BootDir\multiboot\menu\tails015.cfg"    
  
  ${ElseIf} $DistroName == "Liberte (Anonymous Browsing)"
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
@@ -265,6 +271,18 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label AntiX" "APPEND /multiboot/menu/antix.cfg"   
  Delete "$BootDir\multiboot\menu\antix.cfg" 
  
+ ${ElseIf} $DistroName == "Boot Repair Disk" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R  "$BootDir\multiboot\bootrepair"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Boot Repair Disk" "APPEND /multiboot/menu/bootrepair.cfg"   
+ Delete "$BootDir\multiboot\menu\bootrepair.cfg"  
+ 
+ ${ElseIf} $DistroName == "GRML (system rescue)" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R  "$BootDir\multiboot\grml"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label GRML" "APPEND /multiboot/menu/grml.cfg"   
+ Delete "$BootDir\multiboot\menu\grml.cfg"  
+ 
  ${ElseIf} $DistroName == "Debian Live 6 Gnome 32bit" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R  "$BootDir\multiboot\debian"
@@ -483,12 +501,6 @@
  RMDir /R "$BootDir\tables" 
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ophcrack Vista" "APPEND /multiboot/menu/ophvista.cfg"   
  Delete "$BootDir\multiboot\menu\ophvista.cfg"  
- 
- ${ElseIf} $DistroName == "YlmF OS (Looks like Windows)" ;
- ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- RMDir /R "$BootDir\multiboot\ylmf"  
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label YlmF (Windows Like OS)" "APPEND /multiboot/menu/ylmf.cfg" 
- Delete "$BootDir\multiboot\menu\ylmf.cfg"
  
  ${ElseIf} $DistroName == "SalineOS" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -988,6 +1000,54 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint 13 Mate 32bit" "APPEND /multiboot/menu/mate13.cfg" 
  Delete "$BootDir\multiboot\menu\mate13.cfg"  
  
+ ${ElseIf} $DistroName == "Linux Mint 14 Mate 32bit"  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintmate1432"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint 14 Mate 32bit" "APPEND /multiboot/menu/mate14.cfg" 
+ Delete "$BootDir\multiboot\menu\mate14.cfg" 
+
+ ${ElseIf} $DistroName == "Linux Mint 14 Mate 64bit"  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintmate1464"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint 14 Mate 64bit" "APPEND /multiboot/menu/mate1464.cfg" 
+ Delete "$BootDir\multiboot\menu\mate1464.cfg"   
+
+ ${ElseIf} $DistroName == "Linux Mint 14 Cinnamon 32bit"  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintcin1432"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint Cinnamon 14 32bit" "APPEND /multiboot/menu/mcin14.cfg" 
+ Delete "$BootDir\multiboot\menu\mcin14.cfg"  
+ 
+ ${ElseIf} $DistroName == "Linux Mint 14 Cinnamon 64bit"  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintcin1464"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint Cinnamon 14 64bit" "APPEND /multiboot/menu/mcin1464.cfg" 
+ Delete "$BootDir\multiboot\menu\mcin1464.cfg" 
+
+ ${ElseIf} $DistroName == "Linux Mint 14 KDE 32bit"  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintkde1432"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint 14 KDE 32bit" "APPEND /multiboot/menu/LMKDE14.cfg" 
+ Delete "$BootDir\multiboot\menu\LMKDE14.cfg"   
+ 
+ ${ElseIf} $DistroName == "Linux Mint 14 XFCE 32bit"  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintxfce1432"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint 14 XFCE 32bit" "APPEND /multiboot/menu/LMXFCE14.cfg" 
+ Delete "$BootDir\multiboot\menu\LMXFCE14.cfg"   
+ 
+ ${ElseIf} $DistroName == "Linux Mint 14 KDE 64bit"  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintkde1464"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint 14 KDE 64bit" "APPEND /multiboot/menu/LMK1464.cfg" 
+ Delete "$BootDir\multiboot\menu\LMK1464.cfg"   
+ 
+ ${ElseIf} $DistroName == "Linux Mint 14 XFCE 64bit"  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintxfce1464"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint 14 XFCE 64bit" "APPEND /multiboot/menu/LMX1464.cfg" 
+ Delete "$BootDir\multiboot\menu\LMX1464.cfg"    
+ 
  ${ElseIf} $DistroName == "Linux Mint 13 KDE 32bit"  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\mintkde1332"
@@ -1110,9 +1170,15 @@
  
  ${ElseIf} $DistroName == "SLAX (Tiny Slackware Based Distro)"   
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- RMDir /R "$BootDir\multiboot\Slax612" 
+ RMDir /R "$BootDir\multiboot\slax" 
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label SLAX" "APPEND /multiboot/menu/slax.cfg"  
  Delete "$BootDir\multiboot\menu\slax.cfg"
+ 
+ ${ElseIf} $DistroName == "SLAX 64bit"   
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\slax64" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label SLAX 64bit" "APPEND /multiboot/menu/slax64.cfg"  
+ Delete "$BootDir\multiboot\menu\slax64.cfg" 
  
  ${ElseIf} $DistroName == "WifiSlax"   
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -1332,13 +1398,13 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label OpenSUSE 11.4 Gnome x64" "APPEND /multiboot/menu/suse64.cfg"   
  Delete "$BootDir\multiboot\menu\suse64.cfg"
  
- ${ElseIf} $DistroName == "Zorin OS Lite" 
+ ${ElseIf} $DistroName == "Zorin OS Core" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\zorin"  
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Zorin OS" "APPEND /multiboot/menu/zorin.cfg" 
  Delete "$BootDir\multiboot\menu\zorin.cfg"  
  
- ${ElseIf} $DistroName == "Zorin OS Lite 64bit" 
+ ${ElseIf} $DistroName == "Zorin OS Core 64bit" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\zorin"  
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Zorin OS Lite 64bit" "APPEND /multiboot/menu/zorin64.cfg" 
@@ -1356,11 +1422,17 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Fuduntu" "APPEND /multiboot/menu/fuduntu.cfg"  
  Delete "$BootDir\multiboot\menu\fuduntu.cfg"   
  
- ${ElseIf} $DistroName == "Slacko Puppy 5.3"
+ ${ElseIf} $DistroName == "Slacko Puppy"
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\slacko53"  
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Slacko Puppy 5.3" "APPEND /multiboot/menu/slacko53.cfg"  
- Delete "$BootDir\multiboot\menu\slacko53.cfg"    
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Slacko Puppy" "APPEND /multiboot/menu/slacko53.cfg"  
+ Delete "$BootDir\multiboot\menu\slacko53.cfg" 
+
+ ${ElseIf} $DistroName == "DPup Exprimo"
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\dpup"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label DPup Exprimo" "APPEND /multiboot/menu/dpup.cfg"  
+ Delete "$BootDir\multiboot\menu\dpup.cfg"  
   
  ${ElseIf} $DistroName == "Hiren's Boot CD 15.X" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 

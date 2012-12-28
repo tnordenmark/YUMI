@@ -4,14 +4,15 @@ Background of YUMI (Your Universal Multiboot Installer):
 
 YUMI is an easy to use installer script created using NSIS. YUMI's purpose is to help automate the creation of a bootable USB Flash Drive that can be used to boot multiple Linux based distributions (one at a time).
 The end result should be a bootable USB Flash drive that will get you up and running with your chosen Live Distributions, all without having to do the research and perform the steps by hand. 
-My work consists of creating/maintaining the YUMI scripts, initial creation and continued maintenance of the menu entries, adding suggested entries, and testing to make sure the distributions boot.  
+My work consists of creating/maintaining the YUMI scripts, initial creation/changes and continued maintenance of the menu entries, adding suggested entries, and testing to make sure the distributions boot.  
 
 How YUMI Works:
 
 YUMI utilizes a Syslinux MBR to make the chosen drive bootable. Distributions are extracted using 7zip to the multiboot folder on the USB device, and a custom syslinux.cfg file along with distro independant configuration files are used to boot each distribution. Grub4DOS grub.exe may also be used to boot ISO files directly. 
 
 Credits, Resources, and Third Party Tools used:
-  
+
+* Remnants of Cedric Tissieres's Tazusb.exe for Slitaz (slitaz@objectif-securite.ch) may reside in the YUMI script, as it was derived from UUI, which was inspired by Tazusb.exe. 
 * Created with NSIS Installer ©1995-2012 Contributors http://nsis.sourceforge.net (needed to compile the YUMI.nsi script)  
 * Syslinux ©1994-2012 H. Peter Anvin http://syslinux.zytor.com (unmodified binary used)
 * grub.exe Grub4DOS © the Gna! people + Chenall https://code.google.com/p/grub4dos-chenall/ (unmodified binary used) : Official Grub4DOS: http://gna.org/projects/grub4dos/
@@ -23,7 +24,11 @@ Additional instructions for MultiBootISOs can be found HERE: http://www.pendrive
 
 Changelog:
 
-11/13/12 Version 0.0.7.9: Update to support Zorin OS Lite 6.1 32/64 bit, Peppermint OS 32/64 bit, Cent OS 6.3, Hiren's 15.2, GDATA Rescue CD, and AOSS CD.
+12/17/12 Version 0.0.8.3: Update to support Ultimate Edition 3.5, Netrunner 12.12, Fuduntu 2012.4, and Sugar on a Stick based on Fedora 17.
+12/17/12 Version 0.0.8.2: Update to support SLAX 7, GRML, and Boot Repair Disk. Moved Fatdog64 entries to Puppy section.
+12/10/12 Version 0.0.8.1: Update to support Linux Mint 14.x variants, and TAILS 0.15.
+11/27/12 Version 0.0.8.0: Update to support newer Panda Safe CD, Redo Backup 1.0.4, GDATA Rescue/Boot CD, Webconverger 15.1, Racy Puppy 5.3, Precise Puppy 5.4.1, Slacko 5.3.3, DPup Exprimo, and Linux Mint 14.
+11/13/12 Version 0.0.7.9: Update to support Zorin OS Lite 6.1 32/64 bit, Peppermint OS 32/64 bit, Cent OS 6.3, Hiren's 15.2, and AOSS CD.
 10/29/12 Version 0.0.7.8: Correct Lubuntu 12.10 amd64 menu entry. Added support for Ubuntu Studio 12.10.
 10/24/12 Version 0.0.7.7: Update to support Precise Puppy, PinguyOS, Pear Linux 6, and Tails 0.14. Updated to use Syslinux 4.06 and 7zip 920.
 10/19/12 Version 0.0.7.6: Update to support Edubuntu, Ubuntu, Kubuntu, Lubuntu, and Xubuntu 12.10.
