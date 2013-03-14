@@ -426,10 +426,10 @@
  File /oname=$PLUGINSDIR\knoppix.cfg "Menu\knoppix.cfg"  
  CopyFiles "$PLUGINSDIR\knoppix.cfg" "$BootDir\multiboot\menu\knoppix.cfg"  
  
- ${ElseIf} $DistroName == "Crunchbang 10"
+ ${ElseIf} $DistroName == "Crunchbang"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\crunchbang\" -y' 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
- ${WriteToFile} "label Crunchbang 10$\r$\nmenu label Crunchbang 10$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/crunchbang.cfg" $R0
+ ${WriteToFile} "label Crunchbang$\r$\nmenu label Crunchbang$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/crunchbang.cfg" $R0
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\crunchbang.cfg "Menu\crunchbang.cfg"  
@@ -654,12 +654,12 @@
  File /oname=$PLUGINSDIR\DRBL.cfg "Menu\DRBL.cfg"  
  CopyFiles "$PLUGINSDIR\DRBL.cfg" "$BootDir\multiboot\menu\DRBL.cfg" 
   
- ${ElseIf} $DistroName == "Offline NT Password & Registy Editor"
+ ${ElseIf} $DistroName == "Offline NT Password & Registry Editor"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -o"$BootDir\multiboot\offnt\" -y' 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$BootDir\multiboot\offnt\cd110511.iso" -x![BOOT] -o"$BootDir\multiboot\offnt\" -y' 
  Delete "$BootDir\multiboot\offnt\cd110511.iso"
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
- ${WriteToFile} "label Offline NT Password & Registy Editor$\r$\nmenu label Offline NT Password & Registy Editor$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/offnt.cfg" $R0
+ ${WriteToFile} "label Offline NT Password & Registry Editor$\r$\nmenu label Offline NT Password & Registry Editor$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/offnt.cfg" $R0
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\offnt.cfg "Menu\offnt.cfg"  
@@ -1059,6 +1059,24 @@
  InitPluginsDir
  File /oname=$PLUGINSDIR\lu1104.cfg "Menu\lu1104.cfg"  
  CopyFiles "$PLUGINSDIR\lu1104.cfg" "$BootDir\multiboot\menu\lu1104.cfg"  
+ 
+ ${ElseIf} $DistroName == "Ubuntu 13.04"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntu1304\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Ubuntu 13.04$\r$\nmenu label Ubuntu 13.04$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/ub1304.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\ub1304.cfg "Menu\ub1304.cfg"  
+ CopyFiles "$PLUGINSDIR\ub1304.cfg" "$BootDir\multiboot\menu\ub1304.cfg"  
+ 
+ ${ElseIf} $DistroName == "Ubuntu 13.04 amd64"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntu121064\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Ubuntu 13.04 amd64$\r$\nmenu label Ubuntu 13.04 amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/u130464.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\u130464.cfg "Menu\u130464.cfg"  
+ CopyFiles "$PLUGINSDIR\u130464.cfg" "$BootDir\multiboot\menu\u130464.cfg"  
 
  ${ElseIf} $DistroName == "Ubuntu 12.10"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntu1210\" -y'  
@@ -1099,6 +1117,24 @@
  CopyFiles "$PLUGINSDIR\us121064.cfg" "$BootDir\multiboot\menu\us121064.cfg" 
   ReadEnvStr $R0 COMSPEC ; grab commandline
   nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv121064\pool\main\l\linux\*.ude *.udeb" ; rename broken udeb files  
+  
+ ${ElseIf} $DistroName == "Linux Secure Remix 12.10"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntusec1210\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Linux Secure Remix 12.10$\r$\nmenu label Linux Secure Remix 12.10$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/usec1210.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\usec1210.cfg "Menu\usec1210.cfg"  
+ CopyFiles "$PLUGINSDIR\usec1210.cfg" "$BootDir\multiboot\menu\usec1210.cfg" 
+ 
+ ${ElseIf} $DistroName == "Linux Secure Remix 12.10 amd64"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntusec121064\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Linux Secure Remix 12.10 amd64$\r$\nmenu label Linux Secure Remix 12.10 amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/ux121064.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\ux121064.cfg "Menu\ux121064.cfg"  
+ CopyFiles "$PLUGINSDIR\ux121064.cfg" "$BootDir\multiboot\menu\ux121064.cfg"   
   
  ${ElseIf} $DistroName == "Ubuntu Studio 12.10" 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntustud1210\" -y'  
@@ -1929,7 +1965,16 @@
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\pclos.cfg "Menu\pclos.cfg"  
- CopyFiles "$PLUGINSDIR\pclos.cfg" "$BootDir\multiboot\menu\pclos.cfg" 
+ CopyFiles "$PLUGINSDIR\pclos.cfg" "$BootDir\multiboot\menu\pclos.cfg"
+
+ ${ElseIf} $DistroName == "G4L (Ghost For Linux)" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\g4l\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label G4L (Ghost For Linux)$\r$\nmenu label G4L (Ghost For Linux$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/g4l.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\g4l.cfg "Menu\g4l.cfg"  
+ CopyFiles "$PLUGINSDIR\g4l.cfg" "$BootDir\multiboot\menu\g4l.cfg"  
  
  ${ElseIf} $DistroName == "GParted (Partition Tools)" 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\gparted\" -y'
@@ -2058,16 +2103,7 @@
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\caine.cfg "Menu\caine.cfg"  
- CopyFiles "$PLUGINSDIR\caine.cfg" "$BootDir\multiboot\menu\caine.cfg"   
- 
- ${ElseIf} $DistroName == "XBMC"
- ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\xbmc\" -y'  
- ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- ${WriteToFile} "label XBMC$\r$\nmenu label XBMC$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/xbmc.cfg" $R0
- SetShellVarContext all
- InitPluginsDir
- File /oname=$PLUGINSDIR\xbmc.cfg "Menu\xbmc.cfg"  
- CopyFiles "$PLUGINSDIR\xbmc.cfg" "$BootDir\multiboot\menu\xbmc.cfg"  
+ CopyFiles "$PLUGINSDIR\caine.cfg" "$BootDir\multiboot\menu\caine.cfg"    
  
  ${ElseIf} $DistroName == "XBMCbuntu"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\xbmcbuntu\" -y'  
@@ -2444,6 +2480,17 @@
  InitPluginsDir
  File /oname=$PLUGINSDIR\firadisk.img "firadisk.img"  
  CopyFiles "$PLUGINSDIR\firadisk.img" "$BootDir\multiboot\ISOS\firadisk.img"   
+ 
+; Windows Defender Offline entry submitted by Vinny Valdez 
+ ${ElseIf} $DistroName == "Windows Defender Offline (32-bit)"
+ CopyFiles $ISOFile "$BootDir\multiboot\ISOS\$NameThatISO"
+ ${AndIf} ${FileExists} $BootDir\multiboot\ISOS\$NameThatISO 
+ ${WriteToFile} "label Windows Defender Offline (32-bit)$\r$\nmenu label Windows Defender Offline (32-bit)$\r$\nMENU INDENT 1$\r$\nLINUX /multiboot/grub.exe$\r$\nAPPEND --config-file=$\"ls /multiboot/ISOS/$NameThatISO || find --set-root /multiboot/ISOS/$NameThatISO;map --heads=0 --sectors-per-track=0 /multiboot/ISOS/$NameThatISO (0xff) || map --heads=0 --sectors-per-track=0 --mem /multiboot/ISOS/$NameThatISO (0xff);map --hook;chainloader (0xff)$\"" $R0
+
+ ${ElseIf} $DistroName == "Windows Defender Offline (64-bit)"
+ CopyFiles $ISOFile "$BootDir\multiboot\ISOS\$NameThatISO"
+ ${AndIf} ${FileExists} $BootDir\multiboot\ISOS\$NameThatISO 
+ ${WriteToFile} "label Windows Defender Offline (64-bit)$\r$\nmenu label Windows Defender Offline (64-bit)$\r$\nMENU INDENT 1$\r$\nLINUX /multiboot/grub.exe$\r$\nAPPEND --config-file=$\"ls /multiboot/ISOS/$NameThatISO || find --set-root /multiboot/ISOS/$NameThatISO;map --heads=0 --sectors-per-track=0 /multiboot/ISOS/$NameThatISO (0xff) || map --heads=0 --sectors-per-track=0 --mem /multiboot/ISOS/$NameThatISO (0xff);map --hook;chainloader (0xff)$\"" $R0
  
 ; ##################################### ADD NEW DISTRO ########################################
   

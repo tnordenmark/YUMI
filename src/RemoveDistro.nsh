@@ -301,11 +301,11 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label KNOPPIX" "APPEND /multiboot/menu/knoppix.cfg"   
  Delete "$BootDir\multiboot\menu\knoppix.cfg"  
  
- ${ElseIf} $DistroName == "Crunchbang 10" ;
+ ${ElseIf} $DistroName == "Crunchbang" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
  RMDir /R "$BootDir\multiboot\crunchbang"  
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Crunchbang 10" "APPEND /multiboot/menu/crunchbang.cfg"    
- Delete "$BootDir\multiboot\menu\crunchbang.cfg"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Crunchbang" "APPEND /multiboot/menu/crunchbang.cfg"    
+ Delete "$BootDir\multiboot\menu\crunchbang.cfg"   
  
  ${ElseIf} $DistroName == "Web Converger (Web Kiosk)" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -428,6 +428,12 @@
  RMDir /R "$BootDir\multiboot\ocz" 
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label OCZ Tools" "APPEND /multiboot/menu/ocz.cfg" 
  Delete "$BootDir\multiboot\menu\ocz.cfg"  
+ 
+ ${ElseIf} $DistroName == "G4L (Ghost For Linux)" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\g4l"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label G4L (Ghost For Linux)" "APPEND /multiboot/menu/g4l.cfg" 
+ Delete "$BootDir\multiboot\menu\g4l.cfg"  
 
  ${ElseIf} $DistroName == "Memtest86+ (Memory Testing Tool)"
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
@@ -456,10 +462,10 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label DRBL (Diskless Remote Boot in Linux)" "CONFIG /multiboot/menu/DRBL.cfg"  
  Delete "$BootDir\multiboot\menu\DRBL.cfg"    
   
- ${ElseIf} $DistroName == "Offline NT Password & Registy Editor" ;
+ ${ElseIf} $DistroName == "Offline NT Password & Registry Editor" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
  RMDir /R "$BootDir\multiboot\offnt"  
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Offline NT Password & Registy Editor" "APPEND /multiboot/menu/offnt.cfg"   
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Offline NT Password & Registry Editor" "APPEND /multiboot/menu/offnt.cfg"   
  Delete "$BootDir\multiboot\menu\offnt.cfg" 
  
  ${ElseIf} $DistroName == "TinyCore (A Tiny Linux Distribution)" ;
@@ -670,6 +676,18 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label KXStudio 12.04" "APPEND /multiboot/menu/kxstudio.cfg" 
  Delete "$BootDir\multiboot\menu\kxstudio.cfg"   
  
+ ${ElseIf} $DistroName == "Ubuntu 13.04" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\ubuntu1304"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu 13.04" "APPEND /multiboot/menu/ub1304.cfg" 
+ Delete "$BootDir\multiboot\menu\ub1304.cfg"   
+ 
+ ${ElseIf} $DistroName == "Ubuntu 13.04 amd64" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\ubuntu130464"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu 13.04 amd64" "APPEND /multiboot/menu/u130464.cfg" 
+ Delete "$BootDir\multiboot\menu\u130464.cfg"    
+ 
  ${ElseIf} $DistroName == "Ubuntu 12.10" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\ubuntu1210"  
@@ -680,7 +698,19 @@
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\ubuntu121064"  
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu 12.10 amd64" "APPEND /multiboot/menu/u121064.cfg" 
- Delete "$BootDir\multiboot\menu\u121064.cfg"   
+ Delete "$BootDir\multiboot\menu\u121064.cfg"
+
+ ${ElseIf} $DistroName == "Linux Secure Remix 12.10" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\ubuntusec1210"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Secure Remix 12.10" "APPEND /multiboot/menu/usec1210.cfg" 
+ Delete "$BootDir\multiboot\menu\usec1210.cfg" 
+
+ ${ElseIf} $DistroName == "Linux Secure Remix 12.10 amd64" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\ubuntusec121064"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Secure Remix 12.10 amd64" "APPEND /multiboot/menu/ux121064.cfg" 
+ Delete "$BootDir\multiboot\menu\ux121064.cfg"  
  
  ${ElseIf} $DistroName == "Ubuntu Server 12.10" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 

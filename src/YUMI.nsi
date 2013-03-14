@@ -9,7 +9,7 @@
 
 !define NAME "YUMI"
 !define FILENAME "YUMI"
-!define VERSION "0.0.8.7"
+!define VERSION "0.0.9.1"
 !define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\nsis1-install.ico"
 
 ; MoreInfo Plugin - Adds Version Tab fields to Properties. Plugin created by onad http://nsis.sourceforge.net/MoreInfo_plug-in
@@ -696,10 +696,10 @@ Function OnSelectDrive
   
   ${NSD_SetText} $LabelDrivePage "Step 1: You Selected $DestDisk as your USB Device"   
   
-  ${If} ${FileExists} $BootDir\menu.lst
-  ${AndIf} ${FileExists} $BootDir\syslinux.cfg
-  MessageBox MB_ICONQUESTION|MB_OK "It appears MultibootISOs was previously used on this drive? To use YUMI on this device, you must select the option to format the drive."
-  ${EndIf}
+;  ${If} ${FileExists} $BootDir\menu.lst
+;  ${AndIf} ${FileExists} $BootDir\syslinux.cfg
+;  MessageBox MB_ICONQUESTION|MB_OK "It appears MultibootISOs was previously used on this drive? To use YUMI on this device, you must format the drive."
+;  ${EndIf}
 FunctionEnd
 
 Function DrivesList

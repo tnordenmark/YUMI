@@ -117,6 +117,8 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
    !insertmacro FileNames " " " "
    !insertmacro FileNames "--- Ubuntu 32/64 Bit ---" " "
    !insertmacro FileNames " " " "
+ !insertmacro FileNames "Ubuntu 13.04" multiboot\ubuntu1304\casper\vmlinuz  
+ !insertmacro FileNames "Ubuntu 13.04 amd64" multiboot\ubuntu130464\casper\vmlinuz.efi
  !insertmacro FileNames "Ubuntu 12.10" multiboot\ubuntu1210\casper\vmlinuz 
  !insertmacro FileNames "Ubuntu 12.10 amd64" multiboot\ubuntu121064\casper\vmlinuz
  !insertmacro FileNames "Ubuntu Server 12.10" multiboot\ubuntuserv1210\install\vmlinuz 
@@ -129,21 +131,19 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
  !insertmacro FileNames "Kubuntu 12.10 amd64" multiboot\kubuntu121064\casper\vmlinuz  
  !insertmacro FileNames "Lubuntu 12.10" multiboot\lubuntu1210\casper\vmlinuz 
  !insertmacro FileNames "Lubuntu 12.10 amd64" multiboot\lubuntu121064\casper\vmlinuz  
- ; Not ready !insertmacro FileNames "Mythbuntu 12.04" multiboot\mythbuntu1204\casper\vmlinuz 
- ; Not ready !insertmacro FileNames "Mythbuntu 12.04 amd64" multiboot\mythbuntu120464\casper\vmlinuz 
  !insertmacro FileNames "Xubuntu 12.10" multiboot\xubuntu1210\casper\vmlinuz 
  !insertmacro FileNames "Xubuntu 12.10 amd64" multiboot\xubuntu121064\casper\vmlinuz  
  
  !insertmacro FileNames "Ubuntu 12.04" multiboot\ubuntu1204\casper\vmlinuz 
- !insertmacro FileNames "Ubuntu 12.04 amd64" multiboot\ubuntu120464\casper\vmlinuz 
+ !insertmacro FileNames "Ubuntu 12.04 amd64" multiboot\ubuntu120464\casper\vmlinuz.efi
  !insertmacro FileNames "Ubuntu 12.04 DVD" multiboot\ubuntu1204dvd\casper\vmlinuz     
- !insertmacro FileNames "Ubuntu 12.04 DVD amd64" multiboot\ubuntu1204dvd64\casper\vmlinuz     
+ !insertmacro FileNames "Ubuntu 12.04 DVD amd64" multiboot\ubuntu1204dvd64\casper\vmlinuz.efi    
  !insertmacro FileNames "Ubuntu Server 12.04" multiboot\ubuntuserv1204\install\vmlinuz 
  !insertmacro FileNames "Ubuntu Server 12.04 amd64" multiboot\ubuntuserv120464\install\vmlinuz
  !insertmacro FileNames "Ubuntu Studio 12.04" multiboot\ubuntustud1204\casper\vmlinuz 
  !insertmacro FileNames "Ubuntu Studio 12.04 amd64" multiboot\ubuntustud120464\casper\vmlinuz    
  !insertmacro FileNames "Edubuntu 12.04" multiboot\edubuntu1204\casper\vmlinuz  
- !insertmacro FileNames "Edubuntu 12.04 amd64" multiboot\edubuntu120464\casper\vmlinuz 
+ !insertmacro FileNames "Edubuntu 12.04 amd64" multiboot\edubuntu120464\casper\vmlinuz.efi 
  !insertmacro FileNames "Kubuntu 12.04" multiboot\kubuntu1204\casper\vmlinuz 
  !insertmacro FileNames "Kubuntu 12.04 amd64" multiboot\kubuntu120464\casper\vmlinuz  
  !insertmacro FileNames "Kubuntu 12.04 DVD" multiboot\kubuntu1204dvd\casper\vmlinuz 
@@ -151,7 +151,7 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
  !insertmacro FileNames "Lubuntu 12.04" multiboot\lubuntu1204\casper\vmlinuz 
  !insertmacro FileNames "Lubuntu 12.04 amd64" multiboot\lubuntu120464\casper\vmlinuz  
  !insertmacro FileNames "Mythbuntu 12.04" multiboot\mythbuntu1204\casper\vmlinuz 
- !insertmacro FileNames "Mythbuntu 12.04 amd64" multiboot\mythbuntu120464\casper\vmlinuz 
+ !insertmacro FileNames "Mythbuntu 12.04 amd64" multiboot\mythbuntu120464\casper\vmlinuz.efi 
  !insertmacro FileNames "Xubuntu 12.04" multiboot\xubuntu1204\casper\vmlinuz 
  !insertmacro FileNames "Xubuntu 12.04 amd64" multiboot\xubuntu120464\casper\vmlinuz  
  
@@ -200,7 +200,7 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
 ; !insertmacro FileNames "Calculate Linux Desktop" multiboot\cld\boot\vmlinuz	  
  !insertmacro FileNames "CentOS" multiboot\centos\LiveOS\squashfs.img 
  !insertmacro FileNames "CentOS 64bit" multiboot\centos64\LiveOS\squashfs.img  
- !insertmacro FileNames "Crunchbang 10" multiboot\crunchbang\live\vmlinuz1    
+ !insertmacro FileNames "Crunchbang" multiboot\crunchbang\live\vmlinuz    
  !insertmacro FileNames "Damn Small Linux (DSL)" multiboot\dsl\boot\isolinux\linux24 
 ; REVISIT !insertmacro FileNames "Dreamlinux" multiboot\dreamlinux\boot\vmlinuz  
  !insertmacro FileNames "Fuduntu" multiboot\fuduntu\isolinux\vmlinuz0
@@ -208,6 +208,8 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
  !insertmacro FileNames "KNOPPIX 6.7.1 CD" multiboot\knoppix6\KNOPPIX  
  !insertmacro FileNames "KNOPPIX 7" multiboot\knoppix\KNOPPIX  
  !insertmacro FileNames "KXStudio 12.04" multiboot\KXStudio1204\casper\vmlinuz 
+ !insertmacro FileNames "Linux Secure Remix 12.10" multiboot\ubuntusec1210\casper\vmlinuz 
+ !insertmacro FileNames "Linux Secure Remix 12.10 amd64" multiboot\ubuntusec121064\casper\vmlinuz   
 ; !insertmacro FileNames "Mageia Live CD" multiboot\mageia\boot\vmlinuz 
  !insertmacro FileNames "Mandriva 2011" multiboot\mandriva\LiveOS\squashfs.img 
  !insertmacro FileNames "Netrunner" multiboot\netrunner\casper\vmlinuz 
@@ -221,7 +223,7 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
  !insertmacro FileNames "Pear Linux 6" multiboot\pear\casper\vmlinuz  
  !insertmacro FileNames "Pinguy OS 11" multiboot\pinguy\casper\vmlinuz 
  !insertmacro FileNames "Pinguy OS 12.04" multiboot\pinguy1204\casper\vmlinuz  
- !insertmacro FileNames "Porteus" multiboot\porteus\boot\vmlinuz 
+ !insertmacro FileNames "Porteus" multiboot\porteus\boot\syslinux\vmlinuz 
 ; !insertmacro FileNames "Samurai-WTF" multiboot\samurai\casper\vmlinuz  
  !insertmacro FileNames "SalineOS" multiboot\saline\live\vmlinuz  
  !insertmacro FileNames "Scientific Linux CERN 6.3" multiboot\slc63\isolinux\vmlinuz   
@@ -240,8 +242,7 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
  !insertmacro FileNames "Ultimate Edition 3" multiboot\ultimateed\casper\vmlinuz
  !insertmacro FileNames "WifiSlax" wifislax\boot\vmlinuz    
  !insertmacro FileNames "WifiWay 3.4" multiboot\wifiway34\boot\vmlinuz  
- !insertmacro FileNames "WifiWay 2" multiboot\wifiway\boot\vmlinuz 
- !insertmacro FileNames "XBMC" multiboot\xbmc\live\vmlinuz  
+ !insertmacro FileNames "WifiWay 2" multiboot\wifiway\boot\vmlinuz  
  !insertmacro FileNames "XBMCbuntu" multiboot\xbmcbuntu\casper\vmlinuz   
  !insertmacro FileNames "Zorin OS Core" multiboot\zorin\casper\vmlinuz 
  !insertmacro FileNames "Zorin OS Core 64bit" multiboot\zorin64\casper\vmlinuz  
@@ -271,6 +272,10 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
  !insertmacro FileNames "GDATA Rescue CD" multiboot\gdata\boot\linux36 
  !insertmacro FileNames "Kaspersky Rescue Disk (Antivirus Scanner)" multiboot\kav\boot\rescue.igz ; rescue folder is stored at root of USB! To be Fixed
  !insertmacro FileNames "Panda SafeCD" multiboot\panda\live\vmlinuz
+; Windows Defender Offline entry submitted by Vinny Valdez 
+ !insertmacro FileNames "Windows Defender Offline (32-bit)" multiboot\ISOS\WDO_Media32.iso
+ !insertmacro FileNames "Windows Defender Offline (64-bit)" multiboot\ISOS\WDO_Media64.iso
+ 
  
    !insertmacro FileNames " "  " " 	
    !insertmacro FileNames "----------------- System Tools ----------------"  " " 
@@ -286,12 +291,13 @@ Function SomeFiles ; Distro2Check (Name of the Distro), ISO2Check (file to check
  !insertmacro FileNames "DRBL (Diskless Remote Boot in Linux)" multiboot\DRBL\live\vmlinuz 
  !insertmacro FileNames "EASEUS Disk Copy (Disk Cloning Tool)" multiboot\diskcopy\initrd.img  
  !insertmacro FileNames "FreeDOS (Balder img)" multiboot\balder10.img 
+ !insertmacro FileNames "G4L (Ghost For Linux)" multiboot\g4l\bz38.8
  !insertmacro FileNames "GParted (Partition Tools)" multiboot\gparted\live\vmlinuz 
  !insertmacro FileNames "GRML (system rescue)" multiboot\grml\boot\efi.img    
  !insertmacro FileNames "HDT (Hardware Detection Tool)" multiboot\hdt.img
  !insertmacro FileNames "Memtest86+ (Memory Testing Tool)" multiboot\memtest.bin 
  !insertmacro FileNames "Matriux (Penetration Testing)" multiboot\matriux\live\vmlinuz
- !insertmacro FileNames "Offline NT Password & Registy Editor" multiboot\offnt\initrd.cgz  
+ !insertmacro FileNames "Offline NT Password & Registry Editor" multiboot\offnt\initrd.cgz  
  !insertmacro FileNames "Ophcrack (no tables)" multiboot\ophcracknt\boot\rootfs.gz  
  !insertmacro FileNames "Ophcrack XP (Password Finder)" multiboot\ophcrack\boot\rootfs.gz 
  !insertmacro FileNames "Ophcrack Vista/7 (Password Finder)" multiboot\ophcrackvista\boot\rootfs.gz  
@@ -335,17 +341,18 @@ FunctionEnd
 
 Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO File name before extraction), Download2Get (Download Link), Path2Name (Final destination/Name of File), GimmeSize (Size of the File), Config2Use (Config File to Write To), File2Check (file to check for before adding Menu entry), Homepage, OfficialName
  !insertmacro SetISOFileNames "AntiX" antiX-12-486.iso "http://sourceforge.net/projects/antix-linux/files/Final/antiX-12-486.iso/download" antiX-12-486.iso "698" linux.cfg multiboot\antix\antiX\vmlinuz "http://sourceforge.net/projects/antix-linux/" "AntiX"   
- !insertmacro SetISOFileNames "Archlinux" archlinux*dual.iso "http://mirrors.us.kernel.org/archlinux/iso/latest/archlinux-2013.01.04-dual.iso" archlinux-dual.iso "384" linux.cfg multiboot\archlinux\arch\boot\i686\archiso.img "http://www.archlinux.org" "Archlinux"  
+ !insertmacro SetISOFileNames "Archlinux" archlinux*dual.iso "http://mirrors.us.kernel.org/archlinux/iso/latest/archlinux-2013.02.01-dual.iso" archlinux-dual.iso "384" linux.cfg multiboot\archlinux\arch\boot\i686\archiso.img "http://www.archlinux.org" "Archlinux"  
  !insertmacro SetISOFileNames "Bodhi" bodhi*.iso "http://sourceforge.net/projects/bodhilinux/files/latest/download" bodhi.iso "380" linux.cfg multiboot\bodhi\casper\vmlinuz "http://www.bodhilinux.com" "Bodhi"  
  !insertmacro SetISOFileNames "Dr.Web Live CD" drweb-livecd*.iso "http://download.geo.drweb.com/pub/drweb/livecd/drweb-livecd-602.iso" drweb.iso "176" antivirus.cfg boot\vmlinuz "http://www.freedrweb.com/livecd/" "Dr.Web"  
  !insertmacro SetISOFileNames "AOSS (Malware Scanner)" AOSS.iso "http://download.pctools.com/mirror/AOSS.iso" AOSS.iso "223" antivirus.cfg system\stage1 "http://www.pctools.com/aoss/" "AOSS"  
+ !insertmacro SetISOFileNames "G4L (Ghost For Linux)" "g4l*.iso" "http://sourceforge.net/projects/g4l/files/latest/download" g4l.iso "89" system.cfg multiboot\g4l\bz38.8 "http://sourceforge.net/projects/g4l/" "G4L"
 
  !insertmacro SetISOFileNames "CAELinux (Computer Aided Engineering)" caelinux*.iso "ftp://cae-linux:salome@caelinux.dyndns.org/distrib/caelinux2011/caelinux2011.iso" CAE.iso "4094" linux.cfg multiboot\caelinux\casper\vmlinuz "http://caelinux.com/CMS/" "CAELinux"  
  !insertmacro SetISOFileNames "Rescatux" rescatux_cdrom_usb_hybrid*.iso "http://sourceforge.net/projects/rescatux.berlios/files/latest/download" rescatux.iso "305" system.cfg multiboot\rescatux\live\vmlinuz "http://www.supergrubdisk.org/rescatux/" "Rescatux" 
  !insertmacro SetISOFileNames "CentOS" CentOS-6*.iso "http://mirrors.kernel.org/centos/6/isos/i386/CentOS-6.3-i386-LiveCD.iso" CentOS-6-LiveCD.iso "685" linux.cfg multiboot\centos\LiveOS\squashfs.img "http://www.centos.org" "CentOS"
  !insertmacro SetISOFileNames "CentOS 64bit" CentOS-6*64-Live*.iso "http://mirrors.kernel.org/centos/6/isos/x86_64/CentOS-6.3-x86_64-LiveCD.iso" CentOS-6_64-Live.iso "690" linux.cfg multiboot\centos64\LiveOS\squashfs.img "http://www.centos.org" "CentOS"
  !insertmacro SetISOFileNames "gpxe (Net Bootable Distros)" *gpxe.lkrn "http://rom-o-matic.net/gpxe/gpxe-git/gpxe.git/contrib/rom-o-matic/" multiboot\gpxe.lkrn "2" linux.cfg multiboot\gpxe.lkrn "http://etherboot.org/wiki/index.php" "GPXE"
- !insertmacro SetISOFileNames "Crunchbang 10" crunchbang-10*.iso "http://crunchbang.org/download/" crunchbang-10.iso "691" linux.cfg multiboot\crunchbang\live\vmlinuz1 "http://crunchbang.org" "Crunchbang"
+ !insertmacro SetISOFileNames "Crunchbang" crunchbang*.iso "http://crunchbang.org/download/" crunchbang.iso "691" linux.cfg multiboot\crunchbang\live\vmlinuz "http://crunchbang.org" "Crunchbang"
  !insertmacro SetISOFileNames "FreeDOS (Balder img)" balder10.img "http://www.finnix.org/files/balder10.img" multiboot\balder10.img "2" system.cfg multiboot\balder10.img "http://www.finnix.org/Balder" "Finnix Balder"
  !insertmacro SetISOFileNames "Fedora 15 GNOME 32bit" Fedora-15-i686-Live-Desktop.iso "http://download.fedoraproject.org/pub/fedora/linux/releases/15/Live/i686/Fedora-15-i686-Live-Desktop.iso" Fedora-15-i686-Live-Desktop.iso "570" linux.cfg multiboot\fedora\isolinux\vmlinuz0 "http://fedoraproject.org" "Fedora"
  !insertmacro SetISOFileNames "Fedora 15 GNOME 64bit" Fedora-15-x86_64-Live-Desktop.iso "http://download.fedoraproject.org/pub/fedora/linux/releases/15/Live/x86_64/Fedora-15-x86_64-Live-Desktop.iso" Fedora-15-x86_64-Live-Desktop.iso "568" linux.cfg multiboot\fedora64\isolinux\vmlinuz0 "http://fedoraproject.org" "Fedora" 
@@ -391,14 +398,14 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "Boot Repair Disk" boot-repair-disk.iso "http://sourceforge.net/projects/boot-repair-cd/files/boot-repair-disk.iso/download" boot-repair-disk.iso "340" system.cfg multiboot\bootrepair\live\vmlinuz "http://sourceforge.net/projects/boot-repair-cd/" "Boot Repair Disk"
  !insertmacro SetISOFileNames "GRML (system rescue)" grml96*full*.iso "http://download.grml.org/grml96-full_2012.05.iso" grml96.iso "700" system.cfg multiboot\grml\boot\efi.img "http://grml.org" "GRML"
 
- !insertmacro SetISOFileNames "Debian Live 6 Gnome 32bit" debian-live-6.0*-i386-gnome-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/i386/iso-hybrid/debian-live-6.0.6-i386-gnome-desktop.iso" debian-live-6-gnome.iso "1141" linux.cfg multiboot\debian\live\vmlinuz "http://live.debian.net" "Debian Live"
- !insertmacro SetISOFileNames "Debian Live 6 KDE 32bit" debian-live-6.0*-i386-kde-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/i386/iso-hybrid/debian-live-6.0.6-i386-kde-desktop.iso" debian-live-6-kde.iso "1000" linux.cfg multiboot\debiankde\live\vmlinuz "http://live.debian.net" "Debian Live"
- !insertmacro SetISOFileNames "Debian Live 6 LXDE 32bit" debian-live-6.0*-i386-lxde-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/i386/iso-hybrid/debian-live-6.0.6-i386-lxde-desktop.iso" debian-live-6-lxde.iso "752" linux.cfg multiboot\debianlxde\live\vmlinuz "http://live.debian.net" "Debian Live"
- !insertmacro SetISOFileNames "Debian Live 6 XFCE 32bit" debian-live-6.0*-i386-xfce-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/i386/iso-hybrid/debian-live-6.0.6-i386-xfce-desktop.iso" debian-live-6-xfce.iso "809" linux.cfg multiboot\debianxfce\live\vmlinuz "http://live.debian.net" "Debian Live"
- !insertmacro SetISOFileNames "Debian Live 6 Gnome 64bit" debian-live-6.0*-amd64-gnome-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/amd64/iso-hybrid/debian-live-6.0.6-amd64-gnome-desktop.iso" debian-live-664-gnome.iso "1173" linux.cfg multiboot\debian64\live\vmlinuz "http://live.debian.net" "Debian Live"
- !insertmacro SetISOFileNames "Debian Live 6 KDE 64bit" debian-live-6.0*-amd64-kde-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/amd64/iso-hybrid/debian-live-6.0.6-amd64-kde-desktop.iso" debian-live-664-kde.iso "1091" linux.cfg multiboot\debiankde64\live\vmlinuz "http://live.debian.net" "Debian Live"
- !insertmacro SetISOFileNames "Debian Live 6 LXDE 64bit" debian-live-6.0*-amd64-lxde-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/amd64/iso-hybrid/debian-live-6.0.6-amd64-lxde-desktop.iso" debian-live-664-lxde.iso "789" linux.cfg multiboot\debianlxde64\live\vmlinuz "http://live.debian.net" "Debian Live"
- !insertmacro SetISOFileNames "Debian Live 6 XFCE 64bit" debian-live-6.0*-amd64-xfce-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/amd64/iso-hybrid/debian-live-6.0.6-amd64-xfce-desktop.iso" debian-live-664-xfce.iso "809" linux.cfg multiboot\debianxfce64\live\vmlinuz "http://live.debian.net" "Debian Live"
+ !insertmacro SetISOFileNames "Debian Live 6 Gnome 32bit" debian-live-6.0*-i386-gnome-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/i386/iso-hybrid/debian-live-6.0.7-i386-gnome-desktop.iso" debian-live-6-gnome.iso "1141" linux.cfg multiboot\debian\live\vmlinuz "http://live.debian.net" "Debian Live"
+ !insertmacro SetISOFileNames "Debian Live 6 KDE 32bit" debian-live-6.0*-i386-kde-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/i386/iso-hybrid/debian-live-6.0.7-i386-kde-desktop.iso" debian-live-6-kde.iso "1000" linux.cfg multiboot\debiankde\live\vmlinuz "http://live.debian.net" "Debian Live"
+ !insertmacro SetISOFileNames "Debian Live 6 LXDE 32bit" debian-live-6.0*-i386-lxde-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/i386/iso-hybrid/debian-live-6.0.7-i386-lxde-desktop.iso" debian-live-6-lxde.iso "752" linux.cfg multiboot\debianlxde\live\vmlinuz "http://live.debian.net" "Debian Live"
+ !insertmacro SetISOFileNames "Debian Live 6 XFCE 32bit" debian-live-6.0*-i386-xfce-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/i386/iso-hybrid/debian-live-6.0.7-i386-xfce-desktop.iso" debian-live-6-xfce.iso "809" linux.cfg multiboot\debianxfce\live\vmlinuz "http://live.debian.net" "Debian Live"
+ !insertmacro SetISOFileNames "Debian Live 6 Gnome 64bit" debian-live-6.0*-amd64-gnome-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/amd64/iso-hybrid/debian-live-6.0.7-amd64-gnome-desktop.iso" debian-live-664-gnome.iso "1173" linux.cfg multiboot\debian64\live\vmlinuz "http://live.debian.net" "Debian Live"
+ !insertmacro SetISOFileNames "Debian Live 6 KDE 64bit" debian-live-6.0*-amd64-kde-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/amd64/iso-hybrid/debian-live-6.0.7-amd64-kde-desktop.iso" debian-live-664-kde.iso "1091" linux.cfg multiboot\debiankde64\live\vmlinuz "http://live.debian.net" "Debian Live"
+ !insertmacro SetISOFileNames "Debian Live 6 LXDE 64bit" debian-live-6.0*-amd64-lxde-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/amd64/iso-hybrid/debian-live-6.0.7-amd64-lxde-desktop.iso" debian-live-664-lxde.iso "789" linux.cfg multiboot\debianlxde64\live\vmlinuz "http://live.debian.net" "Debian Live"
+ !insertmacro SetISOFileNames "Debian Live 6 XFCE 64bit" debian-live-6.0*-amd64-xfce-desktop.iso "http://cdimage.debian.org/cdimage/release/current-live/amd64/iso-hybrid/debian-live-6.0.7-amd64-xfce-desktop.iso" debian-live-664-xfce.iso "809" linux.cfg multiboot\debianxfce64\live\vmlinuz "http://live.debian.net" "Debian Live"
  !insertmacro SetISOFileNames "Web Converger (Web Kiosk)" webc*.iso "http://dl.webconverger.com/latest.iso" Webc.iso "308" linux.cfg multiboot\webcon\live\vmlinuz1 "http://webconverger.com/" "Web Converger"
 ;Revisit !insertmacro SetISOFileNames "Calculate Linux Desktop" cld*.iso "ftp://ftp.gtlib.gatech.edu/pub/calculate/CLDG/12.0/i686/cldg-12.0-i686.iso" cld*.iso "1800" linux.cfg multiboot\cld\boot\vmlinuz "http://www.calculate-linux.org/" "Calculate Linux"
  !insertmacro SetISOFileNames "WifiSlax" wifislax*.iso "http://www.downloadwireless.net/isos/wifislax-4.2-final.iso" wifislax*.iso "393" linux.cfg wifislax\boot\vmlinuz "http://www.wifislax.com" "WifiSlax"
@@ -406,7 +413,7 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "Scientific Linux CERN 6.3" boot.iso "http://linux.web.cern.ch/linux/scientific6/docs/repository/cern/slc6X/x86_64/images/boot.iso" boot.iso "231" linux.cfg multiboot\slc63\isolinux\vmlinuz "http://linux.web.cern.ch/linux/" "Scientific Linux"
  !insertmacro SetISOFileNames "Tails (Anonymous Browsing)" tails*.iso "http://dl.amnesia.boum.org/tails/stable/tails-i386-0.16/tails-i386-0.16.iso" tails016.iso "764" linux.cfg multiboot\tails\live\vmlinuz "http://amnesia.boum.org" "Tails"
 
- !insertmacro SetISOFileNames "Offline NT Password & Registy Editor" cd110511.zip "http://pogostick.net/~pnh/ntpasswd/cd110511.zip" cd110511.zip "8" system.cfg multiboot\offnt\initrd.cgz "http://www.pogostick.net/~pnh/ntpasswd/" "Offline NT"
+ !insertmacro SetISOFileNames "Offline NT Password & Registry Editor" cd110511.zip "http://pogostick.net/~pnh/ntpasswd/cd110511.zip" cd110511.zip "8" system.cfg multiboot\offnt\initrd.cgz "http://www.pogostick.net/~pnh/ntpasswd/" "Offline NT"
  !insertmacro SetISOFileNames "TinyCore (A Tiny Linux Distribution)" tinycore-current.iso "http://distro.ibiblio.org/tinycorelinux/4.x/x86/release/TinyCore-current.iso" TinyCore-current.iso "10" linux.cfg multiboot\tinycore\boot\core.gz "http://www.tinycorelinux.com" "TinyCore"
  !insertmacro SetISOFileNames "MultiCore" multicore-current.iso "http://distro.ibiblio.org/pub/linux/distributions/tinycorelinux/3.x/release/multicore-current.iso" multicore-current.iso "46" linux.cfg multiboot\multicore\boot\microcore.gz "http://www.tinycorelinux.com" "MultiCore"
 
@@ -436,12 +443,12 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "Rip Linux (Recovery Distro)" RIPLinuX*.iso "http://www.tux.org/pub/people/kent-robotti/looplinux/rip/" RIPLinuX.iso "110" system.cfg multiboot\rip\boot\rootfs.cgz "http://www.tux.org/pub/people/kent-robotti/looplinux/rip/" "RIP Linux"
  !insertmacro SetISOFileNames "KNOPPIX 6.7.1 CD" KNOPPIX_V6.7.1CD-*.iso "ftp://mirrors.kernel.org/knoppix-dvd/CD/KNOPPIX_V6.7.1CD-2011-09-14-EN.iso" KNOPPIX_V6.7.1CD.iso "700" linux.cfg multiboot\knoppix6\KNOPPIX "http://knopper.net" "KNOPPIX"
  !insertmacro SetISOFileNames "KNOPPIX 7" KNOPPIX_V7.0*.iso "http://ftp.knoppix.nl/os/Linux/distr/knoppix/KNOPPIX_V7.0.4CD-2012-08-20-EN.iso" KNOPPIX_V7.iso "700" linux.cfg multiboot\knoppix\KNOPPIX "http://knopper.net" "KNOPPIX"
- !insertmacro SetISOFileNames "Ultimate Boot CD (Diagnostics Tools)" ubcd5*.iso "http://lug.mtu.edu/ubcd/ubcd511.iso" multiboot\ISOS\ubcd.iso "360" system.cfg multiboot\ISOS\ubcd.iso "http://www.ultimatebootcd.com" "Ultimate Boot CD"
+ !insertmacro SetISOFileNames "Ultimate Boot CD (Diagnostics Tools)" ubcd5*.iso "http://ftp.cc.uoc.gr/mirrors/linux/ubcd/ubcd521.iso" multiboot\ISOS\ubcd.iso "360" system.cfg multiboot\ISOS\ubcd.iso "http://www.ultimatebootcd.com" "Ultimate Boot CD"
  !insertmacro SetISOFileNames "Ophcrack (no tables)" ophcrack-notables-livecd-3.4.0.iso "http://sourceforge.net/projects/ophcrack/files/ophcrack-livecd/3.4.0/ophcrack-notables-livecd-3.4.0.iso/download" ophcrack-notables-livecd-3.4.0.iso "47" system.cfg multiboot\ophcracknt\boot\rootfs.gz "http://ophcrack.sourceforge.net" "Ophcrack"
  !insertmacro SetISOFileNames "Ophcrack XP (Password Finder)" ophcrack-xp-livecd-3.4.0.iso "http://downloads.sourceforge.net/ophcrack/ophcrack-xp-livecd-3.4.0.iso" ophcrack-xp-livecd-3.4.0.iso "425" system.cfg multiboot\ophcrack\boot\rootfs.gz "http://ophcrack.sourceforge.net" "Ophcrack"
  !insertmacro SetISOFileNames "Ophcrack Vista/7 (Password Finder)" ophcrack-vista-livecd-3.4.0.iso "http://downloads.sourceforge.net/ophcrack/ophcrack-vista-livecd-3.4.0.iso" ophcrack-vista-livecd-3.4.0.iso "506" system.cfg multiboot\ophcrackvista\boot\rootfs.gz "http://ophcrack.sourceforge.net" "Ophcrack" 
  !insertmacro SetISOFileNames "Ubuntu Rescue Remix (System Rescue)" ubuntu-rescue-remix-10-04.iso "http://ubuntu-rescue-remix.org/files/URR/iso/ubuntu-rescue-remix-10-04.iso" ubuntu-rescue-remix-10-04.iso "171" system.cfg multiboot\URR\casper\vmlinuz "http://ubuntu-rescue-remix.org" "URR"
- !insertmacro SetISOFileNames "Deft 7 (Forensics)" deft*7.1.iso "ftp://ftp.cc.uoc.gr/mirrors/linux/deftlinux/deft7.1.iso" deft7.1.iso "2432" system.cfg multiboot\deft\casper\vmlinuz "http://www.deftlinux.net/" "Deft"
+ !insertmacro SetISOFileNames "Deft 7 (Forensics)" deft*7.2.iso "ftp://ftp.cc.uoc.gr/mirrors/linux/deftlinux/deft7.2.iso" deft7.2.iso "2432" system.cfg multiboot\deft\casper\vmlinuz "http://www.deftlinux.net/" "Deft"
  !insertmacro SetISOFileNames "Matriux (Penetration Testing)" Matriux-Krypton*.iso "http://sourceforge.net/projects/matriux/files/matriux-krypton-v1-2/Matriux-Krypton-v1.2.iso/download" Matriux.iso "2217" system.cfg multiboot\matriux\live\vmlinuz "http://www.matriux.com" "Matriux"
  !insertmacro SetISOFileNames "Pear Linux 6" pearlinux-6*.iso "http://sourceforge.net/projects/pearoslinux/files/latest/download" pearlinux-6*.iso "630" linux.cfg multiboot\pear\casper\vmlinuz "http://pearlinux.fr" "Pear Linux"
  !insertmacro SetISOFileNames "Liberte (Anonymous Browsing)" liberte-2012*.zip "http://sourceforge.net/projects/liberte/files/2012.3/liberte-2012.3.zip/download" Liberte.zip "219" linux.cfg multiboot\liberte\liberte\boot\syslinux\syslinux.exe "http://dee.su/liberte" "Liberte"
@@ -449,6 +456,8 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "Fuduntu" Fuduntu*-LiveDVD.iso "http://sourceforge.net/projects/fuduntu/files/latest/download" fuduntu.iso "1008" linux.cfg multiboot\fuduntu\isolinux\vmlinuz0 "http://www.fuduntu.org/" "Fuduntu"
  !insertmacro SetISOFileNames "KXStudio 12.04" KXStudio_12.04*.iso "http://sourceforge.net/projects/kxstudio/files/Live/KXStudio_12.04.1_32bit.iso/download" KXStudio.iso "1632" linux.cfg multiboot\KXStudio1204\casper\vmlinuz "http://kxstudio.sourceforge.net" "KXStudio"
  
+ !insertmacro SetISOFileNames "Ubuntu 13.04" raring-desktop-i386.iso "http://cdimage.ubuntu.com/daily-live/current/raring-desktop-i386.iso" ubuntu-13.04-desktop.iso "744" linux.cfg multiboot\ubuntu1304\casper\vmlinuz "http://www.ubuntu.com" "Ubuntu 13.04"
+ !insertmacro SetISOFileNames "Ubuntu 13.04 amd64" raring-desktop-amd64.iso "http://cdimage.ubuntu.com/daily-live/current/raring-desktop-amd64.iso" ubuntu-13.04-desktop-amd64.iso "755" linux.cfg multiboot\ubuntu130464\casper\vmlinuz.efi "http://www.ubuntu.com" "Ubuntu 13.04" 
  !insertmacro SetISOFileNames "Ubuntu 12.10" ubuntu-12.10*desktop-i386.iso "http://www.ubuntu.com/start-download?distro=desktop&bits=32&release=quantal" ubuntu-12.10-desktop.iso "744" linux.cfg multiboot\ubuntu1210\casper\vmlinuz "http://www.ubuntu.com" "Ubuntu 12.10"
  !insertmacro SetISOFileNames "Ubuntu 12.10 amd64" ubuntu-12.10*desktop-amd64.iso "http://www.ubuntu.com/start-download?distro=desktop&bits=64&release=quantal" ubuntu-12.10-desktop-amd64.iso "755" linux.cfg multiboot\ubuntu121064\casper\vmlinuz "http://www.ubuntu.com" "Ubuntu 12.10"
  !insertmacro SetISOFileNames "Kubuntu 12.10" kubuntu-12.10*desktop-i386.iso "http://cdimage.ubuntu.com/kubuntu/releases/12.10/release/kubuntu-12.10-desktop-i386.iso" kubuntu-12.10-desktop-i386.iso "953" linux.cfg multiboot\kubuntu1210\casper\vmlinuz "http://www.kubuntu.org" "Kubuntu"
@@ -459,36 +468,38 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "Lubuntu 12.10 amd64" lubuntu-12.10*desktop-amd64.iso "http://cdimages.ubuntu.com/lubuntu/releases/12.10/release/lubuntu-12.10-desktop-amd64.iso" lubuntu-12.10-desktop-amd64.iso "688" linux.cfg multiboot\lubuntu121064\casper\vmlinuz "http://lubuntu.net" "Lubuntu" 
  !insertmacro SetISOFileNames "Xubuntu 12.10" xubuntu-12.10*desktop-i386.iso "http://cdimage.ubuntu.com/xubuntu/releases/12.10/release/xubuntu-12.10-desktop-i386.iso" xubuntu-12.10-desktop-i386.iso "693" linux.cfg multiboot\xubuntu1210\casper\vmlinuz "http://xubuntu.org" "Xubuntu"
  !insertmacro SetISOFileNames "Xubuntu 12.10 amd64" xubuntu-12.10*desktop-amd64.iso "http://cdimage.ubuntu.com/xubuntu/releases/12.10/release/xubuntu-12.10-desktop-amd64.iso" xubuntu-12.10-desktop-amd64.iso "680" linux.cfg multiboot\xubuntu121064\casper\vmlinuz "http://xubuntu.org" "Xubuntu"
+ !insertmacro SetISOFileNames "Linux Secure Remix 12.10" "*secure-remix-12.10-32bits.iso" "http://sourceforge.net/projects/linux-secure/files/linux-secure-12.10-32bit.iso/download" linux-secure-remix-12.10-i386.iso "751" linux.cfg multiboot\ubuntusec1210\casper\vmlinuz "https://help.ubuntu.com/community/UbuntuSecureRemix" "Ubuntu Secure"
+ !insertmacro SetISOFileNames "Linux Secure Remix 12.10 amd64" "*secure-remix-12.10-64bit.iso" "http://sourceforge.net/projects/linux-secure/files/linux-secure-12.10-64bit.iso/download" linux-secure-remix-12.10-amd64.iso "760" linux.cfg multiboot\ubuntusec121064\casper\vmlinuz "https://help.ubuntu.com/community/UbuntuSecureRemix" "Ubuntu Secure"
  !insertmacro SetISOFileNames "Ubuntu Server 12.10" ubuntu-12.10*server-i386.iso "http://releases.ubuntu.com/quantal/ubuntu-12.10-server-i386.iso" ubuntu-12.10-server-i386.iso "672" linux.cfg multiboot\ubuntuserv1210\install\vmlinuz "http://www.ubuntu.com" "Ubuntu"
  !insertmacro SetISOFileNames "Ubuntu Server 12.10 amd64" ubuntu-12.10*server-amd64.iso "http://releases.ubuntu.com/quantal/ubuntu-12.10-server-amd64.iso" ubuntu-12.10-server-amd64.iso "673" linux.cfg multiboot\ubuntuserv121064\install\vmlinuz "http://www.ubuntu.com" "Ubuntu"
- !insertmacro SetISOFileNames "Ubuntu Studio 12.10" ubuntustudio-12.10*dvd-i386.iso "http://cdimage.ubuntu.com/ubuntustudio/releases/12.10/release/ubuntustudio-12.10-dvd-i386.iso" ubuntustudio-12.10-dvd-i386.iso "1949" linux.cfg multiboot\ubuntustud1204\casper\vmlinuz "http://ubuntustudio.org" "Ubuntu Studio" 
- !insertmacro SetISOFileNames "Ubuntu Studio 12.10 amd64" ubuntustudio-12.10*dvd-amd64.iso "http://cdimage.ubuntu.com/ubuntustudio/releases/12.10/release/ubuntustudio-12.10-dvd-amd64.iso" ubuntustudio-12.10-dvd-amd64.iso "2018" linux.cfg multiboot\ubuntustud120464\casper\vmlinuz "http://ubuntustudio.org" "Ubuntu Studio"  
+ !insertmacro SetISOFileNames "Ubuntu Studio 12.10" ubuntustudio-12.10*dvd-i386.iso "http://cdimage.ubuntu.com/ubuntustudio/releases/12.10/release/ubuntustudio-12.10-dvd-i386.iso" ubuntustudio-12.10-dvd-i386.iso "1949" linux.cfg multiboot\ubuntustud1210\casper\vmlinuz "http://ubuntustudio.org" "Ubuntu Studio" 
+ !insertmacro SetISOFileNames "Ubuntu Studio 12.10 amd64" ubuntustudio-12.10*dvd-amd64.iso "http://cdimage.ubuntu.com/ubuntustudio/releases/12.10/release/ubuntustudio-12.10-dvd-amd64.iso" ubuntustudio-12.10-dvd-amd64.iso "2018" linux.cfg multiboot\ubuntustud121064\casper\vmlinuz "http://ubuntustudio.org" "Ubuntu Studio"  
  
- !insertmacro SetISOFileNames "Ubuntu 12.04" ubuntu-12.04*desktop-i386.iso "http://releases.ubuntu.com/precise/ubuntu-12.04.1-desktop-i386.iso" ubuntu-12.04.1-desktop-i386.iso "701" linux.cfg multiboot\ubuntu1204\casper\vmlinuz "http://www.ubuntu.com" "Ubuntu"
- !insertmacro SetISOFileNames "Ubuntu 12.04 DVD" ubuntu-12.04*dvd-i386.iso "http://cdimage.ubuntu.com/releases/precise/release/ubuntu-12.04.1-dvd-i386.iso" ubuntu-12.04.1-dvd-i386.iso "1500" linux.cfg multiboot\ubuntu1204dvd\casper\vmlinuz "http://www.ubuntu.com" "Ubuntu"
- !insertmacro SetISOFileNames "Ubuntu 12.04 DVD amd64" ubuntu-12.04*dvd-amd64.iso "http://cdimage.ubuntu.com/releases/precise/release/ubuntu-12.04.1-dvd-amd64.iso" ubuntu-12.04.1-dvd-amd64.iso "1500" linux.cfg multiboot\ubuntu1204dvd64\casper\vmlinuz "http://www.ubuntu.com" "Ubuntu"
+ !insertmacro SetISOFileNames "Ubuntu 12.04" ubuntu-12.04*desktop-i386.iso "http://releases.ubuntu.com/precise/ubuntu-12.04.2-desktop-i386.iso" ubuntu-12.04.1-desktop-i386.iso "701" linux.cfg multiboot\ubuntu1204\casper\vmlinuz "http://www.ubuntu.com" "Ubuntu"
+ !insertmacro SetISOFileNames "Ubuntu 12.04 DVD" ubuntu-12.04*dvd-i386.iso "http://cdimage.ubuntu.com/releases/precise/release/ubuntu-12.04.2-dvd-i386.iso" ubuntu-12.04.1-dvd-i386.iso "1500" linux.cfg multiboot\ubuntu1204dvd\casper\vmlinuz "http://www.ubuntu.com" "Ubuntu"
+ !insertmacro SetISOFileNames "Ubuntu 12.04 DVD amd64" ubuntu-12.04.2-dvd-amd64.iso "http://cdimage.ubuntu.com/releases/precise/release/ubuntu-12.04.2-dvd-amd64.iso" ubuntu-12.04.1-dvd-amd64.iso "1500" linux.cfg multiboot\ubuntu1204dvd64\casper\vmlinuz.efi "http://www.ubuntu.com" "Ubuntu"
 
- !insertmacro SetISOFileNames "Xubuntu 12.04" xubuntu-12.04*desktop-i386.iso "http://cdimage.ubuntu.com/xubuntu/releases/12.04.1/release/xubuntu-12.04.1-desktop-i386.iso" xubuntu-12.04-desktop-i386.iso "680" linux.cfg multiboot\xubuntu1204\casper\vmlinuz "http://xubuntu.org" "Xubuntu"
- !insertmacro SetISOFileNames "Kubuntu 12.04" kubuntu-12.04*desktop-i386.iso "http://cdimage.ubuntu.com/kubuntu/releases/12.04.1/release/kubuntu-12.04.1-desktop-i386.iso" kubuntu-12.04-desktop-i386.iso "698" linux.cfg multiboot\kubuntu1204\casper\vmlinuz "http://www.kubuntu.org" "Kubuntu"
- !insertmacro SetISOFileNames "Kubuntu 12.04 DVD" kubuntu-12.04*dvd-i386.iso "http://cdimage.ubuntu.com/kubuntu/releases/12.04.1/release/kubuntu-12.04-dvd-i386.iso" kubuntu-12.04-dvd-i386.iso "3300" linux.cfg multiboot\kubuntu1204dvd\casper\vmlinuz "http://www.kubuntu.org" "Kubuntu"
- !insertmacro SetISOFileNames "Kubuntu 12.04 DVD amd64" kubuntu*12.04-dvd-amd64.iso "http://cdimage.ubuntu.com/kubuntu/releases/12.04.1/release/kubuntu-12.04-dvd-amd64.iso" kubuntu-12.04-dvd-amd64.iso "3200" linux.cfg multiboot\kubuntu1204dvd64\casper\vmlinuz "http://www.kubuntu.org" "Kubuntu"
+ !insertmacro SetISOFileNames "Xubuntu 12.04" xubuntu-12.04*desktop-i386.iso "http://cdimage.ubuntu.com/xubuntu/releases/12.04.2/release/xubuntu-12.04.2-desktop-i386.iso" xubuntu-12.04-desktop-i386.iso "680" linux.cfg multiboot\xubuntu1204\casper\vmlinuz "http://xubuntu.org" "Xubuntu"
+ !insertmacro SetISOFileNames "Kubuntu 12.04" kubuntu-12.04*desktop-i386.iso "http://cdimage.ubuntu.com/kubuntu/releases/12.04.2/release/kubuntu-12.04.2-desktop-i386.iso" kubuntu-12.04-desktop-i386.iso "698" linux.cfg multiboot\kubuntu1204\casper\vmlinuz "http://www.kubuntu.org" "Kubuntu"
+ !insertmacro SetISOFileNames "Kubuntu 12.04 DVD" kubuntu-12.04*dvd-i386.iso "http://cdimage.ubuntu.com/kubuntu/releases/12.04.2/release/kubuntu-12.04-dvd-i386.iso" kubuntu-12.04-dvd-i386.iso "3300" linux.cfg multiboot\kubuntu1204dvd\casper\vmlinuz "http://www.kubuntu.org" "Kubuntu"
+ !insertmacro SetISOFileNames "Kubuntu 12.04 DVD amd64" kubuntu*12.04-dvd-amd64.iso "http://cdimage.ubuntu.com/kubuntu/releases/12.04.2/release/kubuntu-12.04-dvd-amd64.iso" kubuntu-12.04-dvd-amd64.iso "3200" linux.cfg multiboot\kubuntu1204dvd64\casper\vmlinuz "http://www.kubuntu.org" "Kubuntu"
 
  !insertmacro SetISOFileNames "Lubuntu 12.04" lubuntu-12.04*desktop-i386.iso "http://cdimages.ubuntu.com/lubuntu/releases/12.04/release/lubuntu-12.04-desktop-i386.iso" lubuntu-12.04-desktop-i386.iso "688" linux.cfg multiboot\lubuntu1204\casper\vmlinuz "http://lubuntu.net" "Lubuntu" 
- !insertmacro SetISOFileNames "Mythbuntu 12.04" mythbuntu-12.04*desktop-i386.iso "http://cdimage.ubuntu.com/mythbuntu/releases/12.04.1/release/mythbuntu-12.04.1-desktop-i386.iso" mythbuntu-12.04-desktop-i386.iso "667" linux.cfg multiboot\mythbuntu1204\casper\vmlinuz "http://www.mythbuntu.org" "Mythbuntu"
- !insertmacro SetISOFileNames "Ubuntu Server 12.04" ubuntu-12.04*server-i386.iso "http://releases.ubuntu.com/precise/ubuntu-12.04.1-server-i386.iso" ubuntu-12.04-server-i386.iso "672" linux.cfg multiboot\ubuntuserv1204\install\vmlinuz "http://www.ubuntu.com" "Ubuntu"
- !insertmacro SetISOFileNames "Ubuntu Server 12.04 amd64" ubuntu-12.04*server-amd64.iso "http://releases.ubuntu.com/precise/ubuntu-12.04.1-server-amd64.iso" ubuntu-12.04-server-amd64.iso "673" linux.cfg multiboot\ubuntuserv120464\install\vmlinuz "http://www.ubuntu.com" "Ubuntu"
- !insertmacro SetISOFileNames "Edubuntu 12.04" edubuntu-12.04*dvd-i386.iso "http://cdimage.ubuntu.com/edubuntu/releases/12.04.1/release/edubuntu-12.04.1-dvd-i386.iso" edubuntu-12.04-dvd-i386.iso "2723" linux.cfg multiboot\edubuntu1204\casper\vmlinuz "http://edubuntu.org" "Edubuntu" 
- !insertmacro SetISOFileNames "Edubuntu 12.04 amd64" edubuntu-12.04*dvd-amd64.iso "http://cdimage.ubuntu.com/edubuntu/releases/12.04.1/release/edubuntu-12.04.1-dvd-amd64.iso" edubuntu-12.04-dvd-amd64.iso "2742" linux.cfg multiboot\edubuntu120464\casper\vmlinuz "http://edubuntu.org" "Edubuntu" 
+ !insertmacro SetISOFileNames "Mythbuntu 12.04" mythbuntu-12.04*desktop-i386.iso "http://cdimage.ubuntu.com/mythbuntu/releases/12.04.2/release/mythbuntu-12.04.2-desktop-i386.iso" mythbuntu-12.04-desktop-i386.iso "667" linux.cfg multiboot\mythbuntu1204\casper\vmlinuz "http://www.mythbuntu.org" "Mythbuntu"
+ !insertmacro SetISOFileNames "Ubuntu Server 12.04" ubuntu-12.04*server-i386.iso "http://releases.ubuntu.com/precise/ubuntu-12.04.2-server-i386.iso" ubuntu-12.04-server-i386.iso "672" linux.cfg multiboot\ubuntuserv1204\install\vmlinuz "http://www.ubuntu.com" "Ubuntu"
+ !insertmacro SetISOFileNames "Ubuntu Server 12.04 amd64" ubuntu-12.04*server-amd64.iso "http://releases.ubuntu.com/precise/ubuntu-12.04.2-server-amd64.iso" ubuntu-12.04-server-amd64.iso "673" linux.cfg multiboot\ubuntuserv120464\install\vmlinuz "http://www.ubuntu.com" "Ubuntu"
+ !insertmacro SetISOFileNames "Edubuntu 12.04" edubuntu-12.04*dvd-i386.iso "http://cdimage.ubuntu.com/edubuntu/releases/12.04.2/release/edubuntu-12.04.2-dvd-i386.iso" edubuntu-12.04-dvd-i386.iso "2723" linux.cfg multiboot\edubuntu1204\casper\vmlinuz "http://edubuntu.org" "Edubuntu" 
+ !insertmacro SetISOFileNames "Edubuntu 12.04 amd64" edubuntu-12.04.2-dvd-amd64.iso "http://cdimage.ubuntu.com/edubuntu/releases/12.04.2/release/edubuntu-12.04.2-dvd-amd64.iso" edubuntu-12.04-dvd-amd64.iso "2742" linux.cfg multiboot\edubuntu120464\casper\vmlinuz.efi "http://edubuntu.org" "Edubuntu" 
 
- !insertmacro SetISOFileNames "Ubuntu Studio 12.04" ubuntustudio-12.04*dvd-i386.iso "http://cdimage.ubuntu.com/ubuntustudio/releases/12.04.1/release/ubuntustudio-12.04.1-dvd-i386.iso" ubuntustudio-12.04-dvd-i386.iso "1949" linux.cfg multiboot\ubuntustud1204\casper\vmlinuz "http://ubuntustudio.org" "Ubuntu Studio" 
- !insertmacro SetISOFileNames "Ubuntu Studio 12.04 amd64" ubuntustudio-12.04*dvd-amd64.iso "http://cdimage.ubuntu.com/ubuntustudio/releases/12.04.1/release/ubuntustudio-12.04.1-dvd-amd64.iso" ubuntustudio-12.04-dvd-amd64.iso "2018" linux.cfg multiboot\ubuntustud120464\casper\vmlinuz "http://ubuntustudio.org" "Ubuntu Studio" 
+ !insertmacro SetISOFileNames "Ubuntu Studio 12.04" ubuntustudio-12.04*dvd-i386.iso "http://cdimage.ubuntu.com/ubuntustudio/releases/12.04.2/release/ubuntustudio-12.04.2-dvd-i386.iso" ubuntustudio-12.04-dvd-i386.iso "1949" linux.cfg multiboot\ubuntustud1204\casper\vmlinuz "http://ubuntustudio.org" "Ubuntu Studio" 
+ !insertmacro SetISOFileNames "Ubuntu Studio 12.04 amd64" ubuntustudio-12.04*dvd-amd64.iso "http://cdimage.ubuntu.com/ubuntustudio/releases/12.04.2/release/ubuntustudio-12.04.2-dvd-amd64.iso" ubuntustudio-12.04-dvd-amd64.iso "2018" linux.cfg multiboot\ubuntustud120464\casper\vmlinuz "http://ubuntustudio.org" "Ubuntu Studio" 
  
- !insertmacro SetISOFileNames "Xubuntu 12.04 amd64" xubuntu-12.04*desktop-amd64.iso "http://cdimage.ubuntu.com/xubuntu/releases/12.04.1/release/xubuntu-12.04.1-desktop-amd64.iso" xubuntu-12.04-desktop-amd64.iso "680" linux.cfg multiboot\xubuntu120464\casper\vmlinuz "http://xubuntu.org" "Xubuntu"
- !insertmacro SetISOFileNames "Kubuntu 12.04 amd64" kubuntu-12.04*desktop-amd64.iso "http://cdimage.ubuntu.com/kubuntu/releases/12.04.1/release/kubuntu-12.04.1-desktop-amd64.iso" kubuntu-12.04-desktop-amd64.iso "698" linux.cfg multiboot\kubuntu120464\casper\vmlinuz "http://www.kubuntu.org" "Kubuntu"
+ !insertmacro SetISOFileNames "Xubuntu 12.04 amd64" xubuntu-12.04*desktop-amd64.iso "http://cdimage.ubuntu.com/xubuntu/releases/12.04.2/release/xubuntu-12.04.2-desktop-amd64.iso" xubuntu-12.04-desktop-amd64.iso "680" linux.cfg multiboot\xubuntu120464\casper\vmlinuz "http://xubuntu.org" "Xubuntu"
+ !insertmacro SetISOFileNames "Kubuntu 12.04 amd64" kubuntu-12.04*desktop-amd64.iso "http://cdimage.ubuntu.com/kubuntu/releases/12.04.2/release/kubuntu-12.04.2-desktop-amd64.iso" kubuntu-12.04-desktop-amd64.iso "698" linux.cfg multiboot\kubuntu120464\casper\vmlinuz "http://www.kubuntu.org" "Kubuntu"
  !insertmacro SetISOFileNames "Lubuntu 12.04 amd64" lubuntu-12.04*desktop-amd64.iso "http://cdimages.ubuntu.com/lubuntu/releases/12.04/release/lubuntu-12.04-desktop-amd64.iso" lubuntu-12.04-desktop-amd64.iso "688" linux.cfg multiboot\lubuntu120464\casper\vmlinuz "http://lubuntu.net" "Lubuntu" 
  
- !insertmacro SetISOFileNames "Mythbuntu 12.04 amd64" mythbuntu-12.04*desktop-amd64.iso "http://cdimage.ubuntu.com/mythbuntu/releases/12.04.1/release/mythbuntu-12.04.1-desktop-amd64.iso" mythbuntu-12.04-desktop-amd64.iso "697" linux.cfg multiboot\mythbuntu120464\casper\vmlinuz "http://www.mythbuntu.org/" "Mythbuntu" 
- !insertmacro SetISOFileNames "Ubuntu 12.04 amd64" ubuntu-12.04*desktop-amd64.iso "http://releases.ubuntu.com/precise/ubuntu-12.04.1-desktop-amd64.iso" ubuntu-12.04-desktop-amd64.iso "698" linux.cfg multiboot\ubuntu120464\casper\vmlinuz "http://www.ubuntu.com" "Ubuntu"
+ !insertmacro SetISOFileNames "Mythbuntu 12.04 amd64" mythbuntu-12.04.2-desktop-amd64.iso "http://cdimage.ubuntu.com/mythbuntu/releases/12.04.2/release/mythbuntu-12.04.2-desktop-amd64.iso" mythbuntu-12.04-desktop-amd64.iso "697" linux.cfg multiboot\mythbuntu120464\casper\vmlinuz.efi "http://www.mythbuntu.org/" "Mythbuntu" 
+ !insertmacro SetISOFileNames "Ubuntu 12.04 amd64" ubuntu-12.04.2-desktop-amd64.iso "http://releases.ubuntu.com/precise/ubuntu-12.04.2-desktop-amd64.iso" ubuntu-12.04-desktop-amd64.iso "698" linux.cfg multiboot\ubuntu120464\casper\vmlinuz.efi "http://www.ubuntu.com" "Ubuntu"
  
  !insertmacro SetISOFileNames "Ubuntu 11.10" ubuntu-11.10-desktop-i386.iso "http://releases.ubuntu.com/11.10/ubuntu-11.10-desktop-i386.iso" ubuntu-11.10-desktop-i386.iso "700" linux.cfg multiboot\ubuntu1110\casper\vmlinuz "http://www.ubuntu.com" "Ubuntu"
  !insertmacro SetISOFileNames "Ubuntu Server 11.10" ubuntu-11.10-server-i386.iso "http://releases.ubuntu.com/11.10/ubuntu-11.10-server-i386.iso" ubuntu-11.10-server-i386.iso "672" linux.cfg multiboot\ubuntuserv1110\install\vmlinuz "http://www.ubuntu.com" "Ubuntu"
@@ -543,7 +554,7 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "OpenSUSE 11.4 KDE x64" openSUSE-11.4-KDE-LiveCD-x86_64.iso "http://suse.mirrors.tds.net/pub/opensuse/distribution/11.4/iso/openSUSE-11.4-KDE-LiveCD-x86_64.iso" openSUSE-11.4-KDE-LiveCD-x86_64.iso "695" linux.cfg multiboot\opensuseKDE64\openSUSE-kde-11.4-livecd-kde-read-only.x86_64-2.8.0 "http://software.opensuse.org" "OpenSUSE" 
 
  
- !insertmacro SetISOFileNames "Ubuntu Netbook Remix 10.10" ubuntu-10.10-netbook-i386.iso "http://releases.ubuntu.com/10.10/ubuntu-10.10-netbook-i386.iso" ubuntu-10.10-netbook-i386.iso "700" netbook.cfg multiboot\netbookubuntu\casper\vmlinuz "http://www.ubuntu.com" "UNR"
+ !insertmacro SetISOFileNames "Ubuntu Netbook Remix 10.10" ubuntu-10.10-netbook-i386.iso "http://old-releases.ubuntu.com/releases/10.10/ubuntu-10.10-beta-netbook-i386.iso" ubuntu-10.10-netbook-i386.iso "700" netbook.cfg multiboot\netbookubuntu\casper\vmlinuz "http://www.ubuntu.com" "UNR"
  
  !insertmacro SetISOFileNames "Linux Mint 12 KDE 32bit" linuxmint-12-kde*32bit.iso "http://mirrors.secution.com/linuxmint.com/stable/12/linuxmint-12-kde-dvd-32bit.iso" linuxmint-12-kde-32bit.iso "1100" linux.cfg multiboot\mint1232KDE\casper\vmlinuz "http://www.linuxmint.com" "Linux Mint"
  !insertmacro SetISOFileNames "Linux Mint 12 KDE 64bit" linuxmint-12-kde*64bit.iso "http://mirrors.secution.com/linuxmint.com/stable/12/linuxmint-12-kde-dvd-64bit.iso" linuxmint-12-kde-64bit.iso "1110" linux.cfg multiboot\mint1264KDE\casper\vmlinuz "http://www.linuxmint.com" "Linux Mint" 
@@ -593,7 +604,7 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "SLAX (Tiny Slackware Based Distro)" slax*7*486.iso "http://www.slax.org/download.php" slax7.iso "212" linux.cfg multiboot\slax\boot\vmlinuz "http://slax.org" "SLAX"
  !insertmacro SetISOFileNames "SLAX 64bit" slax*7*64.iso "http://www.slax.org/download.php" slax7*64.iso "218" linux.cfg multiboot\slax64\boot\vmlinuz "http://slax.org" "SLAX"
 
- !insertmacro SetISOFileNames "Porteus" porteus*.iso "http://www.ponce.cc/porteus/i486/current/" porteus.iso "300" linux.cfg multiboot\porteus\boot\vmlinuz "https://porteus.org/" "Porteus"
+ !insertmacro SetISOFileNames "Porteus" porteus*.iso "http://www.ponce.cc/porteus/i486/current/" porteus.iso "300" linux.cfg multiboot\porteus\boot\syslinux\vmlinuz "https://porteus.org/" "Porteus"
  !insertmacro SetISOFileNames "Dreamlinux" DL3.5*.iso "ftp://ftp.nluug.nl/pub/os/Linux/distr/dreamlinux/stable/DL3.5_20092802.iso" DL3.5.iso "700" linux.cfg multiboot\dreamlinux\boot\vmlinuz "http://www.dreamlinux.net/" "Dreamlinux"
  !insertmacro SetISOFileNames "WifiWay 3.4" wifiway-3.4.iso "http://ns2.elhacker.net/isos/wifiway-3.4.iso" wifiway-3.4.iso "490" linux.cfg multiboot\wifiway34\boot\vmlinuz "http://www.wifiway.org" "WifiWay"
  !insertmacro SetISOFileNames "WifiWay 2" wifiway-2*.iso "" wifiway.iso "499" linux.cfg multiboot\wifiway\boot\vmlinuz "http://www.wifiway.org" "WifiWay"
@@ -608,13 +619,13 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "AVG Rescue CD (Antivirus Scanner)" avg*.iso "http://www.avg.com/us-en/download-file-cd-arl-iso" avg.iso "80" antivirus.cfg multiboot\avg\isolinux\vmlinuz "http://www.avg.com" "AVG Rescue CD"
  !insertmacro SetISOFileNames "Acronis Antimalware CD" AcronisAntimalwareScanCD.iso "http://download.acronis.com/iso/AcronisAntimalwareScanCD.iso" AcronisAntimalwareScanCD.iso "333" antivirus.cfg multiboot\acronis\casper\vmlinuz "http://kb.acronis.com/content/18647" "Acronis"
  !insertmacro SetISOFileNames "Bitdefender Rescue Disk (Antivirus Scanner)" bitdefender-rescue-cd.iso "http://download.bitdefender.com/rescue_cd/bitdefender-rescue-cd.iso" bitdefender-rescue-cd.iso "546" antivirus.cfg multiboot\bitdefender\casper\vmlinuz "http://bitdefender.com" "Bitdefender"
- !insertmacro SetISOFileNames "Comodo Rescue Disk (Antivirus Scanner)" comodo_rescue_disk*.iso "http://help.comodo.com/topic-170-1-414-4579-Downloading-Comodo-Rescue-Disk.html" comodo_rescue_disk.iso "546" antivirus.cfg multiboot\comodo\boot\rootfs.gz "http://help.comodo.com/topic-170-1-414-4573-Introduction-to-Comodo-Rescue-Disk.html" "Comodo"
+ !insertmacro SetISOFileNames "Comodo Rescue Disk (Antivirus Scanner)" comodo_rescue_disk*.iso "http://help.comodo.com/topic-170-1-493-5214-Downloading-Comodo-Rescue-Disk.html" comodo_rescue_disk.iso "546" antivirus.cfg multiboot\comodo\boot\rootfs.gz "http://help.comodo.com/topic-170-1-493-5208-Introduction-to-Comodo-Rescue-Disk.html" "Comodo"
 
  !insertmacro SetISOFileNames "AVIRA AntiVir Rescue CD (Virus Scanner)" rescue_system-common-en.iso "http://dl1.pro.antivir.de/package/rescue_system/common/en/rescue_system-common-en.iso" rescue_system-common-en.iso "74" antivirus.cfg antivir\vmlinuz "http://www.avira.com" "Avira"
  ;!insertmacro SetISOFileNames "G Data (Virus Scanner)" ENG_R_FUL_2011_BootCD.iso "http://www.softpedia.com/get/Antivirus/G-Data-BootCD.shtml" ENG_R_FUL_2011_BootCD.iso "692" antivirus.cfg multiboot\gdata\boot\linux26 "http://www.gdatasoftware.com" "G Data"
- !insertmacro SetISOFileNames "F-Secure Rescue CD" rescue-cd*.iso "http://www.f-secure.com/v-descs/tools/rescue-cd-3.14-44905.iso" rescue-cd.iso "120" antivirus.cfg multiboot\fsecure\boot\isolinux\linux "http://www.f-secure.com/en/web/labs_global/removal/rescue-cd" "F-Secure Rescue CD"
+ !insertmacro SetISOFileNames "F-Secure Rescue CD" rescue-cd*.iso "http://download.f-secure.com/estore/rescue-cd-3.16-52606.iso" rescue-cd.iso "120" antivirus.cfg multiboot\fsecure\boot\isolinux\linux "http://www.f-secure.com/en_EMEA-Labs/security-threats/tools/rescue-cd/" "F-Secure Rescue CD"
 
- !insertmacro SetISOFileNames "Jolicloud (NetBook Distro)" joli*.iso "http://www.jolicloud.com/download/jolicloud-iso" jolicloud.iso "691" netbook.cfg multiboot\jolicloud\casper\vmlinuz "http://www.jolicloud.com" "Jolicloud"
+ !insertmacro SetISOFileNames "Jolicloud (NetBook Distro)" joli*.iso "http://www.jolicloud.com/jolios/download/jolicloud-iso/thank-you" jolicloud.iso "691" netbook.cfg multiboot\jolicloud\casper\vmlinuz "http://www.jolicloud.com" "Jolicloud"
  !insertmacro SetISOFileNames "EASEUS Disk Copy (Disk Cloning Tool)" *.iso "http://majorgeeks.com/EaseUs_Disk_Copy_d4845.html" dc.iso "64" system.cfg multiboot\diskcopy\initrd.img "http://www.easeus.com" "EASEUS Disk Copy"
  !insertmacro SetISOFileNames "Hiren's Boot CD 15.X" Hiren*15*.iso "NONE" Hirens.iso "393" other.cfg HBCD\menu.lst "" ""
  !insertmacro SetISOFileNames "Kon-Boot Floppy Image" kon-boot-all.zip "http://www.mediafire.com/file/74qrm2h4oof17o7/kon-boot-all.zip" multiboot\konboot.img "2" other.cfg multiboot\konboot.img "http://www.piotrbania.com/all/kon-boot/" "Kon-Boot" 
@@ -625,7 +636,7 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "BackTrack5 (Penetration Testing)" BT5*.iso "http://www.backtrack-linux.org/downloads/" BT5.iso "2000" system.cfg multiboot\backtrack5\casper\vmlinuz "http://www.backtrack-linux.org" "Backtrack"
  !insertmacro SetISOFileNames "Caine (Forensics)" caine3*.iso "http://www.caine-live.net/Downloads/caine3.0.iso" caine3.iso "1313" system.cfg multiboot\caine\casper\vmlinuz "http://www.caine-live.net/" "Caine"
  
- !insertmacro SetISOFileNames "BackBox (Penetration Testing)" backbox*.iso "http://bit.ly/yCSJmW" backbox.iso "706" system.cfg multiboot\backbox\casper\vmlinuz "http://www.backbox.org/" "BackBox"
+ !insertmacro SetISOFileNames "BackBox (Penetration Testing)" backbox*.iso "http://backbox.mirror.garr.it/mirrors/backbox/backbox-3.0-i386.iso" backbox.iso "706" system.cfg multiboot\backbox\casper\vmlinuz "http://www.backbox.org/" "BackBox"
  !insertmacro SetISOFileNames "Mageia Live CD" Mageia-2-LiveCD*CD.iso "http://mirrors.kernel.org/mageia/iso/2/Mageia-2-dual-CD/Mageia-2-dual-CD.iso" Mageia-CD.iso "686" linux.cfg multiboot\mageia\boot\vmlinuz "http://www.mageia.org" "Mageia"
  !insertmacro SetISOFileNames "Mandriva 2011" Mandriva.2011.i586.1.iso "http://www.mandriva.com/en/downloads/download.html?product=Mandriva.2011.i586.1.iso" Mandriva.2011.i586.1.iso "1700" linux.cfg multiboot\mandriva\LiveOS\squashfs.img "http://www.mandriva.com" "Mandriva"
  !insertmacro SetISOFileNames "SalineOS" SalineOS*.iso "http://www.salineos.com/server/SalineOS-1.0-i386-PSE.iso" SalineOS*.iso "931" linux.cfg multiboot\saline\live\vmlinuz "http://www.salineos.com" "SalineOS"
@@ -636,12 +647,15 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "Trinity Rescue Kit" trinity-rescue-kit.3.4-build*.iso "ftp://ftp.osuosl.org/pub/trk/trinity-rescue-kit.3.4-build-372.iso" trinity-rescue-kit.3.4.iso "146" system.cfg TRK\initrd.trk "http://trinityhome.org" "TRK"
  !insertmacro SetISOFileNames "DBAN (Hard Drive Nuker)" dban-2.2.*_i586.iso "http://sourceforge.net/projects/dban/files/dban/dban-2.2.7/dban-2.2.7_i586.iso/download" dban-2.2.7_i586.iso "2" system.cfg multiboot\DBAN\DBAN.BZI "http://www.dban.org" "DBAN"
  !insertmacro SetISOFileNames "DRBL (Diskless Remote Boot in Linux)" drbl-live*.iso "http://sourceforge.net/projects/drbl/files/drbl_live_stable/1.0.5-6/drbl-live-xfce-1.0.5-6-i686.iso/download" drbl-live*.iso "394" system.cfg multiboot\DRBL\live\vmlinuz "http://drbl.sourceforge.net" "DRBL"
- !insertmacro SetISOFileNames "XBMC" xbmc*.iso "http://mirrors.xbmc.org/releases/live/xbmc-10.1-live.iso" xbmc.iso "420" linux.cfg multiboot\xbmc\live\vmlinuz "http://xbmc.org/" "XBMC"
- !insertmacro SetISOFileNames "XBMCbuntu" xbmcbuntu*.iso "http://mirrors.xbmc.org/releases/XBMCbuntu/xbmcbuntu-11.0.iso" xbmcbuntu.iso "623" linux.cfg multiboot\xbmcbuntu\casper\vmlinuz "http://xbmc.org/" "XBMC"
+ !insertmacro SetISOFileNames "XBMCbuntu" xbmcbuntu*.iso "http://mirrors.xbmc.org/releases/XBMCbuntu/xbmcbuntu-12.00.Intel-NVIDIA.iso" xbmcbuntu.iso "623" linux.cfg multiboot\xbmcbuntu\casper\vmlinuz "http://xbmc.org/" "XBMC"
  !insertmacro SetISOFileNames "GDATA Rescue CD" *BootCD.iso "http://www.softpedia.com/get/Antivirus/G-Data-BootCD.shtml" bootcd.iso "233" antivirus.cfg multiboot\gdata\boot\linux36 "http://www.gdatasoftware.com" "GDATA"
 
- !insertmacro SetISOFileNames "Try an Unlisted ISO" *.iso "NONE" "" "1" menu.lst "" "" "" 
- !insertmacro SetISOFileNames "Try an Unlisted ISO (Run from RAM)" *.iso "NONE" "" "1" menu.lst "" "" ""  
- !insertmacro SetISOFileNames "Windows XP Installer" *.iso "NONE" "" "1" menu.lst "" "" ""  
+ ; Windows Defender Offline entry subitted by Vinny Valdez
+ !insertmacro SetISOFileNames "Windows Defender Offline (32-bit)" WDO_Media32.iso "http://go.microsoft.com/fwlink/?LinkID=234123" WDO_Media32.iso "289" antivirus.cfg multiboot\ISOS\WDO_Media32.iso "http://windows.microsoft.com/en-US/windows/what-is-windows-defender-offline" "Windows Defender"
+ !insertmacro SetISOFileNames "Windows Defender Offline (64-bit)" WDO_Media64.iso "http://go.microsoft.com/fwlink/?LinkID=234124" WDO_Media64.iso "326" antivirus.cfg multiboot\ISOS\WDO_Media64.iso "http://windows.microsoft.com/en-US/windows/what-is-windows-defender-offline" "Windows Defender"
+ 
+ !insertmacro SetISOFileNames "Try an Unlisted ISO" "*.iso" "NONE" "" "1" menu.lst "" "" "" 
+ !insertmacro SetISOFileNames "Try an Unlisted ISO (Run from RAM)" "*.iso" "NONE" "" "1" menu.lst "" "" ""  
+ !insertmacro SetISOFileNames "Windows XP Installer" "*.iso" "NONE" "" "1" menu.lst "" "" ""  
  ; ##################################### ADD NEW DISTRO ########################################
 FunctionEnd

@@ -24,6 +24,10 @@ Additional instructions for YUMI can be found HERE: http://www.pendrivelinux.com
 
 Changelog:
 
+03/13/13 Version 0.0.9.1: Update to support Ubuntu 12.04.2 Desktop amd64, Ubuntu 12.04.2 DVD amd64, Edubuntu 12.04.2 amd64, Linux Secure Remix 12.10, (G4L) Ghost for Linux, Backbox 3.0, Debian Live 6.0.7, and Jolicloud 1.2.1. implement another attempt to address "Insane primary (MBR) partition. Can’t find myself on the drive I booted from" error.
+03/08/13 Version 0.0.9.0: Update to support Porteus 2.0, Comodo 2.0.261647.1, and UBCD 5.2.1, Switch back to Syslinux 4.06. See the Troubleshooting Section for guidance with "Insane Primary MBR" messages.
+02/25/13 Version 0.0.8.9: Update to support Ubuntu 12.04.2, and Windows Defender Offline (Submitted by Vinny Valdez). Correct Spelling of Offline NT Password & Registry Editor. Switch back to Syslinux 4.06-pre7 to fix "Insane primary (MBR) partition. Can’t find myself on the drive I booted from" error.
+02/18/13 Version 0.0.8.8: Update to support Deft 7.2, F-Secure Rescue CD 3.16-52606, Ubuntu 13.04, Ubuntu Secure Remix 12.10, Crunchbang 11, XBMCbuntu 12, and Archlinux 2013.02.01. Fix Ubuntu Studio 12.10 entry.
 01/18/13 Version 0.0.8.7: Correct all Fedora 18 entries to use newer boot options.  
 01/17/13 Version 0.0.8.6: Update to support Fedora 18, Archlinux 2013.01.04, CentOS 6.3, Dr Web Live CD 6.0.2, Pear Linux 6.1, and KXStudio 12.04.1. Fix Debian Live 6 KDE 64bit option.
 01/14/13 Version 0.0.8.5: Update to support Comodo Rescue Disk and Tails 0.16.
