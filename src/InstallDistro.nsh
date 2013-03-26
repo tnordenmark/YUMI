@@ -1070,7 +1070,7 @@
  CopyFiles "$PLUGINSDIR\ub1304.cfg" "$BootDir\multiboot\menu\ub1304.cfg"  
  
  ${ElseIf} $DistroName == "Ubuntu 13.04 amd64"
- ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntu121064\" -y'  
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntu130464\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  ${WriteToFile} "label Ubuntu 13.04 amd64$\r$\nmenu label Ubuntu 13.04 amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/u130464.cfg" $R0
  SetShellVarContext all
@@ -2095,6 +2095,15 @@
  InitPluginsDir
  File /oname=$PLUGINSDIR\bt5.cfg "Menu\bt5.cfg"  
  CopyFiles "$PLUGINSDIR\bt5.cfg" "$BootDir\multiboot\menu\bt5.cfg"  
+ 
+ ${ElseIf} $DistroName == "Kali (Penetration Testing)"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\kali\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label Kali (Penetration Testing)$\r$\nmenu label Kali (Penetration Testing)$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/kali.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\kali.cfg "Menu\kali.cfg"  
+ CopyFiles "$PLUGINSDIR\kali.cfg" "$BootDir\multiboot\menu\kali.cfg"   
  
  ${ElseIf} $DistroName == "Caine (Forensics)"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\caine\" -y'  

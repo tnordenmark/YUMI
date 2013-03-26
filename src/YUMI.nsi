@@ -9,7 +9,7 @@
 
 !define NAME "YUMI"
 !define FILENAME "YUMI"
-!define VERSION "0.0.9.1"
+!define VERSION "0.0.9.3"
 !define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\nsis1-install.ico"
 
 ; MoreInfo Plugin - Adds Version Tab fields to Properties. Plugin created by onad http://nsis.sourceforge.net/MoreInfo_plug-in
@@ -40,6 +40,7 @@ InstallButtonText "Create"
 !AddPluginDir "plugins"
 
 ; Variables
+Var Checker
 Var FileFormat
 Var Format 
 Var FormatMe
@@ -204,7 +205,7 @@ Function SelectionsPage
  ${NSD_SetText} $DestDriveTxt "$DestDrive"
  
 ; To Install or Uninstall? That is the question!  
-  ${NSD_CreateCheckBox} 60% 0 44% 15 "Remove an Installed Item?"
+  ${NSD_CreateCheckBox} 60% 0 44% 15 "View or Remove Installed Distros?"
   Pop $Uninstaller
   ${NSD_OnClick} $Uninstaller Uninstall  
 
@@ -248,7 +249,8 @@ Function SelectionsPage
   StrCpy $BootDir $DestDrive -1 
   StrCpy $DestDisk $DestDrive -1
   ${NSD_LB_Clear} $Distro "" ; Clear all distro entries because a new drive may have been chosen
-  Call SomeFiles
+  StrCpy $Checker "Yes"   
+  Call SetISOFileName
   Call CheckSpace
   Call FormatIt 
   Call EnableNext 
@@ -287,7 +289,7 @@ Function SelectionsPage
  ${Else}
   
 ; To Install or Uninstall? That is the question!  
-  ${NSD_CreateCheckBox} 60% 0 44% 15 "Remove an Installed Item?"
+  ${NSD_CreateCheckBox} 60% 0 44% 15 "View or Remove Installed Distros?"
   Pop $Uninstaller
   ${NSD_OnClick} $Uninstaller Uninstall  
   
@@ -542,6 +544,7 @@ Function OnSelectDistro
   Pop $Distro
   ${NSD_LB_GetSelection} $Distro $DistroName ; was ${NSD_GetText} $Distro $DistroName 
   StrCpy $DistroName "$DistroName"   
+  StrCpy $Checker "No"  
   Call SetISOFileName
   StrCpy $ISOFileName "$ISOFileName" 
   StrCpy $SomeFileExt "$ISOFileName" "" -3 ; Grabs the last 3 charactors of the filename... zip or iso?
@@ -607,12 +610,6 @@ Function OnSelectDistro
  ${Else}
   ShowWindow $DownloadISO 1
  ${EndIf}
- 
-; Warn user if adding a Windows Installer to rename Sources Folder to boot Linux 
-;  ${If} $DistroName == "Windows Vista/7 Installer"
-;  ${AndIf} $Removal != "Yes"
-;  MessageBox MB_ICONQUESTION|MB_OK "After Windows Vista/7 Installer has been added, you must temporarily rename the SOURCES folder found at the root of the USB drive to SOURCESWIN prior to booting Ubuntu or any Ubuntu based distros (like Linux Mint), and rename SOURCESWIN back to SOURCES again prior to booting the Windows Installer.$\r$\n$\r$\nFailure to rename this folder will result in a halted boot condition."
-;  ${EndIf}  
   
 FunctionEnd 
 
@@ -659,7 +656,8 @@ Function Uninstall
   ${NSD_SetText} $Uninstaller "You're now in Uninstaller Mode!"
    ${NSD_SetText} $LinuxDistroSelection "Step 2: Select a Distribution from the following Box to remove from $DestDisk"  
     ${NSD_LB_Clear} $Distro "" ; Clear all distro entries because a new option may have been chosen
-     Call SomeFiles
+     StrCpy $Checker "Yes"   
+     Call SetISOFileName
 	 
   ${ElseIf} $Removal == ${BST_UNCHECKED}
    ShowWindow $Format 1  
@@ -674,10 +672,11 @@ Function Uninstall
 	  EnableWindow $6 0 ; Disable "Install" control button
   ${NSD_Uncheck} $Uninstaller  
   StrCpy $Removal "No"  
-  ${NSD_SetText} $Uninstaller "Remove an Installed Item?" 
+  ${NSD_SetText} $Uninstaller "View or Remove Installed Distros?" 
    ${NSD_SetText} $LinuxDistroSelection "Step 2: Select a Distribution from the following Box to put on $DestDisk" 
     ${NSD_LB_Clear} $Distro "" ; Clear all distro entries because a new option may have been chosen
-     Call SomeFiles
+     StrCpy $Checker "Yes"   
+     Call SetISOFileName
   ${EndIf}  
 FunctionEnd
 
@@ -688,8 +687,9 @@ Function OnSelectDrive
   StrCpy $DestDrive "$Letters"
   StrCpy $BootDir $DestDrive -1 
   StrCpy $DestDisk $DestDrive -1
-  ${NSD_LB_Clear} $Distro "" ; Clear all distro entries because a new drive may have been chosen
-  Call SomeFiles
+  ${NSD_LB_Clear} $Distro "" ; Clear all distro entries because a new drive may have been chosen 
+  StrCpy $Checker "Yes"    
+  Call SetISOFileName
   Call CheckSpace
   Call FormatIt  
   Call EnableNext
@@ -733,13 +733,15 @@ Function FormatIt ; Set Format Option
   ${NSD_SetText} $Format "We Will Fat32 Format $DestDrive Drive!"
     ${NSD_LB_Clear} $Distro "" ; Clear all distro entries because a new format option may have been chosen
 	 ShowWindow $Uninstaller 0 ; Disable Uninstaller option because we will be formatting the drive.
-    Call SomeFiles
+    StrCpy $Checker "Yes"	 
+    Call SetISOFileName
   ${ElseIf} $FormatMe == ${BST_UNCHECKED}
   ${NSD_Uncheck} $Format 
   ${NSD_SetText} $Format "Format $DestDrive Drive (Erase Content)?"  
     ${NSD_LB_Clear} $Distro "" ; Clear all distro entries because a new format option may have been chosen
-     ShowWindow $Uninstaller 1 ; Re-enable Uninstaller option.	
-    Call SomeFiles
+     ShowWindow $Uninstaller 1 ; Re-enable Uninstaller option.
+	StrCpy $Checker "Yes" 
+    Call SetISOFileName
   ${EndIf}  
 FunctionEnd
 

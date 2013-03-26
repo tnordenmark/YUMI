@@ -1390,6 +1390,12 @@
  Delete "$BootDir\md5sum.txt" 
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label BackTrack 5 (Penetration Testing)" "APPEND /multiboot/menu/bt5.cfg"   
  Delete "$BootDir\multiboot\menu\bt5.cfg" 
+ 
+ ${ElseIf} $DistroName == "Kali (Penetration Testing)"
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R  "$BootDir\multiboot\kali"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Kali (Penetration Testing)" "APPEND /multiboot/menu/kali.cfg"   
+ Delete "$BootDir\multiboot\menu\kali.cfg"  
 
  ${ElseIf} $DistroName == "XBMC" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
