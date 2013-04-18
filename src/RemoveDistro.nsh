@@ -456,11 +456,23 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label DBAN (Hard Drive Nuker)" "CONFIG /multiboot/menu/DBAN.cfg"  
  Delete "$BootDir\multiboot\menu\DBAN.cfg"   
  
- ${ElseIf} $DistroName == "DRBL (Diskless Remote Boot in Linux)" ;
+ ${ElseIf} $DistroName == "DRBL i486 (Diskless Remote Boot in Linux)" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
  RMDir /R "$BootDir\multiboot\DRBL" 
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label DRBL (Diskless Remote Boot in Linux)" "CONFIG /multiboot/menu/DRBL.cfg"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label DRBL i486 (Diskless Remote Boot in Linux)" "CONFIG /multiboot/menu/DRBL.cfg"  
  Delete "$BootDir\multiboot\menu\DRBL.cfg"    
+ 
+ ${ElseIf} $DistroName == "DRBL amd64 (Diskless Remote Boot in Linux)" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ RMDir /R "$BootDir\multiboot\DRBLamd64" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label DRBL amd64 (Diskless Remote Boot in Linux)" "CONFIG /multiboot/menu/DRBL64.cfg"  
+ Delete "$BootDir\multiboot\menu\DRBL64.cfg"    
+ 
+ ${ElseIf} $DistroName == "REMnux (Reverse Engineer Malware)" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ RMDir /R "$BootDir\multiboot\remnux" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label REMnux (Reverse Engineer Malware)" "CONFIG /multiboot/menu/remnux.cfg"  
+ Delete "$BootDir\multiboot\menu\remnux.cfg"    
   
  ${ElseIf} $DistroName == "Offline NT Password & Registry Editor" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
@@ -1319,11 +1331,17 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Partition Wizard (Partition Tools)" "APPEND /multiboot/menu/pwiz.cfg"   
  Delete "$BootDir\multiboot\menu\pwiz.cfg" 
 
- ${ElseIf} $DistroName == "Clonezilla (Backup + Clone Tool)" 
+ ${ElseIf} $DistroName == "Clonezilla i486 (Backup + Clone Tool)" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- RMDir /R "$BootDir\multiboot\clonezilla" 
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Clonezilla (Backup + Clone Tool)" "APPEND /multiboot/menu/clonezilla.cfg"  
+ RMDir /R "$BootDir\multiboot\clonezillai486" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Clonezilla i486 (Backup + Clone Tool)" "APPEND /multiboot/menu/clonezilla.cfg"  
  Delete "$BootDir\multiboot\menu\clonezilla.cfg" 
+ 
+ ${ElseIf} $DistroName == "Clonezilla amd64 (Backup + Clone Tool)" 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\clonezillaamd64" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Clonezilla amd64 (Backup + Clone Tool)" "APPEND /multiboot/menu/clonezilla64.cfg"  
+ Delete "$BootDir\multiboot\menu\clonezilla64.cfg" 
  
  ${ElseIf} $DistroName == "Redo Backup And Recovery (Recovery Tools)" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 

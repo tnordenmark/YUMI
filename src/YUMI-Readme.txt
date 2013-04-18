@@ -24,6 +24,7 @@ Additional instructions for YUMI can be found HERE: http://www.pendrivelinux.com
 
 Changelog:
 
+04/15/13 Version 0.0.9.4: Updated to support REMnux. Added Clonezilla and DRBL amd64 support. Correct a few broken links.
 03/20/13 Version 0.0.9.3: Remove and combine some redundant code to make updates easier. Update to support Kali Linux, and Tails 0.17.
 03/14/13 Version 0.0.9.2: Correct Ubuntu 13.04 Desktop amd64 installation path.
 03/13/13 Version 0.0.9.1: Update to support Ubuntu 12.04.2 Desktop amd64, Ubuntu 12.04.2 DVD amd64, Edubuntu 12.04.2 amd64, Linux Secure Remix 12.10, (G4L) Ghost for Linux, Backbox 3.0, Debian Live 6.0.7, and Jolicloud 1.2.1. implement another attempt to address "Insane primary (MBR) partition. Can’t find myself on the drive I booted from" error.

@@ -10,6 +10,14 @@
  File /oname=$PLUGINSDIR\ping.cfg "Menu\ping.cfg"  
  CopyFiles "$PLUGINSDIR\ping.cfg" "$BootDir\multiboot\menu\ping.cfg"
  
+ ; ${ElseIf} $DistroName == "Repair Broken Syslinux MBR"   
+  ; DetailPrint "Repairing Syslinux on $BootDir"
+  ; ExecWait '$PLUGINSDIR\syslinux.exe -maf -d /multiboot $BootDir' $R8
+  ; DetailPrint "Syslinux Errors $R8"
+  ; Banner::destroy
+  ; DetailPrint "Creating Label MULTIBOOT on $DestDisk"
+  ; nsExec::ExecToLog '"cmd" /c "LABEL $DestDiskMULTIBOOT"' 
+ 
  ${ElseIf} $DistroName == "Archlinux"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\archlinux\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -645,14 +653,23 @@
  File /oname=$PLUGINSDIR\DBAN.cfg "Menu\DBAN.cfg"  
  CopyFiles "$PLUGINSDIR\DBAN.cfg" "$BootDir\multiboot\menu\DBAN.cfg" 
 
- ${ElseIf} $DistroName == "DRBL (Diskless Remote Boot in Linux)"
+ ${ElseIf} $DistroName == "DRBL i486 (Diskless Remote Boot in Linux)"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -o"$BootDir\multiboot\DRBL\" -y' 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
- ${WriteToFile} "label DRBL (Diskless Remote Boot in Linux)$\r$\nmenu label DRBL (Diskless Remote Boot in Linux)$\r$\nMENU INDENT 1$\r$\nCONFIG /multiboot/menu/DRBL.cfg" $R0 
+ ${WriteToFile} "label DRBL i486 (Diskless Remote Boot in Linux)$\r$\nmenu label DRBL i486 (Diskless Remote Boot in Linux)$\r$\nMENU INDENT 1$\r$\nCONFIG /multiboot/menu/DRBL.cfg" $R0 
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\DRBL.cfg "Menu\DRBL.cfg"  
  CopyFiles "$PLUGINSDIR\DRBL.cfg" "$BootDir\multiboot\menu\DRBL.cfg" 
+ 
+ ${ElseIf} $DistroName == "DRBL amd64 (Diskless Remote Boot in Linux)"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -o"$BootDir\multiboot\DRBLamd64\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label DRBL amd64 (Diskless Remote Boot in Linux)$\r$\nmenu label DRBL amd64 (Diskless Remote Boot in Linux)$\r$\nMENU INDENT 1$\r$\nCONFIG /multiboot/menu/DRBL64.cfg" $R0 
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\DRBL.cfg "Menu\DRBL64.cfg"  
+ CopyFiles "$PLUGINSDIR\DRBL64.cfg" "$BootDir\multiboot\menu\DRBL64.cfg"  
   
  ${ElseIf} $DistroName == "Offline NT Password & Registry Editor"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -o"$BootDir\multiboot\offnt\" -y' 
@@ -1994,14 +2011,23 @@
  File /oname=$PLUGINSDIR\pwiz.cfg "Menu\pwiz.cfg"  
  CopyFiles "$PLUGINSDIR\pwiz.cfg" "$BootDir\multiboot\menu\pwiz.cfg" 
 
- ${ElseIf} $DistroName == "Clonezilla (Backup + Clone Tool)" 
- ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\clonezilla\" -y'
+ ${ElseIf} $DistroName == "Clonezilla i486 (Backup + Clone Tool)" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\clonezillai486\" -y'
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- ${WriteToFile} "label Clonezilla (Backup + Clone Tool)$\r$\nmenu label Clonezilla (Backup + Clone Tool)$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/clonezilla.cfg" $R0
+ ${WriteToFile} "label Clonezilla i486 (Backup + Clone Tool)$\r$\nmenu label Clonezilla i486 (Backup + Clone Tool)$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/clonezilla.cfg" $R0
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\clonezilla.cfg "Menu\clonezilla.cfg"  
  CopyFiles "$PLUGINSDIR\clonezilla.cfg" "$BootDir\multiboot\menu\clonezilla.cfg" 
+ 
+ ${ElseIf} $DistroName == "Clonezilla amd64 (Backup + Clone Tool)" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\clonezillaamd64\" -y'
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Clonezilla amd64 (Backup + Clone Tool)$\r$\nmenu label Clonezilla amd64 (Backup + Clone Tool)$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/clonezilla64.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\clonezilla64.cfg "Menu\clonezilla64.cfg"  
+ CopyFiles "$PLUGINSDIR\clonezilla64.cfg" "$BootDir\multiboot\menu\clonezilla64.cfg"  
  
  ${ElseIf} $DistroName == "Redo Backup And Recovery (Recovery Tools)"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\redobackup\" -y'
@@ -2011,6 +2037,15 @@
  InitPluginsDir
  File /oname=$PLUGINSDIR\redobackup.cfg "Menu\redobackup.cfg"  
  CopyFiles "$PLUGINSDIR\redobackup.cfg" "$BootDir\multiboot\menu\redobackup.cfg" 
+ 
+ ${ElseIf} $DistroName == "REMnux (Reverse Engineer Malware)"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\remnux\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label REMnux (Reverse Engineer Malware)$\r$\nmenu label REMnux (Reverse Engineer Malware)$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/remnux.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\remnux.cfg "Menu\remnux.cfg"  
+ CopyFiles "$PLUGINSDIR\remnux.cfg" "$BootDir\multiboot\menu\remnux.cfg"   
  
  ${ElseIf} $DistroName == "Kaspersky Rescue Disk (Antivirus Scanner)"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\kav\" -y'
