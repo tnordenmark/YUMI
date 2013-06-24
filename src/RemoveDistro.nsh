@@ -337,6 +337,54 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label GRML" "APPEND /multiboot/menu/grml.cfg"   
  Delete "$BootDir\multiboot\menu\grml.cfg"  
  
+${ElseIf} $DistroName == "Debian Live 7 Gnome 32bit" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R  "$BootDir\multiboot\debian7"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Debian Live 7" "APPEND /multiboot/menu/debian7.cfg"   
+ Delete "$BootDir\multiboot\menu\debian7.cfg" 
+ 
+ ${ElseIf} $DistroName == "Debian Live 7 KDE 32bit" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R  "$BootDir\multiboot\debian7kde"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Debian Live 7 KDE" "APPEND /multiboot/menu/deb7kde.cfg"   
+ Delete "$BootDir\multiboot\menu\deb7kde.cfg" 
+
+ ${ElseIf} $DistroName == "Debian Live 7 LXDE 32bit" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R  "$BootDir\multiboot\debian7lxde"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Debian Live 7 LXDE" "APPEND /multiboot/menu/deb7lxde.cfg"   
+ Delete "$BootDir\multiboot\menu\deb7lxde.cfg" 
+
+ ${ElseIf} $DistroName == "Debian Live 7 XFCE 32bit" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R  "$BootDir\multiboot\debian7xfce"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Debian Live 7 XFCE" "APPEND /multiboot/menu/deb7xfce.cfg"   
+ Delete "$BootDir\multiboot\menu\deb7xfce.cfg"  
+ 
+ ${ElseIf} $DistroName == "Debian Live 7 Gnome 64bit" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R  "$BootDir\multiboot\debian764"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Debian Live 7 64" "APPEND /multiboot/menu/debian764.cfg"   
+ Delete "$BootDir\multiboot\menu\debian764.cfg" 
+ 
+ ${ElseIf} $DistroName == "Debian Live 7 KDE 64bit" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R  "$BootDir\multiboot\debian7kde64"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Debian Live 7 KDE 64" "APPEND /multiboot/menu/deb7k64.cfg"   
+ Delete "$BootDir\multiboot\menu\deb7k64.cfg" 
+
+ ${ElseIf} $DistroName == "Debian Live 7 LXDE 64bit" 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R  "$BootDir\multiboot\debian7lxde64"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Debian Live 7 LXDE 64" "APPEND /multiboot/menu/deb7l64.cfg"   
+ Delete "$BootDir\multiboot\menu\deb7l64.cfg" 
+
+ ${ElseIf} $DistroName == "Debian Live 7 XFCE 64bit" 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R  "$BootDir\multiboot\deb7xfce64"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Debian Live 7 XFCE 64" "APPEND /multiboot/menu/deb7x64.cfg"   
+ Delete "$BootDir\multiboot\menu\deb7x64.cfg"  
+ 
  ${ElseIf} $DistroName == "Debian Live 6 Gnome 32bit" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R  "$BootDir\multiboot\debian"
@@ -686,7 +734,31 @@
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\KXStudio1204"  
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label KXStudio 12.04" "APPEND /multiboot/menu/kxstudio.cfg" 
- Delete "$BootDir\multiboot\menu\kxstudio.cfg"   
+ Delete "$BootDir\multiboot\menu\kxstudio.cfg"  
+
+  ${ElseIf} $DistroName == "Ubuntu 13.10" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\ubuntu1310"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu 13.10" "APPEND /multiboot/menu/ub1310.cfg" 
+ Delete "$BootDir\multiboot\menu\ub1310.cfg"   
+ 
+ ${ElseIf} $DistroName == "Ubuntu 13.10 amd64" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\ubuntu131064"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu 13.10 amd64" "APPEND /multiboot/menu/u131064.cfg" 
+ Delete "$BootDir\multiboot\menu\u131064.cfg"  
+
+ ${ElseIf} $DistroName == "Ubuntu Server 13.10" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\ubuntuserv1310"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu Server 13.10" "APPEND /multiboot/menu/usrv1310.cfg" 
+ Delete "$BootDir\multiboot\menu\usrv1310.cfg" 
+
+ ${ElseIf} $DistroName == "Ubuntu Server 13.10 amd64" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\ubuntuserv131064"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu Server 13.10 amd64" "APPEND /multiboot/menu/us131064.cfg" 
+ Delete "$BootDir\multiboot\menu\us131064.cfg"   
  
  ${ElseIf} $DistroName == "Ubuntu 13.04" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -699,6 +771,78 @@
  RMDir /R "$BootDir\multiboot\ubuntu130464"  
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu 13.04 amd64" "APPEND /multiboot/menu/u130464.cfg" 
  Delete "$BootDir\multiboot\menu\u130464.cfg"    
+ 
+ ${ElseIf} $DistroName == "Ubuntu Gnome 13.04" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\ugnome1304"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu Gnome 13.04" "APPEND /multiboot/menu/ug1304.cfg" 
+ Delete "$BootDir\multiboot\menu\ug1304.cfg"   
+ 
+ ${ElseIf} $DistroName == "Ubuntu Gnome 13.04 amd64" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\ugnome130464"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu Gnome 13.04 amd64" "APPEND /multiboot/menu/ug130464.cfg" 
+ Delete "$BootDir\multiboot\menu\ug130464.cfg" 
+
+ ${ElseIf} $DistroName == "Ubuntu Server 13.04" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\ubuntuserv1304"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu Server 13.04" "APPEND /multiboot/menu/usrv1304.cfg" 
+ Delete "$BootDir\multiboot\menu\usrv1304.cfg" 
+
+ ${ElseIf} $DistroName == "Ubuntu Server 13.04 amd64" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\ubuntuserv130464"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu Server 13.04 amd64" "APPEND /multiboot/menu/us130464.cfg" 
+ Delete "$BootDir\multiboot\menu\us130464.cfg"  
+ 
+ ${ElseIf} $DistroName == "Edubuntu 13.04" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\edubuntu1304" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Edubuntu 13.04" "APPEND /multiboot/menu/edu1304.cfg" 
+ Delete "$BootDir\multiboot\menu\edu1304.cfg"  
+
+ ${ElseIf} $DistroName == "Edubuntu 13.04 amd64" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\edubuntu130464" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Edubuntu 13.04 amd64" "APPEND /multiboot/menu/ed130464.cfg" 
+ Delete "$BootDir\multiboot\menu\ed130464.cfg" 
+ 
+ ${ElseIf} $DistroName == "Kubuntu 13.04" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\kubuntu1304"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Kubuntu 13.04" "APPEND /multiboot/menu/ku1304.cfg"  
+ Delete "$BootDir\multiboot\menu\ku1304.cfg" 
+ 
+ ${ElseIf} $DistroName == "Kubuntu 13.04 amd64" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\kubuntu130464"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Kubuntu 13.04 amd64" "APPEND /multiboot/menu/ku130464.cfg"  
+ Delete "$BootDir\multiboot\menu\ku130464.cfg"  
+
+ ${ElseIf} $DistroName == "Lubuntu 13.04" ; 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\lubuntu1210"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Lubuntu 13.04" "APPEND /multiboot/menu/lu1304.cfg"   
+ Delete "$BootDir\multiboot\menu\lu1304.cfg" 
+ 
+ ${ElseIf} $DistroName == "Lubuntu 13.04 amd64" ; 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\lubuntu130464"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Lubuntu 13.04 amd64" "APPEND /multiboot/menu/lu130464.cfg"   
+ Delete "$BootDir\multiboot\menu\lu130464.cfg"  
+
+ ${ElseIf} $DistroName == "Xubuntu 13.04" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\xubuntu1304"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Xubuntu 13.04" "APPEND /multiboot/menu/xu1304.cfg"  
+ Delete "$BootDir\multiboot\menu\xu1304.cfg"  
+
+ ${ElseIf} $DistroName == "Xubuntu 13.04 amd64" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\xubuntu130464"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Xubuntu 13.04 amd64" "APPEND /multiboot/menu/xu130464.cfg"  
+ Delete "$BootDir\multiboot\menu\xu130464.cfg"   
  
  ${ElseIf} $DistroName == "Ubuntu 12.10" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -1054,6 +1198,30 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint 10" "APPEND /multiboot/menu/mint10.cfg" 
  Delete "$BootDir\multiboot\menu\mint10.cfg"  
  
+ ${ElseIf} $DistroName == "LMDE 201303 Cinnamon 32bit" ; 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintdeb13"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint Debian 13" "APPEND /multiboot/menu/mintdeb13.cfg" 
+ Delete "$BootDir\multiboot\menu\mintdeb13.cfg"   
+ 
+ ${ElseIf} $DistroName == "LMDE 201303 Cinnamon 64bit" ; 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintdeb1364"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint Debian 13 64bit" "APPEND /multiboot/menu/mdeb1364.cfg" 
+ Delete "$BootDir\multiboot\menu\mdeb1364.cfg" 
+ 
+ ${ElseIf} $DistroName == "LMDE 201303 Mate 32bit" ; 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintmate13"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint Debian Mate 13" "APPEND /multiboot/menu/lmde13.cfg" 
+ Delete "$BootDir\multiboot\menu\lmde13.cfg"   
+ 
+ ${ElseIf} $DistroName == "LMDE 201303 Mate 64bit" ; 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintmate1364"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint Debian Mate 13 64bit" "APPEND /multiboot/menu/lmde1364.cfg" 
+ Delete "$BootDir\multiboot\menu\lmde1364.cfg"  
+ 
  ${ElseIf} $DistroName == "LMDE 201204 Mate/Cinnamon 32bit" ; 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\mintdeb"
@@ -1095,6 +1263,30 @@
  RMDir /R "$BootDir\multiboot\mintmate1332"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint 13 Mate 32bit" "APPEND /multiboot/menu/mate13.cfg" 
  Delete "$BootDir\multiboot\menu\mate13.cfg"  
+ 
+ ${ElseIf} $DistroName == "Linux Mint 15 Mate 32bit"  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintmate1532"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint 15 Mate 32bit" "APPEND /multiboot/menu/mate15.cfg" 
+ Delete "$BootDir\multiboot\menu\mate15.cfg" 
+
+ ${ElseIf} $DistroName == "Linux Mint 15 Mate 64bit"  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintmate1564"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint 15 Mate 64bit" "APPEND /multiboot/menu/mate1564.cfg" 
+ Delete "$BootDir\multiboot\menu\mate1564.cfg"   
+
+ ${ElseIf} $DistroName == "Linux Mint 15 Cinnamon 32bit"  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintcin1532"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint Cinnamon 15 32bit" "APPEND /multiboot/menu/mcin15.cfg" 
+ Delete "$BootDir\multiboot\menu\mcin15.cfg"  
+ 
+ ${ElseIf} $DistroName == "Linux Mint 15 Cinnamon 64bit"  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintcin1564"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint Cinnamon 15 64bit" "APPEND /multiboot/menu/mcin1564.cfg" 
+ Delete "$BootDir\multiboot\menu\mcin1564.cfg"  
  
  ${ElseIf} $DistroName == "Linux Mint 14 Mate 32bit"  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -1342,6 +1534,18 @@
  RMDir /R "$BootDir\multiboot\clonezillaamd64" 
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Clonezilla amd64 (Backup + Clone Tool)" "APPEND /multiboot/menu/clonezilla64.cfg"  
  Delete "$BootDir\multiboot\menu\clonezilla64.cfg" 
+ 
+ ${ElseIf} $DistroName == "Clonezilla i386 Alternative" 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\clonezillaalti386" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Clonezilla i386 Alternative" "APPEND /multiboot/menu/czalt.cfg"  
+ Delete "$BootDir\multiboot\menu\czalt.cfg" 
+ 
+ ${ElseIf} $DistroName == "Clonezilla amd64 Alternative" 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\clonezillaaltamd64" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Clonezilla amd64 Alternative" "APPEND /multiboot/menu/czalt64.cfg"  
+ Delete "$BootDir\multiboot\menu\czalt64.cfg" 
  
  ${ElseIf} $DistroName == "Redo Backup And Recovery (Recovery Tools)" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 

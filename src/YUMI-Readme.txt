@@ -24,6 +24,10 @@ Additional instructions for YUMI can be found HERE: http://www.pendrivelinux.com
 
 Changelog:
 
+06/07/13 Version 0.0.9.8: Updated to support LMDE 2013 MATE 32/64bit. Correct Debian 7 LXDE 64bit entry.
+05/28/13 Version 0.0.9.7: Updated to support Ubuntu Server 13.04, Ubuntu Server 13.10, and Clonezilla raring alternative distributions. Fix problems adding Debian 7 i386.
+05/20/13 Version 0.0.9.6: Updated to support Ubuntu 13.10, Ubuntu Gnome 13.04, Debain Live 7, and Linux Mint 15. Fix TAILS time zone, and G4L config.
+04/29/13 Version 0.0.9.5: Updated to support final release of Ubuntu, Edubuntu, Lubuntu, Kubuntu, Xubuntu 13.04. Add LMDE 201303. 
 04/15/13 Version 0.0.9.4: Updated to support REMnux. Added Clonezilla and DRBL amd64 support. Correct a few broken links.
 03/20/13 Version 0.0.9.3: Remove and combine some redundant code to make updates easier. Update to support Kali Linux, and Tails 0.17.
 03/14/13 Version 0.0.9.2: Correct Ubuntu 13.04 Desktop amd64 installation path.

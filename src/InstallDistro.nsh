@@ -491,6 +491,78 @@
  File /oname=$PLUGINSDIR\grml.cfg "Menu\grml.cfg"  
  CopyFiles "$PLUGINSDIR\grml.cfg" "$BootDir\multiboot\grml\boot\isolinux\syslinux.cfg"  
  
+ ${ElseIf} $DistroName == "Debian Live 7 Gnome 32bit"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\debian7\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label Debian Live 7$\r$\nmenu label Debian Live 7$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/debian7.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\debian7.cfg "Menu\debian7.cfg"  
+ CopyFiles "$PLUGINSDIR\debian7.cfg" "$BootDir\multiboot\menu\debian7.cfg" 
+ 
+ ${ElseIf} $DistroName == "Debian Live 7 KDE 32bit"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\debian7kde\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label Debian Live 7 KDE$\r$\nmenu label Debian Live 7 KDE$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/deb7kde.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\deb7kde.cfg "Menu\deb7kde.cfg"  
+ CopyFiles "$PLUGINSDIR\deb7kde.cfg" "$BootDir\multiboot\menu\deb7kde.cfg" 
+
+ ${ElseIf} $DistroName == "Debian Live 7 LXDE 32bit"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\debian7lxde\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label Debian Live 7 LXDE$\r$\nmenu label Debian Live 7 LXDE$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/deb7lxde.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\deb7lxde.cfg "Menu\deb7lxde.cfg"  
+ CopyFiles "$PLUGINSDIR\deb7lxde.cfg" "$BootDir\multiboot\menu\deb7lxde.cfg" 
+ 
+ ${ElseIf} $DistroName == "Debian Live 7 XFCE 32bit"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\debian7xfce\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label Debian Live 7 XFCE$\r$\nmenu label Debian Live 7 XFCE$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/deb7xfce.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\deb7xfce.cfg "Menu\deb7xfce.cfg"  
+ CopyFiles "$PLUGINSDIR\deb7xfce.cfg" "$BootDir\multiboot\menu\deb7xfce.cfg"  
+ 
+ ${ElseIf} $DistroName == "Debian Live 7 Gnome 64bit"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\debian764\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label Debian Live 7 64$\r$\nmenu label Debian Live 7 64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/debian764.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\debian764.cfg "Menu\debian764.cfg"  
+ CopyFiles "$PLUGINSDIR\debian764.cfg" "$BootDir\multiboot\menu\debian764.cfg" 
+ 
+ ${ElseIf} $DistroName == "Debian Live 7 KDE 64bit"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\debian7kde64\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label Debian Live 7 KDE 64$\r$\nmenu label Debian Live 7 KDE 64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/deb7k64.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\deb7k64.cfg "Menu\deb7k64.cfg"  
+ CopyFiles "$PLUGINSDIR\deb7k64.cfg" "$BootDir\multiboot\menu\deb7k64.cfg" 
+
+ ${ElseIf} $DistroName == "Debian Live 7 LXDE 64bit"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\debian7lxde64\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label Debian Live 7 LXDE 64$\r$\nmenu label Debian Live 7 LXDE 64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/deb7l64.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\deb7l64.cfg "Menu\deb7l64.cfg"  
+ CopyFiles "$PLUGINSDIR\deb7l64.cfg" "$BootDir\multiboot\menu\deb7l64.cfg" 
+ 
+ ${ElseIf} $DistroName == "Debian Live 7 XFCE 64bit"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\debian7xfce64\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label Debian Live 7 XFCE 64$\r$\nmenu label Debian Live 7 XFCE 64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/deb7x64.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\deb7x64.cfg "Menu\deb7x64.cfg"  
+ CopyFiles "$PLUGINSDIR\deb7x64.cfg" "$BootDir\multiboot\menu\deb7x64.cfg"   
+ 
  ${ElseIf} $DistroName == "Debian Live 6 Gnome 32bit"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\debian\" -y' 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
@@ -1077,6 +1149,46 @@
  File /oname=$PLUGINSDIR\lu1104.cfg "Menu\lu1104.cfg"  
  CopyFiles "$PLUGINSDIR\lu1104.cfg" "$BootDir\multiboot\menu\lu1104.cfg"  
  
+ ${ElseIf} $DistroName == "Ubuntu 13.10"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntu1310\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Ubuntu 13.10$\r$\nmenu label Ubuntu 13.10$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/ub1310.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\ub1310.cfg "Menu\ub1310.cfg"  
+ CopyFiles "$PLUGINSDIR\ub1310.cfg" "$BootDir\multiboot\menu\ub1310.cfg"  
+ 
+ ${ElseIf} $DistroName == "Ubuntu 13.10 amd64"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntu131064\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Ubuntu 13.10 amd64$\r$\nmenu label Ubuntu 13.10 amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/u131064.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\u131064.cfg "Menu\u131064.cfg"  
+ CopyFiles "$PLUGINSDIR\u131064.cfg" "$BootDir\multiboot\menu\u131064.cfg"   
+ 
+ ${ElseIf} $DistroName == "Ubuntu Server 13.10"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntuserv1310\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Ubuntu Server 13.10$\r$\nmenu label Ubuntu Server 13.10$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/usrv1310.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\usrv1310.cfg "Menu\usrv1310.cfg"  
+ CopyFiles "$PLUGINSDIR\usrv1310.cfg" "$BootDir\multiboot\menu\usrv1310.cfg"
+  ReadEnvStr $R0 COMSPEC ; grab commandline
+  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv1310\pool\main\l\linux\*.ude *.udeb" ; rename broken udeb files   
+ 
+ ${ElseIf} $DistroName == "Ubuntu Server 13.10 amd64"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntuserv131064\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Ubuntu Server 13.10 amd64$\r$\nmenu label Ubuntu Server 13.10 amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/us131064.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\us131064.cfg "Menu\us131064.cfg"  
+ CopyFiles "$PLUGINSDIR\us131064.cfg" "$BootDir\multiboot\menu\us131064.cfg" 
+  ReadEnvStr $R0 COMSPEC ; grab commandline
+  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux\*.ude *.udeb" ; rename broken udeb files   
+ 
  ${ElseIf} $DistroName == "Ubuntu 13.04"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntu1304\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -1094,6 +1206,118 @@
  InitPluginsDir
  File /oname=$PLUGINSDIR\u130464.cfg "Menu\u130464.cfg"  
  CopyFiles "$PLUGINSDIR\u130464.cfg" "$BootDir\multiboot\menu\u130464.cfg"  
+ 
+ ${ElseIf} $DistroName == "Ubuntu Gnome 13.04"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ugnome1304\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Ubuntu Gnome 13.04$\r$\nmenu label Ubuntu Gnome 13.04$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/ug1304.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\ug1304.cfg "Menu\ug1304.cfg"  
+ CopyFiles "$PLUGINSDIR\ug1304.cfg" "$BootDir\multiboot\menu\ug1304.cfg"  
+ 
+ ${ElseIf} $DistroName == "Ubuntu Gnome 13.04 amd64"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ugnome130464\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Ubuntu Gnome 13.04 amd64$\r$\nmenu label Ubuntu Gnome 13.04 amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/ug130464.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\ug130464.cfg "Menu\ug130464.cfg"  
+ CopyFiles "$PLUGINSDIR\ug130464.cfg" "$BootDir\multiboot\menu\ug130464.cfg"  
+
+ ${ElseIf} $DistroName == "Ubuntu Server 13.04"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntuserv1304\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Ubuntu Server 13.04$\r$\nmenu label Ubuntu Server 13.04$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/usrv1304.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\usrv1304.cfg "Menu\usrv1304.cfg"  
+ CopyFiles "$PLUGINSDIR\usrv1304.cfg" "$BootDir\multiboot\menu\usrv1304.cfg"
+  ReadEnvStr $R0 COMSPEC ; grab commandline
+  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv1304\pool\main\l\linux\*.ude *.udeb" ; rename broken udeb files   
+ 
+ ${ElseIf} $DistroName == "Ubuntu Server 13.04 amd64"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntuserv130464\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Ubuntu Server 13.04 amd64$\r$\nmenu label Ubuntu Server 13.04 amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/us130464.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\us130464.cfg "Menu\us130464.cfg"  
+ CopyFiles "$PLUGINSDIR\us130464.cfg" "$BootDir\multiboot\menu\us130464.cfg" 
+  ReadEnvStr $R0 COMSPEC ; grab commandline
+  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv130464\pool\main\l\linux\*.ude *.udeb" ; rename broken udeb files  
+ 
+${ElseIf} $DistroName == "Edubuntu 13.04" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\edubuntu1304\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Edubuntu 13.04$\r$\nmenu label Edubuntu 13.04$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/edu1304.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\edu1304.cfg "Menu\edu1304.cfg"  
+ CopyFiles "$PLUGINSDIR\edu1304.cfg" "$BootDir\multiboot\menu\edu1304.cfg" 
+ 
+ ${ElseIf} $DistroName == "Edubuntu 13.04 amd64" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\edubuntu130464\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Edubuntu 13.04 amd64$\r$\nmenu label Edubuntu 13.04 amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/ed130464.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\ed130464.cfg "Menu\ed130464.cfg"   
+ CopyFiles "$PLUGINSDIR\ed130464.cfg" "$BootDir\multiboot\menu\ed130464.cfg"  
+
+ ${ElseIf} $DistroName == "Kubuntu 13.04"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\kubuntu1304\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Kubuntu 13.04$\r$\nmenu label Kubuntu 13.04$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/ku1304.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\ku1304.cfg "Menu\ku1304.cfg"  
+ CopyFiles "$PLUGINSDIR\ku1304.cfg" "$BootDir\multiboot\menu\ku1304.cfg" 
+
+ ${ElseIf} $DistroName == "Kubuntu 13.04 amd64"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\kubuntu130464\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Kubuntu 13.04 amd64$\r$\nmenu label Kubuntu 13.04 amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/ku130464.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\ku130464.cfg "Menu\ku130464.cfg"  
+ CopyFiles "$PLUGINSDIR\ku130464.cfg" "$BootDir\multiboot\menu\ku130464.cfg"   
+ 
+ ${ElseIf} $DistroName == "Lubuntu 13.04" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\lubuntu1304\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Lubuntu 13.04$\r$\nmenu label Lubuntu 13.04$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/lu1304.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\lu1304.cfg "Menu\lu1304.cfg"  
+ CopyFiles "$PLUGINSDIR\lu1304.cfg" "$BootDir\multiboot\menu\lu1304.cfg"  
+
+ ${ElseIf} $DistroName == "Lubuntu 13.04 amd64" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\lubuntu130464\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Lubuntu 13.04 amd64$\r$\nmenu label Lubuntu 13.04 amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/lu130464.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\lu130464.cfg "Menu\lu130464.cfg"  
+ CopyFiles "$PLUGINSDIR\lu130464.cfg" "$BootDir\multiboot\menu\lu130464.cfg" 
+
+ ${ElseIf} $DistroName == "Xubuntu 13.04"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\xubuntu1304\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Xubuntu 13.04$\r$\nmenu label Xubuntu 13.04$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/xu1304.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\xu1304.cfg "Menu\xu1304.cfg"  
+ CopyFiles "$PLUGINSDIR\xu1304.cfg" "$BootDir\multiboot\menu\xu1304.cfg" 
+ 
+ ${ElseIf} $DistroName == "Xubuntu 13.04 amd64"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\xubuntu130464\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Xubuntu 13.04 amd64$\r$\nmenu label Xubuntu 13.04 amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/xu130464.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\xu130464.cfg "Menu\xu130464.cfg"  
+ CopyFiles "$PLUGINSDIR\xu130464.cfg" "$BootDir\multiboot\menu\xu130464.cfg"  
 
  ${ElseIf} $DistroName == "Ubuntu 12.10"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntu1210\" -y'  
@@ -1572,7 +1796,43 @@
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\mint10.cfg "Menu\mint10.cfg"  
- CopyFiles "$PLUGINSDIR\mint10.cfg" "$BootDir\multiboot\menu\mint10.cfg"  
+ CopyFiles "$PLUGINSDIR\mint10.cfg" "$BootDir\multiboot\menu\mint10.cfg" 
+
+ ${ElseIf} $DistroName == "LMDE 201303 Cinnamon 32bit" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\mintdeb13\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Linux Mint Debian 13$\r$\nmenu label Linux Mint Debian 13$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/mintdeb13.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\mintdeb13.cfg "Menu\mintdeb13.cfg"  
+ CopyFiles "$PLUGINSDIR\mintdeb13.cfg" "$BootDir\multiboot\menu\mintdeb13.cfg"  
+ 
+ ${ElseIf} $DistroName == "LMDE 201303 Cinnamon 64bit" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\mintdeb1364\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Linux Mint Debian 13 64bit$\r$\nmenu label Linux Mint Debian 13 64bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/mdeb1364.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\mdeb1364.cfg "Menu\mdeb1364.cfg"  
+ CopyFiles "$PLUGINSDIR\mdeb1364.cfg" "$BootDir\multiboot\menu\mdeb1364.cfg"    
+ 
+ ${ElseIf} $DistroName == "LMDE 201303 Mate 32bit" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\mintmate13\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Linux Mint Debian Mate 13$\r$\nmenu label Linux Mint Debian Mate 13$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/lmde13.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\lmde13.cfg "Menu\lmde13.cfg"  
+ CopyFiles "$PLUGINSDIR\lmde13.cfg" "$BootDir\multiboot\menu\lmde13.cfg"  
+ 
+ ${ElseIf} $DistroName == "LMDE 201303 Mate 64bit" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\mintmate1364\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Linux Mint Debian Mate 13 64bit$\r$\nmenu label Linux Mint Debian Mate 13 64bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/lmde1364.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\lmde1364.cfg "Menu\lmde1364.cfg"  
+ CopyFiles "$PLUGINSDIR\lmde1364.cfg" "$BootDir\multiboot\menu\lmde1364.cfg"    
  
  ${ElseIf} $DistroName == "LMDE 201204 Mate/Cinnamon 32bit" 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\mintdeb\" -y'  
@@ -1627,6 +1887,42 @@
  InitPluginsDir
  File /oname=$PLUGINSDIR\mint1164.cfg "Menu\mint1164.cfg"  
  CopyFiles "$PLUGINSDIR\mint1164.cfg" "$BootDir\multiboot\menu\mint1164.cfg"
+ 
+ ${ElseIf} $DistroName == "Linux Mint 15 Mate 32bit" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\mintmate1532\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Linux Mint 15 Mate 32bit$\r$\nmenu label Linux Mint 15 Mate 32bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/mate15.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\mate15.cfg "Menu\mate15.cfg"  
+ CopyFiles "$PLUGINSDIR\mate15.cfg" "$BootDir\multiboot\menu\mate15.cfg" 
+
+ ${ElseIf} $DistroName == "Linux Mint 15 Mate 64bit" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\mintmate1564\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Linux Mint 15 Mate 64bit$\r$\nmenu label Linux Mint 15 Mate 64bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/mate1564.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\mate1564.cfg "Menu\mate1564.cfg"  
+ CopyFiles "$PLUGINSDIR\mate1564.cfg" "$BootDir\multiboot\menu\mate1564.cfg"   
+
+ ${ElseIf} $DistroName == "Linux Mint 15 Cinnamon 32bit" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\mintcin1532\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Linux Mint Cinnamon 15 32bit$\r$\nmenu label Linux Mint Cinnamon 15 32bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/mcin15.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\mcin15.cfg "Menu\mcin15.cfg"  
+ CopyFiles "$PLUGINSDIR\mcin15.cfg" "$BootDir\multiboot\menu\mcin15.cfg"  
+ 
+ ${ElseIf} $DistroName == "Linux Mint 15 Cinnamon 64bit" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\mintcin1564\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Linux Mint Cinnamon 15 64bit$\r$\nmenu label Linux Mint Cinnamon 15 64bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/mcin1564.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\mcin1564.cfg "Menu\mcin1564.cfg"  
+ CopyFiles "$PLUGINSDIR\mcin1564.cfg" "$BootDir\multiboot\menu\mcin1564.cfg"   
 
  ${ElseIf} $DistroName == "Linux Mint 14 Mate 32bit" 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\mintmate1432\" -y'  
@@ -1990,8 +2286,10 @@
  ${WriteToFile} "label G4L (Ghost For Linux)$\r$\nmenu label G4L (Ghost For Linux$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/g4l.cfg" $R0
  SetShellVarContext all
  InitPluginsDir
+ File /oname=$PLUGINSDIR\g4lfailsafe.cfg "Menu\g4lfailsafe.cfg"  
  File /oname=$PLUGINSDIR\g4l.cfg "Menu\g4l.cfg"  
- CopyFiles "$PLUGINSDIR\g4l.cfg" "$BootDir\multiboot\menu\g4l.cfg"  
+ CopyFiles "$PLUGINSDIR\g4l.cfg" "$BootDir\multiboot\menu\g4l.cfg" 
+ CopyFiles "$PLUGINSDIR\g4lfailsafe.cfg" "$BootDir\multiboot\g4l\failsafe.cfg"   
  
  ${ElseIf} $DistroName == "GParted (Partition Tools)" 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\gparted\" -y'
@@ -2028,6 +2326,24 @@
  InitPluginsDir
  File /oname=$PLUGINSDIR\clonezilla64.cfg "Menu\clonezilla64.cfg"  
  CopyFiles "$PLUGINSDIR\clonezilla64.cfg" "$BootDir\multiboot\menu\clonezilla64.cfg"  
+ 
+ ${ElseIf} $DistroName == "Clonezilla i386 Alternative" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\clonezillaalti386\" -y'
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Clonezilla i386 Alternative$\r$\nmenu label Clonezilla i386 Alternative$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/czalt.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\czalt.cfg "Menu\czalt.cfg"  
+ CopyFiles "$PLUGINSDIR\czalt.cfg" "$BootDir\multiboot\menu\czalt.cfg" 
+ 
+ ${ElseIf} $DistroName == "Clonezilla amd64 Alternative" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\clonezillaaltamd64\" -y'
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Clonezilla amd64 (Backup + Clone Tool)$\r$\nmenu label Clonezilla amd64 (Backup + Clone Tool)$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/czalt64.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\czalt64.cfg "Menu\czalt64.cfg"  
+ CopyFiles "$PLUGINSDIR\czalt64.cfg" "$BootDir\multiboot\menu\czalt64.cfg"   
  
  ${ElseIf} $DistroName == "Redo Backup And Recovery (Recovery Tools)"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\redobackup\" -y'
