@@ -265,6 +265,54 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Fedora 18 XFCE 64bit" "APPEND /multiboot/menu/fed18X64.cfg"   
  Delete "$BootDir\multiboot\menu\fed18X64.cfg"  
  
+  ${ElseIf} $DistroName == "Fedora 19 GNOME 32bit"
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ RMDir /R "$BootDir\multiboot\fedora19"   
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Fedora 19" "APPEND /multiboot/menu/fed19.cfg"   
+ Delete "$BootDir\multiboot\menu\fed19.cfg"
+ 
+ ${ElseIf} $DistroName == "Fedora 19 GNOME 64bit"
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ RMDir /R "$BootDir\multiboot\fedora6419"   
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Fedora 19 64bit" "APPEND /multiboot/menu/fed1964.cfg"   
+ Delete "$BootDir\multiboot\menu\fed1964.cfg" 
+ 
+ ${ElseIf} $DistroName == "Fedora 19 KDE 64bit"
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ RMDir /R "$BootDir\multiboot\fedoraKDE6419"   
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Fedora 19 KDE 64bit" "APPEND /multiboot/menu/fed19K64.cfg"   
+ Delete "$BootDir\multiboot\menu\fed19K64.cfg"  
+ 
+ ${ElseIf} $DistroName == "Fedora 19 KDE 32bit"
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ RMDir /R "$BootDir\multiboot\fedoraKDE19"   
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Fedora 19 KDE" "APPEND /multiboot/menu/fed19K.cfg"   
+ Delete "$BootDir\multiboot\menu\fed19K.cfg"  
+ 
+ ${ElseIf} $DistroName == "Fedora 19 LXDE 32bit"
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ RMDir /R "$BootDir\multiboot\fedoraLXDE19"   
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Fedora 19 LXDE" "APPEND /multiboot/menu/fed19L.cfg"   
+ Delete "$BootDir\multiboot\menu\fed19L.cfg"  
+
+ ${ElseIf} $DistroName == "Fedora 19 LXDE 64bit"
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ RMDir /R "$BootDir\multiboot\fedoraLXDE6419"   
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Fedora 19 LXDE 64bit" "APPEND /multiboot/menu/fed19L64.cfg"   
+ Delete "$BootDir\multiboot\menu\fed19L64.cfg"  
+
+ ${ElseIf} $DistroName == "Fedora 19 XFCE 32bit"
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ RMDir /R "$BootDir\multiboot\fedoraXFCE19"   
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Fedora 19 XFCE" "APPEND /multiboot/menu/fed19X.cfg"   
+ Delete "$BootDir\multiboot\menu\fed19X.cfg"  
+
+ ${ElseIf} $DistroName == "Fedora 19 XFCE 64bit"
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ RMDir /R "$BootDir\multiboot\fedoraXFCE6419"   
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Fedora 19 XFCE 64bit" "APPEND /multiboot/menu/fed19X64.cfg"   
+ Delete "$BootDir\multiboot\menu\fed19X64.cfg"  
+ 
  ${ElseIf} $DistroName == "Pinguy OS 11" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\pinguy"  
@@ -325,11 +373,17 @@
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label AntiX" "APPEND /multiboot/menu/antix.cfg"   
  Delete "$BootDir\multiboot\menu\antix.cfg" 
  
- ${ElseIf} $DistroName == "Boot Repair Disk" ;
+ ${ElseIf} $DistroName == "Boot Repair Disk 32bit" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R  "$BootDir\multiboot\bootrepair"
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Boot Repair Disk" "APPEND /multiboot/menu/bootrepair.cfg"   
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Boot Repair Disk 32bit" "APPEND /multiboot/menu/bootrepair.cfg"   
  Delete "$BootDir\multiboot\menu\bootrepair.cfg"  
+ 
+ ${ElseIf} $DistroName == "Boot Repair Disk 64bit" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R  "$BootDir\multiboot\bootrepair64"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Boot Repair Disk 64bit" "APPEND /multiboot/menu/bootrepair64.cfg"   
+ Delete "$BootDir\multiboot\menu\bootrepair64.cfg"   
  
  ${ElseIf} $DistroName == "GRML (system rescue)" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -958,7 +1012,7 @@ ${ElseIf} $DistroName == "Debian Live 7 Gnome 32bit" ;
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu 12.04 DVD amd64" "APPEND /multiboot/menu/u1204d64.cfg" 
  Delete "$BootDir\multiboot\menu\u1204d64.cfg"   
  
- ${ElseIf} $DistroName == "Pear Linux 6" ;
+ ${ElseIf} $DistroName == "Pear Linux 7" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\pear"  
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Pear Linux" "APPEND /multiboot/menu/pear.cfg" 

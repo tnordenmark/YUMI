@@ -380,6 +380,79 @@
  File /oname=$PLUGINSDIR\fed18X64.cfg "Menu\fed18X64.cfg"  
  CopyFiles "$PLUGINSDIR\fed18X64.cfg" "$BootDir\multiboot\menu\fed18X64.cfg"    
  
+ ${ElseIf} $DistroName == "Fedora 19 GNOME 32bit"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\fedora19\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label Fedora 19$\r$\nmenu label Fedora 19$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/fed19.cfg" $R0 
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\fed19.cfg "Menu\fed19.cfg"  
+ CopyFiles "$PLUGINSDIR\fed19.cfg" "$BootDir\multiboot\menu\fed19.cfg"  
+
+ ${ElseIf} $DistroName == "Fedora 19 GNOME 64bit"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\fedora6419\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label Fedora 19 64bit$\r$\nmenu label Fedora 19 64bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/fed1964.cfg" $R0 
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\fed1964.cfg "Menu\fed1964.cfg"  
+ CopyFiles "$PLUGINSDIR\fed1964.cfg" "$BootDir\multiboot\menu\fed1964.cfg"  
+ 
+ ${ElseIf} $DistroName == "Fedora 19 KDE 32bit"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\fedoraKDE19\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label Fedora 19 KDE$\r$\nmenu label Fedora 19 KDE$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/fed19K.cfg" $R0 
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\fed19K.cfg "Menu\fed19K.cfg"  
+ CopyFiles "$PLUGINSDIR\fed19K.cfg" "$BootDir\multiboot\menu\fed19K.cfg"  
+ 
+ ${ElseIf} $DistroName == "Fedora 19 KDE 64bit"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\fedoraKDE6419\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label Fedora 19 KDE 64bit$\r$\nmenu label Fedora 19 KDE 64bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/fed19K64.cfg" $R0 
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\fed19K64.cfg "Menu\fed19K64.cfg"  
+ CopyFiles "$PLUGINSDIR\fed19K64.cfg" "$BootDir\multiboot\menu\fed19K64.cfg" 
+
+ ${ElseIf} $DistroName == "Fedora 19 LXDE 32bit"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\fedoraLXDE19\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label Fedora 19 LXDE$\r$\nmenu label Fedora 19 LXDE$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/fed19L.cfg" $R0 
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\fed19L.cfg "Menu\fed19L.cfg"  
+ CopyFiles "$PLUGINSDIR\fed19L.cfg" "$BootDir\multiboot\menu\fed19L.cfg" 
+
+ ${ElseIf} $DistroName == "Fedora 19 LXDE 64bit"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\fedoraLXDE6419\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label Fedora 19 LXDE 64bit$\r$\nmenu label Fedora 19 LXDE 64bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/fed19L64.cfg" $R0 
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\fed19L64.cfg "Menu\fed19L64.cfg"  
+ CopyFiles "$PLUGINSDIR\fed19L64.cfg" "$BootDir\multiboot\menu\fed19L64.cfg" 
+ 
+ ${ElseIf} $DistroName == "Fedora 19 XFCE 32bit"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\fedoraXFCE19\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label Fedora 19 XFCE$\r$\nmenu label Fedora 19 XFCE$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/fed19X.cfg" $R0 
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\fed19X.cfg "Menu\fed19X.cfg"  
+ CopyFiles "$PLUGINSDIR\fed19X.cfg" "$BootDir\multiboot\menu\fed19X.cfg" 
+
+ ${ElseIf} $DistroName == "Fedora 19 XFCE 64bit"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\fedoraXFCE6419\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label Fedora 19 XFCE 64bit$\r$\nmenu label Fedora 19 XFCE 64bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/fed19X64.cfg" $R0 
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\fed19X64.cfg "Menu\fed19X64.cfg"  
+ CopyFiles "$PLUGINSDIR\fed19X64.cfg" "$BootDir\multiboot\menu\fed19X64.cfg"     
+ 
+ 
  ${ElseIf} $DistroName == "Pinguy OS 11"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\pinguy\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -473,14 +546,23 @@
  File /oname=$PLUGINSDIR\antix.cfg "Menu\antix.cfg"  
  CopyFiles "$PLUGINSDIR\antix.cfg" "$BootDir\multiboot\menu\antix.cfg" 
 
- ${ElseIf} $DistroName == "Boot Repair Disk"
+ ${ElseIf} $DistroName == "Boot Repair Disk 32bit"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\bootrepair\" -y' 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
- ${WriteToFile} "label Boot Repair Disk$\r$\nmenu label Boot Repair Disk$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/bootrepair.cfg" $R0
+ ${WriteToFile} "label Boot Repair Disk 32bit$\r$\nmenu label Boot Repair Disk 32bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/bootrepair.cfg" $R0
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\bootrepair.cfg "Menu\bootrepair.cfg"  
- CopyFiles "$PLUGINSDIR\bootrepair.cfg" "$BootDir\multiboot\menu\bootrepair.cfg"  
+ CopyFiles "$PLUGINSDIR\bootrepair.cfg" "$BootDir\multiboot\menu\bootrepair.cfg" 
+
+ ${ElseIf} $DistroName == "Boot Repair Disk 64bit"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\bootrepair64\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label Boot Repair Disk 64bit$\r$\nmenu label Boot Repair Disk 64bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/bootrepair64.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\bootrepair64.cfg "Menu\bootrepair64.cfg"  
+ CopyFiles "$PLUGINSDIR\bootrepair64.cfg" "$BootDir\multiboot\menu\bootrepair64.cfg"   
  
  ${ElseIf} $DistroName == "GRML (system rescue)"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\grml\" -y' 
@@ -2113,7 +2195,7 @@ ${ElseIf} $DistroName == "Edubuntu 13.04"
  File /oname=$PLUGINSDIR\m12LXDE.cfg "Menu\m12LXDE.cfg"  
  CopyFiles "$PLUGINSDIR\m12LXDE.cfg" "$BootDir\multiboot\menu\m12LXDE.cfg"   
 
- ${ElseIf} $DistroName == "Pear Linux 6" 
+ ${ElseIf} $DistroName == "Pear Linux 7" 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\pear\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  ${WriteToFile} "label Pear Linux$\r$\nmenu label Pear Linux$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/pear.cfg" $R0

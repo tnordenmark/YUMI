@@ -24,6 +24,8 @@ Additional instructions for YUMI can be found HERE: http://www.pendrivelinux.com
 
 Changelog:
 
+07/08/13 Version 0.1.0.0: Updated to support Knoppix 7.2, Fedora 19, Sugar on a Stick 19, and Antix 13. Correct Boot Repair Disk menu removal.
+07/01/13 Version 0.0.9.9: Updated to support Pear OS 7, Ophcrack 3.6, and Boot Repair Disk 32bit + 64bit ISOs.
 06/07/13 Version 0.0.9.8: Updated to support LMDE 2013 MATE 32/64bit. Correct Debian 7 LXDE 64bit entry.
 05/28/13 Version 0.0.9.7: Updated to support Ubuntu Server 13.04, Ubuntu Server 13.10, and Clonezilla raring alternative distributions. Fix problems adding Debian 7 i386.
 05/20/13 Version 0.0.9.6: Updated to support Ubuntu 13.10, Ubuntu Gnome 13.04, Debain Live 7, and Linux Mint 15. Fix TAILS time zone, and G4L config.
