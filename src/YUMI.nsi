@@ -9,7 +9,7 @@
 
 !define NAME "YUMI"
 !define FILENAME "YUMI"
-!define VERSION "0.1.0.0"
+!define VERSION "0.1.0.5"
 !define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\nsis1-install.ico"
 
 ; MoreInfo Plugin - Adds Version Tab fields to Properties. Plugin created by onad http://nsis.sourceforge.net/MoreInfo_plug-in
@@ -348,13 +348,13 @@ Function SelectionsPage
   ${NSD_OnClick} $LINK onClickMyLink  
 
 ;; Add a custom donate button
-  ; ${NSD_CreateBitmap} 80% 125 20% 50 "PayPal Donation"
-  ; Var /Global Donate
-  ; Var /Global DonateHandle  
-  ; Pop $Donate
-  ; ${NSD_SetImage} $Donate $PLUGINSDIR\paypal.bmp $DonateHandle 
- ; GetFunctionAddress $DonateHandle OnClickDonate
- ; nsDialogs::OnClick $Donate $DonateHandle  
+;   ${NSD_CreateBitmap} 80% 125 20% 50 "PayPal Donation"
+;   Var /Global Donate
+;   Var /Global DonateHandle  
+;   Pop $Donate
+;   ${NSD_SetImage} $Donate $PLUGINSDIR\paypal.bmp $DonateHandle 
+;  GetFunctionAddress $DonateHandle OnClickDonate
+;  nsDialogs::OnClick $Donate $DonateHandle  
   
 ; Disable Next Button until a selection is made for all 
   GetDlgItem $6 $HWNDPARENT 1
@@ -378,7 +378,7 @@ Function SelectionsPage
 FunctionEnd
 
 ; Function OnClickDonate
-;   ExecShell "open" "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YXUXHZ2Z2KSN2"
+;   ExecShell "open" "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=T6K3C62LC5TCG"
 ; FunctionEnd 
 
 Function InstFiles_PreFunction
@@ -999,7 +999,7 @@ Function .onInit
  done:
  SetShellVarContext all
  InitPluginsDir
-  File /oname=$PLUGINSDIR\paypal.bmp "paypal.bmp"   
+;  File /oname=$PLUGINSDIR\paypal.bmp "paypal.bmp"   
   File /oname=$PLUGINSDIR\syslinux.exe "syslinux.exe"  
   File /oname=$PLUGINSDIR\syslinux.cfg "syslinux.cfg"
   File /oname=$PLUGINSDIR\menu.lst "menu.lst" 

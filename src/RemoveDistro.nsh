@@ -54,6 +54,12 @@
  RMDir /R "$BootDir\multiboot\liberte"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Liberte (Anonymous Browsing)" "APPEND /multiboot/menu/liberte.cfg"  
  Delete "$BootDir\multiboot\menu\liberte.cfg"   
+
+ ${ElseIf} $DistroName == "Linux Lite"
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ RMDir /R "$BootDir\multiboot\linuxlite"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Lite" "APPEND /multiboot/menu/linuxlite.cfg"  
+ Delete "$BootDir\multiboot\menu\linuxlite.cfg"    
  
  ${ElseIf} $DistroName == "CentOS"
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
@@ -72,6 +78,12 @@
  RMDir /R "$BootDir\multiboot\rescatux"   
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Rescatux" "APPEND /multiboot/menu/rescatux.cfg"   
  Delete "$BootDir\multiboot\menu\rescatux.cfg"  
+ 
+ ${ElseIf} $DistroName == "Fusion Linux"
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ RMDir /R "$BootDir\multiboot\fusion"   
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Fusion" "APPEND /multiboot/menu/fusion.cfg"   
+ Delete "$BootDir\multiboot\menu\fusion.cfg" 
  
  ${ElseIf} $DistroName == "Fedora 15 GNOME 32bit"
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
@@ -700,10 +712,10 @@ ${ElseIf} $DistroName == "Debian Live 7 Gnome 32bit" ;
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label OSGeo Live" "APPEND /multiboot/menu/osgeo.cfg"  
  Delete "$BootDir\multiboot\menu\osgeo.cfg"   
   
- ${ElseIf} $DistroName == "Deft 7 (Forensics)" ;
+ ${ElseIf} $DistroName == "Deft(Forensics)" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\deft" 
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Deft 7" "APPEND /multiboot/menu/deft.cfg"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Deft" "APPEND /multiboot/menu/deft.cfg"  
  Delete "$BootDir\multiboot\menu\deft.cfg" 
 
  ${ElseIf} $DistroName == "Matriux (Penetration Testing)" ;
@@ -824,7 +836,25 @@ ${ElseIf} $DistroName == "Debian Live 7 Gnome 32bit" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  RMDir /R "$BootDir\multiboot\ubuntu130464"  
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu 13.04 amd64" "APPEND /multiboot/menu/u130464.cfg" 
- Delete "$BootDir\multiboot\menu\u130464.cfg"    
+ Delete "$BootDir\multiboot\menu\u130464.cfg"  
+ 
+ ${ElseIf} $DistroName == "Elementary OS" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\elementary"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Elementary OS" "APPEND /multiboot/menu/element.cfg" 
+ Delete "$BootDir\multiboot\menu\element.cfg"   
+ 
+ ${ElseIf} $DistroName == "Uberstudent i386" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\uberstudent"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Uberstudent" "APPEND /multiboot/menu/uberst.cfg" 
+ Delete "$BootDir\multiboot\menu\uberst.cfg"    
+
+ ${ElseIf} $DistroName == "Uberstudent amd64" ;
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\uberstudent64"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Uberstudent amd64" "APPEND /multiboot/menu/uberst64.cfg" 
+ Delete "$BootDir\multiboot\menu\uberst64.cfg"   
  
  ${ElseIf} $DistroName == "Ubuntu Gnome 13.04" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -1317,6 +1347,30 @@ ${ElseIf} $DistroName == "Debian Live 7 Gnome 32bit" ;
  RMDir /R "$BootDir\multiboot\mintmate1332"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint 13 Mate 32bit" "APPEND /multiboot/menu/mate13.cfg" 
  Delete "$BootDir\multiboot\menu\mate13.cfg"  
+ 
+ ${ElseIf} $DistroName == "Linux Mint 15 KDE 32bit"  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintkde1532"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint 15 KDE 32bit" "APPEND /multiboot/menu/mkde15.cfg" 
+ Delete "$BootDir\multiboot\menu\mkde15.cfg" 
+
+ ${ElseIf} $DistroName == "Linux Mint 15 KDE 64bit"  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintkde1564"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint 15 KDE 64bit" "APPEND /multiboot/menu/mkde1564.cfg" 
+ Delete "$BootDir\multiboot\menu\mkde1564.cfg"   
+
+ ${ElseIf} $DistroName == "Linux Mint 15 XFCE 32bit"  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintxfce1532"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint 15 XFCE 32bit" "APPEND /multiboot/menu/mxfce15.cfg" 
+ Delete "$BootDir\multiboot\menu\mxfce15.cfg"  
+ 
+ ${ElseIf} $DistroName == "Linux Mint 15 XFCE 64bit"  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\multiboot\mintxfce1564"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Linux Mint 15 XFCE 64bit" "APPEND /multiboot/menu/mxfce1564.cfg" 
+ Delete "$BootDir\multiboot\menu\mxfce1564.cfg"  
  
  ${ElseIf} $DistroName == "Linux Mint 15 Mate 32bit"  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -1811,7 +1865,15 @@ ${ElseIf} $DistroName == "Debian Live 7 Gnome 32bit" ;
  RMDir /R "$BootDir\HBCD"  
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Hiren's Boot CD" "COM32 /multiboot/chain.c32 fs grldr=/HBCD/grldr"  ; to remove older version entry!
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Hiren's Boot CD 15.X" "COM32 /HBCD/Boot/chain.c32 fs grldr=/HBCD/grldr"   
-
+ 
+ ${ElseIf} $DistroName == "Falcon 4 Boot CD 4.X" 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ RMDir /R "$BootDir\HBCD"  
+ RMDir /R "$BootDir\F4UBCD"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Falcon 4 Boot CD 4.X" "COM32 /multiboot/chain.c32 ntldr=/grldr"
+ Delete "$BootDir\grldr" 
+ Delete "$BootDir\menu.lst"  
+ Delete "$BootDir\autorun.inf" 
  
  ${ElseIf} $DistroName == "Windows Vista/7/8 Installer" 
  RMDir /R "$BootDir\sources"  

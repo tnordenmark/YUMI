@@ -61,7 +61,16 @@
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\liberte.cfg "Menu\liberte.cfg"  
- CopyFiles "$PLUGINSDIR\liberte.cfg" "$BootDir\multiboot\menu\liberte.cfg"   
+ CopyFiles "$PLUGINSDIR\liberte.cfg" "$BootDir\multiboot\menu\liberte.cfg"  
+
+ ${ElseIf} $DistroName == "Linux Lite"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\linuxlite\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Linux Lite$\r$\nmenu label Linux Lite$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/linuxlite.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\linuxlite.cfg "Menu\linuxlite.cfg"  
+ CopyFiles "$PLUGINSDIR\linuxlite.cfg" "$BootDir\multiboot\menu\linuxlite.cfg"   
  
  ${ElseIf} $DistroName == "CentOS"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\centos\" -y' 
@@ -452,6 +461,14 @@
  File /oname=$PLUGINSDIR\fed19X64.cfg "Menu\fed19X64.cfg"  
  CopyFiles "$PLUGINSDIR\fed19X64.cfg" "$BootDir\multiboot\menu\fed19X64.cfg"     
  
+ ${ElseIf} $DistroName == "Fusion Linux"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\fusion\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ ${WriteToFile} "label Fusion$\r$\nmenu label Fusion$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/fusion.cfg" $R0 
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\fusion.cfg "Menu\fusion.cfg"  
+ CopyFiles "$PLUGINSDIR\fusion.cfg" "$BootDir\multiboot\menu\fusion.cfg"  
  
  ${ElseIf} $DistroName == "Pinguy OS 11"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\pinguy\" -y'  
@@ -1033,10 +1050,10 @@
  File /oname=$PLUGINSDIR\osgeo.cfg "Menu\osgeo.cfg"  
  CopyFiles "$PLUGINSDIR\osgeo.cfg" "$BootDir\multiboot\menu\osgeo.cfg"  
  
- ${ElseIf} $DistroName == "Deft 7 (Forensics)"
+ ${ElseIf} $DistroName == "Deft (Forensics)"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\deft\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- ${WriteToFile} "label Deft 7$\r$\nmenu label Deft 7$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/deft.cfg" $R0
+ ${WriteToFile} "label Deft$\r$\nmenu label Deft$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/deft.cfg" $R0
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\deft.cfg "Menu\deft.cfg"  
@@ -1288,6 +1305,33 @@
  InitPluginsDir
  File /oname=$PLUGINSDIR\u130464.cfg "Menu\u130464.cfg"  
  CopyFiles "$PLUGINSDIR\u130464.cfg" "$BootDir\multiboot\menu\u130464.cfg"  
+ 
+ ${ElseIf} $DistroName == "Elementary OS"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\elementary\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Elementary OS$\r$\nmenu label Elementary OS$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/element.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\element.cfg "Menu\element.cfg"  
+ CopyFiles "$PLUGINSDIR\element.cfg" "$BootDir\multiboot\menu\element.cfg"  
+ 
+ ${ElseIf} $DistroName == "Uberstudent i386"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\uberstudent\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Uberstudent$\r$\nmenu label Uberstudent$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/uberst.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\uberst.cfg "Menu\uberst.cfg"  
+ CopyFiles "$PLUGINSDIR\uberst.cfg" "$BootDir\multiboot\menu\uberst.cfg"    
+ 
+ ${ElseIf} $DistroName == "Uberstudent amd64"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\uberstudent64\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Uberstudent amd64$\r$\nmenu label Uberstudent amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/uberst64.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\uberst64.cfg "Menu\uberst64.cfg"  
+ CopyFiles "$PLUGINSDIR\uberst64.cfg" "$BootDir\multiboot\menu\uberst64.cfg"   
  
  ${ElseIf} $DistroName == "Ubuntu Gnome 13.04"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ugnome1304\" -y'  
@@ -1970,6 +2014,42 @@ ${ElseIf} $DistroName == "Edubuntu 13.04"
  File /oname=$PLUGINSDIR\mint1164.cfg "Menu\mint1164.cfg"  
  CopyFiles "$PLUGINSDIR\mint1164.cfg" "$BootDir\multiboot\menu\mint1164.cfg"
  
+ ${ElseIf} $DistroName == "Linux Mint 15 KDE 32bit" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\mintkde1532\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Linux Mint 15 KDE 32bit$\r$\nmenu label Linux Mint 15 KDE 32bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/mkde15.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\mkde15.cfg "Menu\mkde15.cfg"  
+ CopyFiles "$PLUGINSDIR\mkde15.cfg" "$BootDir\multiboot\menu\mkde15.cfg" 
+
+ ${ElseIf} $DistroName == "Linux Mint 15 KDE 64bit" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\mintkde1564\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Linux Mint 15 KDE 64bit$\r$\nmenu label Linux Mint 15 KDE 64bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/mkde1564.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\mkde1564.cfg "Menu\mkde1564.cfg"  
+ CopyFiles "$PLUGINSDIR\mkde1564.cfg" "$BootDir\multiboot\menu\mkde1564.cfg"   
+
+ ${ElseIf} $DistroName == "Linux Mint 15 XFCE 32bit" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\mintxfce1532\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Linux Mint 15 XFCE 32bit$\r$\nmenu label Linux Mint 15 XFCE 32bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/mxfce15.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\mxfce15.cfg "Menu\mxfce15.cfg"  
+ CopyFiles "$PLUGINSDIR\mxfce15.cfg" "$BootDir\multiboot\menu\mxfce15.cfg"  
+ 
+ ${ElseIf} $DistroName == "Linux Mint 15 XFCE 64bit" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\mintxfce1564\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Linux Mint 15 XFCE 64bit$\r$\nmenu label Linux Mint 15 XFCE 64bit$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/mxfce1564.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\mxfce1564.cfg "Menu\mxfce1564.cfg"  
+ CopyFiles "$PLUGINSDIR\mxfce1564.cfg" "$BootDir\multiboot\menu\mxfce1564.cfg"    
+ 
  ${ElseIf} $DistroName == "Linux Mint 15 Mate 32bit" 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\mintmate1532\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -2482,10 +2562,7 @@ ${ElseIf} $DistroName == "Edubuntu 13.04"
  CopyFiles "$PLUGINSDIR\comodo.cfg" "$BootDir\multiboot\menu\comodo.cfg"   
  
  ${ElseIf} $DistroName == "AVIRA AntiVir Rescue CD (Virus Scanner)"
- ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -ir!avupdate -o"$BootDir\" -y'  
- ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -ir!antivir -o"$BootDir\" -y'  
- ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -ir!system -o"$BootDir\" -y'
- ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -x!avupdate -x!antivir -x!system -o"$BootDir\antivir\" -y'  
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -o"$BootDir\multiboot\antivir" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  ${WriteToFile} "label AVIRA AntiVir Rescue Disk (Antivirus Scanner)$\r$\nmenu label AVIRA AntiVir Rescue Disk (Antivirus Scanner)$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/avira.cfg" $R0
  SetShellVarContext all
@@ -2780,6 +2857,11 @@ ${ElseIf} $DistroName == "Edubuntu 13.04"
  File /oname=$PLUGINSDIR\fsecure.cfg "Menu\fsecure.cfg"  
  CopyFiles "$PLUGINSDIR\fsecure.cfg" "$BootDir\multiboot\menu\fsecure.cfg"  
  CreateDirectory "$BootDir\fsecure\rescuecd"
+ 
+ ${ElseIf} $DistroName == "Falcon 4 Boot CD 4.X"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -o"$BootDir\" -y' 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Falcon 4 Boot CD 4.X$\r$\nmenu label Falcon 4 Boot CD 4.X$\r$\nMENU INDENT 1$\r$\nCOM32 /multiboot/chain.c32 ntldr=/grldr" $R0
  
  ${ElseIf} $DistroName == "Hiren's Boot CD 15.X"
  ;ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -o"$EXEDIR\TEMPYUMI" -y' 
