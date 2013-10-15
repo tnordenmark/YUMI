@@ -9,7 +9,7 @@
 
 !define NAME "YUMI"
 !define FILENAME "YUMI"
-!define VERSION "0.1.0.5"
+!define VERSION "0.1.0.7"
 !define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\nsis1-install.ico"
 
 ; MoreInfo Plugin - Adds Version Tab fields to Properties. Plugin created by onad http://nsis.sourceforge.net/MoreInfo_plug-in
@@ -40,6 +40,8 @@ InstallButtonText "Create"
 !AddPluginDir "plugins"
 
 ; Variables
+Var Capacity
+Var VolName
 Var Checker
 Var FileFormat
 Var Format 
@@ -51,6 +53,7 @@ Var Distro
 Var DistroName
 Var ISOFileName
 Var DestDriveTxt
+Var JustDrive
 Var DestDrive
 Var BootDir
 Var LinuxDistroSelection
@@ -138,13 +141,13 @@ LangString IsoPage_Text ${LANG_ENGLISH} "Step 3: Select the $FileFormat (Name mu
 LangString IsoPage_Title ${LANG_ENGLISH} "Select Your $FileFormat"
 LangString IsoFile ${LANG_ENGLISH} "$FileFormat file|$ISOFileName" ;$ISOFileName variable previously *.iso
 LangString Extract ${LANG_ENGLISH} "Extracting the $FileFormat: The progress bar will not move until finished. Please be patient..."
-LangString CreateSysConfig ${LANG_ENGLISH} "Creating configuration files for $DestDrive"
+LangString CreateSysConfig ${LANG_ENGLISH} "Creating configuration files for $DestDisk"
 LangString ExecuteSyslinux ${LANG_ENGLISH} "Executing syslinux on $BootDir"
 LangString SkipSyslinux ${LANG_ENGLISH} "Good Syslinux Exists..."
 LangString WarningSyslinux ${LANG_ENGLISH} "An error ($R8) occurred while executing syslinux.$\r$\nYour USB drive won't be bootable..."
 LangString Install_Title ${LANG_ENGLISH} "$InUnStall $ISOFileName"
-LangString Install_SubTitle ${LANG_ENGLISH} "Please wait while we $InUnStall $DistroName on $Letters"
-LangString Install_Finish_Sucess ${LANG_ENGLISH} "${NAME} sucessfully $InUnStalled $DistroName on $Letters"
+LangString Install_SubTitle ${LANG_ENGLISH} "Please wait while we $InUnStall $DistroName on $JustDrive"
+LangString Install_Finish_Sucess ${LANG_ENGLISH} "${NAME} sucessfully $InUnStalled $DistroName on $JustDrive"
 LangString Finish_Install ${LANG_ENGLISH} "$InUnStallation is Complete."
 LangString Finish_Title ${LANG_ENGLISH} "${NAME} has completed the $InUnStallation."
 LangString Finish_Text ${LANG_ENGLISH} "Your Selections have been $InUnStalled on your USB drive.$\r$\n$\r$\nFeel Free to run this tool again to $InUnStall more Distros.$\r$\n$\r$\nYUMI will keep track of selections you have already $InUnStalled."
@@ -242,12 +245,13 @@ Function SelectionsPage
   Pop $LabelDrivePage 
   ${NSD_SetText} $LabelDrivePage "Step 1: YUMI Summoned $DestDisk as your USB Device"  
 ; Droplist for Drive Selection  
-  ${NSD_CreateDropList} 0 20 15% 15 ""
+  ${NSD_CreateDropList} 0 20 28% 15 "" ; was 0 20 15% 15
   Pop $DestDriveTxt
   Call ListAllDrives
   ${NSD_CB_SelectString} $DestDriveTxt "$DestDrive"
-  StrCpy $BootDir $DestDrive -1 
-  StrCpy $DestDisk $DestDrive -1
+  StrCpy $JustDrive $DestDrive 3
+  StrCpy $BootDir $DestDrive 2 ;was -1 
+  StrCpy $DestDisk $DestDrive 2 ;was -1
   ${NSD_LB_Clear} $Distro "" ; Clear all distro entries because a new drive may have been chosen
   StrCpy $Checker "Yes"   
   Call SetISOFileName
@@ -258,12 +262,12 @@ Function SelectionsPage
   ${NSD_OnChange} $DestDriveTxt OnSelectDrive 
   
 ; All Drives Option
-  ${NSD_CreateCheckBox} 17% 23 41% 15 "Show ALL Drives? (USE CAUTION)"
+  ${NSD_CreateCheckBox} 30% 23 30% 15 "Show All Drives?" ; was 17% 23 41% 15
   Pop $AllDriveOption
   ${NSD_OnClick} $AllDriveOption ListAllDrives   
   
 ; Format Drive Option
-  ${NSD_CreateCheckBox} 60% 23 100% 15 "Format Drive"
+  ${NSD_CreateCheckBox} 60% 23 100% 15 "Format $DestDisk Drive (Erase Content)?"
   Pop $Format
   ${NSD_OnClick} $Format FormatIt     
  
@@ -299,18 +303,18 @@ Function SelectionsPage
   ${NSD_SetText} $LabelDrivePage "Step 1: Select the Drive Letter of your USB Device."    
   
 ; Droplist for Drive Selection
-  ${NSD_CreateDropList} 0 20 15% 15 ""
+  ${NSD_CreateDropList} 0 20 28% 15 "" ; was 0 20 15% 15
   Pop $DestDriveTxt
   Call ListAllDrives
   ${NSD_OnChange} $DestDriveTxt OnSelectDrive
  
 ; All Drives Option
-  ${NSD_CreateCheckBox} 17% 23 41% 15 "Show ALL Drives? (USE CAUTION)"
+  ${NSD_CreateCheckBox} 30% 23 30% 15 "Show All Drives?" ; was 17% 23 41% 15
   Pop $AllDriveOption
   ${NSD_OnClick} $AllDriveOption ListAllDrives 
   
 ; Format Drive Option
-  ${NSD_CreateCheckBox} 60% 23 100% 15 "Format Drive"
+  ${NSD_CreateCheckBox} 60% 23 100% 15 "Format $DestDisk Drive (Erase Content)?"
   Pop $Format
   ${NSD_OnClick} $Format FormatIt    
  
@@ -395,11 +399,11 @@ Function ListAllDrives ; Set to Display All Drives
   ${NSD_GetState} $AllDriveOption $DisplayAll
   ${If} $DisplayAll == ${BST_CHECKED}
   ${NSD_Check} $AllDriveOption
-  ${NSD_SetText} $AllDriveOption "ALL Drives Shown! (BE CAREFUL)" 
+  ${NSD_SetText} $AllDriveOption "Showing All Drives" 
     ${GetDrives} "ALL" DrivesList ; All Drives Listed  
   ${ElseIf} $DisplayAll == ${BST_UNCHECKED}
   ${NSD_Uncheck} $AllDriveOption
-  ${NSD_SetText} $AllDriveOption "Show ALL Drives? (USE CAUTION)"  
+  ${NSD_SetText} $AllDriveOption "Show All Drives?"  
 	${GetDrives} "FDD" DrivesList ; FDD+HDD reduced to FDD for removable media only
   ${EndIf}
 FunctionEnd
@@ -685,8 +689,9 @@ Function OnSelectDrive
   Pop $DestDriveTxt
   ${NSD_GetText} $DestDriveTxt $Letters
   StrCpy $DestDrive "$Letters"
-  StrCpy $BootDir $DestDrive -1 
-  StrCpy $DestDisk $DestDrive -1
+  StrCpy $JustDrive $DestDrive 3  
+  StrCpy $BootDir $DestDrive 2 ;was -1 
+  StrCpy $DestDisk $DestDrive 2 ;was -1
   ${NSD_LB_Clear} $Distro "" ; Clear all distro entries because a new drive may have been chosen 
   StrCpy $Checker "Yes"    
   Call SetISOFileName
@@ -702,8 +707,35 @@ Function OnSelectDrive
 ;  ${EndIf}
 FunctionEnd
 
+Function GetDiskVolumeName
+;Pop $1 ; get parameter
+System::Alloc 1024 ; Allocate string body
+Pop $0 ; Get the allocated string's address
+
+!define GetVolumeInformation "Kernel32::GetVolumeInformation(t,t,i,*i,*i,*i,t,i) i"
+System::Call '${GetVolumeInformation}("$9",.r0,1024,,,,,1024)' ;
+
+;Push $0 ; Push result
+${If} $0 != ""
+ StrCpy $VolName "$0"
+${Else}
+ StrCpy $VolName ""
+${EndIf}
+FunctionEnd ; GetDiskVolumeName
+
+Function DiskSpace
+${DriveSpace} "$9" "/D=T /S=G" $1 ; used to find total space of each drive
+${If} $1 > "0"
+ StrCpy $Capacity "$1GB"
+${Else}
+ StrCpy $Capacity ""
+${EndIf}
+FunctionEnd
+
 Function DrivesList
- SendMessage $DestDriveTxt ${CB_ADDSTRING} 0 "STR:$9" 
+ Call GetDiskVolumeName
+ Call DiskSpace
+ SendMessage $DestDriveTxt ${CB_ADDSTRING} 0 "STR:$9 $VolName $Capacity" 
  Push 1 ; must push something - see GetDrives documentation
 FunctionEnd
 
@@ -730,14 +762,14 @@ Function FormatIt ; Set Format Option
   ${If} $FormatMe == ${BST_CHECKED}
   ${NSD_Check} $Format
   StrCpy $FormatMe "Yes"
-  ${NSD_SetText} $Format "We Will Fat32 Format $DestDrive Drive!"
+  ${NSD_SetText} $Format "We Will Fat32 Format $DestDisk Drive!"
     ${NSD_LB_Clear} $Distro "" ; Clear all distro entries because a new format option may have been chosen
 	 ShowWindow $Uninstaller 0 ; Disable Uninstaller option because we will be formatting the drive.
     StrCpy $Checker "Yes"	 
     Call SetISOFileName
   ${ElseIf} $FormatMe == ${BST_UNCHECKED}
   ${NSD_Uncheck} $Format 
-  ${NSD_SetText} $Format "Format $DestDrive Drive (Erase Content)?"  
+  ${NSD_SetText} $Format "Format $DestDisk Drive (Erase Content)?"  
     ${NSD_LB_Clear} $Distro "" ; Clear all distro entries because a new format option may have been chosen
      ShowWindow $Uninstaller 1 ; Re-enable Uninstaller option.
 	StrCpy $Checker "Yes" 
@@ -765,21 +797,22 @@ Function CheckSpace ; Check total available space so we can set block size
 FunctionEnd
 
 Function TotalSpace
-${DriveSpace} "$Letters" "/D=T /S=M" $1 ; used to find total space of select $Letters disk
+${DriveSpace} "$JustDrive" "/D=T /S=M" $1 ; used to find total space of select disk
+ StrCpy $Capacity "$1"
 FunctionEnd
 
 Function FreeDiskSpace
 ${If} $FormatMe == "Yes"
-${DriveSpace} "$BootDir" "/D=T /S=M" $1
+${DriveSpace} "$JustDrive" "/D=T /S=M" $1
 ${Else}
-${DriveSpace} "$BootDir" "/D=F /S=M" $1
+${DriveSpace} "$JustDrive" "/D=F /S=M" $1
 ${EndIf}
 FunctionEnd
 
 Function HaveSpace ; Check space required
   Call FreeDiskSpace
   StrCpy $2 $SizeOfDistro ; Free space required by you (in MB)
-  System::Int64Op $1 > $2 ; Compare the space required and the space available
+  System::Int64Op $1 > $2 ; Compare the space available > space required
   Pop $3 ; Get the result ...
   IntCmp $3 1 okay ; ... and compare it
   MessageBox MB_ICONSTOP|MB_OK "Oops: There is not enough Free disk space! $1 MB of $2 MB Needed on $BootDir Drive."
@@ -905,11 +938,11 @@ Pop $NameThatISO
  ${EndIf}
  
  ${If} $FormatMe == "Yes" 
- MessageBox MB_YESNO|MB_ICONEXCLAMATION "${NAME} is Ready to perform the following actions:$\r$\n$\r$\n1. Close Open Explorer Windows - Allows ($DestDisk) to be Fat32 Formatted!$\r$\n$\r$\n2. Fat32 Format ($DestDisk) - All Data will be Irrecoverably Deleted!$\r$\n$\r$\n3. Create a Syslinux MBR on ($DestDisk) - Existing MBR will be Overwritten!$\r$\n$\r$\n4. Create MULTIBOOT Label on ($DestDisk) - Existing Label will be Overwritten!$\r$\n$\r$\n5. Install ($DistroName) on ($DestDisk)$\r$\n$\r$\nAre you absolutely positive Drive ($DestDisk) is your USB Device?$\r$\nDouble Check with Windows (My Computer) to make sure!$\r$\n$\r$\nClick YES to perform these actions on ($DestDisk) or NO to Abort." IDYES proceed
+ MessageBox MB_YESNO|MB_ICONEXCLAMATION "${NAME} is Ready to perform the following actions:$\r$\n$\r$\n1. Close Open Explorer Windows - Allows ($DestDisk) to be Fat32 Formatted!$\r$\n$\r$\n2. Fat32 Format ($DestDisk) - All Data will be Irrecoverably Deleted!$\r$\n$\r$\n3. Create a Syslinux MBR on ($DestDisk) - Existing MBR will be Overwritten!$\r$\n$\r$\n4. Create MULTIBOOT Label on ($DestDisk) - Existing Label will be Overwritten!$\r$\n$\r$\n5. Install ($DistroName) on ($DestDisk)$\r$\n$\r$\nAre you absolutely positive Drive ($DestDisk) is your USB Device?$\r$\nDouble Check with Windows (My Computer) to make sure!$\r$\n$\r$\nClick YES to perform these actions on ($DestDisk) or NO to Go Back!" IDYES proceed
  Quit
  ${ElseIf} $FormatMe != "Yes" 
  ${AndIfNot} ${FileExists} $BootDir\multiboot\syslinux.cfg
- MessageBox MB_YESNO|MB_ICONEXCLAMATION "${NAME} is Ready to perform the following actions:$\r$\n$\r$\n1. Create a Syslinux MBR on ($DestDisk) - Existing MBR will be Overwritten!$\r$\n$\r$\n2. Create MULTIBOOT Label on ($DestDisk) - Existing Label will be Overwritten!$\r$\n$\r$\n3. Install ($DistroName) on ($DestDisk)$\r$\n$\r$\nAre you absolutely positive Drive ($DestDisk) is your USB Device?$\r$\nDouble Check with Windows (My Computer) to make sure!$\r$\n$\r$\nClick YES to perform these actions on ($DestDisk) or NO to Abort." IDYES proceed
+ MessageBox MB_YESNO|MB_ICONEXCLAMATION "${NAME} is Ready to perform the following actions:$\r$\n$\r$\n1. Create a Syslinux MBR on ($DestDisk) - Existing MBR will be Overwritten!$\r$\n$\r$\n2. Create MULTIBOOT Label on ($DestDisk) - Existing Label will be Overwritten!$\r$\n$\r$\n3. Install ($DistroName) on ($DestDisk)$\r$\n$\r$\nAre you absolutely positive Drive ($DestDisk) is your USB Device?$\r$\nDouble Check with Windows (My Computer) to make sure!$\r$\n$\r$\nClick YES to perform these actions on ($DestDisk) or NO to Go Back!" IDYES proceed
  Quit
  ${EndIf}
 
@@ -953,7 +986,7 @@ Function Config2Write
 FunctionEnd
 
 Function NoQuit
-MessageBox MB_YESNO "Would you like to add more ISOs/Distros Now on $DestDrive?" IDYES noskip
+MessageBox MB_YESNO "Would you like to add more ISOs/Distros Now on $DestDisk?" IDYES noskip
     StrCmp $R8 3 0 End ;Compare $R8 variable with current page #
     StrCpy $R9 1 ; Goes to finish page
     Call RelGotoPage
@@ -989,6 +1022,7 @@ FunctionEnd
 
 ; --- Stuff to do at startup of script ---
 Function .onInit
+StrCpy $R9 0 ; we start on page 0
 ;StrCpy $InstallButton ""
  StrCpy $FileFormat "ISO"
  userInfo::getAccountType

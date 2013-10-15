@@ -24,10 +24,12 @@ Additional instructions for YUMI can be found HERE: http://www.pendrivelinux.com
 
 Changelog:
 
-08/15/13 Version 0.1.0.4: Update to support Elementry OS, Fusion Linux, Uberstudent, and Falcon 4.
-08/02/13 Version 0.1.0.3: Update to support Linux Mint 15 KDE and XFCE.
-07/31/13 Version 0.1.0.2: Update to support newer Avira Rescue System
-07/25/13 Version 0.1.0.1: Update to support DEFT Linux 8
+09/12/13 Version 0.1.0.7: Added display of Drive Volume Label and Capacity.
+09/06/13 Version 0.1.0.6: Update to support Ubuntu 12.04.3, and CentOS 6.4.
+08/15/13 Version 0.1.0.5: Update to support Elementry OS, Fusion Linux, Uberstudent, and Falcon 4.
+08/02/13 Version 0.1.0.4: Update to support Linux Mint 15 KDE and XFCE.
+07/31/13 Version 0.1.0.3: Update to support newer Avira Rescue System
+07/25/13 Version 0.1.0.2: Update to support DEFT Linux 8
 07/22/13 Version 0.1.0.1: Update and correct G4L missing Menu entry.
 07/08/13 Version 0.1.0.0: Updated to support Knoppix 7.2, Fedora 19, Sugar on a Stick 19, and Antix 13. Correct Boot Repair Disk menu removal.
 07/01/13 Version 0.0.9.9: Updated to support Pear OS 7, Ophcrack 3.6, and Boot Repair Disk 32bit + 64bit ISOs.

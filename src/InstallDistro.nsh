@@ -1276,7 +1276,18 @@
  CopyFiles "$PLUGINSDIR\usrv1310.cfg" "$BootDir\multiboot\menu\usrv1310.cfg"
   ReadEnvStr $R0 COMSPEC ; grab commandline
   nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv1310\pool\main\l\linux\*.ude *.udeb" ; rename broken udeb files   
- 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1310\pool\main\l\linux-lts-raring\*.ude *.udeb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1310\pool\main\l\linux-signed-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1310\pool\main\l\linux-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
+; Ubuntu Server 12.04 i386
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1310\pool\main\l\linux-signed-lts-quantal\*precis*.udeb *precise1_i386.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1310\pool\main\l\linux-signed-lts-quantal\*precise*.deb *precise1_i386.deb" ; rename broken udeb files    
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1310\pool\main\l\linux-lts-quantal\*precis*.deb *precise1_i386.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1310\pool\main\l\linux-lts-quantal\*precis*.udeb *precise1_i386.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1310\pool\main\l\linux-lts-quantal\linux-headers-3.5.0-23_3.5.0-23.35~precise1_i386.deb linux-headers-3.5.0-23_3.5.0-23.35~precise1_all.deb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1310\pool\main\l\linux-lts-raring\*precis*.udeb *precise1_i386.udeb" ; rename broken udeb files    
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1310\pool\main\m\maas\python-maas-provisioningserver*.deb python-maas-provisioningserver_1.2+bzr1373+dfsg-0ubuntu1~12.04.1_all.deb" ; rename broken udeb files     
+  
  ${ElseIf} $DistroName == "Ubuntu Server 13.10 amd64"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntuserv131064\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -1286,7 +1297,27 @@
  File /oname=$PLUGINSDIR\us131064.cfg "Menu\us131064.cfg"  
  CopyFiles "$PLUGINSDIR\us131064.cfg" "$BootDir\multiboot\menu\us131064.cfg" 
   ReadEnvStr $R0 COMSPEC ; grab commandline
-  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux\*.ude *.udeb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux\*.ude *.udeb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-lts-raring\*.ude *.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-signed-lts-raring\*.ude *.udeb" ; rename broken udeb files     
+  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv131064\dists\precise\main\dist-upgrader\binary-amd64\*.ude *.udeb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-signed-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
+; Ubuntu Server 12.04 amd64
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-signed-lts-quantal\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-signed-lts-quantal\*precise*.deb *precise1_amd64.deb" ; rename broken udeb files    
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-signed-lts-raring\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-signed-lts-raring\*precise*.deb *precise1_amd64.deb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-lts-raring\*precis*.deb *precise1_amd64.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-lts-raring\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-lts-raring\linux-headers-3.8.0-29_3.8.0-29.42~precise1_amd64.deb linux-headers-3.8.0-29_3.8.0-29.42~precise1_all.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\g\grub2-signed\grub-efi-amd64-signed_1.9~ubuntu12.04.4+1.99-21ubuntu3.10_amd.deb grub-efi-amd64-signed_1.9~ubuntu12.04.4+1.99-21ubuntu3.10_amd64.deb" ; rename broken udeb files   
+  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-lts-quantal\*precis*.deb *precise1_amd64.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-lts-quantal\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-lts-quantal\linux-headers-3.5.0-23_3.5.0-23.35~precise1_amd64.deb linux-headers-3.5.0-23_3.5.0-23.35~precise1_all.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\g\grub2-signed\grub-efi-amd64-signed_1.9~ubuntu12.04.3+1.99-21ubuntu3.9_amd6.deb grub-efi-amd64-signed_1.9~ubuntu12.04.3+1.99-21ubuntu3.9_amd64.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\m\maas\python-maas-provisioningserver*.deb python-maas-provisioningserver_1.2+bzr1373+dfsg-0ubuntu1~12.04.1_all.deb" ; rename broken udeb files     
  
  ${ElseIf} $DistroName == "Ubuntu 13.04"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntu1304\" -y'  
@@ -1361,7 +1392,18 @@
  CopyFiles "$PLUGINSDIR\usrv1304.cfg" "$BootDir\multiboot\menu\usrv1304.cfg"
   ReadEnvStr $R0 COMSPEC ; grab commandline
   nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv1304\pool\main\l\linux\*.ude *.udeb" ; rename broken udeb files   
- 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1304\pool\main\l\linux-lts-raring\*.ude *.udeb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1304\pool\main\l\linux-signed-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1304\pool\main\l\linux-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
+; Ubuntu Server 12.04 i386
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1304\pool\main\l\linux-signed-lts-quantal\*precis*.udeb *precise1_i386.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1304\pool\main\l\linux-signed-lts-quantal\*precise*.deb *precise1_i386.deb" ; rename broken udeb files    
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1304\pool\main\l\linux-lts-quantal\*precis*.deb *precise1_i386.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1304\pool\main\l\linux-lts-quantal\*precis*.udeb *precise1_i386.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1304\pool\main\l\linux-lts-quantal\linux-headers-3.5.0-23_3.5.0-23.35~precise1_i386.deb linux-headers-3.5.0-23_3.5.0-23.35~precise1_all.deb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1304\pool\main\l\linux-lts-raring\*precis*.udeb *precise1_i386.udeb" ; rename broken udeb files    
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1304\pool\main\m\maas\python-maas-provisioningserver*.deb python-maas-provisioningserver_1.2+bzr1373+dfsg-0ubuntu1~12.04.1_all.deb" ; rename broken udeb files     
+  
  ${ElseIf} $DistroName == "Ubuntu Server 13.04 amd64"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntuserv130464\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -1371,8 +1413,28 @@
  File /oname=$PLUGINSDIR\us130464.cfg "Menu\us130464.cfg"  
  CopyFiles "$PLUGINSDIR\us130464.cfg" "$BootDir\multiboot\menu\us130464.cfg" 
   ReadEnvStr $R0 COMSPEC ; grab commandline
-  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv130464\pool\main\l\linux\*.ude *.udeb" ; rename broken udeb files  
- 
+  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv130464\pool\main\l\linux\*.ude *.udeb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv130464\pool\main\l\linux-lts-raring\*.ude *.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv130464\pool\main\l\linux-signed-lts-raring\*.ude *.udeb" ; rename broken udeb files     
+  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv130464\dists\precise\main\dist-upgrader\binary-amd64\*.ude *.udeb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv130464\pool\main\l\linux-signed-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv130464\pool\main\l\linux-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
+; Ubuntu Server 12.04 amd64
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv130464\pool\main\l\linux-signed-lts-quantal\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv130464\pool\main\l\linux-signed-lts-quantal\*precise*.deb *precise1_amd64.deb" ; rename broken udeb files    
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv130464\pool\main\l\linux-signed-lts-raring\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv130464\pool\main\l\linux-signed-lts-raring\*precise*.deb *precise1_amd64.deb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv130464\pool\main\l\linux-lts-raring\*precis*.deb *precise1_amd64.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv130464\pool\main\l\linux-lts-raring\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv130464\pool\main\l\linux-lts-raring\linux-headers-3.8.0-29_3.8.0-29.42~precise1_amd64.deb linux-headers-3.8.0-29_3.8.0-29.42~precise1_all.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv130464\pool\main\g\grub2-signed\grub-efi-amd64-signed_1.9~ubuntu12.04.4+1.99-21ubuntu3.10_amd.deb grub-efi-amd64-signed_1.9~ubuntu12.04.4+1.99-21ubuntu3.10_amd64.deb" ; rename broken udeb files   
+  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv130464\pool\main\l\linux-lts-quantal\*precis*.deb *precise1_amd64.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv130464\pool\main\l\linux-lts-quantal\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv130464\pool\main\l\linux-lts-quantal\linux-headers-3.5.0-23_3.5.0-23.35~precise1_amd64.deb linux-headers-3.5.0-23_3.5.0-23.35~precise1_all.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv130464\pool\main\g\grub2-signed\grub-efi-amd64-signed_1.9~ubuntu12.04.3+1.99-21ubuntu3.9_amd6.deb grub-efi-amd64-signed_1.9~ubuntu12.04.3+1.99-21ubuntu3.9_amd64.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv130464\pool\main\m\maas\python-maas-provisioningserver*.deb python-maas-provisioningserver_1.2+bzr1373+dfsg-0ubuntu1~12.04.1_all.deb" ; rename broken udeb files     
+
 ${ElseIf} $DistroName == "Edubuntu 13.04" 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\edubuntu1304\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -1472,8 +1534,19 @@ ${ElseIf} $DistroName == "Edubuntu 13.04"
  File /oname=$PLUGINSDIR\usrv1210.cfg "Menu\usrv1210.cfg"  
  CopyFiles "$PLUGINSDIR\usrv1210.cfg" "$BootDir\multiboot\menu\usrv1210.cfg"
   ReadEnvStr $R0 COMSPEC ; grab commandline
-  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv1210\pool\main\l\linux\*.ude *.udeb" ; rename broken udeb files   
- 
+  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv1210\pool\main\l\linux\*.ude *.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1210\pool\main\l\linux-lts-raring\*.ude *.udeb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1210\pool\main\l\linux-signed-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1210\pool\main\l\linux-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
+; Ubuntu Server 12.04 i386
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1210\pool\main\l\linux-signed-lts-quantal\*precis*.udeb *precise1_i386.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1210\pool\main\l\linux-signed-lts-quantal\*precise*.deb *precise1_i386.deb" ; rename broken udeb files    
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1210\pool\main\l\linux-lts-quantal\*precis*.deb *precise1_i386.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1210\pool\main\l\linux-lts-quantal\*precis*.udeb *precise1_i386.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1210\pool\main\l\linux-lts-quantal\linux-headers-3.5.0-23_3.5.0-23.35~precise1_i386.deb linux-headers-3.5.0-23_3.5.0-23.35~precise1_all.deb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1210\pool\main\l\linux-lts-raring\*precis*.udeb *precise1_i386.udeb" ; rename broken udeb files    
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1210\pool\main\m\maas\python-maas-provisioningserver*.deb python-maas-provisioningserver_1.2+bzr1373+dfsg-0ubuntu1~12.04.1_all.deb" ; rename broken udeb files     
+  
  ${ElseIf} $DistroName == "Ubuntu Server 12.10 amd64"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntuserv121064\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
@@ -1484,6 +1557,26 @@ ${ElseIf} $DistroName == "Edubuntu 13.04"
  CopyFiles "$PLUGINSDIR\us121064.cfg" "$BootDir\multiboot\menu\us121064.cfg" 
   ReadEnvStr $R0 COMSPEC ; grab commandline
   nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv121064\pool\main\l\linux\*.ude *.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv121064\pool\main\l\linux-lts-raring\*.ude *.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv121064\pool\main\l\linux-signed-lts-raring\*.ude *.udeb" ; rename broken udeb files     
+  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv121064\dists\precise\main\dist-upgrader\binary-amd64\*.ude *.udeb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv121064\pool\main\l\linux-signed-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv121064\pool\main\l\linux-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
+; Ubuntu Server 12.04 amd64
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv121064\pool\main\l\linux-signed-lts-quantal\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv121064\pool\main\l\linux-signed-lts-quantal\*precise*.deb *precise1_amd64.deb" ; rename broken udeb files    
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv121064\pool\main\l\linux-signed-lts-raring\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv121064\pool\main\l\linux-signed-lts-raring\*precise*.deb *precise1_amd64.deb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv121064\pool\main\l\linux-lts-raring\*precis*.deb *precise1_amd64.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv121064\pool\main\l\linux-lts-raring\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv121064\pool\main\l\linux-lts-raring\linux-headers-3.8.0-29_3.8.0-29.42~precise1_amd64.deb linux-headers-3.8.0-29_3.8.0-29.42~precise1_all.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv121064\pool\main\g\grub2-signed\grub-efi-amd64-signed_1.9~ubuntu12.04.4+1.99-21ubuntu3.10_amd.deb grub-efi-amd64-signed_1.9~ubuntu12.04.4+1.99-21ubuntu3.10_amd64.deb" ; rename broken udeb files   
+  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv121064\pool\main\l\linux-lts-quantal\*precis*.deb *precise1_amd64.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv121064\pool\main\l\linux-lts-quantal\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv121064\pool\main\l\linux-lts-quantal\linux-headers-3.5.0-23_3.5.0-23.35~precise1_amd64.deb linux-headers-3.5.0-23_3.5.0-23.35~precise1_all.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv121064\pool\main\g\grub2-signed\grub-efi-amd64-signed_1.9~ubuntu12.04.3+1.99-21ubuntu3.9_amd6.deb grub-efi-amd64-signed_1.9~ubuntu12.04.3+1.99-21ubuntu3.9_amd64.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv121064\pool\main\m\maas\python-maas-provisioningserver*.deb python-maas-provisioningserver_1.2+bzr1373+dfsg-0ubuntu1~12.04.1_all.deb" ; rename broken udeb files      
   
  ${ElseIf} $DistroName == "Linux Secure Remix 12.10"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntusec1210\" -y'  
@@ -1658,7 +1751,19 @@ ${ElseIf} $DistroName == "Edubuntu 13.04"
  File /oname=$PLUGINSDIR\usrv1204.cfg "Menu\usrv1204.cfg"  
  CopyFiles "$PLUGINSDIR\usrv1204.cfg" "$BootDir\multiboot\menu\usrv1204.cfg"
   ReadEnvStr $R0 COMSPEC ; grab commandline
-  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv1204\pool\main\l\linux\*.ude *.udeb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv1204\pool\main\l\linux\*.ude *.udeb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1204\pool\main\l\linux-lts-raring\*.ude *.udeb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1204\pool\main\l\linux-signed-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1204\pool\main\l\linux-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
+; Ubuntu Server 12.04 i386
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1204\pool\main\l\linux-signed-lts-quantal\*precis*.udeb *precise1_i386.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1204\pool\main\l\linux-signed-lts-quantal\*precise*.deb *precise1_i386.deb" ; rename broken udeb files    
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1204\pool\main\l\linux-lts-quantal\*precis*.deb *precise1_i386.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1204\pool\main\l\linux-lts-quantal\*precis*.udeb *precise1_i386.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1204\pool\main\l\linux-lts-quantal\linux-headers-3.5.0-23_3.5.0-23.35~precise1_i386.deb linux-headers-3.5.0-23_3.5.0-23.35~precise1_all.deb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1204\pool\main\l\linux-lts-raring\*precis*.udeb *precise1_i386.udeb" ; rename broken udeb files    
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1204\pool\main\m\maas\python-maas-provisioningserver*.deb python-maas-provisioningserver_1.2+bzr1373+dfsg-0ubuntu1~12.04.1_all.deb" ; rename broken udeb files     
+  
  
  ${ElseIf} $DistroName == "Ubuntu Server 12.04 amd64"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntuserv120464\" -y'  
@@ -1670,6 +1775,27 @@ ${ElseIf} $DistroName == "Edubuntu 13.04"
  CopyFiles "$PLUGINSDIR\us120464.cfg" "$BootDir\multiboot\menu\us120464.cfg" 
   ReadEnvStr $R0 COMSPEC ; grab commandline
   nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv120464\pool\main\l\linux\*.ude *.udeb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv120464\pool\main\l\linux-lts-raring\*.ude *.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv120464\pool\main\l\linux-signed-lts-raring\*.ude *.udeb" ; rename broken udeb files     
+  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv120464\dists\precise\main\dist-upgrader\binary-amd64\*.ude *.udeb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv120464\pool\main\l\linux-signed-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv120464\pool\main\l\linux-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
+; Ubuntu Server 12.04 amd64
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv120464\pool\main\l\linux-signed-lts-quantal\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv120464\pool\main\l\linux-signed-lts-quantal\*precise*.deb *precise1_amd64.deb" ; rename broken udeb files    
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv120464\pool\main\l\linux-signed-lts-raring\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv120464\pool\main\l\linux-signed-lts-raring\*precise*.deb *precise1_amd64.deb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv120464\pool\main\l\linux-lts-raring\*precis*.deb *precise1_amd64.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv120464\pool\main\l\linux-lts-raring\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv120464\pool\main\l\linux-lts-raring\linux-headers-3.8.0-29_3.8.0-29.42~precise1_amd64.deb linux-headers-3.8.0-29_3.8.0-29.42~precise1_all.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv120464\pool\main\g\grub2-signed\grub-efi-amd64-signed_1.9~ubuntu12.04.4+1.99-21ubuntu3.10_amd.deb grub-efi-amd64-signed_1.9~ubuntu12.04.4+1.99-21ubuntu3.10_amd64.deb" ; rename broken udeb files   
+  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv120464\pool\main\l\linux-lts-quantal\*precis*.deb *precise1_amd64.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv120464\pool\main\l\linux-lts-quantal\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv120464\pool\main\l\linux-lts-quantal\linux-headers-3.5.0-23_3.5.0-23.35~precise1_amd64.deb linux-headers-3.5.0-23_3.5.0-23.35~precise1_all.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv120464\pool\main\g\grub2-signed\grub-efi-amd64-signed_1.9~ubuntu12.04.3+1.99-21ubuntu3.9_amd6.deb grub-efi-amd64-signed_1.9~ubuntu12.04.3+1.99-21ubuntu3.9_amd64.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv120464\pool\main\m\maas\python-maas-provisioningserver*.deb python-maas-provisioningserver_1.2+bzr1373+dfsg-0ubuntu1~12.04.1_all.deb" ; rename broken udeb files     
+
  
  ${ElseIf} $DistroName == "Xubuntu 12.04"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\xubuntu1204\" -y'  

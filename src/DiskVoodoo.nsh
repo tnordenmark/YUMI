@@ -21,7 +21,7 @@ Function "MBRID" ; Let's Get the MBRID for OpenSUSE
 FunctionEnd
 
 Function PhysDrive
- StrCpy $1 "$DestDrive"
+ StrCpy $1 "$JustDrive"
  Push $1
  Call HDDNumber      
 FunctionEnd

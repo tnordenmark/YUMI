@@ -1,4 +1,4 @@
-YUMI (Your Universal Multiboot Installer) ©2011-2012 Lance www.pendrivelinux.com
+YUMI (Your Universal Multiboot Installer) ©2011-2013 Lance www.pendrivelinux.com
 This Open Source tool is covered under GNU General Public License Version 2
 Source Code is made available at time of download from the official YUMI page:
 http://www.pendrivelinux.com/yumi-multiboot-usb-creator/
@@ -20,13 +20,13 @@ for any damages that could potentially arise from it's use or misuse.
 
 Third Party Unmodified Tools Used:
 
-Built using NSIS Installer ©1995-2012 Contributors http://nsis.sourceforge.net
+Built using NSIS Installer © Contributors http://nsis.sourceforge.net
 
-Syslinux ©1994-2012 H. Peter Anvin http://syslinux.zytor.com 
-GRUB4DOS ©1991-2012 the Gna! people + Chenall https://code.google.com/p/grub4dos-chenall/
+Syslinux © H. Peter Anvin http://syslinux.zytor.com 
+GRUB4DOS © the Gna! people + Chenall https://code.google.com/p/grub4dos-chenall/
 7-Zip is © Igor Pavlovis www.7-zip.org  
 Fat32format.exe © Tom Thornhill Ridgecorp Consultants http://www.ridgecrop.demon.co.uk
-Firadisk.img ©2009-2011 Panot Joonkhiaw Karyonix http://reboot.pro/8804/
+Firadisk.img © Panot Joonkhiaw Karyonix http://reboot.pro/8804/
 
 YUMI, Grub, Fat32format, Syslinux covered under GNU GPL version 2
 7-zip is covered under an LGPL + AES License - see the License following GNU GPL 2
