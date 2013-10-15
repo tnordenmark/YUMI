@@ -7,17 +7,17 @@ Homepage: http://nsis.sourceforge.net/Main_Page
 Binary/Source: http://nsis.sourceforge.net/Download
 
 
-grub.exe (Grub4DOS)
+grub.exe (Grub4DOS-chenall)
 
-Homepage: http://sourceforge.net/projects/grub4dos/files/
-Source: http://sourceforge.net/projects/grub4dos/files/GRUB4DOS/grub4dos%200.4.4/grub4dos-0.4.4-src.zip/download
-Binary: http://sourceforge.net/projects/grub4dos/files/GRUB4DOS/grub4dos%200.4.4/grub4dos-0.4.4.zip/download
+Homepage: https://code.google.com/p/grub4dos-chenall/
+Source: svn checkout http://grub4dos-chenall.googlecode.com/svn/trunk/ grub4dos-chenall-read-only
+Binary: https://grub4dos-chenall.googlecode.com/files/grub4dos-0.4.6a-2013-07-24.7z
 
 
 syslinux.exe, chain.c32, menu.c32, vesamenu.c32, memdisk (Syslinux)
 
-Homepage: http://syslinux.zytor.com
-Binary/Source: http://www.kernel.org/pub/linux/utils/boot/syslinux/Testing/4.06/syslinux-4.06-pre7.zip
+Homepage: http://www.syslinux.org/
+Binary/Source: https://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-6.02.zip
 
 
 7zG.exe, 7z.dll (7zip)
