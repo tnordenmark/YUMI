@@ -910,6 +910,8 @@ Function DoSyslinux ; Install Syslinux on USB
   CopyFiles "$PLUGINSDIR\license.txt" "$BootDir\multiboot\license.txt"   
   CopyFiles "$PLUGINSDIR\vesamenu.c32" "$BootDir\multiboot\vesamenu.c32"
   CopyFiles "$PLUGINSDIR\chain.c32" "$BootDir\multiboot\chain.c32"
+  CopyFiles "$PLUGINSDIR\libutil.c32" "$BootDir\multiboot\libutil.c32"
+  CopyFiles "$PLUGINSDIR\libcom32.c32" "$BootDir\multiboot\libcom32.c32"   
   CopyFiles "$PLUGINSDIR\memdisk" "$BootDir\multiboot\memdisk"   
   Call AddDir    
   ${EndIf}   

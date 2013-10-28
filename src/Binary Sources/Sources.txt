@@ -14,7 +14,7 @@ Source: svn checkout http://grub4dos-chenall.googlecode.com/svn/trunk/ grub4dos-
 Binary: https://grub4dos-chenall.googlecode.com/files/grub4dos-0.4.6a-2013-07-24.7z
 
 
-syslinux.exe, chain.c32, menu.c32, vesamenu.c32, memdisk (Syslinux)
+syslinux.exe, chain.c32, menu.c32, vesamenu.c32, libcom32.c32, libutil.c32, memdisk (Syslinux)
 
 Homepage: http://www.syslinux.org/
 Binary/Source: https://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-6.02.zip
