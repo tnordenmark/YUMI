@@ -551,8 +551,8 @@ ${ElseIf} $DistroName == "Debian Live 7 Gnome 32bit" ;
 
  ${ElseIf} $DistroName == "Memtest86+ (Memory Testing Tool)"
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
- Delete "$BootDir\multiboot\memtest.bin" 
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Memtest86+ (Memory Testing Tool)" "LINUX /multiboot/memtest.bin" 
+ Delete "$BootDir\multiboot\memtest86+-5.01.bin" 
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Memtest86+ (Memory Testing Tool)" "LINUX /multiboot/memtest86+-5.01.bin" 
  
  ${ElseIf} $DistroName == "HDT (Hardware Detection Tool)"
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
@@ -801,29 +801,33 @@ ${ElseIf} $DistroName == "Debian Live 7 Gnome 32bit" ;
  RMDir /R "$BootDir\multiboot\KXStudio1204"  
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label KXStudio 12.04" "APPEND /multiboot/menu/kxstudio.cfg" 
  Delete "$BootDir\multiboot\menu\kxstudio.cfg"  
-
-  ${ElseIf} $DistroName == "Ubuntu 13.10" ;
- ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- RMDir /R "$BootDir\multiboot\ubuntu1310"  
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu 13.10" "APPEND /multiboot/menu/ub1310.cfg" 
- Delete "$BootDir\multiboot\menu\ub1310.cfg"   
  
- ${ElseIf} $DistroName == "Ubuntu 13.10 amd64" ;
- ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- RMDir /R "$BootDir\multiboot\ubuntu131064"  
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu 13.10 amd64" "APPEND /multiboot/menu/u131064.cfg" 
- Delete "$BootDir\multiboot\menu\u131064.cfg"  
+; New Methods Ubuntu 13.10
+ ${ElseIf} $DistroName == "Ubuntu 13.10" 
+ ${OrIf} $DistroName == "Ubuntu 13.10 amd64" 
+ ${OrIf} $DistroName == "Ubuntu Gnome 13.10"
+ ${OrIf} $DistroName == "Ubuntu Gnome 13.10 amd64"  
+ ${OrIf} $DistroName == "Ubuntu Server 13.10" 
+ ${OrIf} $DistroName == "Ubuntu Server 13.10 amd64" 
+ ${OrIf} $DistroName == "Edubuntu 13.10"
+ ${OrIf} $DistroName == "Edubuntu 13.10 amd64" 
+ ${OrIf} $DistroName == "Kubuntu 13.10"
+ ${OrIf} $DistroName == "Kubuntu 13.10 amd64"
+ ${OrIf} $DistroName == "Lubuntu 13.10"
+ ${OrIf} $DistroName == "Lubuntu 13.10 amd64"
+ ${OrIf} $DistroName == "Xubuntu 13.10"
+ ${OrIf} $DistroName == "Xubuntu 13.10 amd64"   
+ RMDir /R "$BootDir\multiboot\$PathName"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "#start $PathName" "#end $PathName"   
 
- ${ElseIf} $DistroName == "Ubuntu Server 13.10" ;
- ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- RMDir /R "$BootDir\multiboot\ubuntuserv1310"  
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu Server 13.10" "APPEND /multiboot/menu/usrv1310.cfg" 
+ ${ElseIf} $DistroName == "Ubuntu Server 13.10"
+ RMDir /R "$BootDir\multiboot\$PathName"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "#start $PathName" "#end $PathName" 
  Delete "$BootDir\multiboot\menu\usrv1310.cfg" 
 
- ${ElseIf} $DistroName == "Ubuntu Server 13.10 amd64" ;
- ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- RMDir /R "$BootDir\multiboot\ubuntuserv131064"  
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Ubuntu Server 13.10 amd64" "APPEND /multiboot/menu/us131064.cfg" 
+ ${ElseIf} $DistroName == "Ubuntu Server 13.10 amd64"
+ RMDir /R "$BootDir\multiboot\$PathName"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "#start $PathName" "#end $PathName" 
  Delete "$BootDir\multiboot\menu\us131064.cfg"   
  
  ${ElseIf} $DistroName == "Ubuntu 13.04" ;
@@ -1606,12 +1610,10 @@ ${ElseIf} $DistroName == "Debian Live 7 Gnome 32bit" ;
  RMDir /R "$BootDir\multiboot\wifiway" 
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label WifiWay" "APPEND /multiboot/menu/wifiway.cfg"   
  Delete "$BootDir\multiboot\menu\wifiway.cfg" 
- 
+
  ${ElseIf} $DistroName == "Parted Magic (Partition Tools)" 
- ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- RMDir /R "$BootDir\multiboot\partedmagic"  
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Parted Magic (Partition Tools)" "APPEND /multiboot/menu/parted.cfg"  
- Delete "$BootDir\multiboot\menu\parted.cfg"
+ RMDir /R "$BootDir\multiboot\$PathName"  
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "#start $PathName" "#end $PathName"
  
  ${ElseIf} $DistroName == "PCLinuxOS" ;
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
@@ -1685,11 +1687,15 @@ ${ElseIf} $DistroName == "Debian Live 7 Gnome 32bit" ;
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Comodo Rescue Disk (Antivirus Scanner)" "APPEND /multiboot/menu/comodo.cfg"   
  Delete "$BootDir\multiboot\menu\comodo.cfg"   
  
+ ${ElseIf} $DistroName == "Antivirus Live CD (Virus Scanner)" 
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
+ RMDir /R "$BootDir\multiboot\antiviruslivecd"
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label Antivirus Live CD (Virus Scanner)" "APPEND /multiboot/menu/avlcd.cfg"    
+ Delete "$BootDir\multiboot\menu\avlcd.cfg"   
+ 
  ${ElseIf} $DistroName == "AVIRA AntiVir Rescue CD (Virus Scanner)" 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
- RMDir /R "$BootDir\avupdate"
- RMDir /R "$BootDir\antivir"
- RMDir /R "$BootDir\system" 
+ RMDir /R "$BootDir\multiboot\antivir"
  ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "label AVIRA AntiVir Rescue Disk (Antivirus Scanner)" "APPEND /multiboot/menu/avira.cfg"    
  Delete "$BootDir\multiboot\menu\avira.cfg"   
  

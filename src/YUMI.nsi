@@ -9,7 +9,7 @@
 
 !define NAME "YUMI"
 !define FILENAME "YUMI"
-!define VERSION "0.1.0.7"
+!define VERSION "0.1.1.0"
 !define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\nsis1-install.ico"
 
 ; MoreInfo Plugin - Adds Version Tab fields to Properties. Plugin created by onad http://nsis.sourceforge.net/MoreInfo_plug-in
@@ -63,6 +63,9 @@ Var TheISO
 Var IsoFile
 Var ISOSelection
 Var ISOTest
+Var JustISO
+Var JustISOName
+Var JustISOPath
 Var SizeOfDistro
 Var DestDisk
 Var DownloadISO
@@ -579,6 +582,9 @@ Function OnSelectDistro
  ${AndIf} $WILD != "*"  
   StrCpy $TheISO "$EXEDIR\$ISOFileName"
   StrCpy $ISOFile "$TheISO"  
+  ${GetFileName} "$TheISO" $JustISO
+  ${GetBaseName} "$JustISO" $JustISOName
+  ${GetParent} "$TheISO" $JustISOPath  
   EnableWindow $DownloadISO 0
   ${NSD_SetText} $DownloadISO "We Found and Selected the $SomeFileExt."    
   EnableWindow $ISOSelection 0 
@@ -627,6 +633,9 @@ Function ISOBrowse
  ${NSD_SetText} $DownloadISO "Local $SomeFileExt Selected." 
  StrCpy $ISOTest "$TheISO" ; Populate ISOTest so we can enable Next 
  StrCpy $ISOFile "$TheISO" 
+ ${GetFileName} "$TheISO" $JustISO
+ ${GetBaseName} "$JustISO" $JustISOName
+ ${GetParent} "$TheISO" $JustISOPath
  StrCpy $LocalSelection "Yes"
  Call EnableNext
  ; Uncomment for Testing --> MessageBox MB_ICONQUESTION|MB_OK 'Removal: "$Removal"  ISOFileName: "$ISOFileName" ISOFile "$ISOFile" BootDir: "$BootDir" DestDisk: "$DestDisk" DestDrive: "$DestDrive" ISOTest: "$ISOTest"'

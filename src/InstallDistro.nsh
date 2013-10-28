@@ -1,5 +1,5 @@
-; ------------ Install Distros Macro --------------
-
+!include ReplaceInFile.nsh
+; ------------ Install Distros Macro -------------- Lance
 !macro Install_Distros  
  ${If} $DistroName == "PING (Partimg Is Not Ghost)"  
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\PING\" -y' 
@@ -802,7 +802,7 @@
  ${ElseIf} $DistroName == "Memtest86+ (Memory Testing Tool)"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -o"$BootDir\multiboot\" -y' 
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check
- ${WriteToFile} "label Memtest86+ (Memory Testing Tool)$\r$\nmenu label Memtest86+ (Memory Testing Tool)$\r$\nMENU INDENT 1$\r$\nLINUX /multiboot/memtest.bin" $R0 
+ ${WriteToFile} "label Memtest86+ (Memory Testing Tool)$\r$\nmenu label Memtest86+ (Memory Testing Tool)$\r$\nMENU INDENT 1$\r$\nLINUX /multiboot/memtest86+-5.01.bin" $R0 
  
  ${ElseIf} $DistroName == "HDT (Hardware Detection Tool)"
  #nsExec::ExecToLog '"xcopy" "echo F|$ISOFile" /f/y "$BootDir\$PathName"'
@@ -1248,76 +1248,87 @@
  File /oname=$PLUGINSDIR\lu1104.cfg "Menu\lu1104.cfg"  
  CopyFiles "$PLUGINSDIR\lu1104.cfg" "$BootDir\multiboot\menu\lu1104.cfg"  
  
+; New Methods Ubuntu 13.10 
  ${ElseIf} $DistroName == "Ubuntu 13.10"
- ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntu1310\" -y'  
+ ${OrIf} $DistroName == "Ubuntu 13.10 amd64"
+ ${OrIf} $DistroName == "Ubuntu Gnome 13.10"
+ ${OrIf} $DistroName == "Ubuntu Gnome 13.10 amd64" 
+ ${OrIf} $DistroName == "Edubuntu 13.10"
+ ${OrIf} $DistroName == "Edubuntu 13.10 amd64" 
+ ${OrIf} $DistroName == "Kubuntu 13.10"
+ ${OrIf} $DistroName == "Kubuntu 13.10 amd64"
+ ${OrIf} $DistroName == "Lubuntu 13.10"
+ ${OrIf} $DistroName == "Lubuntu 13.10 amd64"
+ ${OrIf} $DistroName == "Xubuntu 13.10"
+ ${OrIf} $DistroName == "Xubuntu 13.10 amd64" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\$JustISOName\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- ${WriteToFile} "label Ubuntu 13.10$\r$\nmenu label Ubuntu 13.10$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/ub1310.cfg" $R0
- SetShellVarContext all
- InitPluginsDir
- File /oname=$PLUGINSDIR\ub1310.cfg "Menu\ub1310.cfg"  
- CopyFiles "$PLUGINSDIR\ub1310.cfg" "$BootDir\multiboot\menu\ub1310.cfg"  
- 
- ${ElseIf} $DistroName == "Ubuntu 13.10 amd64"
- ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntu131064\" -y'  
- ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- ${WriteToFile} "label Ubuntu 13.10 amd64$\r$\nmenu label Ubuntu 13.10 amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/u131064.cfg" $R0
- SetShellVarContext all
- InitPluginsDir
- File /oname=$PLUGINSDIR\u131064.cfg "Menu\u131064.cfg"  
- CopyFiles "$PLUGINSDIR\u131064.cfg" "$BootDir\multiboot\menu\u131064.cfg"   
+ ${WriteToFile} "#start $JustISOName$\r$\nlabel $JustISOName$\r$\nMENU LABEL $JustISOName$\r$\nCONFIG /multiboot/$JustISOName/isolinux/isolinux.cfg$\r$\nAPPEND /multiboot/$JustISOName/isolinux$\r$\n#end $JustISOName" $R0 
+ ;Rename the following for isolinux txt.cfg
+ !insertmacro ReplaceInFile "file=/cdrom/preseed/" "file=/cdrom/multiboot/$JustISOName/preseed/" "all" "all" "$BootDir\multiboot\$JustISOName\isolinux\txt.cfg"  
+  ;!insertmacro ReplaceInFile "boot=casper initrd=/casper/" "boot=casper cdrom-detect/try-usb=true noprompt floppy.allowed_drive_mask=0 ignore_uuid live-media-path=/multiboot/$JustISOName/casper/ initrd=/multiboot/$JustISOName/casper/" "all" "all" "$BootDir\multiboot\$JustISOName\isolinux\txt.cfg"  
+  !insertmacro ReplaceInFile "initrd=/casper/" "cdrom-detect/try-usb=true noprompt floppy.allowed_drive_mask=0 ignore_uuid live-media-path=/multiboot/$JustISOName/casper/ initrd=/multiboot/$JustISOName/casper/" "all" "all" "$BootDir\multiboot\$JustISOName\isolinux\txt.cfg"  
+  !insertmacro ReplaceInFile "kernel /casper/" "kernel /multiboot/$JustISOName/casper/" "all" "all" "$BootDir\multiboot\$JustISOName\isolinux\txt.cfg"  
+ ;Rename the following for grub loopback.cfg
+  !insertmacro ReplaceInFile "file=/cdrom/preseed/" "file=/cdrom/multiboot/$JustISOName/preseed/" "all" "all" "$BootDir\multiboot\$JustISOName\boot\loopback.cfg"  
+  ;!insertmacro ReplaceInFile "boot=casper initrd=/casper/" "boot=casper cdrom-detect/try-usb=true noprompt floppy.allowed_drive_mask=0 ignore_uuid live-media-path=/multiboot/$JustISOName/casper/ initrd=/multiboot/$JustISOName/casper/" "all" "all" "$BootDir\multiboot\$JustISOName\boot\loopback.cfg"  
+  !insertmacro ReplaceInFile "initrd=/casper/" "cdrom-detect/try-usb=true noprompt floppy.allowed_drive_mask=0 ignore_uuid live-media-path=/multiboot/$JustISOName/casper/ initrd=/multiboot/$JustISOName/casper/" "all" "all" "$BootDir\multiboot\$JustISOName\boot\loopback.cfg"  
+  !insertmacro ReplaceInFile "kernel /casper/" "kernel /multiboot/$JustISOName/casper/" "all" "all" "$BootDir\multiboot\$JustISOName\boot\loopback.cfg"    
  
  ${ElseIf} $DistroName == "Ubuntu Server 13.10"
- ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntuserv1310\" -y'  
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\$JustISOName\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- ${WriteToFile} "label Ubuntu Server 13.10$\r$\nmenu label Ubuntu Server 13.10$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/usrv1310.cfg" $R0
+ ${WriteToFile} "#start $JustISOName$\r$\nlabel $JustISOName$\r$\nMENU LABEL $JustISOName$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/usrv1310.cfg$\r$\n#end $JustISOName" $R0 
+; ${WriteToFile} "#start $JustISOName$\r$\nlabel $JustISOName$\r$\nMENU LABEL $JustISOName$\r$\nCONFIG /multiboot/$JustISOName/isolinux/isolinux.cfg$\r$\nAPPEND /multiboot/$JustISOName/isolinux$\r$\n#end $JustISOName" $R0 
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\usrv1310.cfg "Menu\usrv1310.cfg"  
  CopyFiles "$PLUGINSDIR\usrv1310.cfg" "$BootDir\multiboot\menu\usrv1310.cfg"
   ReadEnvStr $R0 COMSPEC ; grab commandline
-  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv1310\pool\main\l\linux\*.ude *.udeb" ; rename broken udeb files   
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1310\pool\main\l\linux-lts-raring\*.ude *.udeb" ; rename broken udeb files   
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1310\pool\main\l\linux-signed-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1310\pool\main\l\linux-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\$JustISOName\pool\main\l\linux\*.ude *.udeb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\l\linux-lts-raring\*.ude *.udeb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\l\linux-signed-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\l\linux-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
 ; Ubuntu Server 12.04 i386
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1310\pool\main\l\linux-signed-lts-quantal\*precis*.udeb *precise1_i386.udeb" ; rename broken udeb files  
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1310\pool\main\l\linux-signed-lts-quantal\*precise*.deb *precise1_i386.deb" ; rename broken udeb files    
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1310\pool\main\l\linux-lts-quantal\*precis*.deb *precise1_i386.deb" ; rename broken udeb files   
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1310\pool\main\l\linux-lts-quantal\*precis*.udeb *precise1_i386.udeb" ; rename broken udeb files  
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1310\pool\main\l\linux-lts-quantal\linux-headers-3.5.0-23_3.5.0-23.35~precise1_i386.deb linux-headers-3.5.0-23_3.5.0-23.35~precise1_all.deb" ; rename broken udeb files 
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1310\pool\main\l\linux-lts-raring\*precis*.udeb *precise1_i386.udeb" ; rename broken udeb files    
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv1310\pool\main\m\maas\python-maas-provisioningserver*.deb python-maas-provisioningserver_1.2+bzr1373+dfsg-0ubuntu1~12.04.1_all.deb" ; rename broken udeb files     
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\l\linux-signed-lts-quantal\*precis*.udeb *precise1_i386.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\l\linux-signed-lts-quantal\*precise*.deb *precise1_i386.deb" ; rename broken udeb files    
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\l\linux-lts-quantal\*precis*.deb *precise1_i386.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\l\linux-lts-quantal\*precis*.udeb *precise1_i386.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\l\linux-lts-quantal\linux-headers-3.5.0-23_3.5.0-23.35~precise1_i386.deb linux-headers-3.5.0-23_3.5.0-23.35~precise1_all.deb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\l\linux-lts-raring\*precis*.udeb *precise1_i386.udeb" ; rename broken udeb files    
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\m\maas\python-maas-provisioningserver*.deb python-maas-provisioningserver_1.2+bzr1373+dfsg-0ubuntu1~12.04.1_all.deb" ; rename broken udeb files     
   
  ${ElseIf} $DistroName == "Ubuntu Server 13.10 amd64"
- ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntuserv131064\" -y'  
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\$JustISOName\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- ${WriteToFile} "label Ubuntu Server 13.10 amd64$\r$\nmenu label Ubuntu Server 13.10 amd64$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/us131064.cfg" $R0
+ ${WriteToFile} "#start $JustISOName$\r$\nlabel $JustISOName$\r$\nMENU LABEL $JustISOName$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/us131064.cfg$\r$\n#end $JustISOName" $R0 
+; ${WriteToFile} "#start $JustISOName$\r$\nlabel $JustISOName$\r$\nMENU LABEL $JustISOName$\r$\nCONFIG /multiboot/$JustISOName/isolinux/isolinux.cfg$\r$\nAPPEND /multiboot/$JustISOName/isolinux$\r$\n#end $JustISOName" $R0 
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\us131064.cfg "Menu\us131064.cfg"  
  CopyFiles "$PLUGINSDIR\us131064.cfg" "$BootDir\multiboot\menu\us131064.cfg" 
   ReadEnvStr $R0 COMSPEC ; grab commandline
-  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux\*.ude *.udeb" ; rename broken udeb files 
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-lts-raring\*.ude *.udeb" ; rename broken udeb files  
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-signed-lts-raring\*.ude *.udeb" ; rename broken udeb files     
-  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\ubuntuserv131064\dists\precise\main\dist-upgrader\binary-amd64\*.ude *.udeb" ; rename broken udeb files 
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-signed-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\$JustISOName\pool\main\l\linux\*.ude *.udeb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\l\linux-lts-raring\*.ude *.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\l\linux-signed-lts-raring\*.ude *.udeb" ; rename broken udeb files     
+  nsExec::Exec "$R0 /C Rename $BootDir\multiboot\$JustISOName\dists\precise\main\dist-upgrader\binary-amd64\*.ude *.udeb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\l\linux-signed-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\l\linux-lts-quantal\*.ude *.udeb" ; rename broken udeb files 
 ; Ubuntu Server 12.04 amd64
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-signed-lts-quantal\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files  
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-signed-lts-quantal\*precise*.deb *precise1_amd64.deb" ; rename broken udeb files    
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-signed-lts-raring\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files  
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-signed-lts-raring\*precise*.deb *precise1_amd64.deb" ; rename broken udeb files 
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-lts-raring\*precis*.deb *precise1_amd64.deb" ; rename broken udeb files   
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-lts-raring\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files   
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-lts-raring\linux-headers-3.8.0-29_3.8.0-29.42~precise1_amd64.deb linux-headers-3.8.0-29_3.8.0-29.42~precise1_all.deb" ; rename broken udeb files   
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\g\grub2-signed\grub-efi-amd64-signed_1.9~ubuntu12.04.4+1.99-21ubuntu3.10_amd.deb grub-efi-amd64-signed_1.9~ubuntu12.04.4+1.99-21ubuntu3.10_amd64.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\l\linux-signed-lts-quantal\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\l\linux-signed-lts-quantal\*precise*.deb *precise1_amd64.deb" ; rename broken udeb files    
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\l\linux-signed-lts-raring\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\l\linux-signed-lts-raring\*precise*.deb *precise1_amd64.deb" ; rename broken udeb files 
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\l\linux-lts-raring\*precis*.deb *precise1_amd64.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\l\linux-lts-raring\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\l\linux-lts-raring\linux-headers-3.8.0-29_3.8.0-29.42~precise1_amd64.deb linux-headers-3.8.0-29_3.8.0-29.42~precise1_all.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\g\grub2-signed\grub-efi-amd64-signed_1.9~ubuntu12.04.4+1.99-21ubuntu3.10_amd.deb grub-efi-amd64-signed_1.9~ubuntu12.04.4+1.99-21ubuntu3.10_amd64.deb" ; rename broken udeb files   
   
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-lts-quantal\*precis*.deb *precise1_amd64.deb" ; rename broken udeb files   
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-lts-quantal\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files  
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\l\linux-lts-quantal\linux-headers-3.5.0-23_3.5.0-23.35~precise1_amd64.deb linux-headers-3.5.0-23_3.5.0-23.35~precise1_all.deb" ; rename broken udeb files   
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\g\grub2-signed\grub-efi-amd64-signed_1.9~ubuntu12.04.3+1.99-21ubuntu3.9_amd6.deb grub-efi-amd64-signed_1.9~ubuntu12.04.3+1.99-21ubuntu3.9_amd64.deb" ; rename broken udeb files   
-  nsExec::Exec "$R0 /C rename $BootDir\multiboot\ubuntuserv131064\pool\main\m\maas\python-maas-provisioningserver*.deb python-maas-provisioningserver_1.2+bzr1373+dfsg-0ubuntu1~12.04.1_all.deb" ; rename broken udeb files     
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\l\linux-lts-quantal\*precis*.deb *precise1_amd64.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\l\linux-lts-quantal\*precis*.udeb *precise1_amd64.udeb" ; rename broken udeb files  
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\l\linux-lts-quantal\linux-headers-3.5.0-23_3.5.0-23.35~precise1_amd64.deb linux-headers-3.5.0-23_3.5.0-23.35~precise1_all.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\g\grub2-signed\grub-efi-amd64-signed_1.9~ubuntu12.04.3+1.99-21ubuntu3.9_amd6.deb grub-efi-amd64-signed_1.9~ubuntu12.04.3+1.99-21ubuntu3.9_amd64.deb" ; rename broken udeb files   
+  nsExec::Exec "$R0 /C rename $BootDir\multiboot\$JustISOName\pool\main\m\maas\python-maas-provisioningserver*.deb python-maas-provisioningserver_1.2+bzr1373+dfsg-0ubuntu1~12.04.1_all.deb" ; rename broken udeb files     
  
  ${ElseIf} $DistroName == "Ubuntu 13.04"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\ubuntu1304\" -y'  
@@ -2550,14 +2561,23 @@ ${ElseIf} $DistroName == "Edubuntu 13.04"
  File /oname=$PLUGINSDIR\wifiway.cfg "Menu\wifiway.cfg"  
  CopyFiles "$PLUGINSDIR\wifiway.cfg" "$BootDir\multiboot\menu\wifiway.cfg" 
  
+; Parted Magic is No longer Free!
  ${ElseIf} $DistroName == "Parted Magic (Partition Tools)" 
- ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\partedmagic\" -y' 
- ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
- ${WriteToFile} "label Parted Magic (Partition Tools)$\r$\nmenu label Parted Magic (Partition Tools)$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/parted.cfg" $R0
- SetShellVarContext all
- InitPluginsDir
- File /oname=$PLUGINSDIR\parted.cfg "Menu\parted.cfg"  
- CopyFiles "$PLUGINSDIR\parted.cfg" "$BootDir\multiboot\menu\parted.cfg"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\$JustISOName\" -y'  
+ ${WriteToFile} "#start $JustISOName$\r$\nlabel $JustISOName$\r$\nMENU LABEL $JustISOName$\r$\nCONFIG /multiboot/$JustISOName/boot/syslinux/syslinux.cfg$\r$\nAPPEND /multiboot/$JustISOName/boot/syslinux$\r$\n#end $JustISOName" $R0 
+ ;Rename the following for syslinux.cfg
+  !insertmacro ReplaceInFile "/boot/syslinux" "/multiboot/$JustISOName/boot/syslinux" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"  
+  !insertmacro ReplaceInFile "/pmagic/bzImage" "/multiboot/$JustISOName/pmagic/bzImage" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"  
+  !insertmacro ReplaceInFile "/pmagic/bzImage64" "/multiboot/$JustISOName/pmagic/bzImage64" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"  
+  !insertmacro ReplaceInFile "/pmagic/initrd.img" "/multiboot/$JustISOName/pmagic/initrd.img" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"    
+  !insertmacro ReplaceInFile "APPEND edd=" "APPEND directory=/multiboot/$JustISOName/ edd=" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"    
+  !insertmacro ReplaceInFile "APPEND iso" "APPEND directory=/multiboot/$JustISOName/ iso" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"    
+  !insertmacro ReplaceInFile "/boot/syslinux/reboot.c32" "/multiboot/$JustISOName/boot/syslinux/reboot.c32" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"    
+  !insertmacro ReplaceInFile "/boot/ipxe/ipxe.krn" "/multiboot/$JustISOName/boot/ipxe/ipxe.krn" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"    
+  !insertmacro ReplaceInFile "/boot/plpbt/plpbt.bin" "/multiboot/$JustISOName/boot/plpbt/plpbt.bin" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"    
+  !insertmacro ReplaceInFile "INITRD /boot/" "INITRD /multiboot/$JustISOName/boot/" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"    
+  !insertmacro ReplaceInFile "LINUX /boot/" "LINUX /multiboot/$JustISOName/boot/" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"    
+  !insertmacro ReplaceInFile "COM32 /boot/" "COM32 /multiboot/$JustISOName/boot/" "all" "all" "$BootDir\multiboot\$PathName\boot\syslinux\syslinux.cfg"  
  
  ${ElseIf} $DistroName == "PCLinuxOS" 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\pclos\" -y'  
@@ -2685,10 +2705,19 @@ ${ElseIf} $DistroName == "Edubuntu 13.04"
  SetShellVarContext all
  InitPluginsDir
  File /oname=$PLUGINSDIR\comodo.cfg "Menu\comodo.cfg"  
- CopyFiles "$PLUGINSDIR\comodo.cfg" "$BootDir\multiboot\menu\comodo.cfg"   
+ CopyFiles "$PLUGINSDIR\comodo.cfg" "$BootDir\multiboot\menu\comodo.cfg"  
+
+ ${ElseIf} $DistroName == "Antivirus Live CD (Virus Scanner)"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -o"$BootDir\multiboot\antiviruslivecd\" -y'  
+ ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
+ ${WriteToFile} "label Antivirus Live CD (Virus Scanner)$\r$\nmenu label Antivirus Live CD (Virus Scanner)$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/avlcd.cfg" $R0
+ SetShellVarContext all
+ InitPluginsDir
+ File /oname=$PLUGINSDIR\avlcd.cfg "Menu\avlcd.cfg"  
+ CopyFiles "$PLUGINSDIR\avlcd.cfg" "$BootDir\multiboot\menu\avlcd.cfg"   
  
  ${ElseIf} $DistroName == "AVIRA AntiVir Rescue CD (Virus Scanner)"
- ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -o"$BootDir\multiboot\antivir" -y'  
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -o"$BootDir\multiboot\antivir\" -y'  
  ${AndIf} ${FileExists} $BootDir\$SomeFile2Check 
  ${WriteToFile} "label AVIRA AntiVir Rescue Disk (Antivirus Scanner)$\r$\nmenu label AVIRA AntiVir Rescue Disk (Antivirus Scanner)$\r$\nMENU INDENT 1$\r$\nkernel vesamenu.c32$\r$\nAPPEND /multiboot/menu/avira.cfg" $R0
  SetShellVarContext all
