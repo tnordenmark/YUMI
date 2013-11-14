@@ -1,2 +1,0 @@
-IMAGE='/dev/ram1;/multiboot/opensuseKDE6412/openSUSE-12.1-livecd-kde.x86_64;2.8.0'
-UNIONFS_CONFIG='/dev/ram1,/dev/loop1,clicfs'

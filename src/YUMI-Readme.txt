@@ -24,6 +24,13 @@ Additional instructions for YUMI can be found HERE: http://www.pendrivelinux.com
 
 Changelog:
 
+11/13/13 Version 1.9.9.5B: Add WifiSlax. Thanks to Geminis Demon for helping finish the entry!
+11/12/13 Version 1.9.9.5: Added provision to ensure menu.32 exists. Fixed Falcon4 and Hiren menu creation.
+11/11/13 Version 1.9.9.4: Added Persistent Option for Ubuntu and some Derivatives. Fix Kon-Boot free entry. Switch to AutoDetect Size of ISO.
+11/08/13 Version 1.9.9.3: Add Liberte Linux. Fixed a menu scrolling bug (vesamenu.c32 incompatible with boot.msg?) that occurred with distros like Puppy and KNOPPIX
+11/07/13 Version 1.9.9.2: Add support for TAILS, and Ultimate Boot CD
+11/05/13 Version 1.9.9.1: Quick fix to support older versions of Knoppix
+11/04/13 Version 1.9.9.0: Beta release of YUMI version 2
 10/18/13 Version 0.1.1.0: Added back support for Parted Magic. Updated to support Ubuntu Gnome. Fix config error with Kubuntu 13.10. 
 10/18/13 Version 0.1.0.9: Added final release of Ubuntu, Edubuntu, Kubuntu, Lubuntu, Xubuntu 13.10.
 10/14/13 Version 0.1.0.8: Fixed Antivir removal option, and Porteus boot entries. Update to support Memtest86+ 5.01, and Antivirus Live CD.
