@@ -1187,7 +1187,9 @@ StrCpy $R9 0 ; we start on page 0
   File /oname=$PLUGINSDIR\vesamenu.c32 "vesamenu.c32" 
   File /oname=$PLUGINSDIR\menu.c32 "menu.c32"    
   File /oname=$PLUGINSDIR\memdisk "memdisk" 
-  File /oname=$PLUGINSDIR\chain.c32 "chain.c32" 
+  File /oname=$PLUGINSDIR\chain.c32 "chain.c32"
+  File /oname=$PLUGINSDIR\libcom32.c32 "libcom32.c32" 
+  File /oname=$PLUGINSDIR\libutil.c32 "libutil.c32" 
 FunctionEnd
 
 Function onNotify_CasperSlider
