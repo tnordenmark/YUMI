@@ -11,13 +11,13 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "Ubuntu Gnome" "ubuntu-gnome*desktop*.iso" "http://cdimage.ubuntu.com/ubuntu-gnome/releases/raring/release/ubuntu-gnome-13.04-desktop-i386.iso" "casper" "linux.cfg" "http://www.ubuntugnome.org" "Ubuntu Gnome"
  !insertmacro SetISOFileNames "Ubuntu Server" "ubuntu*server*.iso" "http://www.ubuntu.com/start-download?distro=server&bits=32&release=saucy" "NULL" "linux.cfg" "http://www.ubuntu.com/server" "Ubuntu Server"
  !insertmacro SetISOFileNames "Ubuntu Studio" "ubuntustudio*.iso" "http://cdimage.ubuntu.com/ubuntustudio/releases/saucy/release/ubuntustudio-13.10-dvd-i386.iso" "casper" "linux.cfg" "http://ubuntustudio.org" "Ubuntu Studio" 
- !insertmacro SetISOFileNames "Ubuntu Rescue Remix (System Rescue)" "ubuntu-rescue-remix*.iso" "http://ubuntu-rescue-remix.org/Download" "NULL" "system.cfg" "http://ubuntu-rescue-remix.org" "URR"
+;REVISIT !insertmacro SetISOFileNames "Ubuntu Rescue Remix (System Rescue)" "ubuntu-rescue-remix*.iso" "http://ubuntu-rescue-remix.org/Download" "NULL" "system.cfg" "http://ubuntu-rescue-remix.org" "URR"
 
      !insertmacro SetISOFileNames "" "" "" "" "" "" ""
      !insertmacro SetISOFileNames "--- Linux Mint 32/64 Bit ---" "" "" "" "" "" ""
 	 !insertmacro SetISOFileNames "" "" "" "" "" "" ""  
    
- !insertmacro SetISOFileNames "Linux Mint" "linuxmint*.iso" "http://mirrors.secution.com/linuxmint.com/testing/linuxmint-15-kde-dvd-32bit-rc.iso" "casper" "linux.cfg" "http://www.linuxmint.com" "Linux Mint"
+ !insertmacro SetISOFileNames "Linux Mint" "linuxmint*.iso" "http://www.linuxmint.com/download.php" "casper" "linux.cfg" "http://www.linuxmint.com" "Linux Mint"
 
      !insertmacro SetISOFileNames "" "" "" "" "" "" ""
      !insertmacro SetISOFileNames "--- Debian Live 32/64 Bit ---" "" "" "" "" "" ""
@@ -31,6 +31,13 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  
  !insertmacro SetISOFileNames "Fedora" "Fedora-Live-Desktop*.iso" "http://mirror.pnl.gov/fedora/linux/releases/19/Live/i386/Fedora-Live-Desktop-i686-19-1.iso" "NULL" "linux.cfg" "http://fedoraproject.org" "Fedora"	 
 
+     !insertmacro SetISOFileNames "" "" "" "" "" "" ""
+     !insertmacro SetISOFileNames "--- OpenSUSE ---" "" "" "" "" "" ""
+	 !insertmacro SetISOFileNames "" "" "" "" "" "" ""  
+
+ !insertmacro SetISOFileNames "OpenSUSE 32bit" "openSUSE*86.iso" "http://suse.mirrors.tds.net/pub/opensuse/distribution/13.1/iso/openSUSE-13.1-GNOME-Live-x86_64.iso" "NULL" "linux.cfg" "http://software.opensuse.org" "OpenSUSE"	 
+ !insertmacro SetISOFileNames "OpenSUSE 64bit" "openSUSE*64.iso" "http://suse.mirrors.tds.net/pub/opensuse/distribution/13.1/iso/openSUSE-13.1-GNOME-Live-i686.iso" "NULL" "linux.cfg" "http://software.opensuse.org" "OpenSUSE"	 
+ 
      !insertmacro SetISOFileNames "" "" "" "" "" "" ""
      !insertmacro SetISOFileNames "--- Puppy Linux Based ---" "" "" "" "" "" ""
 	 !insertmacro SetISOFileNames "" "" "" "" "" "" ""  
@@ -75,6 +82,8 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "Linux Secure Remix" "linux-secure*.iso" "http://sourceforge.net/projects/linux-secure/files/latest/download" "NULL" "linux.cfg" "https://help.ubuntu.com/community/UbuntuSecureRemix" "Ubuntu Secure"
  !insertmacro SetISOFileNames "Mageia Live CD" "Mageia-2-LiveCD*CD.iso" "http://mirrors.kernel.org/mageia/iso/2/Mageia-2-dual-CD/Mageia-2-dual-CD.iso" "NULL" "linux.cfg" "http://www.mageia.org" "Mageia"
  !insertmacro SetISOFileNames "Mandriva 2011" "Mandriva.2011*.iso" "ftp://ftp.uwsg.indiana.edu/linux/mandrake/official/iso/2011/Mandriva.2011.x86_64.1.iso" "NULL" "linux.cfg" "http://www.mandriva.com" "Mandriva"
+ !insertmacro SetISOFileNames "Manjaro" "Manjaro*.iso" "http://manjaro.org/get-manjaro/" "NULL" "linux.cfg" "http://manjaro.org" "Manjaro"
+
 ;Revisit !insertmacro SetISOFileNames "MultiCore" "multicore-current.iso" "http://distro.ibiblio.org/pub/linux/distributions/tinycorelinux/3.x/release/multicore-current.iso" "NULL" "linux.cfg" "http://www.tinycorelinux.com" "MultiCore"
  !insertmacro SetISOFileNames "Netrunner" "netrunner*.iso" "http://www.netrunner-os.com/download/" "NULL" "linux.cfg" "http://www.netrunner-os.com" "Netrunner"
  !insertmacro SetISOFileNames "OSGeo Live" "osgeo-live*.iso" "http://sourceforge.net/projects/osgeo-live/files/latest/download" "NULL" "linux.cfg" "http://live.osgeo.org" "OSGeo Live"
@@ -90,12 +99,13 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "SLAX (Tiny Slackware Based Distro)" "slax*.iso" "http://www.slax.org/download.php" "NULL" "linux.cfg" "http://slax.org" "SLAX"
  !insertmacro SetISOFileNames "Slitaz (Another Tiny Distro)" "slitaz*.iso" "http://distro.ibiblio.org/slitaz/iso/4.0/slitaz-4.0.iso" "NULL" "linux.cfg" "http://www.slitaz.org" "SliTaZ"
  !insertmacro SetISOFileNames "Sn0wL1nuX" "Sn0wL1nuX*Desktop*.iso" "http://sourceforge.net/projects/sn0wl1nux/files/latest/download" "NULL" "linux.cfg" "http://luninuxos.com" "Sn0wL1nuX" 
+ !insertmacro SetISOFileNames "SolydX" "solydx*.iso" "http://downloads.solydxk.com/solydx32_latest.iso" "NULL" "linux.cfg" "http://solydxk.com" "SolydX Linux" 
+ !insertmacro SetISOFileNames "Sparky Linux" "sparkylinux*.iso" "http://sourceforge.net/projects/sparkylinux/files/latest/download" "NULL" "linux.cfg" "http://sparkylinux.org" "Sparky Linux" 
  !insertmacro SetISOFileNames "Sugar on a Stick" "Fedora-Live-SoaS*.iso" "http://dl.fedoraproject.org/pub/alt/releases/19/Spins/i386/Fedora-Live-SoaS-i686-19-1.iso" "NULL" "linux.cfg" "http://wiki.sugarlabs.org/go/Sugar_on_a_Stick" "Sugar On A Stick"
  !insertmacro SetISOFileNames "Tails (Anonymous Browsing)" "tails*.iso" "http://dl.amnesia.boum.org/tails/stable/" "NULL" "linux.cfg" "http://amnesia.boum.org" "Tails"
  !insertmacro SetISOFileNames "Terralinux" "Terra*.iso" "http://sourceforge.net/projects/terralinuxos/files/latest/download" "NULL" "linux.cfg" "http://terralinux.blogspot.com/" "Terralinux"
  !insertmacro SetISOFileNames "TinyCore (A Tiny Linux Distribution)" "tinycore*.iso" "http://distro.ibiblio.org/tinycorelinux/5.x/x86/release/TinyCore-5.0.2.iso" "NULL" "linux.cfg" "http://www.tinycorelinux.com" "TinyCore"
  !insertmacro SetISOFileNames "Uberstudent" "uberstudent*.iso" "http://sourceforge.net/projects/uberstudent/files/Releases/Plato/uberstudent-3.0-xfce-i386.iso/download" "NULL" "linux.cfg" "http://uberstudent.com/" "Uberstudent"
- 
  !insertmacro SetISOFileNames "Ultimate Edition 3" "ultimate-edition-3*.iso" "http://sourceforge.net/projects/ultimateedition/files/latest/download" "NULL" "linux.cfg" "http://ultimateedition.info" "Ultimate Edition"
  !insertmacro SetISOFileNames "Web Converger (Web Kiosk)" "webc*.iso" "http://dl.webconverger.com/latest.iso" "NULL" "linux.cfg" "http://webconverger.com/" "Web Converger" 
  !insertmacro SetISOFileNames "XBMCbuntu" "xbmcbuntu*.iso" "http://mirrors.xbmc.org/releases/XBMCbuntu/" "NULL" "linux.cfg" "http://xbmc.org/" "XBMC" 
@@ -112,7 +122,8 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "AVIRA AntiVir Rescue CD (Virus Scanner)" "rescue-system.iso" "http://www.avira.com/en/download/product/avira-rescue-system" "NULL" "antivirus.cfg" "http://www.avira.com" "Avira"
  !insertmacro SetISOFileNames "Bitdefender Rescue Disk (Antivirus Scanner)" "bitdefender-rescue-cd.iso" "http://download.bitdefender.com/rescue_cd/bitdefender-rescue-cd.iso" "NULL" "antivirus.cfg" "http://bitdefender.com" "Bitdefender"
  !insertmacro SetISOFileNames "Comodo Rescue Disk (Antivirus Scanner)" "comodo_rescue_disk*.iso" "http://help.comodo.com/topic-170-1-493-5214-Downloading-Comodo-Rescue-Disk.html" "NULL" "antivirus.cfg" "http://help.comodo.com/topic-170-1-493-5208-Introduction-to-Comodo-Rescue-Disk.html" "Comodo" 
- ;REVISIT !insertmacro SetISOFileNames "Dr.Web Live CD" "drweb-livecd*.iso" "http://download.geo.drweb.com/pub/drweb/livecd/drweb-livecd-602.iso" "NULL" "antivirus.cfg" "http://www.freedrweb.com/livecd/" "Dr.Web"  
+;REVIST BROKEN Loader !insertmacro SetISOFileNames "Dr.Web Live CD" "drweb-livecd*.iso" "http://download.geo.drweb.com/pub/drweb/livecd/drweb-livecd-602.iso" "NULL" "antivirus.cfg" "http://www.freedrweb.com/livecd/" "Dr.Web"  
+ !insertmacro SetISOFileNames "Desinfec't 2013" "desinfect*.iso" "NONE" "NULL" "antivirus.cfg" "" ""
  !insertmacro SetISOFileNames "F-Secure Rescue CD" "rescue-cd*.iso" "http://download.f-secure.com/estore/rescue-cd-3.16-52606.iso" "NULL" "antivirus.cfg" "http://www.f-secure.com/en_EMEA-Labs/security-threats/tools/rescue-cd/" "F-Secure Rescue CD"
  !insertmacro SetISOFileNames "GDATA Rescue CD" "GD*.iso" "http://www.softpedia.com/get/Antivirus/G-Data-BootCD.shtml" "NULL" "antivirus.cfg" "http://www.gdatasoftware.com" "GDATA"
  !insertmacro SetISOFileNames "Kaspersky Rescue Disk (Antivirus Scanner)" "kav_rescue_10.iso" "http://rescuedisk.kaspersky-labs.com/rescuedisk/updatable/kav_rescue_10.iso" "NULL" "antivirus.cfg" "http://support.kaspersky.com/viruses/rescuedisk" "Kaspersky"
@@ -123,6 +134,7 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
      !insertmacro SetISOFileNames "--- System Tools ---" "" "" "" "" "" ""
      !insertmacro SetISOFileNames "" "" "" "" "" "" ""
 	 
+ !insertmacro SetISOFileNames "Acronis True Image" "Acronis_True_Image*.iso" "" "NULL" "system.cfg" "http://www.acronis.com" "Acronis True-Image" 
  !insertmacro SetISOFileNames "BackBox (Penetration Testing)" "backbox*.iso" "http://backbox.mirror.garr.it/mirrors/backbox/backbox-3.0-i386.iso" "NULL" "system.cfg" "http://www.backbox.org/" "BackBox"
  !insertmacro SetISOFileNames "BackTrack5 (Penetration Testing)" "BT5*.iso" "http://www.backtrack-linux.org/downloads/" "NULL" "system.cfg" "http://www.backtrack-linux.org" "Backtrack"
  !insertmacro SetISOFileNames "Boot Repair Disk 32bit" "boot-repair-disk-32bit.iso" "http://sourceforge.net/projects/boot-repair-cd/files/boot-repair-disk-32bit.iso/download" "NULL" "system.cfg" "http://sourceforge.net/projects/boot-repair-cd/" "Boot Repair Disk"
@@ -148,7 +160,7 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "Parted Magic (Partition Tools)" "pmagic*.iso" "NONE" "NULL" "system.cfg" "http://partedmagic.com" "Parted Magic"
  !insertmacro SetISOFileNames "Partition Wizard (Partition Tools)" "pwhe*.iso" "http://www.partitionwizard.com/download/pwhe7.iso" "NULL" "system.cfg" "http://www.partitionwizard.com" "Partition Wizard"
  !insertmacro SetISOFileNames "PING (Partimg Is Not Ghost)" "PING*.iso" "http://ping.windowsdream.com/ping/Releases/3.00.04/PING-3.00.iso" "NULL" "system.cfg" "http://ping.windowsdream.com" "PING"
-;REVISIT BROKEN !insertmacro SetISOFileNames "Rescatux" "rescatux_cdrom_usb_hybrid*.iso" "http://sourceforge.net/projects/rescatux.berlios/files/latest/download" "NULL" "system.cfg" "http://www.supergrubdisk.org/rescatux/" "Rescatux" 
+ !insertmacro SetISOFileNames "Rescatux" "rescatux_cdrom_usb_hybrid*0.30b3.iso" "http://sourceforge.net/projects/rescatux.berlios/files/rescatux_cdrom_usb_hybrid_i386_486-amd64_0.30b3.iso/download" "NULL" "system.cfg" "http://www.supergrubdisk.org/rescatux/" "Rescatux" 
  !insertmacro SetISOFileNames "Redo Backup And Recovery (Recovery Tools)" "redobackup-livecd*.iso" "http://sourceforge.net/projects/redobackup/files/latest/download" "NULL" "system.cfg" "http://redobackup.org" "RedoBackup"
  !insertmacro SetISOFileNames "REMnux (Reverse Engineer Malware)" "remnux*.iso" "http://sourceforge.net/projects/remnux/files/version4/remnux-4.0-live-cd.iso/download" "NULL" "system.cfg" "http://zeltser.com/remnux/" "Remnux"
 ;REVISIT BROKEN !insertmacro SetISOFileNames "Rip Linux (Recovery Distro)" "RIPLinuX*.iso" "http://www.tux.org/pub/people/kent-robotti/looplinux/rip/" "NULL" "system.cfg" "http://www.tux.org/pub/people/kent-robotti/looplinux/rip/" "RIP Linux"
@@ -156,6 +168,7 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
 ;REVISIT BROKEN !insertmacro SetISOFileNames "Trinity Rescue Kit" "trinity-rescue-kit*.iso" "ftp://ftp.osuosl.org/pub/trk/trinity-rescue-kit.3.4-build-372.iso" "NULL" "system.cfg" "http://trinityhome.org" "TRK"
  !insertmacro SetISOFileNames "Ultimate Boot CD (Diagnostics Tools)" "ubcd5*.iso" "http://ftp.cc.uoc.gr/mirrors/linux/ubcd/ubcd521.iso" "NULL" "system.cfg" "http://www.ultimatebootcd.com" "Ultimate Boot CD"
  !insertmacro SetISOFileNames "Wifislax (Wireless Penetration Testing)" "wifislax-4*.iso" "http://downloadwireless.net/isos/wifislax-4-7-final.iso" "NULL" "system.cfg" "http://www.wifislax.com/" "Wifislax"
+;REVISIT filename contains spaces !insertmacro SetISOFileNames "XIAOPAN (Wireless Penetration Testing)" "XIAOPAN*.iso" "http://sourceforge.net/projects/xiaopanos/files/latest/download" "NULL" "system.cfg" "http://xiaopan.co/forums/" "XIAOPAN"
 
      !insertmacro SetISOFileNames "" "" "" "" "" "" ""
      !insertmacro SetISOFileNames "--- Other OS/Tools ---" "" "" "" "" "" ""
@@ -164,7 +177,9 @@ Function SetISOFileName ; Distro2Check (Name of the Distro), ISO2Check2 (The ISO
  !insertmacro SetISOFileNames "Linux Live Tools for OCZ" "ocz_tools*.iso" "NONE" "NULL" "other.cfg" "http://www.ocztechnologyforum.com/forum/showthread.php?99275-NEW!-Bootable-Linux-based-tools-for-OCZ-SSD-s" "OCZ" 
  !insertmacro SetISOFileNames "Falcon 4 Boot CD" "F4UBCD*.iso" "NONE" "NULL" "other.cfg" "" ""
  !insertmacro SetISOFileNames "Hiren's Boot CD" "Hiren*.iso" "NONE" "NULL" "other.cfg" "" ""
- !insertmacro SetISOFileNames "Kon-Boot Floppy Image" "kon-boot*free.zip" "https://www.dropbox.com/s/f5i4g9vlmwoxrtp/kon-boot1.1-free.zip" "NULL" "other.cfg" "http://www.piotrbania.com/all/kon-boot/" "Kon-Boot" 
+ !insertmacro SetISOFileNames "Kon-Boot FREE" "kon-boot*free.zip" "https://www.dropbox.com/s/f5i4g9vlmwoxrtp/kon-boot1.1-free.zip" "NULL" "other.cfg" "http://www.piotrbania.com/all/kon-boot/" "Kon-Boot" 
+ !insertmacro SetISOFileNames "Kon-Boot Purchased" "kon-boot*.exe" "NONE" "NULL" "other.cfg" "http://www.piotrbania.com/all/kon-boot/" "Kon-Boot" 
+
  !insertmacro SetISOFileNames "Windows Vista/7/8 Installer" "*.iso" "NONE" "NULL" "other.cfg" "" ""
  !insertmacro SetISOFileNames "Windows XP Installer" "*.iso" "NONE" "NULL" "menu.lst" "" ""  
  

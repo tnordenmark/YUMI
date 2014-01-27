@@ -1,5 +1,6 @@
 This file outlines where to find the third party tools (tools authored entirely by others) that are either used in YUMI or used to create it.
-The binarysources.zip file can be found at http://www.pendrivelinux.com/downloads/Sources/USB-Installers/YUMI/ and contains the sources for grub4DOS, Syslinux, 7zip, Firadisk, and Fat32format. 
+The binarysources.zip file contains the sources for grub4DOS, Syslinux, 7zip, Firadisk, and Fat32format. 
+It can be found at http://www.pendrivelinux.com/downloads/YUMI/binarysources.zip
 
 NSIS (Nullsoft Scriptable Install System) was used to create YUMI
 

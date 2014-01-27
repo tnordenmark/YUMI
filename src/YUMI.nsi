@@ -9,7 +9,7 @@
 
 !define NAME "YUMI"
 !define FILENAME "YUMI"
-!define VERSION "1.9.9.5B"
+!define VERSION "1.9.9.9"
 !define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\nsis1-install.ico"
 
 ; MoreInfo Plugin - Adds Version Tab fields to Properties. Plugin created by onad http://nsis.sourceforge.net/MoreInfo_plug-in
@@ -115,12 +115,13 @@ Var Persistence
 !define MUI_HEADERIMAGE_BITMAP_NOSTRETCH
 !define MUI_HEADERIMAGE_RIGHT
 
+; Comment out licensing page for less clicks on load
 ; License Agreement Page
-!define MUI_TEXT_LICENSE_SUBTITLE $(License_Subtitle)
-!define MUI_LICENSEPAGE_TEXT_TOP $(License_Text_Top)
-!define MUI_LICENSEPAGE_TEXT_BOTTOM $(License_Text_Bottom)
-!define MUI_PAGE_CUSTOMFUNCTION_PRE License_PreFunction
-!insertmacro MUI_PAGE_LICENSE "YUMI-Copying.txt"
+; !define MUI_TEXT_LICENSE_SUBTITLE $(License_Subtitle)
+; !define MUI_LICENSEPAGE_TEXT_TOP $(License_Text_Top)
+; !define MUI_LICENSEPAGE_TEXT_BOTTOM $(License_Text_Bottom)
+; !define MUI_PAGE_CUSTOMFUNCTION_PRE License_PreFunction
+; !insertmacro MUI_PAGE_LICENSE "YUMI-Copying.txt"
 
 ; Distro Selection Page
 Page custom SelectionsPage
@@ -174,9 +175,10 @@ LangString Finish_Link ${LANG_ENGLISH} "Visit the YUMI Tutorial Page"
 !include DistroList.nsh ; List of Distributions
 !include "CasperScript.nsh" ; For creation of Persistent Casper-rw files
 
-Function License_PreFunction
-  StrCpy $R8 1 ;This is the 1st page
-FunctionEnd
+; Comment out the Licensing page for less clicks on load
+;Function License_PreFunction
+;  StrCpy $R8 1 ;This is the 1st page
+;FunctionEnd
 
 Function SelectionsPage
   StrCpy $R8 2
@@ -193,7 +195,7 @@ Function SelectionsPage
   ${NSD_OnClick} $Uninstaller Uninstall  
 
  ; Distro Selection Starts
-  ${NSD_CreateLabel} 0 50 100% 15 $(Distro_Text) 
+  ${NSD_CreateLabel} 0 50 50% 15 $(Distro_Text) 
   Pop $LinuxDistroSelection   
 
   ${NSD_CreateDroplist} 0 70 55% 95 "" ; was  ${NSD_CreateListBox} ; Enable For DropBox
@@ -202,12 +204,12 @@ Function SelectionsPage
   ${NSD_CB_SelectString} $Distro $DistroName ; Was ${NSD_LB_SelectString} $Distro $DistroName  ; Enable For DropBox 
 
 ; ISO Download Option
-  ${NSD_CreateCheckBox} 60% 70 40% 15 "Download the ISO (Optional)."
+  ${NSD_CreateCheckBox} 60% 60 40% 15 "Download the ISO (Optional)."
   Pop $DownloadISO
   ${NSD_OnClick} $DownloadISO DownloadIt  
   
 ; Clickable Link to Distribution Homepage  
-  ${NSD_CreateLink} 60% 90 40% 15 "Visit the $OfficialName HomePage"
+  ${NSD_CreateLink} 60% 80 40% 15 "Visit the $OfficialName HomePage"
   Pop $DistroLink
   ${NSD_OnClick} $DistroLink onClickLinuxSite    
 
@@ -325,7 +327,7 @@ Function SelectionsPage
   ${NSD_OnClick} $Format FormatIt    
  
 ; Distro Selection Starts
-  ${NSD_CreateLabel} 0 50 100% 15 $(Distro_Text) 
+  ${NSD_CreateLabel} 0 50 50% 15 $(Distro_Text) 
   Pop $LinuxDistroSelection   
 
   ${NSD_CreateDropList} 0 70 55% 95 "" ; was ${NSD_CreateListBox} ; Enable for Dropbox
@@ -334,12 +336,12 @@ Function SelectionsPage
   ${NSD_CB_SelectString} $Distro $DistroName ; Was ${NSD_LB_SelectString} $Distro $DistroName  ; Enable For DropBox
 
 ; ISO Download Option
-  ${NSD_CreateCheckBox} 60% 70 40% 15 "Download the ISO (Optional)."
+  ${NSD_CreateCheckBox} 60% 60 40% 15 "Download the ISO (Optional)."
   Pop $DownloadISO
   ${NSD_OnClick} $DownloadISO DownloadIt  
   
 ; Clickable Link to Distribution Homepage  
-  ${NSD_CreateLink} 60% 90 40% 15 "Visit the $OfficialName HomePage"
+  ${NSD_CreateLink} 60% 80 40% 15 "Visit the $OfficialName HomePage"
   Pop $DistroLink
   ${NSD_OnClick} $DistroLink onClickLinuxSite    
 
@@ -710,7 +712,7 @@ Function InstallorRemove ; Populate DistroName based on Install/Removal option
   ${If} $Removal == "Yes" 
   Call RemovalList
   ${Else}
-   ${NSD_SetText} $LinuxDistroSelection "Step 2: Select a Distribution from the list to put on $DestDisk" 
+   ${NSD_SetText} $LinuxDistroSelection "Step 2: Select a Distribution to put on $DestDisk" 
   Call SetISOFileName
   ${EndIf}
 FunctionEnd  
@@ -739,7 +741,7 @@ Function Uninstall
 	SendMessage $6 ${WM_SETTEXT} 0 "STR:Remove"
 	EnableWindow $6 0 ; Disable "Install" control button
   ${NSD_SetText} $Uninstaller "You're in Uninstaller Mode!"
-   ${NSD_SetText} $LinuxDistroSelection "Step 2: Select a Distribution from the list to remove from $DestDisk"  
+   ${NSD_SetText} $LinuxDistroSelection "Step 2: Select a Distribution to remove from $DestDisk"  
     SendMessage $Distro ${CB_RESETCONTENT} 0 0 ; was ${NSD_LB_Clear} $Distro "" ; Clear all distro entries because a new option may have been chosen ; Enable for DropBox
      StrCpy $Checker "Yes"   
 	 Call RemovalList
@@ -758,7 +760,7 @@ Function Uninstall
   ${NSD_Uncheck} $Uninstaller  
   StrCpy $Removal "No"  
   ${NSD_SetText} $Uninstaller "View or Remove Installed Distros?" 
-   ${NSD_SetText} $LinuxDistroSelection "Step 2: Select a Distribution from the list to put on $DestDisk" 
+   ${NSD_SetText} $LinuxDistroSelection "Step 2: Select a Distribution to put on $DestDisk" 
      SendMessage $Distro ${CB_RESETCONTENT} 0 0  ; was ${NSD_LB_Clear} $Distro "" ; Clear all distro entries because a new option may have been chosen ; Enable for DropBox
      StrCpy $Checker "Yes"         
      Call SetISOFileName
@@ -981,7 +983,7 @@ Function DoSyslinux ; Install Syslinux on USB
   IfFileExists "$BootDir\multiboot\ldlinux.sys" SkipSyslinux CreateSyslinux
   CreateSyslinux:
   CreateDirectory $BootDir\multiboot\menu ; recursively create the directory structure if it doesn't exist
-  CreateDirectory $BootDir\multiboot\ISOS ; create ISOS folder
+  CreateDirectory $BootDir\multiboot\ISOS ; create ISOS folder  
   DetailPrint $(ExecuteSyslinux)
   ExecWait '$PLUGINSDIR\syslinux.exe -maf -d /multiboot $BootDir' $R8
   DetailPrint "Syslinux Errors $R8"
@@ -1009,11 +1011,29 @@ Function DoSyslinux ; Install Syslinux on USB
   CopyFiles "$PLUGINSDIR\vesamenu.c32" "$BootDir\multiboot\vesamenu.c32"
   CopyFiles "$PLUGINSDIR\menu.c32" "$BootDir\multiboot\menu.c32"  
   CopyFiles "$PLUGINSDIR\chain.c32" "$BootDir\multiboot\chain.c32"
-  CopyFiles "$PLUGINSDIR\libcom32.c32" "$BootDir\multiboot\libcom32.c32"	
-  CopyFiles "$PLUGINSDIR\libutil.c32" "$BootDir\multiboot\libutil.c32"
   CopyFiles "$PLUGINSDIR\memdisk" "$BootDir\multiboot\memdisk"   
+  CopyFiles "$PLUGINSDIR\libcom32.c32" "$BootDir\multiboot\libcom32.c32"	
+  CopyFiles "$PLUGINSDIR\libutil.c32" "$BootDir\multiboot\libutil.c32"	
+; Copy these files to multiboot\menu
+  DetailPrint "Adding required files to the $BootDir\multiboot\menu directory..." 
+  CopyFiles "$PLUGINSDIR\vesamenu.c32" "$BootDir\multiboot\menu\vesamenu.c32"
+  CopyFiles "$PLUGINSDIR\menu.c32" "$BootDir\multiboot\menu\menu.c32"  
+  CopyFiles "$PLUGINSDIR\chain.c32" "$BootDir\multiboot\menu\chain.c32"
+  CopyFiles "$PLUGINSDIR\memdisk" "$BootDir\multiboot\menu\memdisk"   
+  CopyFiles "$PLUGINSDIR\libcom32.c32" "$BootDir\multiboot\menu\libcom32.c32"	
+  CopyFiles "$PLUGINSDIR\libutil.c32" "$BootDir\multiboot\menu\libutil.c32"
+  
   Call AddDir    
   ${EndIf}  
+  
+  ${IfNot} ${FileExists} $BootDir\multiboot\menu\vesamenu.c32
+; Copy these files to multiboot\menu
+  DetailPrint "Adding required files to the $BootDir\multiboot\menu directory..." 
+  CopyFiles "$PLUGINSDIR\vesamenu.c32" "$BootDir\multiboot\menu\vesamenu.c32"
+  CopyFiles "$PLUGINSDIR\menu.c32" "$BootDir\multiboot\menu\menu.c32"  
+  CopyFiles "$PLUGINSDIR\chain.c32" "$BootDir\multiboot\menu\chain.c32"
+  CopyFiles "$PLUGINSDIR\memdisk" "$BootDir\multiboot\menu\memdisk"   
+  ${EndIf}    
 
 ; Check to ensure menu.c32 exists... now required for YUMI V2
   ${IfNot} ${FileExists} $BootDir\multiboot\menu.c32

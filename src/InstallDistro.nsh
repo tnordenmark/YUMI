@@ -7,10 +7,14 @@ Function FindConfig ; Set config path and file
   StrCpy $ConfigPath "liberte/boot/syslinux"
   StrCpy $CopyPath "liberte\boot\syslinux"
   StrCpy $ConfigFile "syslinux.cfg"    
-  ${ElseIf} ${FileExists} "$BootDir\multiboot\$JustISOName\boot\i386\loader\isolinux.cfg" ; OpenSuse based
+  ${ElseIf} ${FileExists} "$BootDir\multiboot\$JustISOName\boot\i386\loader\isolinux.cfg" ; OpenSuse based 32bit
   StrCpy $ConfigPath "boot/i386/loader"
   StrCpy $CopyPath "boot\i386\loader"
-  StrCpy $ConfigFile "isolinux.cfg"    
+  StrCpy $ConfigFile "isolinux.cfg" 
+  ${ElseIf} ${FileExists} "$BootDir\multiboot\$JustISOName\boot\x86_64\loader\isolinux.cfg" ; OpenSuse based 32bit
+  StrCpy $ConfigPath "boot/x86_64/loader"
+  StrCpy $CopyPath "boot\x86_64\loader"
+  StrCpy $ConfigFile "isolinux.cfg"   
   ${ElseIf} ${FileExists} "$BootDir\multiboot\$JustISOName\syslinux\syslinux.cfg"    
   StrCpy $ConfigPath "syslinux"
   StrCpy $CopyPath "syslinux"
@@ -82,14 +86,14 @@ Function OldSysFix ; fix to force use of new syslinux...
 FunctionEnd
 
 Function WriteStuff
- CreateDirectory "$BootDir\multiboot\$JustISOName\YUMI\" ; Create the YUMI Directory.. so we can copy the following config file to it.
+ ; Now done before this function is called (see line 122) CreateDirectory "$BootDir\multiboot\$JustISOName\YUMI\" ; Create the YUMI Directory.. so we can copy the following config file to it.
  CopyFiles "$PLUGINSDIR\$Config2Use" "$BootDir\multiboot\$JustISOName\YUMI\$Config2Use" ; Copy the $Config2Use file to $JustISOName\YUMI folder for the distro (so we know where to remove entry) 
  DetailPrint "$DistroName ($JustISOName) and its menu entry were added!"
  
 ; Failure to find ConfigFile and was not added as a GRUB Boot ISO, so Remove and Delete   
   ${If} $ConfigFile == "NULL" ; Isolinux/Syslinux config file doesn't exist!
   ${AndIf} $Config2Use != "menu.lst" ; menu.lst = GRUB, so we shouldn't expect to find a syslinux config file!
-    MessageBox MB_OK "YUMI couldn't find a configuration file.$\r$\nPlease report '$JustISO' not supported!$\r$\nYUMI will now remove this entry."   
+    MessageBox MB_OK "YUMI couldn't find a configuration file.$\r$\n'$JustISO' not supported, please report the exact steps taken to arrive at this message!$\r$\nYUMI will now remove this entry."   
     ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "#start $JustISOName" "#end $JustISOName" ; Remove entry from config file... I.E. linux.cfg, system.cfg, etc
     StrCpy $DistroName "$JustISOName" ; So we can remove the following Installed.txt entry
     ${LineFind} "$BootDir\multiboot\Installed.txt" "$BootDir\multiboot\Installed.txt" "1:-1" "DeleteInstall" ; Remove the Installed.txt entry
@@ -100,6 +104,7 @@ Function WriteStuff
 FunctionEnd
 
 !macro Install_Distros 
+
 ; Initiate Plugins Directory for potential use
   SetShellVarContext all
   InitPluginsDir
@@ -112,21 +117,51 @@ FunctionEnd
 ; Write $JustISOName to Installed.txt 
  ${InstalledList} "$JustISOName" $R0 ; Write the ISO name to the Installed List "Installed.txt" file (so we can keep track of installs for removal)
  ${LineFind} "$BootDir\multiboot\Installed.txt" "$BootDir\multiboot\Installed.txt" "1:-1" "DeleteEmptyLine" ; Remove any left over empty lines
+ 
+; Create the Directory for this ISOs files
+ CreateDirectory "$BootDir\multiboot\$JustISOName\YUMI\" ; Create the YUMI Directory.. so we can eventually copy the config file (see line 90) to it.
 
 ; Kaspersky Rescue Disk
  ${If} $DistroName == "Kaspersky Rescue Disk (Antivirus Scanner)" 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\$JustISOName\" -y'  
  File /oname=$PLUGINSDIR\kav.cfg "menu\kav.cfg"   
+ CreateDirectory "$BootDir\multiboot\$JustISOName\syslinux" 
  CopyFiles "$PLUGINSDIR\kav.cfg" "$BootDir\multiboot\$JustISOName\syslinux\syslinux.cfg" 
  CopyFiles "$PLUGINSDIR\vesamenu.c32" "$BootDir\multiboot\$JustISOName\syslinux\vesamenu.c32"  
  !insertmacro ReplaceInFile "SLUG" "$JustISOName" "all" "all" "$BootDir\multiboot\$JustISOName\syslinux\syslinux.cfg" 
  Call FindConfig
- ${WriteToFile} "#start $JustISOName$\r$\nlabel $JustISOName$\r$\nMENU LABEL $JustISOName$\r$\nCONFIG /multiboot/$JustISOName/$ConfigPath/$ConfigFile$\r$\nAPPEND /multiboot/$JustISOName/$ConfigPath$\r$\n#end $JustISOName" $R0 
+ ${WriteToFile} "#start $JustISOName$\r$\nLABEL $JustISOName$\r$\nMENU LABEL $JustISOName$\r$\nCONFIG /multiboot/$JustISOName/$ConfigPath/$ConfigFile$\r$\nAPPEND /multiboot/$JustISOName/$ConfigPath$\r$\n#end $JustISOName" $R0 
 
-; FreeDOS (Balder img) 
+; Acronis True Image 
+ ${ElseIf} $DistroName == "Acronis True Image"
+ ExecWait '"$PLUGINSDIR\7zG.exe" e "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\$JustISOName\" -y'  
+ File /oname=$PLUGINSDIR\acronisti.cfg "menu\acronisti.cfg"   
+ CopyFiles "$PLUGINSDIR\acronisti.cfg" "$BootDir\multiboot\$JustISOName\acronisti.cfg"  
+ ${WriteToFile} "#start $JustISOName$\r$\nLABEL $JustISOName$\r$\nMENU LABEL $JustISOName$\r$\nCONFIG /multiboot/$JustISOName/acronisti.cfg$\r$\nAPPEND /multiboot/$JustISOName$\r$\n#end $JustISOName" $R0 
+
+; Dr.Web Live CD
+ ${ElseIf} $DistroName == "Dr.Web Live CD"
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\" -y'
+ ${WriteToFile} "#start $JustISOName$\r$\nLABEL $JustISOName$\r$\nMENU LABEL $JustISOName$\r$\nCONFIG /boot/isolinux/isolinux.cfg$\r$\nAPPEND /boot/isolinux$\r$\n#end $JustISOName" $R0
+ 
+; OpenSUSE 32bit 
+ ${ElseIf} $DistroName == "OpenSUSE 32bit"
+ CopyFiles $ISOFile "$BootDir\multiboot\$JustISOName\$JustISO" ; Copy the ISO to ISO Directory
+ ExecWait '"$PLUGINSDIR\7zG.exe" e "$ISOFile" -ir!*nitrd -ir!*inux -o"$BootDir\multiboot\$JustISOName\" -y'  
+ ${WriteToFile} "#start $JustISOName$\r$\nLABEL $JustISOName$\r$\nMENU LABEL $JustISOName$\r$\nMENU INDENT 1$\r$\nKERNEL /multiboot/$JustISOName/linux$\r$\nAPPEND initrd=/multiboot/$JustISOName/initrd ramdisk_size=512000 ramdisk_blocksize=4096 isofrom=/dev/disk/by-label/MULTIBOOT:/multiboot/$JustISOName/$JustISO isofrom_device=/dev/disk/by-label/MULTIBOOT isofrom_system=/multiboot/$JustISOName/$JustISO loader=syslinux$\r$\n#end $JustISOName" $R0
+ 
+; OpenSUSE 64bit 
+ ${ElseIf} $DistroName == "OpenSUSE 64bit"
+ CopyFiles $ISOFile "$BootDir\multiboot\$JustISOName\$JustISO" ; Copy the ISO to ISO Directory
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -o"$EXEDIR\TEMPYUMI" -y' 
+ ExecWait '"$PLUGINSDIR\7zG.exe" e "$EXEDIR\TEMPYUMI\*.img" -ir!*nitrd -ir!*inux -o"$BootDir\multiboot\$JustISOName\" -y' 
+ RMDir /R "$EXEDIR\TEMPYUMI" 
+ ${WriteToFile} "#start $JustISOName$\r$\nLABEL $JustISOName$\r$\nMENU LABEL $JustISOName$\r$\nMENU INDENT 1$\r$\nKERNEL /multiboot/$JustISOName/linux$\r$\nAPPEND initrd=/multiboot/$JustISOName/initrd ramdisk_size=512000 ramdisk_blocksize=4096 isofrom=/dev/disk/by-label/MULTIBOOT:/multiboot/$JustISOName/$JustISO isofrom_device=/dev/disk/by-label/MULTIBOOT isofrom_system=/multiboot/$JustISOName/$JustISO loader=syslinux$\r$\n#end $JustISOName" $R0 
+
+ ; FreeDOS (Balder img) 
  ${ElseIf} $DistroName == "FreeDOS (Balder img)"
  CopyFiles $ISOFile "$BootDir\multiboot\$JustISOName\$JustISO"
- ${WriteToFile} "#start $JustISOName$\r$\nlabel FreeDOS ($JustISOName)$\r$\nMENU LABEL FreeDOS ($JustISOName)$\r$\nMENU INDENT 1$\r$\nKERNEL /multiboot/memdisk$\r$\nAPPEND initrd=/multiboot/$JustISOName/$JustISO$\r$\n#end $JustISOName" $R0
+ ${WriteToFile} "#start $JustISOName$\r$\nLABEL FreeDOS ($JustISOName)$\r$\nMENU LABEL FreeDOS ($JustISOName)$\r$\nMENU INDENT 1$\r$\nKERNEL /multiboot/memdisk$\r$\nAPPEND initrd=/multiboot/$JustISOName/$JustISO$\r$\n#end $JustISOName" $R0
  
 ; Memtest86+ (Memory Testing Tool)
  ${ElseIf} $DistroName == "Memtest86+ (Memory Testing Tool)"
@@ -134,15 +169,26 @@ FunctionEnd
  ${WriteToFile} "#start $JustISOName$\r$\nLABEL $JustISOName$\r$\nMENU LABEL $JustISOName$\r$\nMENU INDENT 1$\r$\nLINUX /multiboot/$JustISOName/$JustISOName.bin$\r$\n#end $JustISOName" $R0
 
 ; Kon-Boot  
- ${ElseIf} $DistroName == "Kon-Boot Floppy Image"
+ ${ElseIf} $DistroName == "Kon-Boot FREE"
  CreateDirectory "$EXEDIR\TEMPYUMI" ; Create the TEMPYUMI directory
- ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -pkon-boot -o"$EXEDIR\TEMPYUMI" -y' 
- ExecWait '"$PLUGINSDIR\7zG.exe" x "$EXEDIR\TEMPYUMI\kon-boot1.1-free\FD0-konboot-v1.1-2in1.zip" -pkon-boot -ir!FD0-konboot-v1.1-2in1 -o"$EXEDIR\TEMPYUMI" -y' 
- CopyFiles $EXEDIR\TEMPYUMI\FD0-konboot-v1.1-2in1\FD0-konboot-v1.1-2in1.img "$BootDir\multiboot\konboot.img" 
+ ExecWait '"$PLUGINSDIR\7zG.exe" e "$ISOFile" -pkon-boot -o"$EXEDIR\TEMPYUMI" -y' 
+ ExecWait '"$PLUGINSDIR\7zG.exe" e "$EXEDIR\TEMPYUMI\FD0-konboot*.zip" -pkon-boot -o"$EXEDIR\TEMPYUMI" -y' 
+ CopyFiles $EXEDIR\TEMPYUMI\FD0-konboot-v1.1-2in1.img "$BootDir\multiboot\$JustISOName\konboot.img" 
  RMDir /R "$EXEDIR\TEMPYUMI"
  ${WriteToFile} "#start $JustISOName$\r$\nLABEL Kon-Boot ($JustISOName)$\r$\nMENU LABEL Kon-Boot ($JustISOName)$\r$\nMENU INDENT 1$\r$\nCONFIG /multiboot/menu/konboot.cfg$\r$\nAPPEND /multiboot/menu$\r$\n#end $JustISOName" $R0 
  File /oname=$PLUGINSDIR\konboot.cfg "Menu\konboot.cfg"  
  CopyFiles "$PLUGINSDIR\konboot.cfg" "$BootDir\multiboot\menu\konboot.cfg"
+ !insertmacro ReplaceInFile "SLUG" "$JustISOName" "all" "all" "$BootDir\multiboot\menu\konboot.cfg" 
+ 
+ ${ElseIf} $DistroName == "Kon-Boot Purchased"
+ CreateDirectory "$EXEDIR\TEMPYUMI" ; Create the TEMPYUMI directory
+ ExecWait '"$PLUGINSDIR\7zG.exe" e "$ISOFile" -o"$EXEDIR\TEMPYUMI" -y' 
+ CopyFiles $EXEDIR\TEMPYUMI\kon-bootFLOPPY.img "$BootDir\multiboot\$JustISOName\konbootpaid.img" 
+ RMDir /R "$EXEDIR\TEMPYUMI"
+ ${WriteToFile} "#start $JustISOName$\r$\nLABEL Kon-Boot ($JustISOName)$\r$\nMENU LABEL Kon-Boot ($JustISOName)$\r$\nMENU INDENT 1$\r$\nCONFIG /multiboot/menu/konbootpaid.cfg$\r$\nAPPEND /multiboot/menu$\r$\n#end $JustISOName" $R0 
+ File /oname=$PLUGINSDIR\konbootpaid.cfg "Menu\konbootpaid.cfg"  
+ CopyFiles "$PLUGINSDIR\konbootpaid.cfg" "$BootDir\multiboot\menu\konbootpaid.cfg" 
+ !insertmacro ReplaceInFile "SLUG" "$JustISOName" "all" "all" "$BootDir\multiboot\menu\konbootpaid.cfg"   
 
 ; Falcon 4 Boot CD
  ${ElseIf} $DistroName == "Falcon 4 Boot CD"
@@ -192,7 +238,7 @@ FunctionEnd
 ; Start Catch All Install Methods 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\multiboot\$JustISOName\" -y'  
  Call FindConfig
- ${WriteToFile} "#start $JustISOName$\r$\nLABEL $JustISOName$\r$\nMENU LABEL $JustISOName$\r$\nCONFIG /multiboot/$JustISOName/$ConfigPath/$ConfigFile$\r$\nAPPEND /multiboot/$JustISOName/$ConfigPath$\r$\n#end $JustISOName" $R0 
+ ${WriteToFile} "#start $JustISOName$\r$\nLABEL $JustISOName$\r$\nMENU LABEL $JustISOName$\r$\nMENU INDENT 1$\r$\nCONFIG /multiboot/$JustISOName/$ConfigPath/$ConfigFile$\r$\nAPPEND /multiboot/$JustISOName/$ConfigPath$\r$\n#end $JustISOName" $R0 
 
 ; For Ubuntu Desktop and derivatives
   ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\isolinux\txt.cfg" ; Rename the following for isolinux txt.cfg
@@ -238,12 +284,28 @@ FunctionEnd
   ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\isolinux\live.cfg" ; Rename the following for isolinux live.cfg
   !insertmacro ReplaceInFile "linux /live/" "linux /multiboot/$JustISOName/live/" "all" "all" "$BootDir\multiboot\$JustISOName\isolinux\live.cfg"  
   !insertmacro ReplaceInFile "initrd /live/" "initrd /multiboot/$JustISOName/live/" "all" "all" "$BootDir\multiboot\$JustISOName\isolinux\live.cfg" 
-  !insertmacro ReplaceInFile "append boot=live" "append live-media-path=/multiboot/$JustISOName/live boot=live" "all" "all" "$BootDir\multiboot\$JustISOName\isolinux\live.cfg" 
+  !insertmacro ReplaceInFile "append boot=live" "append live-media-path=/multiboot/$JustISOName/live cdrom-detect/try-usb=true noprompt boot=live" "all" "all" "$BootDir\multiboot\$JustISOName\isolinux\live.cfg" 
   ${AndIf} ${FileExists} "$BootDir\multiboot\$JustISOName\isolinux\install.cfg" ; Rename the following for isolinux install.cfg  
   !insertmacro ReplaceInFile "linux /install/" "linux /multiboot/$JustISOName/install/" "all" "all" "$BootDir\multiboot\$JustISOName\isolinux\install.cfg"  
-  !insertmacro ReplaceInFile "initrd /install/" "initrd /multiboot/$JustISOName/install/" "all" "all" "$BootDir\multiboot\$JustISOName\isolinux\install.cfg"   
+  !insertmacro ReplaceInFile "initrd /install/" "initrd /multiboot/$JustISOName/install/" "all" "all" "$BootDir\multiboot\$JustISOName\isolinux\install.cfg" 
+  !insertmacro ReplaceInFile "-- quiet" "cdrom-detect/try-usb=true quiet" "all" "all" "$BootDir\multiboot\$JustISOName\isolinux\install.cfg"
   ${EndIf}  
   
+; SolydX
+  ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\solydxk\filesystem.squashfs" 
+  !insertmacro ReplaceInFile "kernel /solydxk" "kernel /multiboot/$JustISOName/solydxk" "all" "all" "$BootDir\multiboot\$JustISOName\$CopyPath\$ConfigFile"  
+  !insertmacro ReplaceInFile "initrd=/solydxk" "initrd=/multiboot/$JustISOName/solydxk" "all" "all" "$BootDir\multiboot\$JustISOName\$CopyPath\$ConfigFile" 
+  !insertmacro ReplaceInFile "live-media-path=/solydxk" "live-media-path=/multiboot/$JustISOName/solydxk" "all" "all" "$BootDir\multiboot\$JustISOName\$CopyPath\$ConfigFile"   
+  ${EndIf} 
+	
+; For Desinfect Distro 
+  ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\isolinux\os.cfg" ; Rename the following for isolinux os.cfg
+  !insertmacro ReplaceInFile "file=/cdrom/preseed/" "file=/cdrom/multiboot/$JustISOName/preseed/" "all" "all" "$BootDir\multiboot\$JustISOName\isolinux\os.cfg"  
+  !insertmacro ReplaceInFile "initrd=/casper/" "cdrom-detect/try-usb=true noprompt floppy.allowed_drive_mask=0 ignore_uuid live-media-path=/multiboot/$JustISOName/casper/ initrd=/multiboot/$JustISOName/casper/" "all" "all" "$BootDir\multiboot\$JustISOName\isolinux\os.cfg"  
+  !insertmacro ReplaceInFile "kernel /casper/" "kernel /multiboot/$JustISOName/casper/" "all" "all" "$BootDir\multiboot\$JustISOName\isolinux\os.cfg"    
+  !insertmacro ReplaceInFile "BOOT_IMAGE=/casper/" "BOOT_IMAGE=/multiboot/$JustISOName/casper/" "all" "all" "$BootDir\multiboot\$JustISOName\isolinux\os.cfg"    
+  ${EndIf} 
+   
 ; For Fedora Based and derivatives
    ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\isolinux\isolinux.cfg" 
    ${AndIf} ${FileExists} "$BootDir\multiboot\$JustISOName\LiveOS\livecd-iso-to-disk"  ; Probably Fedora based
@@ -431,7 +493,16 @@ FunctionEnd
    !insertmacro ReplaceInFile "archisolabel=ARCH" "archisolabel=MULTIBOOT NULL=" "all" "all" "$BootDir\multiboot\$JustISOName\arch\boot\syslinux\archiso_sys64.cfg"     
    !insertmacro ReplaceInFile "archisobasedir=arch" "archisobasedir=/multiboot/$JustISOName/arch" "all" "all" "$BootDir\multiboot\$JustISOName\arch\boot\syslinux\archiso_sys32.cfg"     
    !insertmacro ReplaceInFile "archisolabel=ARCH" "archisolabel=MULTIBOOT NULL=" "all" "all" "$BootDir\multiboot\$JustISOName\arch\boot\syslinux\archiso_sys32.cfg"     
-   ${EndIf}   
+   ${EndIf}  
+
+; Manjaro
+   ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\.miso"  
+   !insertmacro ReplaceInFile "kernel /manjaro" "kernel /multiboot/$JustISOName/manjaro" "all" "all" "$BootDir\multiboot\$JustISOName\$CopyPath\$ConfigFile"  
+   !insertmacro ReplaceInFile "append initrd=/manjaro" "append initrd=/multiboot/$JustISOName/manjaro" "all" "all" "$BootDir\multiboot\$JustISOName\$CopyPath\$ConfigFile" 
+   !insertmacro ReplaceInFile "misobasedir=manjaro" "misobasedir=/multiboot/$JustISOName/manjaro" "all" "all" "$BootDir\multiboot\$JustISOName\$CopyPath\$ConfigFile"    
+   !insertmacro ReplaceInFile "misolabel=MJRO" "misolabel=MULTIBOOT NULL=" "all" "all" "$BootDir\multiboot\$JustISOName\$CopyPath\$ConfigFile"
+   CopyFiles "$BootDir\multiboot\$JustISOName\.miso" "$BootDir"
+   ${EndIf}     
 
 ; Slax
    ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\slax\boot\syslinux.cfg"  
@@ -503,7 +574,6 @@ FunctionEnd
     !insertmacro ReplaceInFile "initrd=/initrd" "initrd=/multiboot/$JustISOName/initrd" "all" "all" "$BootDir\multiboot\$JustISOName\$CopyPath\isolinux.cfg"   
    ${EndIf} 
  	
-	
 ; GRML (system rescue)
    ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\$CopyPath\addon_10_grub2.cfg" 
    !insertmacro ReplaceInFile "kernel /boot/addons/mboot.c32 /boot/grub/grub.img" "kernel /multiboot/$JustISOName/boot/addons/mboot.c32 /multiboot/$JustISOName/boot/grub/grub.img" "all" "all" "$BootDir\multiboot\$JustISOName\$CopyPath\addon_10_grub2.cfg" 
@@ -575,7 +645,23 @@ FunctionEnd
    !insertmacro ReplaceInFile "KERNEL /boot" "KERNEL /multiboot/$JustISOName/boot" "all" "all" "$BootDir\multiboot\$JustISOName\$CopyPath\it.cfg" 
    !insertmacro ReplaceInFile "initrd=/boot" "initrd=/multiboot/$JustISOName/boot" "all" "all" "$BootDir\multiboot\$JustISOName\$CopyPath\jp.cfg" 
    !insertmacro ReplaceInFile "KERNEL /boot" "KERNEL /multiboot/$JustISOName/boot" "all" "all" "$BootDir\multiboot\$JustISOName\$CopyPath\jp.cfg"    
-   ${EndIf}  	
+   ${EndIf}  
+
+; RIP Linux
+   ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\BOOT\DOC\RIPLINUX.TXT" 
+   !insertmacro ReplaceInFile "F1 /boot" "F1 /multiboot/$JustISOName/boot" "all" "all" "$BootDir\multiboot\$JustISOName\$CopyPath\$ConfigFile"
+   !insertmacro ReplaceInFile "F2 /boot" "F1 /multiboot/$JustISOName/boot" "all" "all" "$BootDir\multiboot\$JustISOName\$CopyPath\$ConfigFile"
+   !insertmacro ReplaceInFile "F3 /boot" "F1 /multiboot/$JustISOName/boot" "all" "all" "$BootDir\multiboot\$JustISOName\$CopyPath\$ConfigFile"
+   !insertmacro ReplaceInFile "KERNEL /boot" "KERNEL /multiboot/$JustISOName/boot" "all" "all" "$BootDir\multiboot\$JustISOName\$CopyPath\$ConfigFile"
+   !insertmacro ReplaceInFile "initrd=/boot" "initrd=/multiboot/$JustISOName/boot" "all" "all" "$BootDir\multiboot\$JustISOName\$CopyPath\$ConfigFile"     
+   ${EndIf}     
+   
+; Trinity Rescue Kit
+   ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\trk3\trkramfs" 
+   CopyFiles "$BootDir\multiboot\$JustISOName\trk3\*.*" "$BootDir\trk3\" 
+   RMDir /R "$BootDir\multiboot\$JustISOName\trk3" 
+   !insertmacro ReplaceInFile "initrd=initrd.trk r" "initrd=initrd.trk vollabel=MULTIBOOT r" "all" "all" "$BootDir\multiboot\$JustISOName\$CopyPath\$ConfigFile"  
+   ${EndIf}  
   
   Call OldSysFix  ; Check for and replace vesamenu.c32, menu.c32, chain.c32 if found
  ${EndIf} 
@@ -753,8 +839,9 @@ FunctionEnd
 ; Parted Magic
  ${ElseIf} $DistroName == "Parted Magic (Partition Tools)" 
   !insertmacro ReplaceInFile "/boot/syslinux" "/multiboot/$JustISOName/boot/syslinux" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"  
-  !insertmacro ReplaceInFile "/pmagic/bzImage" "/multiboot/$JustISOName/pmagic/bzImage" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"  
-  !insertmacro ReplaceInFile "/pmagic/bzImage64" "/multiboot/$JustISOName/pmagic/bzImage64" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"  
+  !insertmacro ReplaceInFile "/pmagic/bzIma" "/multiboot/$JustISOName/pmagic/bzIma" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"  
+  !insertmacro ReplaceInFile "/pmagic/initrd64.img" "/multiboot/$JustISOName/pmagic/initrd64.img" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"  
+
   !insertmacro ReplaceInFile "/pmagic/initrd.img" "/multiboot/$JustISOName/pmagic/initrd.img" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"    
   !insertmacro ReplaceInFile "APPEND edd=" "APPEND directory=/multiboot/$JustISOName/ edd=" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"    
   !insertmacro ReplaceInFile "APPEND iso" "APPEND directory=/multiboot/$JustISOName/ iso" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"    
@@ -763,7 +850,10 @@ FunctionEnd
   !insertmacro ReplaceInFile "/boot/plpbt/plpbt.bin" "/multiboot/$JustISOName/boot/plpbt/plpbt.bin" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"    
   !insertmacro ReplaceInFile "INITRD /boot/" "INITRD /multiboot/$JustISOName/boot/" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"    
   !insertmacro ReplaceInFile "LINUX /boot/" "LINUX /multiboot/$JustISOName/boot/" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"    
-  !insertmacro ReplaceInFile "COM32 /boot/" "COM32 /multiboot/$JustISOName/boot/" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"  
+  !insertmacro ReplaceInFile "COM32 /boot/" "COM32 /multiboot/$JustISOName/boot/" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg" 
+  ; For older pmagic
+ ${AndIf} $JustISO == "pmagic_2013_06_15.iso"   
+  !insertmacro ReplaceInFile "edd=off load" "edd=off directory=/multiboot/$JustISOName/ load" "all" "all" "$BootDir\multiboot\$JustISOName\boot\syslinux\syslinux.cfg"
 
 ; System Rescue CD
  ${ElseIf} $DistroName == "System Rescue CD" 
