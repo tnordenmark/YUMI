@@ -1,0 +1,13 @@
+* Sat Oct 12 2013 Lance <usbyumi@gmail.com> 0.0.1
+- Allow translations
+
+* Sat Oct 12 2013 Lance <usbyumi@gmail.com> 0.0.1
+- Initial release
+- Ported from the MultibootUSB project
+- Correct // paths during append operations
+- Correct several other minor bugs (crashing issues)
+- Added format and rebuild syslinux boot options
+- Fix paths to correct Syslinux Error: No Default UI configuration found
+- Added DistrosTab to provide information, homepage, and download options for each distribution
+- TODO Still need to add many distributions to the list of Distros (email me to help with this)
+

@@ -1,0 +1,2434 @@
+' Gambas module file
+
+Public Sub Add_Distro()
+  
+  Dim sTempScript_pardus As String
+  Dim sReadMe, sReadMe_txt, sRReadMe_TXT1, srReadMe_txt, sWelcome, sInfo_txt, sGrub_cfg, sMenu_cfg, sMenu_lst, sBoot_msg, sVersion As String
+  Dim sBoot_gfxboot_cfg, sIsolinux_txt, sEngb_cfg, sLICENSE, sEnglish_cfg, sInfo, sLicense_txt, sIso_Isolinux_cfg, sSys_Syslinux_cfg As String
+  Dim sBoot_Isolinux_cfg, sBoot_Syslinux_cfg, sArch_Syslinux_cfg, sLive_cfg, sSyslinux_Cfg, sIsolinux_Cfg, sMini_Info, sIso_gfxboot_cfg As String
+  Dim sSlitaz_Script As String
+  Dim sSearchFile As String
+  Dim fDistro_File As File
+  
+  If Exist(Var.LIVE_MOUNT & "/boot/grub/menu.lst") = True Then
+    sMenu_lst = File.Load(Var.LIVE_MOUNT & "/boot/grub/menu.lst")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/syslinux.cfg") = True Then
+    sSyslinux_Cfg = File.Load(Var.LIVE_MOUNT & "/syslinux.cfg")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/isolinux.cfg") = True Then
+    sIsolinux_Cfg = File.Load(Var.LIVE_MOUNT & "/isolinux.cfg")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/boot/isolinux/isolinux.cfg") = True Then
+    sBoot_Isolinux_cfg = File.Load(Var.LIVE_MOUNT & "/boot/isolinux/isolinux.cfg")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/isolinux/gfxboot.cfg") = True Then
+    sIso_gfxboot_cfg = File.Load(Var.LIVE_MOUNT & "/isolinux/gfxboot.cfg")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/boot/syslinux/syslinux.cfg") = True Then
+    sBoot_Syslinux_cfg = File.Load(Var.LIVE_MOUNT & "/boot/syslinux/syslinux.cfg")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/.disk/info") = True Then
+    sInfo = File.Load(Var.LIVE_MOUNT & "/.disk/info")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/.disk/mini-info") = True Then
+    sMini_Info = File.Load(Var.LIVE_MOUNT & "/.disk/mini-info")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/license.txt") = True Then
+    sLicense_txt = File.Load(Var.LIVE_MOUNT & "/license.txt")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/arch/boot/syslinux/syslinux.cfg") = True Then
+    sArch_Syslinux_cfg = File.Load(Var.LIVE_MOUNT & "/arch/boot/syslinux/syslinux.cfg")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/isolinux/menu.cfg") = True Then
+    sMenu_cfg = File.Load(Var.LIVE_MOUNT & "/isolinux/menu.cfg")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/isolinux/live.cfg") = True Then
+    sLive_cfg = File.Load(Var.LIVE_MOUNT & "/isolinux/live.cfg")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/syslinux/syslinux.cfg") = True Then
+    sSys_Syslinux_cfg = File.Load(Var.LIVE_MOUNT & "/syslinux/syslinux.cfg")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/boot/isolinux/english.cfg") = True Then
+    sEnglish_cfg = File.Load(Var.LIVE_MOUNT & "/boot/isolinux/english.cfg")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/isolinux/engb.cfg") = True Then
+    sEngb_cfg = File.Load(Var.LIVE_MOUNT & "/isolinux/engb.cfg")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/LICENSE") = True Then
+    sLICENSE = File.Load(Var.LIVE_MOUNT & "/LICENSE")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/boot/isolinux/gfxboot.cfg") = True Then
+    sBoot_gfxboot_cfg = File.Load(Var.LIVE_MOUNT & "/boot/isolinux/gfxboot.cfg")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/welcome.txt") = True Then
+    sWelcome = File.Load(Var.LIVE_MOUNT & "/welcome.txt")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/info.txt") Then
+    sInfo_txt = File.Load(Var.LIVE_MOUNT & "/info.txt")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/boot/grub/grub.cfg") = True Then
+    sGrub_cfg = File.Load(Var.LIVE_MOUNT & "/boot/grub/grub.cfg")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/README.txt") = True Then
+    sReadMe_txt = File.Load(Var.LIVE_MOUNT & "/README.txt")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/isolinux/isolinux.cfg") = True Then
+    sIso_Isolinux_cfg = File.Load(Var.LIVE_MOUNT & "/isolinux/isolinux.cfg")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/version") = True Then
+    sVersion = File.Load(Var.LIVE_MOUNT & "/version")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/isolinux/isolinux.txt") = True Then
+    sIsolinux_txt = File.Load(Var.LIVE_MOUNT & "/isolinux/isolinux.txt")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/README") = True Then
+    sReadMe = File.Load(Var.LIVE_MOUNT & "/README")
+  Endif
+  If Exist(Var.LIVE_MOUNT & "/boot/isolinux/boot.msg") = True Then
+    sBoot_msg = File.Load(Var.LIVE_MOUNT & "/boot/isolinux/boot.msg")
+  Endif
+  
+  With FMain.ListBox1
+    If Exist(Var.USB_MOUNT & "/yumi") = False Then
+      Shell "cp -vr " & Application.Path & "/yumi" & " " & Var.USB_MOUNT Wait
+    Endif
+    
+    var.sDetect_Distro = Temp$
+    Copy "detect-distro.sh" To var.sDetect_Distro
+    Shell "chmod +x " & var.sDetect_Distro Wait
+    Shell var.sDetect_Distro Wait To var.sList_of_Distro
+    fDistro_File = Open Var.PRO_DIR & "/distro.txt" For Write Create
+    Print #fDistro_File, Trim$(Var.sList_of_Distro)
+    fDistro_File.Close
+    'Shell "echo " & var.sList_of_Distro & " > " & Var.PRO_DIR & "/distro.txt" Wait
+    
+    If InStr(var.sList_of_Distro, "ubuntu") <> 0 Or If InStr(var.sList_of_Distro, "debian") <> 0 Or If InStr(var.sList_of_Distro, "slitaz") <> 0 Then
+      DISTRO_EXIST
+      os.generic
+    Else If InStr(var.sList_of_Distro, "fedora") <> 0 Or If InStr(var.sList_of_Distro, "systemrescuecd") <> 0 Or If InStr(var.sList_of_Distro, "slax") <> 0 Then
+      DISTRO_EXIST
+      os.generic
+    Else If InStr(var.sList_of_Distro, "arch") <> 0 Or If InStr(var.sList_of_Distro, "tinycore") <> 0 Or If InStr(var.sList_of_Distro, "antiX") <> 0 Then
+      DISTRO_EXIST
+      os.generic
+    Else If InStr(var.sList_of_Distro, "PCLinuxOS") <> 0 Or If InStr(var.sList_of_Distro, "gentoo") <> 0 Or If InStr(var.sList_of_Distro, "finnix") <> 0 Or If InStr(var.sList_of_Distro, "knoppix") <> 0 Then
+      DISTRO_EXIST
+      os.generic
+    Else If InStr(var.sList_of_Distro, "chakraisolabel") <> 0 Then
+      DISTRO_EXIST
+      os.generic
+    Else If Exist(Var.LIVE_MOUNT & "/Clonezilla-Live-Version") = True Then
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''Clonezilla'''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Clonezilla"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("clonezilla is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Clonezilla Start#"
+        Var.LINE2 = "label Clonezilla"
+        Var.LINE3 = "MENU LABEL Clonezilla"
+        If Exist(Var.DISTRO_DIR & "/live/vmlinuz") = True Then
+          Var.LINE4 = "kernel /yumi/Clonezilla/live/vmlinuz"
+          Var.LINE5 = "append initrd=/yumi/Clonezilla/live/initrd.img boot=live quickreboot hostname=maverick config quiet noswap nolocales edd=on nomodeset noprompt ocs_live_run=" & Quote$("ocs-live-general") & " ocs_live_extra_param=" & Quote$("" " ocs_live_keymap=" "") & " ocs_live_batch=" & Quote$("no") & " ocs_lang=" & Quote$("") & " video=uvesafb:mode_option=800x600-16 ip=frommedia nosplash live-media-path=/yumi/Clonezilla/live/"
+        Else
+          Var.LINE4 = "kernel /yumi/Clonezilla/live/vmlinuz1"
+          Var.LINE5 = "append initrd=/yumi/Clonezilla/live/initrd1.img boot=live quickreboot hostname=maverick config quiet noswap nolocales edd=on nomodeset noprompt ocs_live_run=" & Quote$("ocs-live-general") & " ocs_live_extra_param=" & Quote$("" " ocs_live_keymap=" "") & " ocs_live_batch=" & Quote$("no") & " ocs_lang=" & Quote$("") & " video=uvesafb:mode_option=800x600-16 ip=frommedia nosplash live-media-path=/yumi/Clonezilla/live/"
+        Endif
+        Var.LINE6 = "#Clonezilla End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+    Else If Exist(Var.LIVE_MOUNT & "/bootmgr") = True Then
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''Windows 7''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/sources"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Windows 7 is already installed.")
+      Else
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.USB_MOUNT
+        FUN_PROGRESS
+        Var.LINE1 = "#WINDOWS-7 Start#"
+        Var.LINE2 = "label WINDOWS-7"
+        Var.LINE3 = "MENU LABEL WINDOWS-7"
+        Var.LINE4 = "KERNEL chain.c32 hd0 1 ntldr=/bootmgr"
+        Var.LINE6 = "#WINDOWS-7 End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+    Else If Exist(Var.LIVE_MOUNT & "/wifiway/livecd.sgn") Or If Exist(Var.LIVE_MOUNT & "/slax/boot/syslinux.cfg") = True Then
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''Slax'''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      DISTRO_EXIST
+      os.slax
+      '---------
+      
+    Else If Exist(Var.LIVE_MOUNT & "/ubcd/menus/syslinux/defaults.cfg") Then
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''''UBCD'''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/UBCD"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("UBCD is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.ISO_LINK & " " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#UBCD Start#"
+        Var.LINE2 = "label UBCD"
+        Var.LINE3 = "MENU LABEL UBCD"
+        Var.LINE4 = "kernel /yumi/grub.exe"
+        Var.LINE5 = "APPEND --config-file=/yumi/UBCD/menu.lst"
+        Var.LINE6 = "#UBCD End#"
+        Var.MENU_LINE1 = "title UBCD"
+        Var.MENU_LINE2 = "find --set-root /yumi/UBCD/" & Var.ISO_NAME
+        Var.MENU_LINE3 = "map /yumi/UBCD/" & Var.ISO_NAME & " (hd32)"
+        Var.MENU_LINE4 = "map --hook"
+        Var.MENU_LINE5 = "chainloader (hd32)"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+    Else If Exist(Var.LIVE_MOUNT & "/HBCD.txt") Then
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''''HBCD'''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/HBCD"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("HBCD is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#HBCD Start#"
+        Var.LINE2 = "label HBCD"
+        Var.LINE3 = "MENU LABEL HBCD"
+        Var.LINE4 = "kernel /yumi/grub.exe"
+        Var.LINE5 = "append --config-file=/HBCD/menu.lst"
+        Var.LINE6 = "#HBCD End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+    Else If Exist(Var.LIVE_MOUNT & "/README-ophcrack.txt") Or If InStr(sReadMe, "Ophcrack") <> 0 Then
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''Ophcrack''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      DISTRO_EXIST
+      os.Ophcrack
+      '---------
+    Else If Exist(Var.LIVE_MOUNT & "/boot/sms.cfg") = True Then
+      Var.Search = File.Load(Var.LIVE_MOUNT & "/boot/sms.cfg")
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''SMS'''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      If InStr(Var.Search, "MENU BACKGROUND /boot/sms.jpg") <> 0 Then
+        DISTRO_EXIST
+        Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/SMS"
+        If Exist(Var.DISTRO_DIR) = True Then
+          Message("SMS is already installed.")
+        Else
+          Mkdir Var.DISTRO_DIR
+          Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+          FUN_PROGRESS
+          Var.LINE1 = "#SMS Start#"
+          Var.LINE2 = "label SMS"
+          Var.LINE3 = "MENU LABEL Superb Mini Server"
+          Var.LINE4 = "kernel /yumi/SMS/boot/vmlinuz"
+          Var.LINE5 = "append initrd=/yumi/SMS/boot/initrd.gz from=/yumi/SMS/ vga=791 ramdisk_size=8888 root=/dev/ram0 rw"
+          Var.LINE6 = "#SMS End#"
+          Write_cfg
+          Var.search = Null
+        Endif
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''BG-Rescue''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sWelcome, "BG-Rescue") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/BG-Rescue"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("BG-Rescue is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#BG-Rescue Start#"
+        Var.LINE2 = "label BG-Rescue"
+        Var.LINE3 = "MENU LABEL BG-Rescue"
+        Var.LINE4 = "kernel /yumi/BG-Rescue/vmlinuz"
+        Var.LINE5 = "append initrd=/yumi/BG-Rescue/initrd.img vga=normal root=/dev/ram0 source=usb"
+        Var.LINE6 = "#BG-Rescue End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''''LPS''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sInfo_txt, "Lightweight Portable Security") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/LPS"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("LPS is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#LPS Start#"
+        Var.LINE2 = "label LPS"
+        Var.LINE3 = "MENU LABEL Lightweight Portable Security"
+        Var.LINE4 = "kernel /yumi/LPS/vmlinuz"
+        Var.LINE5 = "append initrd=/yumi/LPS/initrd load_ramdisk=1 ramdisk_blocksize=4096 root=/dev/ram0 ramdisk_size=524288 console=ttyS3 splash=silent vga=791"
+        Var.LINE6 = "#LPS End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''''XBMC-Live''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sGrub_cfg, "XBMCLive") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/XBMCLive"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("XBMC-Live is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        FUN_PROGRESS
+        Var.LINE1 = "#XBMCLive Start#"
+        Var.LINE2 = "label XBMCLive"
+        Var.LINE3 = "MENU LABEL XBMCLive"
+        Var.LINE4 = "KERNEL /yumi/XBMCLive/live/vmlinuz"
+        Var.LINE5 = "APPEND initrd=/yumi/XBMCLive/live/initrd.img live-media-path=/yumi/XBMCLive/live video=vesafb boot=live xbmc=autostart,nodiskmount splash quiet loglevel=0 persistent quickreboot quickusbmodules notimezone noaccessibility noapparmor noaptcdrom noautologin noxautologin noconsolekeyboard nofastboot nognomepanel nohosts nokpersonalizer nolanguageselector nolocales nonetworking nopowermanagement noprogramcrashes nojockey nosudo noupdatenotifier nouser nopolkitconf noxautoconfig noxscreensaver nopreseed union=aufs root=UUID=" & Trim$(Var.USB_UUID)
+        Var.LINE6 = "#XBMCLive End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''''Puppy''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIsolinux_Cfg, "puppy") <> 0 Then
+      DISTRO_EXIST
+      os.puppy
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''Siduction''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sBoot_Isolinux_cfg, "siduction") <> 0 Or If InStr(sWelcome, "sidux") <> 0 Or If InStr(sBoot_Isolinux_cfg, "sidux") <> 0 Or If InStr(sBoot_Isolinux_cfg, "aptosid") <> 0 Then
+      DISTRO_EXIST
+      os.sidux
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''''GRML conf 1''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sBoot_Isolinux_cfg, "grml") <> 0 Or If InStr(sBoot_msg, "grml") <> 0 Then
+      DISTRO_EXIST
+      os.grml
+      '---------
+      
+    Else If Exist(Var.LIVE_MOUNT & "/GParted-Live-Version") Then
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''GParted'''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      DISTRO_EXIST
+      os.debian
+      'Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Gparted-Live"
+      'If Exist(Var.DISTRO_DIR) = True Then
+      ' Message("Gparted-Live is already installed.")
+      'Else
+      ' Mkdir Var.DISTRO_DIR
+      '        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+      '       FUN_PROGRESS
+      '      Var.LINE1 = "#Gparted-Live Start#"
+      '     Var.LINE2 = "label Gparted-Live"
+      '    Var.LINE3 = "MENU LABEL Gparted-Live"
+      '   Var.LINE4 = "kernel /yumi/Gparted-Live/live/vmlinuz"
+      '  Var.LINE5 = "append initrd=/yumi/Gparted-Live/live/initrd.img  live-media-path=/yumi/Gparted-Live/live boot=live config config noswap nomodeset ip=frommedia nosplash root=UUID=" & Trim$(Var.USB_UUID)
+      ' Var.LINE6 = "#Gparted-Live End#"
+      'Write_cfg
+      'Var.search = Null
+      'Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''IPFire''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sReadMe_txt, "IPFire") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/IPFire"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("IPFire is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Shell "cp -rv " & Var.LIVE_MOUNT & "/boot " & Var.DISTRO_DIR Wait
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/*.tlz " & Var.USB_MOUNT
+        FUN_PROGRESS
+        Var.LINE1 = "#IPFire Start#"
+        Var.LINE2 = "label IPFire "
+        Var.LINE3 = "MENU LABEL IPFire"
+        Var.LINE4 = "kernel /yumi/IPFire/boot/isolinux/vmlinuz"
+        Var.LINE5 = "append initrd=/yumi/IPFire/boot/isolinux/instroot vga=791 splash=silent ro"
+        Var.LINE6 = "#IPFire End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''UBUNTU-MINI''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sMini_Info, "Ubuntu") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message(Var.DISTRO_Name & " is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        Add.FUN_PROGRESS
+        Var.LINE1 = "#start " & Var.DISTRO_Name
+        Var.LINE2 = "label " & Var.DISTRO_Name
+        Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name
+        Var.LINE4 = "kernel /yumi/" & Var.DISTRO_Name & "/linux"
+        Var.LINE5 = "append cdrom-detect/try-usb=true noprompt boot=casper floppy.allowed_drive_mask=0 ignore_uuid initrd=/yumi/" & Var.DISTRO_Name & "/initrd.gz tasks=standard pkgsel/language-pack-patterns= pkgsel/install-language-support=false vga=788 -- quiet"
+        Var.LINE6 = "#end " & Var.DISTRO_Name
+        Add.Write_cfg
+      Endif
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''Calculate Linux conf 1'''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sReadMe_txt, "Calculate Linux") <> 0 Or If InStr(sIso_Isolinux_cfg, "Calculate Linux") <> 0 Or If InStr(sSys_Syslinux_cfg, "Calculate Linux") <> 0 Then
+      DISTRO_EXIST
+      os.calculate
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''Gentoo Linux'''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "MENU TITLE Gentoo Linux") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Gentoo-Linux"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Gentoo Linux is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Gentoo-Linux Start#"
+        Var.LINE2 = "label Gentoo-Linux-32-bit"
+        Var.LINE3 = "MENU LABEL Gentoo-Linux-32-bit"
+        Var.LINE4 = "kernel /yumi/Gentoo-Linux/boot/gentoo"
+        Var.LINE5 = "append initrd=/yumi/Gentoo-Linux/boot/gentoo.igz root=/dev/ram0 init=/linuxrc dokeymap looptype=squashfs subdir=/yumi/Gentoo-Linux loop=/yumi/Gentoo-Linux/image.squashfs cdroot"
+        Var.LINE6 = "label Gentoo-Linux-64-bit"
+        Var.LINE7 = "MENU LABEL Gentoo-Linux-64-bit"
+        Var.LINE8 = "kernel /yumi/Gentoo-Linux/boot/gentoo64"
+        Var.LINE9 = "append initrd=/yumi/Gentoo-Linux/boot/gentoo64.igz root=/dev/ram0 init=/linuxrc dokeymap looptype=squashfs subdir=/yumi/Gentoo-Linux loop=/yumi/Gentoo-Linux/image.squashfs cdroot"
+        Var.LINE10 = "#Gentoo-Linux End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''Pentoo'''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "pentoo") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Pentoo"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Pentoo is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        Var.LINE1 = "#Pentoo Start#"
+        Var.LINE2 = "label Pentoo"
+        Var.LINE3 = "MENU LABEL Pentoo"
+        Var.LINE4 = "kernel /yumi/Pentoo/isolinux/pentoo"
+        Var.LINE5 = "append initrd=/yumi/Pentoo/isolinux/pentoo.igz subdir=/yumi/Pentoo loop=/yumi/Pentoo/image.squashfs root=/dev/ram0 init=/linuxrc  aufs max_loop=256 dokeymap looptype=squashfs cdroot video=uvesafb:mtrr:3,ywrap,1024x768-16 usbcore.autosuspend=1 console=tty0"
+        Var.LINE6 = "#Pentoo End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''Livarp''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sLive_cfg, "livarp") <> 0 Or If InStr(sInfo, "Debian GNU/Linux") <> 0 Or If InStr(sIso_Isolinux_cfg, "boot=live") <> 0 Or If InStr(sLive_cfg, "boot=live") <> 0 Or If InStr(sReadMe_txt, "http://www.debian.org/intro/about") <> 0 Then
+      DISTRO_EXIST
+      os.debian
+    Else If InStr(sLive_cfg, "Kanotix") <> 0 Or If InStr(sSys_Syslinux_cfg, "tails") <> 0 Or If InStr(sLive_cfg, "tails") <> 0 Or If InStr(sMenu_cfg, "Saline") <> 0 Or If InStr(sMenu_cfg, "AtlasX") <> 0 Then
+      DISTRO_EXIST
+      os.debian
+    Else If InStr(sMenu_cfg, "AV_Linux") <> 0 Or If InStr(sIso_Isolinux_cfg, "SolusOS") <> 0 Or If InStr(sIso_Isolinux_cfg, "boot=live") <> 0 Or If InStr(sBoot_Isolinux_cfg, "boot=live") <> 0 Or If InStr(sBoot_Syslinux_cfg, "boot=live") <> 0 Or If InStr(sLive_cfg, "boot=live") <> 0 Or If InStr(sMenu_cfg, "boot=live") <> 0 Then
+      DISTRO_EXIST
+      os.debian
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''Finnix'''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(srReadMe_txt, "http://www.finnix.org/") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/finnix"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Finnix is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Shell "cp -rv " & Var.LIVE_MOUNT & "/isolinux " & Var.USB_MOUNT & "/finnix/" Wait
+        Shell "cp -rv " & Var.LIVE_MOUNT & "/boot " & Var.USB_MOUNT & "/finnix/" Wait
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/finnix/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Finnix Start#"
+        If Exist(Var.DISTRO_DIR & "/isolinux/linux") = True Then
+          Var.LINE2 = "label Finnix-32-bit"
+          Var.LINE3 = "MENU LABEL Finnix-32-bit"
+          Var.LINE4 = "kernel /finnix/isolinux/linux"
+          Var.LINE5 = "append initrd=/finnix/isolinux/initrd.xz"
+          Var.LINE6 = "label Finnix-64-bit"
+          Var.LINE7 = "MENU LABEL Finnix-64-bit"
+          Var.LINE8 = "kernel /finnix/isolinux/linux64"
+          Var.LINE9 = "append initrd=/finnix/isolinux/initrd64.xz"
+        Else If Exist(Var.DISTRO_DIR & "/boot/x86/linux") = True Then
+          Var.LINE2 = "label Finnix-32-bit"
+          Var.LINE3 = "MENU LABEL Finnix-32-bit"
+          Var.LINE4 = "kernel /finnix/boot/x86/linux"
+          Var.LINE5 = "append initrd=/finnix/boot/x86/initrd.xz"
+          Var.LINE6 = "label Finnix-64-bit"
+          Var.LINE7 = "MENU LABEL Finnix-64-bit"
+          Var.LINE8 = "kernel /finnix/boot/x86/linux64"
+          Var.LINE9 = "append initrd=/finnix/boot/x86/initrd64.xz"
+        Endif
+        Var.LINE10 = "#Finnix End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''NT-Password-Recovery''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sRReadMe_TXT1, "Windows Change Password / Registry Editor / Boot CD") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/NT-Password-Recovery"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("NT-Password-Recovery is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#NT-Password-Recovery Start#"
+        Var.LINE2 = "label NT-Password-Recovery"
+        Var.LINE3 = "MENU LABEL NT-Password-Recovery"
+        Var.LINE4 = "kernel /yumi/NT-Password-Recovery/vmlinuz"
+        Var.LINE5 = "append initrd=/yumi/NT-Password-Recovery/initrd.cgz,/yumi/NT-Password-Recovery/scsi.cgz rw vga=1"
+        Var.LINE6 = "#NT-Password-Recovery End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+    Else If Exist(Var.LIVE_MOUNT & "/CDlinux/boot/grub.cfg") Or If Exist(Var.LIVE_MOUNT & "/CDlinux/boot/menu.lst") Then
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''CDLinux conf 1''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      DISTRO_EXIST
+      os.cdlinux
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''Tiny-Core'''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sBoot_msg, "Tiny Core") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name
+      'Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Tiny-Core"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Tiny-Core is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        sSlitaz_Script = Temp$
+        Copy "update-cfg.sh" To sSlitaz_Script
+        Shell "chmod +x " & sSlitaz_Script Wait
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Shell sSlitaz_Script Wait
+        Var.LINE1 = "#start " & Var.DISTRO_Name
+        Var.LINE2 = "label " & Var.DISTRO_Name
+        Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name
+        'Var.LINE4 = "kernel /yumi/Tiny-Core/boot/vmlinuz"
+        Var.LINE4 = "config vesamenu.c32"
+        Shell "cd " & Var.DISTRO_DIR & " ; find . -name \"syslinux.cfg\" | cut -d \".\" -f 2-3" Wait To sSearchFile
+        If sSearchFile <> Null Then
+        Else
+          Shell "cd " & Var.DISTRO_DIR & " ; find . -name \"isolinux.cfg\" | cut -d \".\" -f 2-3" Wait To sSearchFile
+        Endif
+        Var.LINE5 = "append /yumi/" & var.DISTRO_Name & sSearchFile
+        'If Exist(Var.DISTRO_DIR & "/tinycore.gz") = True Then
+        ' Var.LINE5 = "APPEND initrd=/yumi/Tiny-Core/boot/tinycore.gz"
+        'Else If (Var.DISTRO_DIR & "/core.gz") = True Then
+        ' Var.LINE5 = "APPEND initrd=/yumi/Tiny-Core/boot/core.gz"
+        'Endif
+        
+        Var.LINE6 = "#end " & Var.DISTRO_Name
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''Luninox'''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sInfo, "LuninuX") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name
+      'Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Tiny-Core"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message(Var.DISTRO_NAME & " is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        sSlitaz_Script = Temp$
+        Copy "update-cfg.sh" To sSlitaz_Script
+        Shell "chmod +x " & sSlitaz_Script Wait
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Shell sSlitaz_Script Wait
+        Var.LINE1 = "#start " & Var.DISTRO_Name
+        Var.LINE2 = "label " & Var.DISTRO_Name
+        Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name
+        'Var.LINE4 = "kernel /yumi/Tiny-Core/boot/vmlinuz"
+        Var.LINE4 = "kernel vesamenu.c32"
+        Shell "cd " & Var.DISTRO_DIR & " ; find . -name \"syslinux.cfg\"" Wait To sSearchFile
+        If sSearchFile <> Null Then
+          Var.LINE5 = "append /yumi/" & var.DISTRO_Name & sSearchFile
+        Else
+          Shell "cd " & Var.DISTRO_DIR & " ; find . -name \"isolinux.cfg\"" Wait To sSearchFile
+          Var.LINE5 = "append /yumi/" & var.DISTRO_Name & sSearchFile
+        Endif
+        
+        'If Exist(Var.DISTRO_DIR & "/tinycore.gz") = True Then
+        ' Var.LINE5 = "APPEND initrd=/yumi/Tiny-Core/boot/tinycore.gz"
+        'Else If (Var.DISTRO_DIR & "/core.gz") = True Then
+        ' Var.LINE5 = "APPEND initrd=/yumi/Tiny-Core/boot/core.gz"
+        'Endif
+        
+        Var.LINE6 = "#end " & Var.DISTRO_Name
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''Micro-Core''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sBoot_msg, "Micro Core") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Micro-Core"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Micro-Core is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.ISO_LINK & " " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Micro-Core Start#"
+        Var.LINE2 = "label Micro-Core"
+        Var.LINE3 = "MENU LABEL Micro-Core"
+        Var.LINE4 = "kernel /yumi/memdisk"
+        Var.LINE5 = "APPEND iso raw initrd=/yumi/Micro-Core/" & Var.ISO_NAME
+        Var.LINE6 = "#Micro-Core End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''Core-Plus''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sBoot_Isolinux_cfg, "Core plus") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Core-Plus"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Core-Plus is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.ISO_LINK & " " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Core-Plus Start#"
+        Var.LINE2 = "label Core-Plus"
+        Var.LINE3 = "MENU LABEL Core-Plus"
+        Var.LINE4 = "kernel /yumi/memdisk"
+        Var.LINE5 = "APPEND iso raw initrd=/yumi/Core-Plus/" & Var.ISO_NAME
+        Var.LINE6 = "#Core-Plus End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''Antix''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sVersion, "antiX") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/antiX"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("AntiX is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Shell "cp -rv " & Var.LIVE_MOUNT & "/boot " & Var.USB_MOUNT & "/antiX/" Wait
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/antiX/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#AntiX Start#"
+        Var.LINE2 = "label AntiX"
+        Var.LINE3 = "MENU LABEL AntiX"
+        Var.LINE4 = "kernel /antiX/boot/vmlinuz"
+        Var.LINE5 = "append initrd=/antiX/boot/initrd.gz init=/etc/init rw quiet splash"
+        Var.LINE6 = "#AntiX End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''System Rescue CD'''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "SystemRescueCd") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/System-Rescue-CD"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("SystemRescueCd is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#System-Rescue-CD Start#"
+        Var.LINE2 = "label System-Rescue-CD"
+        Var.LINE3 = "MENU LABEL System-Rescue-CD"
+        If Exist(Var.DISTRO_DIR & "/isolinux/rescue64") = True Then
+          Var.LINE4 = "kernel /yumi/System-Rescue-CD/isolinux/rescue64"
+        Else
+          Var.LINE4 = "kernel /yumi/System-Rescue-CD/isolinux/rescuecd"
+        Endif
+        Var.LINE5 = "append initrd=/yumi/System-Rescue-CD/isolinux/initram.igz rootfs=/yumi/System-Rescue-CD subdir=/yumi/System-Rescue-CD dostartx setkmap=us"
+        Var.LINE6 = "#System-Rescue-CD End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+    Else If Exist(Var.LIVE_MOUNT & "/deliver/elive.sig") Then
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''Elive''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Elive"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Elive is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Elive Start#"
+        Var.LINE2 = "label Elive"
+        Var.LINE3 = "MENU LABEL Elive"
+        Var.LINE4 = "kernel /yumi/Elive/boot/vmlinuz-2.6.30.9-elive-686"
+        Var.LINE5 = "append initrd=/yumi/Elive/boot/initrd.img-2.6.30.9-elive-686 boot=eli quiet resolution from=/yumi/Elive"
+        Var.LINE6 = "#Elive End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''Sabayon conf '''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIsolinux_txt, "Sabayon") <> 0 Or If InStr(sIso_Isolinux_cfg, "sabayon") <> 0 Then
+      DISTRO_EXIST
+      os.sabayon
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''''Kuki Linux'''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIsolinux_txt, "Kuki Linux") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Kuki"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Kuki Linux is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Kuki Start#"
+        Var.LINE2 = "label Kuki Linux"
+        Var.LINE3 = "MENU LABEL Kuki Linux"
+        Var.LINE4 = "kernel /yumi/Kuki/casper/vmlinuz"
+        Var.LINE5 = "append initrd=/yumi/Kuki/casper/initrd.gz live-media-path=/yumi/Kuki/casper file=/cdrom/yumi/Kuki/preseed/custom.seed boot=casper noprompt quiet splash -- root=UUID=" & Trim$(Var.USB_UUID)
+        Var.LINE6 = "#Kuki End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''Turnkey''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "GFXBOOT-BACKGROUND 0xc85800") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Turnkey"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Turnkey is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Turnkey Start#"
+        Var.LINE2 = "label Turnkey"
+        Var.LINE3 = "MENU LABEL Turnkey"
+        Var.LINE4 = "KERNEL /yumi/Turnkey/casper/vmlinuz"
+        Var.LINE5 = "APPEND initrd=/yumi/Turnkey/casper/initrd.gz boot=casper live-media-path=/yumi/Turnkey/casper ramdisk_size=1048576 root=/dev/ram rw showmounts debug -- splash root=UUID=" & Trim$(Var.USB_UUID)
+        Var.LINE6 = "#Turnkey End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''CrunchBang conf 1'''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIsolinux_txt, "crunchbang") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/CrunchBang"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("CrunchBang is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#CrunchBang Start#"
+        Var.LINE2 = "label CrunchBang"
+        Var.LINE3 = "MENU LABEL CrunchBang"
+        Var.LINE4 = "KERNEL /yumi/CrunchBang/casper/vmlinuz"
+        Var.LINE5 = "APPEND initrd=/yumi/CrunchBang/casper/initrd.gz boot=casper live-media-path=/yumi/CrunchBang/casper file=/cdrom/yumi/CrunchBang/preseed/custom.seed root=UUID=" & Trim$(Var.USB_UUID)
+        Var.LINE6 = "#CrunchBang End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''GnewSense''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sReadMe, "gNewSense LiveCD") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/gNewSense"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("gNewSense is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#gNewSense Start#"
+        Var.LINE2 = "label gNewSense"
+        Var.LINE3 = "MENU LABEL gNewSense"
+        Var.LINE4 = "KERNEL /yumi/gNewSense/isolinux/vmlinuz"
+        Var.LINE5 = "APPEND initrd=/yumi/gNewSense/isolinux/initrd.gz boot=casper live-media-path=/yumi/gNewSense/casper quiet splash root=UUID=" & Trim$(Var.USB_UUID)
+        Var.LINE6 = "#gNewSense End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''Pardus'''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sBoot_gfxboot_cfg, "theme=Pardus") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Pardus"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Pardus is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Shell "cp -rv " & Var.LIVE_MOUNT & "/boot " & Var.DISTRO_DIR Wait
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/*.img " & Var.USB_MOUNT
+        Shell "cp -rv " & Var.LIVE_MOUNT & "/boot/initrd ~/.yumi/"
+        FUN_PROGRESS
+        sTempScript_pardus = Temp$
+        Copy "pardus.sh" To sTempScript_pardus
+        Shell "chmod +x " & sTempScript_pardus Wait
+        Shell "echo " & Var.Password & " | sudo -S " & sTempScript_pardus Wait
+        Shell "cp -rv ~/.yumi/initrd1 " & Var.DISTRO_DIR & "/boot/" Wait
+        Var.LINE1 = "#Pardus Start#"
+        Var.LINE2 = "label Pardus"
+        Var.LINE3 = "MENU LABEL Pardus"
+        Var.LINE4 = "kernel /yumi/Pardus/boot/kernel"
+        Var.LINE5 = "append initrd=/yumi/Pardus/boot/initrd1 livedisk splash=silent quiet root=UUID=" & Trim$(Var.USB_UUID)
+        Var.LINE6 = "#Pardus End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''Scientific Linux'''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sLICENSE, "SL Live CD/DVD") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Scientific-Linux"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Scientific Linux is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Scientific-Linux Start#"
+        Var.LINE2 = "label Scientific-Linux"
+        Var.LINE3 = "MENU LABEL Scientific-Linux"
+        Var.LINE4 = "kernel /Scientific-Linux/boot/vmlinuz"
+        Var.LINE5 = "append initrd=/Scientific-Linux/boot/initrd.gz sgnfile=/Scientific-Linux/livecd.sgn init=linuxrc max_loop=32 ramdisk_size=50000 root=/dev/ram0 rw"
+        Var.LINE6 = "#Scientific-Linux End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''PureDyne conf 1''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sLICENSE, "Puredyne") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Puredyne"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Puredyne is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Puredyne Start#"
+        Var.LINE2 = "label Puredyne"
+        Var.LINE3 = "MENU LABEL Puredyne (Dynebolic)"
+        Var.LINE4 = "kernel /yumi/Puredyne/live/vmlinuz"
+        Var.LINE5 = "append initrd=/yumi/Puredyne/live/initrd.img boot=live live-media-path=/yumi/Puredyne/live quickreboot username=luther hostname=dynebolic union=aufs vga=792"
+        Var.LINE6 = "#Puredyne End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''Chakra-i686''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sEngb_cfg, "/chakra/boot/i686/chakraiso") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/chakra"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Chakra-i686 is already installed.")
+      Else
+        'Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/chakra " & Var.USB_MOUNT
+        FUN_PROGRESS
+        Var.LINE1 = "#Chakra-i686 Start#"
+        Var.LINE2 = "label Chakra-i686"
+        Var.LINE3 = "MENU LABEL Chakra-i686"
+        Var.LINE4 = "kernel /chakra/boot/i686/chakraiso"
+        Var.LINE5 = "append initrd=/chakra/boot/i686/chakraiso.img quiet lang=engb nonfree=yes xdriver=no chakraisolabel=" & Var.USB_LABLE
+        Var.LINE6 = "#Chakra-i686 End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''Chakra-AMD64'''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sEngb_cfg, "/chakra/boot/x86_64/chakraiso") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/chakra"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Chakra-AMD64 is already installed.")
+      Else
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/chakra " & Var.USB_MOUNT
+        FUN_PROGRESS
+        Var.LINE1 = "#Chakra-AMD64 Start#"
+        Var.LINE2 = "label Chakra-AMD64"
+        Var.LINE3 = "MENU LABEL Chakra-AMD64"
+        Var.LINE4 = "kernel /chakra/boot/x86_64/chakraiso"
+        Var.LINE5 = "append initrd=/chakra/boot/x86_64/chakraiso.img quiet lang=engb nonfree=yes xdriver=no chakraisolabel=" & Var.USB_LABLE
+        Var.LINE6 = "#Chakra-AMD64 End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''Toorox conf'''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sEnglish_cfg, "MENU TITLE Toorox") <> 0 Or If InStr(sMenu_cfg, "Toorox") <> 0 Then
+      DISTRO_EXIST
+      os.toorox
+      
+    Else If Exist(Var.LIVE_MOUNT & "/zenwalk/PACKAGES.TXT") = True Then
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''Zenwalk-Install'''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Zenwalk-Install"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Zenwalk-Install is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Zenwalk-Install Start#"
+        Var.LINE2 = "label Zenwalk-Install"
+        Var.LINE3 = "MENU LABEL Zenwalk-Install"
+        Var.LINE4 = "KERNEL /yumi/Zenwalk-Install/kernel/bzImage"
+        Var.LINE5 = "APPEND initrd=/yumi/Zenwalk-Install/isolinux/initrd.img from=/yumi/Zenwalk-Install/ load_ramdisk=1 prompt_ramdisk=0 rw root=/dev/null ZENWALK_KERNEL=auto"
+        Var.LINE6 = "#Zenwalk-Install End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''Arch Linux conf 1'''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sSys_Syslinux_cfg, "MENU LABEL Boot Arch Linux") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Arch-Linux"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Arch-Linux is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Arch-Linux Start#"
+        Var.LINE2 = "label Arch Linux"
+        Var.LINE3 = "MENU LABEL Arch Linux"
+        If Exist(Var.DISTRO_DIR & "/arch/boot/i686/vmlinuz26") = True Then
+          Var.LINE4 = "LINUX /yumi/Arch-Linux/arch/boot/i686/vmlinuz26"
+          Var.LINE5 = "APPEND initrd=/yumi/Arch-Linux/arch/boot/i686/archiso.img archisobasedir=/yumi/Arch-Linux/arch archisolabel=" & Var.USB_LABLE & " rw_branch_size=75% locale=en_US.UTF-8)"
+        Else
+          Var.LINE4 = "LINUX /yumi/Arch-Linux/arch/boot/x86_64/vmlinuz26"
+          Var.LINE5 = "APPEND initrd=/yumi/Arch-Linux/arch/boot/x86_64/archiso.img archisobasedir=/yumi/Arch-Linux/arch archisolabel=" & Var.USB_LABLE & " rw_branch_size=75% locale=en_US.UTF-8)"
+        Endif
+        Var.LINE6 = "#Arch-Linux End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''DRBL''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sSys_Syslinux_cfg, "MENU LABEL DRBL Live") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/DRBL"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("DRBL is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#DRBL Start#"
+        Var.LINE2 = "label DRBL"
+        Var.LINE3 = "MENU LABEL DRBL"
+        Var.LINE4 = "KERNEL /yumi/DRBL/live/vmlinuz"
+        Var.LINE5 = "APPEND initrd=/yumi/DRBL/live/initrd.img live-media-path=/yumi/DRBL/live boot=live config nomodeset vga=785 ip=frommedia nosplash quickreboot root=UUID=" & Trim$(Var.USB_UUID)
+        Var.LINE6 = "#DRBL End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''Webconverger'''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sLive_cfg, "portal.webconverger.com") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Webconverger"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Webconverger is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Webconverger Start#"
+        Var.LINE2 = "label Webconverger"
+        Var.LINE3 = "MENU LABEL Webconverger"
+        Var.LINE4 = "KERNEL /yumi/Webconverger/live/vmlinuz"
+        Var.LINE5 = "APPEND initrd=/yumi/Webconverger/live/initrd.img boot=live live-media-path=/yumi/Webconverger/live config homepage=http://portal.webconverger.com nonetworking nopersistent quickreboot nomodeset noroot splash username=webc hostname=webconverger quiet root=UUID=" & Trim$(Var.USB_UUID)
+        Var.LINE6 = "#Webconverger End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''CrunchBang conf 2'''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sLive_cfg, "crunchbang") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/CrunchBang"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("CrunchBang is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#CrunchBang Start#"
+        Var.LINE2 = "label CrunchBang"
+        Var.LINE3 = "MENU LABEL CrunchBang"
+        If Exist(Var.DISTRO_DIR & "install/vmlinuz") = True Then
+          Var.LINE4 = "KERNEL /yumi/CrunchBang/install/vmlinuz"
+          Var.LINE5 = "APPEND initrd=/yumi/CrunchBang/install/initrd.gz boot=live live-media-path=/yumi/CrunchBang/live config quickreboot quickusbmodules quiet root=UUID=" & Trim$(Var.USB_UUID)
+        Else
+          Var.LINE4 = "KERNEL /yumi/CrunchBang/live/vmlinuz1"
+          Var.LINE5 = "APPEND initrd=/yumi/CrunchBang/live/initrd1.img boot=live live-media-path=/yumi/CrunchBang/live config quickreboot quickusbmodules quiet root=UUID=" & Trim$(Var.USB_UUID)
+          Var.LINE6 = "#CrunchBang End#"
+        Endif
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''Semplice'''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sLive_cfg, "Semplice") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Semplice"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Semplice is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Semplice Start#"
+        Var.LINE2 = "label Semplice"
+        Var.LINE3 = "MENU LABEL Semplice Linux"
+        Var.LINE4 = "KERNEL /yumi/Semplice/live/vmlinuz"
+        Var.LINE5 = "APPEND initrd=/yumi/Semplice/live/initrd.img boot=live live-media-path=/yumi/Semplice/live boot=live config  username=user hostname=SempliceLive user-fullname=Semplice quiet root=UUID=" & Trim$(Var.USB_UUID)
+        Var.LINE6 = "#Semplice End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''Zest'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sLive_cfg, "zest") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Zest"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Zest Linux is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Zest Start#"
+        Var.LINE2 = "label Zest"
+        Var.LINE3 = "MENU LABEL Zest Linux"
+        Var.LINE4 = "KERNEL /yumi/Zest/live/vmlinuz"
+        Var.LINE5 = "APPEND initrd=/yumi/Zest/live/initrd.img boot=live live-media-path=/yumi/Zest/live config locales=en_GB.UTF-8 keyboard-layouts=gb username=bert hostname=zest  quiet root=UUID=" & Trim$(Var.USB_UUID)
+        Var.LINE6 = "#Zest End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''DoudouLinux''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sLive_cfg, "DoudouLinux") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/DoudouLinux"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("DoudouLinux is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#DoudouLinux Start#"
+        Var.LINE2 = "label DoudouLinux"
+        Var.LINE3 = "MENU LABEL DoudouLinux"
+        Var.LINE4 = "KERNEL /yumi/DoudouLinux/live/vmlinuz"
+        Var.LINE5 = "APPEND initrd=/yumi/DoudouLinux/live/initrd.img boot=live live-media-path=/yumi/DoudouLinux/live notimezone noxautologin quiet splash vga=785 username=tux hostname=doudoulinux union=aufs config quickreboot quickusbmodules quiet root=UUID=" & Trim$(Var.USB_UUID)
+        Var.LINE6 = "#DoudouLinux End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''Archbang'''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sArch_Syslinux_cfg, "MENU LABEL Boot ArchBang Linux") <> 0 Or If InStr(sArch_Syslinux_cfg, "MENU LABEL Boot Arch Linux") <> 0 Or If InStr(sArch_Syslinux_cfg, "Bridge Linux") <> 0 Then
+      DISTRO_EXIST
+      os.archlinux
+      
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''Arch Dual conf 1''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sArch_Syslinux_cfg, "CONFIG syslinux_both.cfg") <> 0 Or If InStr(sArch_Syslinux_cfg, "CONFIG archiso.cfg") <> 0 Then
+      DISTRO_EXIST
+      os.archdual
+      '---------
+      
+    Else If Exist(Var.LIVE_MOUNT & "/zenlive/livecd.sgn") = True Then
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''Zenwalk-Live''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Zenwalk-Live"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Zenwalk-Live is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Zenwalk-Live Start#"
+        Var.LINE2 = "label Zenwalk-Live"
+        Var.LINE3 = "MENU LABEL Zenwalk-Live"
+        Var.LINE4 = "KERNEL /yumi/Zenwalk-Live/boot/vmlinuz"
+        Var.LINE5 = "APPEND initrd=/yumi/Zenwalk-Live/boot/initrd.gz from=/yumi/Zenwalk-Live/ max_loop=255  init=linuxrc load_ramdisk=1 prompt_ramdisk=0 ramdisk_size=6666 root=/dev/ram0 rw splash=silent keyb=fr-latin9 autologin changes=zensave.xfs"
+        Var.LINE6 = "#Zenwalk-Live End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+    Else If Exist(Var.LIVE_MOUNT & "/boot/defaults/loader.conf") = True Then
+      Var.Search = File.Load(Var.LIVE_MOUNT & "/boot/defaults/loader.conf")
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''FreeBSD'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      If InStr(Var.Search, "FreeBSD") <> 0 Then
+        DISTRO_EXIST
+        Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/FreeBSD"
+        If Exist(Var.DISTRO_DIR) = True Then
+          Message("FreeBSD is already installed.")
+        Else
+          Mkdir Var.DISTRO_DIR
+          Var.pFileCopy = Shell "cp -rv " & Var.ISO_LINK & " " & Var.DISTRO_DIR
+          FUN_PROGRESS
+          Var.LINE1 = "#FreeBSD Start#"
+          Var.LINE2 = "label FreeBSD"
+          Var.LINE3 = "MENU LABEL FreeBSD"
+          Var.LINE4 = "KERNEL /yumi/memdisk"
+          Var.LINE5 = "APPEND iso raw initrd=/yumi/FreeBSD/" & Var.ISO_NAME
+          Var.LINE6 = "#FreeBSD End#"
+          Write_cfg
+          Var.search = Null
+        Endif
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''Avira''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sLicense_txt, "Avira Rescue System") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/antivir"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Avira is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        'Shell "cp -rv " & Var.LIVE_MOUNT & "/avupdate " & Var.USB_MOUNT Wait
+        Shell "cp -rv " & Var.LIVE_MOUNT & "/initrd.gz " & Var.USB_MOUNT & "/antivir" Wait
+        Shell "cp -rv " & Var.LIVE_MOUNT & "/vmlinuz " & Var.USB_MOUNT & "/antivir" Wait
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/antivir/. " & Var.USB_MOUNT & "/antivir"
+        FUN_PROGRESS
+        Var.LINE1 = "#Avira-Rescue Start#"
+        Var.LINE2 = "label Avira-Rescue"
+        Var.LINE3 = "MENU LABEL Avira-Rescue"
+        Var.LINE4 = "KERNEL /antivir/vmlinuz"
+        Var.LINE5 = "APPEND initrd=/antivir/initrd.gz ramdisk_size=133551 root=/dev/ram0 rw  console=/dev/vc/4"
+        Var.LINE6 = "#Avira-Rescue End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+    Else If Exist(Var.LIVE_MOUNT & "/menu.lst") = True Then
+      Var.Search = File.Load(Var.LIVE_MOUNT & "/menu.lst")
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''Sage''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      If InStr(Var.Search, "SAGE") <> 0 Then
+        DISTRO_EXIST
+        Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Sage"
+        If Exist(Var.DISTRO_DIR) = True Then
+          Message("Sage is already installed.")
+        Else
+          Mkdir Var.DISTRO_DIR
+          Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+          FUN_PROGRESS
+          Var.LINE1 = "#Sage Start#"
+          Var.LINE2 = "label Sage"
+          Var.LINE3 = "MENU LABEL Sage Live"
+          Var.LINE4 = "kernel /yumi/Sage/vmlinuz"
+          Var.LINE5 = "append initrd=/yumi/Sage/initrd.gz pfix=nocopy i915.modeset=1 quiet root=/dev/ram0 psubdir=/yumi/Sage pmedia=usbflash loglevel=7 pkeys=us"
+          Var.LINE6 = "#Sage End#"
+          Write_cfg
+          Var.search = Null
+        Endif
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''***UBUNTU***''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sInfo, "Ubuntu") <> 0 Or If InStr(sInfo, "Kubuntu") <> 0 Or If InStr(sInfo, "Xubuntu") <> 0 Or If InStr(sInfo, "Lubuntu") <> 0 Then
+      DISTRO_EXIST
+      os.ubuntu
+    Else If InStr(sInfo, "Edubuntu") <> 0 Or If InStr(sInfo, "Mythbuntu") <> 0 Or If InStr(sInfo, "Peppermint") <> 0 Or If InStr(sInfo, "Ubuntu-Netbook") <> 0 Or If InStr(sInfo, "Ubuntu-Server") <> 0 Then
+      DISTRO_EXIST
+      os.ubuntu
+    Else If InStr(sInfo, "KXStudio") <> 0 Or If InStr(sInfo, "quantOS") <> 0 Or If InStr(sInfo, "BigLinux") <> 0 Or If InStr(sInfo, "Linux Mint") <> 0 Then
+      DISTRO_EXIST
+      os.ubuntu
+    Else If InStr(sInfo, "Pinguy") <> 0 Or If InStr(sInfo, "Zorin") <> 0 Or If InStr(sInfo, "Deepin") <> 0 Or If InStr(sInfo, "Zeven") <> 0 Then
+      DISTRO_EXIST
+      os.ubuntu
+    Else If InStr(sInfo, "Ylmf") <> 0 Or If InStr(sInfo, "Blackbuntu") <> 0 Or If InStr(sInfo, "DarkRacer") <> 0 Or If InStr(sInfo, "Pear") <> 0 Then
+      DISTRO_EXIST
+      os.ubuntu
+    Else If InStr(sInfo, "BlankOn") <> 0 Or If InStr(sInfo, "DEFT") <> 0 Or If InStr(sInfo, "iGolaware") <> 0 Or If InStr(sInfo, "Caine") <> 0 Then
+      DISTRO_EXIST
+      os.ubuntu
+    Else If InStr(sInfo, "Netrunner") <> 0 Or If InStr(sInfo, "Kuki") <> 0 Or If InStr(sInfo, "Bodhi") <> 0 Or If InStr(sInfo, "Rebecca") <> 0 Then
+      DISTRO_EXIST
+      os.ubuntu
+    Else If InStr(sInfo, "Descent") <> 0 Or If InStr(sInfo, "DreamStudio") <> 0 Or If InStr(sInfo, "express") <> 0 Or If InStr(sInfo, "Joli OS") <> 0 Then
+      DISTRO_EXIST
+      os.ubuntu
+    Else If InStr(sInfo, "moonOS") <> 0 Or If InStr(sInfo, "CAELinux") <> 0 Or If InStr(sInfo, "Jolicloud") <> 0 Or If InStr(sInfo, "elementary") <> 0 Then
+      DISTRO_EXIST
+      os.ubuntu
+    Else If InStr(sInfo, "BackBox") <> 0 Or If InStr(sInfo, "Sn0wL1nuX") <> 0 Or If InStr(sInfo, "AriOS") <> 0 Or If InStr(sInfo, "GNOME Shell Remix") <> 0 Then
+      DISTRO_EXIST
+      os.ubuntu
+    Else If InStr(sIso_Isolinux_cfg, "BACKGROUND bg_redo.png") <> 0 Or If InStr(sIsolinux_txt, "BlankOn") <> 0 Or If InStr(sIsolinux_txt, "crunchbang") <> 0 Then
+      DISTRO_EXIST
+      os.ubuntu
+    Else If InStr(sLive_cfg, "Snowlinux") <> 0 Then
+      DISTRO_EXIST
+      os.ubuntu
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''''Panda-Rescue-CD''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sInfo, "MENU LABEL Start SafeCD") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Panda-Rescue-CD"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Panda-Rescue-CD is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Panda-Rescue-CD Start#"
+        Var.LINE2 = "label Panda-Rescue-CD-32-bit"
+        Var.LINE3 = "MENU LABEL Panda-Rescue-CD-32-bit"
+        Var.LINE4 = "kernel /yumi/Panda-Rescue-CD/live/vmlinuz1"
+        Var.LINE5 = "append initrd=/yumi/Panda-Rescue-CD/live/initrd1.img  live-media-path=/yumi/Panda-Rescue-CD/live boot=live union=aufs config quiet root=UUID=" & Trim$(Var.USB_UUID)
+        Var.LINE6 = "label Panda-Rescue-CD-64-bit"
+        Var.LINE7 = "MENU LABEL Panda-Rescue-CD-64-bit"
+        Var.LINE8 = "kernel /yumi/Panda-Rescue-CD/live/vmlinuz2"
+        Var.LINE9 = "append initrd=/yumi/Panda-Rescue-CD/live/initrd2.img  live-media-path=/yumi/Panda-Rescue-CD/live boot=live union=aufs config quiet root=UUID=" & Trim$(Var.USB_UUID)
+        Var.LINE10 = "#Panda-Rescue-CD End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''CrunchBang conf 3'''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sMenu_cfg, "CrunchBang Linux") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/CrunchBang"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("CrunchBang is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#CrunchBang Start#"
+        Var.LINE2 = "label CrunchBang"
+        Var.LINE3 = "MENU LABEL CrunchBang"
+        Var.LINE4 = "KERNEL /yumi/CrunchBang/live/vmlinuz1"
+        Var.LINE5 = "APPEND initrd=/yumi/CrunchBang/live/initrd1.img boot=live live-media-path=/yumi/CrunchBang/live config quickreboot quickusbmodules quiet root=UUID=" & Trim$(Var.USB_UUID)
+        Var.LINE6 = "#CrunchBang End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''BackTrack-05''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sInfo, "BackTrack Live CD") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/BackTrack-05"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("BackTrack-05 is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#BackTrack-05 Start#"
+        Var.LINE2 = "label BackTrack-05 Default"
+        Var.LINE3 = "MENU LABEL BackTrack-05 Text"
+        Var.LINE4 = "kernel /yumi/BackTrack-05/casper/vmlinuz"
+        Var.LINE5 = "append initrd=/yumi/BackTrack-05/casper/initrd.gz live-media-path=/yumi/BackTrack-05/casper file=/cdrom/yumi/BackTrack-05/preseed/custom.seed text boot=casper noprompt quiet splash -- root=UUID=" & Trim$(Var.USB_UUID)
+        Var.LINE6 = "label BackTrack-05 Forensics"
+        Var.LINE7 = "MENU LABEL BackTrack-05 Forensics"
+        Var.LINE8 = "kernel /yumi/BackTrack-05/casper/vmlinuz"
+        Var.LINE9 = "append initrd=/yumi/BackTrack-05/casper/initrdf.gz live-media-path=/yumi/BackTrack-05/casper file=/cdrom/yumi/BackTrack-05/preseed/custom.seed text boot=casper noprompt quiet splash -- root=UUID=" & Trim$(Var.USB_UUID)
+        Var.LINE10 = "#BackTrack-05 End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''PartedMagic conf 1'''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sBoot_Syslinux_cfg, "partedmagic.com") <> 0 Or If InStr(sBoot_Syslinux_cfg, "pmagic") <> 0 Then
+      DISTRO_EXIST
+      os.partedmagic
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''RIPLinuX'''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sBoot_Syslinux_cfg, "MENU TITLE RIPLinuX") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/RIPLinuX"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("RIPLinuX is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#RIPLinuX Start#"
+        Var.LINE2 = "label RIPLinuX-32-bit"
+        Var.LINE3 = "MENU LABEL RIPLinuX-32-bit"
+        Var.LINE4 = "kernel /yumi/RIPLinuX/boot/kernel32"
+        Var.LINE5 = "append initrd=/yumi/RIPLinuX/boot/rootfs.cgz vga=normal video=640x400 xlogin root=/dev/ram0 rw"
+        Var.LINE6 = "label RIPLinuX-64-bit"
+        Var.LINE7 = "MENU LABEL RIPLinuX-64-bit"
+        Var.LINE8 = "kernel /yumi/RIPLinuX/boot/kernel64"
+        Var.LINE9 = "append initrd=/yumi/RIPLinuX/boot/rootfs.cgz vga=normal video=640x400 xlogin root=/dev/ram0 rw"
+        Var.LINE10 = "#RIPLinuX End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''Vector Linux'''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sBoot_Isolinux_cfg, "MENU TITLE Vector Linux Live") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Vector"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Vector is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Vector Start#"
+        Var.LINE2 = "label Vector"
+        Var.LINE3 = "MENU LABEL Vector"
+        Var.LINE4 = "kernel /yumi/Vector/boot/vmlinuz"
+        Var.LINE5 = "append initrd=/yumi/Vector/boot/initrd.gz ramdisk_size=6666 root=/dev/ram0 rw from=/yumi/Vector/ vga=769 autoexec=startx"
+        Var.LINE6 = "#Vector End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''ImagineOS''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sBoot_Syslinux_cfg, "MENU TITLE ImagineOS") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/ImagineOS"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("ImagineOS is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#ImagineOS Start#"
+        Var.LINE2 = "label ImagineOS"
+        Var.LINE3 = "MENU LABEL ImagineOS"
+        Var.LINE4 = "KERNEL /yumi/ImagineOS/boot/vmlinuz"
+        Var.LINE5 = "APPEND initrd=/yumi/ImagineOS/boot/initrd.gz sgnfile=/yumi/ImagineOS/imagineos/livecd.sgn ramdisk_size=9999 from=/yumi/ImagineOS/ root=/dev/ram0 rw quiet splash=silent logo.nologo load=Skel Desktop changes=/imagineos/ kdm"
+        Var.LINE6 = "#ImagineOS End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''CTKArch''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sBoot_Syslinux_cfg, "MENU TITLE CTKArch ") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/CTKArch"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("CTKArch is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Shell "cp -rv " & Var.LIVE_MOUNT & "/boot " & Var.DISTRO_DIR Wait
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/*.sqfs " & Var.USB_MOUNT
+        FUN_PROGRESS
+        Var.LINE1 = "#CTKArch Start#"
+        Var.LINE2 = "label CTKArch"
+        Var.LINE3 = "MENU LABEL CTKArch"
+        Var.LINE4 = "KERNEL /yumi/CTKArch/boot/vmlinuz26"
+        Var.LINE5 = "APPEND initrd=/yumi/CTKArch/boot/archiso.img locale=en_US.UTF-8 keymap=us,us- quiet archisolabel=" & Var.USB_LABLE
+        Var.LINE6 = "#CTKArch End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''PCLinuxOS'''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_gfxboot_cfg, "theme=PCLinuxOS") <> 0 Or If InStr(sIso_gfxboot_cfg, "theme=Unity Linux") <> 0 Then
+      DISTRO_EXIST
+      os.pclinuxos
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''Mageia-Live'''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_gfxboot_cfg, "panel.f-key.fg=0x33358c") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Mageia-Live"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Mageia-Live is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Mageia-Live Start#"
+        Var.LINE2 = "label Mageia-Live"
+        Var.LINE3 = "MENU LABEL Mageia-Live"
+        Var.LINE4 = "kernel /yumi/Mageia-Live/boot/vmlinuz"
+        Var.LINE5 = "append initrd=/yumi/Mageia-Live/boot/cdrom/initrd.gz splash=silent init=linuxrc vga=788 root=UUID=" & Trim$(Var.USB_UUID)
+        Var.LINE6 = "#Mageia-Live End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''OpenSUSE''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If Exist(Var.LIVE_MOUNT & "/config.isoclient") = True Then
+      Var.Search = File.Load(Var.LIVE_MOUNT & "/config.isoclient")
+      DISTRO_EXIST
+      os.suse
+      
+    Else If Exist(Var.LIVE_MOUNT & "/rescue/help/English/EULA.txt") = True Then
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''Kaspersky''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Kaspersky"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Kaspersky is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Kaspersky Start#"
+        Var.LINE2 = "label Kaspersky"
+        Var.LINE3 = "MENU LABEL Kaspersky Rescue CD"
+        Var.LINE4 = "kernel /yumi/Kaspersky/boot/rescue"
+        Var.LINE5 = "append subdir=/yumi/Kaspersky root=/dev/ram0 init=/linuxrc looptype=squashfs loop=/yumi/Kaspersky/image.squashfs cdroot initrd=/yumi/Kaspersky/boot/rescue.igz noapic kav_lang=en quiet"
+        Var.LINE6 = "#Kaspersky End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+    Else If Exist(Var.LIVE_MOUNT & "/extract/CHANGELOG") = True Then
+      Var.Search = File.Load(Var.LIVE_MOUNT & "/extract/CHANGELOG")
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''AVG RescueCD''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      If InStr(Var.Search, "AVG Technologies") <> 0 Then
+        DISTRO_EXIST
+        Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/AVG-RescueCD"
+        If Exist(Var.DISTRO_DIR) = True Then
+          Message("AVG-RescueCD is already installed.")
+        Else
+          Mkdir Var.DISTRO_DIR
+          Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+          FUN_PROGRESS
+          Var.LINE1 = "#AVG-RescueCD Start#"
+          Var.LINE2 = "label AVG-RescueCD"
+          Var.LINE3 = "MENU LABEL AVG-RescueCD"
+          Var.LINE4 = "kernel /yumi/AVG-RescueCD/isolinux/vmlinuz"
+          Var.LINE5 = "append initrd=/yumi/AVG-RescueCD/isolinux/initrd.lzm init=linuxrc append max_loop=255 vga=791"
+          Var.LINE6 = "#AVG-RescueCD End#"
+          Write_cfg
+          Var.search = Null
+        Endif
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''Slitaz''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sBoot_Isolinux_cfg, "slitaz") <> 0 Then
+      DISTRO_EXIST
+      os.slitaz
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''''Openmamba''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sBoot_Isolinux_cfg, "root=live:LABEL=openmamba") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Openmamba"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Openmamba is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Openmamba Start#"
+        Var.LINE2 = "label Openmamba"
+        Var.LINE3 = "MENU LABEL Openmamba"
+        Var.LINE4 = "kernel /yumi/Openmamba/boot/vmlinuz"
+        Var.LINE5 = "append initrd=/yumi/Openmamba/boot/initrd.gz root=UUID=" & Trim$(Var.USB_UUID) & " live_dir=/yumi/Openmamba/LiveOS ro selinux=0 quiet splash vga=792"
+        Var.LINE6 = "#Openmamba End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''Knoppix'''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sBoot_Isolinux_cfg, "DEFAULT knoppix") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Knoppix"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Knoppix is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Knoppix Start#"
+        Var.LINE2 = "label Knoppix"
+        Var.LINE3 = "MENU LABEL Knoppix"
+        Var.LINE4 = "kernel /yumi/Knoppix/boot/isolinux/linux"
+        Var.LINE5 = "append noprompt knoppix_dir=yumi/Knoppix/KNOPPIX initrd=/yumi/Knoppix/boot/isolinux/minirt.gz edd=off ramdisk_size=100000 lang=en vt.default_utf8=0 apm=power-off video=vga16fb:off nomce loglevel=1 tz=localtime"
+        Var.LINE6 = "#Knoppix End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''DSL'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sBoot_Isolinux_cfg, "dsl") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/DSL"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Dam Small Linux is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#DSL Start#"
+        Var.LINE2 = "label Dam Small Linux "
+        Var.LINE3 = "MENU LABEL Dam Small Linux "
+        Var.LINE4 = "kernel /yumi/DSL/boot/isolinux/linux24"
+        Var.LINE5 = "append knoppix_dir=yumi/DSL/KNOPPIX ramdisk_size=100000 init=/etc/init lang=us apm=power-off vga=791 initrd=/yumi/DSL/boot/isolinux/minirt24.gz nomce noapic quiet BOOT_IMAGE=knoppix"
+        Var.LINE6 = "#DSL End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''LinHES''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sBoot_Isolinux_cfg, "LinHES") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/LinHES"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Linux Home Entertainment System is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#LinHES Start#"
+        Var.LINE2 = "label LinHES"
+        Var.LINE3 = "MENU LABEL LinHES"
+        '***** the following is surely wrong
+        
+        Var.LINE4 = "kernel /yumi/DSL/boot/isolinux/linux24"
+        
+        Var.LINE5 = "append knoppix_dir=yumi/DSL/KNOPPIX ramdisk_size=100000 init=/etc/init lang=us apm=power-off vga=791 initrd=/yumi/DSL/boot/isolinux/minirt24.gz nomce noapic quiet BOOT_IMAGE=knoppix"
+        '***** end of wrong
+        Var.LINE6 = "#LinHES End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      'Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''4MLinux'''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sBoot_Isolinux_cfg, "4MLinux") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/4MLinux"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("4MLinux is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#4MLinux Start#"
+        Var.LINE2 = "label 4MLinux"
+        Var.LINE3 = "MENU LABEL 4MLinux"
+        Var.LINE4 = "kernel /yumi/4MLinux/boot/bzImage"
+        Var.LINE5 = "append rw root=/dev/ram initrd=/yumi/4MLinux/boot/initrd.gz"
+        Var.LINE6 = "#4MLinux End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''RescueCD''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sBoot_Isolinux_cfg, "rescue.cpi") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/RescueCD"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("RescueCD is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Shell "cp -rv " & Var.LIVE_MOUNT & "/boot " & Var.DISTRO_DIR Wait
+        Shell "cp -rv " & Var.LIVE_MOUNT & "/custom " & Var.USB_MOUNT Wait
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/rescue.cpi " & Var.USB_MOUNT
+        FUN_PROGRESS
+        Var.LINE1 = "#RescueCD Start#"
+        Var.LINE2 = "label RescueCD"
+        Var.LINE3 = "MENU LABEL RescueCD"
+        Var.LINE4 = "kernel vesamenu.c32"
+        Var.LINE5 = "append /yumi/RescueCD/boot/isolinux/isolinux.cfg"
+        Var.LINE6 = "#RescueCD End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''Partition Wizard'''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sBoot_Isolinux_cfg, "Partition Wizard Boot Disc") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Partition-Wizard"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Partition-Wizard is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Partition-Wizard Start#"
+        Var.LINE2 = "label Partition-Wizard"
+        Var.LINE3 = "MENU LABEL Partition-Wizard"
+        Var.LINE4 = "kernel /yumi/Partition-Wizard/boot/bzImage"
+        Var.LINE5 = "append initrd=/yumi/Partition-Wizard/boot/tinycore.gz ramdisk_size=102400 root=/dev/ram0 rw"
+        Var.LINE6 = "#Partition-Wizard End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''Fedora 17'''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "Fedora 17") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Fedora-17"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Fedora-17 is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Fedora-17 Start#"
+        Var.LINE2 = "label Fedora-17"
+        Var.LINE3 = "MENU LABEL Fedora-17"
+        Var.LINE4 = "kernel /yumi/Fedora-17/isolinux/vmlinuz0"
+        Var.LINE5 = "append initrd=/yumi/Fedora-17/isolinux/initrd0.img root=UUID=" & Trim$(Var.USB_UUID) & " live_dir=/yumi/Fedora-17/LiveOS rootfstype=auto ro liveimg quiet  rhgb rd.luks=0 rd.md=0 rd.dm=0"
+        Var.LINE6 = "#Fedora-17 End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''''Fedora 16''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "Start Fedora 16") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Fedora-16"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Fedora-16 is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Fedora-16 Start#"
+        Var.LINE2 = "label Fedora-16"
+        Var.LINE3 = "MENU LABEL Fedora-16"
+        Var.LINE4 = "kernel /yumi/Fedora-16/EFI/boot/vmlinuz0"
+        Var.LINE5 = "append initrd=/yumi/Fedora-16/EFI/boot/initrd0.img root=UUID=" & Trim$(Var.USB_UUID) & " live_dir=/yumi/Fedora-16/LiveOS rootfstype=auto ro liveimg quiet  rhgb rd.luks=0 rd.md=0 rd.dm=0"
+        Var.LINE6 = "#Fedora-16 End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''''Fedora 15''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "Welcome to Fedora-15") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Fedora-15"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Fedora-15 is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Fedora-15 Start#"
+        Var.LINE2 = "label Fedora-15"
+        Var.LINE3 = "MENU LABEL Fedora-15"
+        Var.LINE4 = "kernel /yumi/Fedora-15/EFI/boot/vmlinuz0"
+        Var.LINE5 = "append initrd=/yumi/Fedora-15/EFI/boot/initrd0.img root=UUID=" & Trim$(Var.USB_UUID) & " live_dir=/yumi/Fedora-15/LiveOS rootfstype=auto ro liveimg quiet  rhgb rd_NO_LUKS rd_NO_M"
+        Var.LINE6 = "#Fedora-15 End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''''Fedora 14''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "Welcome to Fedora-14") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Fedora-14"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Fedora-14 is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Fedora-14 Start#"
+        Var.LINE2 = "label Fedora-14"
+        Var.LINE3 = "MENU LABEL Fedora-14"
+        Var.LINE4 = "kernel /yumi/Fedora-14/EFI/boot/vmlinuz0"
+        Var.LINE5 = "append initrd=/yumi/Fedora-14/EFI/boot/initrd0.img root=UUID=" & Trim$(Var.USB_UUID) & " live_dir=/yumi/Fedora-14/LiveOS rootfstype=auto ro liveimg quiet  rhgb rd_NO_LUKS rd_NO_M"
+        Var.LINE6 = "#Fedora-14 End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''''GNOME3-Fedora''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "CDLABEL=GNOME3") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/GNOME3-Fedora"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("GNOME3-Fedora is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#GNOME3-Fedora Start#"
+        Var.LINE2 = "label GNOME3-Fedora"
+        Var.LINE3 = "MENU LABEL GNOME3-Fedora"
+        Var.LINE4 = "kernel /yumi/GNOME3-Fedora/EFI/boot/vmlinuz0"
+        Var.LINE5 = "append initrd=/yumi/GNOME3-Fedora/EFI/boot/initrd0.img root=UUID=" & Trim$(Var.USB_UUID) & " live_dir=/yumi/GNOME3-Fedora/LiveOS rootfstype=auto ro liveimg quiet  rhgb rd_NO_LUKS rd_NO_M"
+        Var.LINE6 = "#GNOME3-Fedora End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''ROSA'''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "ROSA") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/ROSA"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("ROSA is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#ROSA Start#"
+        Var.LINE2 = "label ROSA"
+        Var.LINE3 = "MENU LABEL ROSA"
+        Var.LINE4 = "kernel /yumi/ROSA/isolinux/vmlinuz0"
+        Var.LINE5 = "append initrd=/yumi/ROSA/isolinux/initrd0.img root=UUID=" & Trim$(Var.USB_UUID) & " live_dir=/yumi/ROSA/LiveOS splash=silent rootfstype=auto ro liveimg quiet rhgb rd.luks=0 rd.md=0 rd.dm=0"
+        Var.LINE6 = "#ROSA End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''''Stella'''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "Stella") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Stella"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Stella Linux is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Stella Start#"
+        Var.LINE2 = "label Stella"
+        Var.LINE3 = "MENU LABEL Stella"
+        Var.LINE4 = "kernel /yumi/Stella/isolinux/vmlinuz0"
+        Var.LINE5 = "append initrd=/yumi/Stella/isolinux/initrd0.img root=UUID=" & Trim$(Var.USB_UUID) & " live_dir=/yumi/Stella/LiveOS rootfstype=auto ro liveimg quiet nodiskmount nolvmmount  rhgb vga=791 rd_NO_LUKS rd_NO_MD rd_NO_DM"
+        Var.LINE6 = "#Stella End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''''liberte''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "liberte") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/liberte"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("liberte is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#liberte Start#"
+        Var.LINE2 = "label liberte"
+        Var.LINE3 = "MENU LABEL liberte"
+        Var.LINE4 = "LINUX  /yumi/liberte/liberte/boot/kernel-x86.zi"
+        Var.LINE5 = "INITRD /yumi/liberte/liberte/boot/initrd-x86.xz"
+        Var.LINE6 = "APPEND loop=/multiboot/liberte/liberte/boot/root-x86.sfs cdroot_type=auto readonly cdroot_flags=noatime,noexec,flush,iocharset=iso8859-1,utf8,uid=2101,gid=9000,umask=0177,dmask=077 video=800x600-32 quiet memtest=1 loglevel=4"
+        Var.LINE7 = "#liberte End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''''Linpus'''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "CDLABEL=Lite") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Linpus"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Linpus is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Linpus Start#"
+        Var.LINE2 = "label Linpus"
+        Var.LINE3 = "MENU LABEL Linpus Linux"
+        Var.LINE4 = "kernel /yumi/Linpus/isolinux/vmlinuz"
+        Var.LINE5 = "append initrd=/yumi/Linpus/isolinux/initrd.img root=UUID=" & Trim$(Var.USB_UUID) & " live_dir=/yumi/Linpus/LiveOS rootfstype=auto ro liveimg quiet rhgb rd_NO_LUKS rd_NO_MD noiswmd pci=nommconf reboot=k"
+        Var.LINE6 = "#Linpus End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''Net-Sec-Toolkit''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "root=CDLABEL=nst") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Net-Sec-Toolkit"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Net-Sec-Toolkit is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Net-Sec-Toolkit Start#"
+        Var.LINE2 = "label Net-Sec-Toolkit"
+        Var.LINE3 = "MENU LABEL Network Security Toolkit"
+        Var.LINE4 = "kernel /yumi/Net-Sec-Toolkit/EFI/boot/vmlinuz0"
+        Var.LINE5 = "append initrd=/yumi/Net-Sec-Toolkit/EFI/boot/initrd0.img root=UUID=" & Trim$(Var.USB_UUID) & " live_dir=/yumi/Net-Sec-Toolkit/LiveOS rootfstype=auto ro liveimg quiet  liveimg ramdisk_size=2097152 5"
+        Var.LINE6 = "#Net-Sec-Toolkit End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''Kororaa'''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "Kororaa") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Kororaa"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Kororaa is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Kororaa Start#"
+        Var.LINE2 = "label Kororaa"
+        Var.LINE3 = "MENU LABEL Kororaa Linux"
+        Var.LINE4 = "kernel /yumi/Kororaa/EFI/boot/vmlinuz0"
+        Var.LINE5 = "append initrd=/yumi/Kororaa/EFI/boot/initrd0.img root=UUID=" & Trim$(Var.USB_UUID) & " live_dir=/yumi/Kororaa/LiveOS rootfstype=auto ro liveimg quiet  rhgb rd.luks=0 rd.md=0 rd.dm=0 "
+        Var.LINE6 = "#Kororaa End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''Scientific Linux 6.2'''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "root=live:CDLABEL=SL") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Sci-Linux-6-2"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Scientific Linux 6.2 is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Sci-Linux-6-2 Start#"
+        Var.LINE2 = "label Sci-Linux-6-2"
+        Var.LINE3 = "MENU LABEL Scientific Linux 6.2"
+        Var.LINE4 = "kernel /yumi/Sci-Linux-6-2/EFI/boot/vmlinuz0"
+        Var.LINE5 = "append initrd=/yumi/Sci-Linux-6-2/EFI/boot/initrd0.img root=UUID=" & Trim$(Var.USB_UUID) & " live_dir=/yumi/Sci-Linux-6-2/LiveOS  rootfstype=auto ro liveimg quiet  rhgb rd_NO_LUKS rd_NO_MD rd_NO_DM"
+        Var.LINE6 = "#Sci-Linux-6-2 End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''ClearOS'''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "ClearOS") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/ClearOS"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("ClearOS is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Shell "cp -rv " & Var.LIVE_MOUNT & "/isolinux " & Var.DISTRO_DIR Wait
+        Shell "cp -rv " & Var.LIVE_MOUNT & "/images " & Var.USB_MOUNT Wait
+        Shell "cp -rv " & Var.LIVE_MOUNT & "/repodata " & Var.USB_MOUNT Wait
+        Shell "cp -rv " & Var.LIVE_MOUNT & "/repoview " & Var.USB_MOUNT Wait
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/Packages " & Var.USB_MOUNT
+        FUN_PROGRESS
+        Var.LINE1 = "#ClearOS Start#"
+        Var.LINE2 = "label ClearOS"
+        Var.LINE3 = "MENU LABEL ClearOS"
+        Var.LINE4 = "kernel /yumi/ClearOS/isolinux/vmlinuz"
+        Var.LINE5 = "append initrd=/yumi/ClearOS/isolinux/initrd.img"
+        Var.LINE6 = "#ClearOS End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''Openxange'''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "openxange.org") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Openxange"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Openxange is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Openxange Start#"
+        Var.LINE2 = "label Openxange"
+        Var.LINE3 = "MENU LABEL Openxange"
+        Var.LINE4 = "kernel /yumi/Openxange/EFI/boot/vmlinuz0"
+        Var.LINE5 = "append initrd=/yumi/Openxange/EFI/boot/initrd0.img live_dir=/yumi/Openxange/LiveOS rootfstype=auto ro liveimg quiet  rhgb rd.luks=0 rd.md=0 rd.dm=0 root=UUID=" & Trim$(Var.USB_UUID)
+        Var.LINE6 = "#Openxange End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''PureDyne conf 2''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "dyne") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Puredyne"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Puredyne is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Puredyne Start#"
+        Var.LINE2 = "label Puredyne"
+        Var.LINE3 = "MENU LABEL Puredyne (Dynebolic)"
+        Var.LINE4 = "kernel /yumi/Puredyne/live/vmlinuz"
+        Var.LINE5 = "append initrd=/yumi/Puredyne/live/initrd.img boot=live live-media-path=/yumi/Puredyne/live quickreboot username=luther hostname=dynebolic union=aufs vga=792"
+        Var.LINE6 = "#Puredyne End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''Fuduntu'''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "root=live:CDLABEL=Fuduntu-") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Fuduntu"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Fuduntu is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Fuduntu Start#"
+        Var.LINE2 = "label Fuduntu"
+        Var.LINE3 = "MENU LABEL Fuduntu"
+        Var.LINE4 = "kernel /yumi/Fuduntu/EFI/boot/vmlinuz0"
+        Var.LINE5 = "append initrd=/yumi/Fuduntu/EFI/boot/initrd0.img root=UUID=" & Trim$(Var.USB_UUID) & " live_dir=/yumi/Fuduntu/LiveOS rootfstype=auto ro liveimg quiet  rhgb rd_NO_LUKS rd_NO_M"
+        Var.LINE6 = "#Fuduntu End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''FreeDOS'''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "www.freedos.org") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/freedos"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("FreeDOS is already installed.")
+      Else
+        Shell "cp -rv " & Var.LIVE_MOUNT & "/freedos " & Var.USB_MOUNT Wait
+        Shell "cp -rv " & Var.LIVE_MOUNT & "/*.img " & Var.USB_MOUNT & "/freedos" Wait
+        Var.LINE1 = "#FreeDOS Start#"
+        Var.LINE2 = "label FreeDOS"
+        Var.LINE3 = "MENU LABEL FreeDOS"
+        Var.LINE4 = "kernel /yumi/memdisk"
+        Var.LINE5 = "append initrd=/freedos/isolinux/data/FDBOOT.IMG"
+        Var.LINE6 = "#FreeDOS End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''GeeXboX'''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "Start GeeXboX") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/GeeXboX"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("GeeXboX is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/rootfs " & Var.USB_MOUNT
+        FUN_PROGRESS
+        Var.LINE1 = "#GeeXboX Start#"
+        Var.LINE2 = "label GeeXboX"
+        Var.LINE3 = "MENU LABEL GeeXboX"
+        Var.LINE4 = "kernel /yumi/GeeXboX/vmlinuz"
+        Var.LINE5 = "append initrd=/yumi/GeeXboX/initrd vga=789 persistent quiet splash loglevel=3"
+        Var.LINE6 = "#GeeXboX End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''CentOS''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "CDLABEL=CentOS-") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/CentOS"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("CentOS is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#CentOS Start#"
+        Var.LINE2 = "label CentOS"
+        Var.LINE3 = "MENU LABEL CentOS"
+        Var.LINE4 = "kernel /yumi/CentOS/EFI/boot/vmlinuz0"
+        Var.LINE5 = "append initrd=/yumi/CentOS/EFI/boot/initrd0.img root=UUID=" & Trim$(Var.USB_UUID) & " live_dir=/yumi/CentOS/LiveOS rootfstype=auto ro liveimg quiet nodiskmount nolvmmount  rhgb vga=791 rd.luks=0 rd.md=0 rd.dm=0"
+        Var.LINE6 = "#CentOS End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''Vidalinux'''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "LABEL vidalinux") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Vidalinux"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Vidalinux is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Vidalinux Start#"
+        Var.LINE2 = "label Vidalinux"
+        Var.LINE3 = "MENU LABEL Vidalinux"
+        Var.LINE4 = "kernel /yumi/Vidalinux/boot/sabayon"
+        Var.LINE5 = "append initrd=/yumi/Vidalinux/boot/sabayon.igz root=/dev/ram0 initrd=/yumi/Vidalinux/boot/sabayon.igz aufs init=/linuxrc cdroot subdir=/yumi/Vidalinux looptype=squashfs max_loop=64 loop=/yumi/Vidalinux/livecd.squashfs splash=silent,theme:sabayon console=tty1 quiet music --"
+        Var.LINE6 = "#Vidalinux End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''Mandriva-2011'''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "root=live:CDLABEL=Mandriva") <> 0 Then
+      DISTRO_EXIST
+      
+      os.fedora
+      '      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Mandriva-2011"
+      '     If Exist(Var.DISTRO_DIR) = True Then
+      '      Message("Mandriva-2011 is already installed.")
+      '   Else
+      '    Mkdir Var.DISTRO_DIR
+      '   Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+      '  FUN_PROGRESS
+      ' Var.LINE1 = "#Mandriva-2011 Start#"
+      'Var.LINE2 = "label Mandriva-2011"
+      '        Var.LINE3 = "MENU LABEL Mandriva-2011"
+      '       Var.LINE4 = "kernel /yumi/Mandriva-2011/isolinux/vmlinuz0"
+      '      Var.LINE5 = "append initrd=/yumi/Mandriva-2011/isolinux/initrd0.img root=UUID=" & Trim$(Var.USB_UUID) & " live_dir=/yumi/Mandriva-2011/LiveOS rootfstype=auto ro liveimg vga=788 desktop nopat rd_NO_LUKS rd_NO_MD noiswmd splash=silent"
+      '     Var.LINE6 = "#Mandriva-2011 End#"
+      '    Write_cfg
+      '   Var.search = Null
+      '      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''LinuxMint-DE''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "Mint") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/LinuxMint-DE"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("LinuxMint-DE is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#LinuxMint-DE Start#"
+        Var.LINE2 = "label LinuxMint-DE"
+        Var.LINE3 = "MENU LABEL LinuxMint-DE"
+        Var.LINE4 = "kernel /yumi/LinuxMint-DE/casper/vmlinuz"
+        Var.LINE5 = "append initrd=/yumi/LinuxMint-DE/casper/initrd.lz live-media-path=/yumi/LinuxMint-DE/casper rootfstype=vfat cdrom-detect/try-usb=true noprompt floppy.allowed_drive_mask=0 ignore_uuid boot=live quiet splash --"
+        Var.LINE6 = "#LinuxMint-DE End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      '---------
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''Kiwi-Linux-DE'''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIsolinux_txt, "Kiwi") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Kiwi"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Kiwi Linux is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#Kiwi Start#"
+        Var.LINE2 = "label Kiwi"
+        Var.LINE3 = "MENU LABEL Kiwi Linux"
+        Var.LINE4 = "kernel /yumi/Kiwi/casper/vmlinuz"
+        Var.LINE5 = "append initrd=/yumi/Kiwi/casper/initrd.lz live-media-path=/yumi/Kiwi/casper rootfstype=vfat cdrom-detect/try-usb=true noprompt floppy.allowed_drive_mask=0 ignore_uuid boot=live quiet splash --"
+        Var.LINE6 = "#Kiwi End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''porteus'''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sBoot_Syslinux_cfg, "porteus") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/porteus"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("porteus Linux is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+        FUN_PROGRESS
+        Var.LINE1 = "#porteus Start#"
+        Var.LINE2 = "label porteus"
+        Var.LINE3 = "MENU LABEL porteus"
+        Var.LINE4 = "KERNEL /yumi/porteus/boot/vmlinuz"
+        Var.LINE5 = "APPEND from_dir=/yumi/porteus/porteus/ initrd=/yumi/porteus/boot/initrd.xz vga=791 splash=silent quiet autoexec=xconf;telinit~4 changes=/yumi/porteus/ fromusb"
+        Var.LINE6 = "#porteus End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''CORE-17'''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sBoot_Isolinux_cfg, "Core17") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/Core17"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("Core17 is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Shell "cp -rv " & Var.LIVE_MOUNT & "/boot/. " & Var.DISTRO_DIR & "/" Wait
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/tce " & Var.USB_MOUNT & "/"
+        FUN_PROGRESS
+        Var.LINE1 = "#start Core17"
+        Var.LINE2 = "label Core17"
+        Var.LINE3 = "MENU LABEL Core17"
+        Var.LINE4 = "KERNEL /yumi/Core17/vmlinuz"
+        Var.LINE5 = "APPEND initrd=/yumi/Core17/core17.gz loglevel=3 cde waitusb=5 vga=788"
+        Var.LINE6 = "#end Core17"
+        Write_cfg
+        Var.search = Null
+      Endif
+      
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''boot=casper''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "boot=casper") <> 0 Or If InStr(sBoot_Isolinux_cfg, "boot=casper") <> 0 Or If InStr(sBoot_Syslinux_cfg, "boot=casper") <> 0 Or If InStr(sLive_cfg, "boot=casper") <> 0 Or If InStr(sMenu_cfg, "boot=casper") <> 0 Then
+      DISTRO_EXIST
+      os.ubuntu
+      '''''''''''''''''''''''''''''''''''''''''''''''''''''''Fedora Generic''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sIso_Isolinux_cfg, "root=live:CDLABEL=") <> 0 Then
+      DISTRO_EXIST
+      If InStr(sIso_Isolinux_cfg, "rd.luks=0") <> 0 Then
+        Var.LINE5 = "append initrd=/yumi/" & Var.DISTRO_Name & "/isolinux/initrd0.img root=UUID=" & Trim$(Var.USB_UUID) & " live_dir=/yumi/" & Var.DISTRO_Name & "/LiveOS rootfstype=auto ro rd.live.image quiet  rhgb rd.luks=0 rd.md=0 rd.dm=0"
+      Else If InStr(sIso_Isolinux_cfg, "rd_NO_LUKS") <> 0 Then
+        Var.LINE5 = "append initrd=/yumi/" & Var.DISTRO_Name & "/isolinux/initrd0.img root=UUID=" & Trim$(Var.USB_UUID) & " live_dir=/yumi/" & Var.DISTRO_Name & "/LiveOS rootfstype=auto ro liveimg quiet  rhgb rd_NO_LUKS vga=788 desktop nopat  rd_NO_MD noiswmd splash=silent"
+      Endif
+      os.fedora
+      
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''BackTrack-04''''''''''''''''''''''''''''''''''''''''''''''''''''
+      ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Else If InStr(sMenu_lst, "BackTrack") <> 0 Then
+      DISTRO_EXIST
+      Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/BackTrack-04"
+      If Exist(Var.DISTRO_DIR) = True Then
+        Message("BackTrack-04 is already installed.")
+      Else
+        Mkdir Var.DISTRO_DIR
+        Shell "cp -rv " & Var.LIVE_MOUNT & "/boot " & Var.DISTRO_DIR Wait
+        Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/casper " & Var.USB_MOUNT
+        FUN_PROGRESS
+        Var.LINE1 = "#BackTrack-04 Start#"
+        Var.LINE2 = "label BackTrack-04 Default"
+        Var.LINE3 = "MENU LABEL BackTrack-04 Text"
+        Var.LINE4 = "kernel /yumi/BackTrack-04/boot/vmlinuz"
+        Var.LINE5 = "append initrd=/yumi/BackTrack-04/boot/initrd.gz live-media-path=/casper BOOT=casper textonly boot=casper noprompt quiet splash -- root=UUID=" & Trim$(Var.USB_UUID)
+        Var.LINE6 = "label BackTrack-04 Forensics"
+        Var.LINE7 = "MENU LABEL BackTrack-04 Forensics"
+        Var.LINE8 = "kernel /yumi/BackTrack-04/boot/vmlinuz"
+        Var.LINE9 = "append initrd=/yumi/BackTrack-04/boot/initrdfr.gz live-media-path=/casper nopersistent boot=casper noprompt quiet splash -- root=UUID=" & Trim$(Var.USB_UUID)
+        Var.LINE10 = "#BackTrack-04 End#"
+        Write_cfg
+        Var.search = Null
+      Endif
+    Endif
+    '---------
+    
+  End With
+  
+End
+
+Public Sub Write_cfg()
+
+  Var.SYSLINUX_CFG = Open Var.USB_MOUNT & "/yumi/syslinux.cfg" For Append  'Edit the main Syslinux.cfg file
+  'Print #Var.SYSLINUX_CFG, "" 'add an empty line between distros (this line will need to be removed during removal :)
+  Print #Var.SYSLINUX_CFG, Var.LINE1
+  Print #Var.SYSLINUX_CFG, Var.LINE2
+  Print #Var.SYSLINUX_CFG, Var.LINE3
+  Print #Var.SYSLINUX_CFG, Var.LINE4
+  Print #Var.SYSLINUX_CFG, Var.LINE5
+  Print #Var.SYSLINUX_CFG, Var.LINE6
+  If Var.LINE7 <> Null Then
+    Print #Var.SYSLINUX_CFG, Var.LINE7
+    Print #Var.SYSLINUX_CFG, Var.LINE8
+    Print #Var.SYSLINUX_CFG, Var.LINE9
+    Print #Var.SYSLINUX_CFG, Var.LINE10
+  End If
+  If Var.MENU_LINE1 <> Null Then
+    Var.MENU_CFG = Open Var.USB_MOUNT & "/yumi/menu.lst" For Append
+    Print #Var.MENU_CFG, "default 0"
+    Print #Var.MENU_CFG, "timeout=0"
+    Print #Var.MENU_CFG, Var.MENU_LINE1
+    Print #Var.MENU_CFG, Var.MENU_LINE2
+    Print #Var.MENU_CFG, Var.MENU_LINE3
+    Print #Var.MENU_CFG, Var.MENU_LINE4
+    Print #Var.MENU_CFG, Var.MENU_LINE5
+    Var.MENU_CFG.Close
+  Endif
+  Var.SYSLINUX_CFG.Close
+
+End
+
+Public Sub DISTRO_EXIST()
+  
+  Var.sDistro_Exist = "yes"
+  
+End
+
+Public Sub MODIFY_SUSE()
+  
+  Dim fMbrid As File
+  Dim fuuid As File
+  Dim sSuse As String
+  Dim sSuseScript As String
+  
+  If Exist(Var.USB_MOUNT & "/boot/grub/mbrid") = True Then
+    Shell "rm -rf " & Var.USB_MOUNT & "/boot/grub/mbrid" Wait
+    fMbrid = Open Var.USB_MOUNT & "/boot/grub/mbrid" For Write Create
+    Print #fMbrid, Var.MBID
+    fMbrid.Close
+  Else
+    Shell "mkdir " & Var.USB_MOUNT & "/boot" Wait
+    Shell "mkdir " & Var.USB_MOUNT & "/boot/grub" Wait
+    fMbrid = Open Var.USB_MOUNT & "/boot/grub/mbrid" For Write Create
+    Print #fMbrid, Var.MBID
+    fMbrid.Close
+  Endif
+  If Exist(Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name & "/config.isoclient") = True Then
+    sSuse = File.Load(Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name & "/config.isoclient")
+    sSuse = Replace$(sSuse, "openSUSE", "yumi/" & Var.DISTRO_Name & "/openSUSE")
+    File.Save(Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name & "/config.isoclient", sSuse)
+  Else
+    Message.Error(Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name & "/config.isoclient is not found")
+  Endif
+  If Exist(User.Home & "/.yumi/suse") = False Then
+    Shell "rm -rf " & User.Home & "/.yumi/suse" Wait
+    If Exist(Var.DISTRO_DIR & "/boot/i386/loader/linux") = True Then
+      Shell "cp -rv " & Var.LIVE_MOUNT & "/boot/i386/loader/initrd " & User.Home & "/.yumi"
+    Else If Exist(Var.DISTRO_DIR & "/boot/x86_64/loader/linux") = True Then
+      Shell "cp -rv " & Var.LIVE_MOUNT & "/boot/x86_64/loader/initrd " & User.Home & "/.yumi"
+    Endif
+    fuuid = Open User.Home & "/.yumi/uuid" For Write Create
+    Print #fuuid, Trim$(Var.USB_UUID)
+    fuuid.Close
+    sSuseScript = Temp$
+    Copy "suse-modify-initrd.sh" To sSuseScript
+    Shell "chmod +x " & sSuseScript Wait
+    Message.Info("yumi is about to modify initrd.\nPlease wait, this may take several minutes.")
+    Shell "echo " & Var.Password & " | sudo -S " & sSuseScript Wait
+    Message.Info("Initrd Is Successfuly modified.")
+    If Exist(Var.DISTRO_DIR & "/boot/i386/loader/linux") = True Then
+      Shell "cp -rv " & User.Home & "/.yumi/initrd-mod " & Var.DISTRO_DIR & "/boot/i386/loader/"
+    Else
+      Shell "cp -rv " & User.Home & "/.yumi/initrd-mod " & Var.DISTRO_DIR & "/boot/x86_64/loader/"
+    Endif
+  Endif
+  
+End 
+
+Public Sub FUN_PROGRESS()
+  
+  Dim iDummyValue As Integer
+  
+  Var.iInitialSize = Var.iUSB_SIZE + 0
+  
+  With FMain.ProgressBar1
+    .value = 0
+    While Var.pFileCopy.state = Process.Running
+      Wait 0.1
+      Shell "df -Pk | grep " & Var.USBSelect & " | awk '{ print $4 }'" To Var.sCurrentSize
+      Var.iCurrentSize = Val(Var.sCurrentSize)
+      iDummyValue = Var.iUSB_SIZE - Var.iCurrentSize
+      Var.iPercentage = (iDummyValue / Var.iISO_SIZE)
+      .Value = Var.iPercentage
+    Wend
+    Wait 0.5
+    .value = 1
+    Exec ["sync"]
+    .value = 0
+    'Update.Update_List
+    If Var.DISTRO_DIR <> Var.USB_MOUNT & "/yumi/" & Var.DISTRO_DIR Then
+      'Message.Info(Var.ISO_NAME & " successfully extracted")
+    Endif
+    
+  End With
+  
+End

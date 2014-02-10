@@ -1,0 +1,725 @@
+' Gambas class file
+
+Public Sub _new()
+
+  Var.PRO_DIR = User.Home & "/.yumi"
+  Var.LIVE_MOUNT = Var.PRO_DIR & "/live"
+  
+  If Exist(Var.LIVE_MOUNT) = True Then
+    Shell "echo " & Var.Password & " | sudo -S  umount " & Var.LIVE_MOUNT Wait 'Umount it before we Open Form ;Lance :)
+  Endif
+    
+  If Exist(Var.PRO_DIR) = True Then
+    Shell "echo " & Var.Password & " | sudo -S  rm -rf " & Var.PRO_DIR Wait 'Remove it before we Open Form ;Lance :)
+  Endif
+
+End
+
+Public Sub Form_Open()
+
+'''''''''''''''''''''''''''''''''''''''''Begin Section Moved from _new()''''''''''''''''''''''''''''''''''''''Lance
+  Dim hFile As File
+  Dim sInputLine As String
+  Dim lineCtr As Integer
+  Dim sTempScript As String
+  
+  Shell "mkdir " & Var.PRO_DIR Wait 'Make the yumi directory once the form has loaded;Lance :)
+  
+  sTempScript = Temp$
+  Copy "detect-usb.sh" To sTempScript
+  Shell "chmod +x " & sTempScript Wait
+  Shell sTempScript Wait
+  
+  If Exist(Var.PRO_DIR & "/USB_DETECTION.txt") = True Then
+    hFile = Open Var.PRO_DIR & "/USB_DETECTION.txt" For Read
+    While Not Eof(hFile)
+      Line Input #hFile, sInputLine
+      Print Str(lineCtr) & Chr(9) & sInputLine
+      Inc lineCtr
+      ComboBox1.Add(sInputLine, lineCtr)
+    Wend
+    Close #hFile
+    Var.USB = Trim(ComboBox1.Text)
+    Var.USBSelect = String.Left(Var.USB, 9)
+    Var.USB_DRIVE = String.Left(Var.USB, 8)
+    Var.USB_LABLE = String.Mid(Var.USB, 11, 11)
+    Var.USB_PART = String.Mid(Var.USB, 6, 4)
+    'Shell "ls -l /dev/disk/by-uuid/ | grep " & Var.USB_PART & "1 | awk '{ for (i=NF;i>=1;i--) { if(s!= \" \"){s=s\" \"$i}else{ s=$i  }} {print s;s=\" \"}}' | awk '{ printf $3; }'" To Var.USB_UUID
+    Shell "ls -lQ /dev/disk/by-uuid/ | grep " & Var.USB_PART & " | cut -d \"" & "\\" & "\"" & "\"" & " -f2" To Var.USB_UUID
+    Shell "echo " & Var.Password & " | sudo -S  dd if=" & Var.USBSelect & " bs=1 count=4 skip=$((0x1b8))|hexdump -n4 -e " & "\'\"0x%x\"\'" To Var.MBID
+    Shell "df | grep " & Var.USBSelect To Var.sUSBMntChk
+    Shell "echo " & Var.Password & " | sudo -S  df | grep " & Var.USBSelect & " | awk '{ printf $6; }'" To Var.USB_MEDIA_MOUNT
+    Shell "mount | grep " & Var.USBSelect & " | cut -d \" \" -f5" To Var.sFile_System
+    
+    If Comp(Trim$(Var.sFile_System), "ext2") = 0 Or If Comp(Trim$(Var.sFile_System), "ext3") = 0 Or If Comp(Trim$(Var.sFile_System), "ext4") = 0 Or If Comp(Trim$(Var.sFile_System), "btrfs") = 0 Then
+      Message("YUMI currently only supports fat formatted drives!")
+    Endif
+      
+    Var.USB_MOUNT = Var.USB_MEDIA_MOUNT
+  Else
+    'Message.Error("YUMI Crashed!\nRestart YUMI to clean up the mess!")
+    'FMain.Close
+  Endif
+  '''''''''''''''''''''''''''''''''''''''''''End Section Moved from _new()''''''''''''''''''''''''''''''''''''''''''''''''''
+
+  If Exist(Application.Dir & "/yumi/.hidden/hashes")
+    'Shell "cat " & Application.Dir & "/yumi/.hidden/hashes" To Var.sHashReference
+    Var.sHashReference = File.Load(Application.Dir & "/yumi/.hidden/hashes")
+  Endif
+  system_details
+  FMain.Show
+  FMain.Center
+  TextBox1.SetFocus
+  TextLabel1.Text = "Status OK, Ready for action!"
+  If Var.USB = Null Then
+    Message.Error("No USB found (Step 1).\nInsert a USB drive and click Refresh Drives.")
+  Else If Exist(Var.USB_MOUNT) = False Then
+    Message.Error("Drive " & Var.USBSelect & "(" & Var.USB_LABLE & ") is not mounted in /media.\nPlease mount usb via file manager and restart YUMI.")
+  Quit 'Still need to quit; Lance
+  Else If Var.USB <> Null Then
+    Update.Update_List
+  Endif
+  
+  'Stuff done when the form is opened added by Lance
+  DistroBox.Index = 0 'Select the first Item in the Distrobox
+  Distros.DistroName = DistroBox.Text 'Current.Text is for newer gambas  versions, use .Text
+  DistroBox.SetFocus 'Highlight the selected item
+
+End
+
+Public Sub ComboBox1_Click()
+
+  Var.USB = Trim(ComboBox1.Text)
+  Var.USBSelect = String.Left(Var.USB, 9)
+  Var.USB_DRIVE = String.Left(Var.USB, 8)
+  Var.USB_LABLE = String.Mid(Var.USB, 11, 11)
+  Var.USB_PART = String.Mid(Var.USB, 6, 3)
+  'Shell "ls -l /dev/disk/by-uuid/ | grep " & Var.USB_PART & "1 | awk '{ for (i=NF;i>=1;i--) { if(s!= \" \"){s=s\" \"$i}else{ s=$i  }} {print s;s=\" \"}}' | awk '{ printf $3; }'" To Var.USB_UUID
+  Shell "ls -lQ /dev/disk/by-uuid/ | grep " & Var.USB_PART & " | cut -d \"" & "\\" & "\"" & "\"" & " -f2" To Var.USB_UUID
+  Shell "echo " & Var.Password & " | sudo -S  dd if=" & Var.USBSelect & " bs=1 count=4 skip=$((0x1b8))|hexdump -n4 -e " & "\'\"0x%x\"\'" To Var.MBID
+  Shell "echo " & Var.Password & " | sudo -S  df | grep " & Var.USBSelect & " | awk '{ printf $6; }'" To Var.USB_MEDIA_MOUNT
+  Shell "mount | grep " & Var.USBSelect & " | cut -d \" \" -f5" To Var.sFile_System
+  Var.USB_MOUNT = Var.USB_MEDIA_MOUNT
+  If Var.USB = Null Then
+    Message.Error("No USB found (Step 1).")
+  Else If Exist(Var.USB_MOUNT) = False Then
+    Message.Error("Drive " & Var.USBSelect & "(" & Var.USB_LABLE & ") is not mounted in /media.\nPlease mount usb via file manager and restart YUMI.")
+  Else If Var.USB <> Null Then
+    Update.Update_List
+    Remove_Dist ' See if we need to make the Remove Distro Button Visible/Invisible;Lance
+  Endif
+
+End
+''''''''''''''''''''''''''''''''''''''''''''''''''''BROWSE ISO''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Public Sub Browse_Click()
+
+  Dialog.Path = User.Home
+  Dialog.Title = "Choose an ISO file"
+  Dialog.Filter = ["*.iso", "ISO File"]
+  TextBox1.Clear
+  If Dialog.OpenFile(False) Then
+    TextBox1.Insert(Null)
+    Shell "rm -r " & Var.PRO_DIR & "/iso" Wait
+  Else
+    Var.ISOPATH = Dialog.Path
+    TextBox1.Insert(Var.ISOPATH)
+    Shell "echo iso_exist > " & Var.PRO_DIR & "/iso" Wait
+  Endif
+
+End
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Public Sub Create_Click()
+
+  Dim iQuestion As Integer
+  Dim usb_uuid_file As File
+
+  Var.ISOPATH = Dialog.Path
+  Var.LABLE_EXTRACT = "Extracting ISO to USB"
+  Var.ISO_LINK = Var.ISOPATH
+  Var.ISO_NAME = (File.Name(Var.ISO_LINK))
+  Var.DISTRO_Name = (File.BaseName(Var.ISO_LINK))
+  Print Var.DISTRO_NAME
+  If Var.pFileCopy = Null Or If Var.pFileCopy.State = Process.Stopped Then
+    If Var.USB = Null Then
+      Message.Error("No USB found (Step 1).")
+      Var.ISO_LINK = Null
+      TextBox1.clear
+    Else If Var.ISOPATH = Null Then
+      Message.Error("Select an ISO (Step 2).")
+    Else If Var.USB <> Null And Var.ISOPATH <> Null Then
+      Shell "du -k " & Shell$(Var.ISO_LINK) & " " & "| cut -f1" To Var.ISO_SIZE
+      Shell "df -Pk | grep " & Var.USBSelect & " | awk '{ print $4 }'" To Var.USB_SIZE
+      'Print ("ISO Size is " & Trim$(Var.ISO_SIZE))
+      'Print ("USB Size is " & Trim$(Var.USB_SIZE))
+      If Var.USB_SIZE <> Null And If Exist(Var.PRO_DIR & "/iso") = True Then
+        Var.iISO_SIZE = CInt(Val(Var.ISO_SIZE))
+        Var.iUSB_SIZE = CInt(Val(Var.USB_SIZE))
+        If (Var.iISO_SIZE > Var.iUSB_SIZE) = True Then
+          Message.Error(Var.USBSelect & " Not enough space on your USB Drive!")
+          TextBox1.clear
+          Var.ISO_LINK = Null
+        Else
+          If Exist(Var.LIVE_MOUNT) = False Then
+            Mkdir Var.LIVE_MOUNT
+            Shell "echo " & Var.Password & " | sudo -S mount -o loop  " & Shell$(Var.ISO_LINK) & " " & Var.LIVE_MOUNT Wait
+          Else If Exist(Var.LIVE_MOUNT) = True Then
+            Shell "echo " & Var.Password & " | sudo -S  sudo umount " & Var.LIVE_MOUNT Wait
+            Shell "echo " & Var.Password & " | sudo -S mount -o loop  " & Shell$(Var.ISO_LINK) & " " & Var.LIVE_MOUNT Wait
+          Endif
+          TextBox1.clear
+          Wait
+          'FileSize = ((Stat(Var.ISO_LINK).Size / 1024) / 1024)
+          'Message.Info(FileSize & " MB")
+          iQuestion = Message.Question(User.Name & ", Please review the following:-\n\nSelected ISO :: " & Var.ISO_NAME & " \nSelected USB :: " & "/dev/" & Var.USB_PART & " (" & Var.USB_LABLE & ")" & ".\n\nWhat would you like to do?", "Install", "Quit ")
+          If iQuestion = 1 Then
+
+            usb_uuid_file = Open Var.PRO_DIR & "/usb-uuid" For Write Create
+            Print #usb_uuid_file, Trim$(Var.USB_UUID)
+            usb_uuid_file.Close
+            'Shell "echo " & Var.USB_UUID & " > " & Var.PRO_DIR & "/usb-uuid" Wait
+            Shell "echo " & Var.DISTRO_Name & " > " & Var.PRO_DIR & "/distro-name" Wait
+            Shell "echo " & Var.USB_MOUNT & " > " & Var.PRO_DIR & "/usb-mount" Wait
+            Shell "echo " & Var.USB_LABLE & " > " & Var.PRO_DIR & "/usb-label" Wait
+            'hash.md5sum
+            INSTALL_DISTRO
+          Endif
+        Endif
+      Endif
+    Endif
+  Else If Var.pFileCopy.state = Process.Running Then
+    Message.Info("Please wait.\n Installing " & Var.ISO_NAME)
+  Endif
+
+End
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''INSTALL DISTROS''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Public Sub INSTALL_DISTRO()
+
+  If Exist(Var.USB_MOUNT & "/yumi/syslinux.cfg") = False Then
+    TextLabel1.Text = "Installing Syslinux."
+    INSTALL_SYSLINUX
+    TextLabel1.Text = "Extracting ISO to USB."
+    Wait
+    Add.Add_Distro
+    TextLabel1.Text = "Updating syslinux.cfg file."
+    Wait
+    Update.Update_List
+    TextLabel1.Text = "Configuration Updated" 'added by Lance
+    Shell "echo " & Var.Password & " | sudo -S  umount " & Var.LIVE_MOUNT Wait
+    Shell "rm -rf " & Var.LIVE_MOUNT Wait
+    Var.ISOPATH = Null
+    TextLabel1.Text = "ISO Added, Status OK" 'added by Lance
+  Else
+    TextLabel1.Text = "Extracting ISO to USB."
+    Wait
+    Add.Add_Distro
+    TextLabel1.Text = "Updating syslinux.cfg file."
+    Wait
+    Update.Update_List
+    TextLabel1.Text = "Configuration Updated" 'added by Lance
+    Shell "echo " & Var.Password & " | sudo -S  umount " & Var.LIVE_MOUNT Wait
+    Shell "rm -rf " & Var.LIVE_MOUNT Wait
+    Var.ISOPATH = Null
+  Endif
+  If Var.sDistro_Exist <> "yes" Then
+    Message.Info(Var.ISO_NAME & " is not supported yet \nPlease email this to usbyumi@gmail.com")
+    Update.Update_List
+  Endif
+  Shell "rm -r " & Var.PRO_DIR & "/iso" Wait
+  TextLabel1.Text = "ISO Added, Status OK" 'added by Lance
+  Remove_Dist ' See if we need to make the Remove Distro Button Visible/Invisible;Lance
+End
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''INSTALL SYSLINUX''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Public Sub INSTALL_SYSLINUX()
+
+  If Exist(Var.USB_MOUNT & "/yumi") = True Then
+    Shell "echo " & Var.Password & " | sudo -S dd bs=440 conv=notrunc count=1 if=/usr/lib/syslinux/mbr.bin of=" & Var.USB_DRIVE Wait
+    If Comp(Trim$(Var.sFile_System), "ext2") = 0 Or If Comp(Trim$(Var.sFile_System), "ext3") = 0 Or If Comp(Trim$(Var.sFile_System), "ext4") = 0 Or If Comp(Trim$(Var.sFile_System), "btrfs") = 0 Then
+      'Message("YUMI currently only supports fat formatted drives")
+      Shell "mkdir " & Var.USB_MOUNT & "/yumi" Wait
+      Shell "echo " & Var.Password & " | sudo -S sudo extlinux -i " & Var.USB_MOUNT & "/yumi " Wait
+      Shell "cp -vr " & Application.Path & "/yumi/." & " " & Var.USB_MOUNT & "/yumi/" Wait
+    Else
+      Shell "echo " & Var.Password & " | sudo -S syslinux -i -d /yumi " & Var.USBSelect Wait
+      Shell "cp -vr " & Application.Path & "/yumi/." & " " & Var.USB_MOUNT & "/yumi/" Wait
+    Endif
+  Else If Exist(Var.USB_MOUNT & "/yumi") = False Then
+    Mkdir Var.USB_MOUNT & "/yumi"
+    Shell "echo " & Var.Password & " | sudo -S dd bs=440 conv=notrunc count=1 if=/usr/lib/syslinux/mbr.bin of=" & Var.USB_DRIVE Wait
+    If Comp(Trim$(Var.sFile_System), "ext2") = 0 Or If Comp(Trim$(Var.sFile_System), "ext3") = 0 Or If Comp(Trim$(Var.sFile_System), "ext4") = 0 Or If Comp(Trim$(Var.sFile_System), "btrfs") = 0 Then
+      Shell "echo " & Var.Password & " | sudo -S sudo extlinux -i " & Var.USB_MOUNT & "/yumi " Wait
+      Shell "cp -vr " & Application.Path & "/yumi/." & " " & Var.USB_MOUNT & "/yumi/" Wait
+    Else
+      Shell "echo " & Var.Password & " | sudo -S syslinux -i -d /yumi " & Var.USBSelect Wait
+      Shell "cp -vr " & Application.Path & "/yumi/." & " " & Var.USB_MOUNT & "/yumi/" Wait
+    Endif
+  Endif
+
+End
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''LIST DISTROS''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Public Sub ListDistro_Click()
+
+  If Var.pFileCopy = Null Or If Var.pFileCopy.State = Process.Stopped Then
+    If Var.USB = Null Then
+      Message.Error("No USB found (Step 1)...")
+    Else If Var.USB <> Null And If Var.USB_MOUNT <> Null Then
+      If Exist(Var.USB_MOUNT & "/yumi/syslinux.cfg") = False Then
+        Message.Error("YUMI is not installed on " & Var.USBSelect & ".")
+      Else
+        Update.Update_List
+          Remove_Dist ' See if we need to make the Remove Distro Button Visible/Invisible;Lance
+      Endif
+    Endif
+    Exec ["sync"] Wait
+  Else If Var.pFileCopy.state = Process.Running Then
+    Message.Info("Extracting ISO To USB.")
+  Endif
+
+End
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''REMOVE''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Public Sub ListBox1_Select() 'added by Lance to enable distro removal button 
+
+ ListBox1.SetFocus 'Highlight the selected item
+ Remove_Dist
+  
+End
+
+Public Sub Remove_Dist() 'added by Lance to enable/disable distro removal button 
+'Message(ListBox1.Text) 'Current.Text is for newer gambas  versions, use .Text for versions prior to 3.2?
+  If ListBox1.Text <> Null
+   Remove.Visible = True
+  Else 
+  Remove.Visible = False
+  End If
+  
+End
+
+
+Public Sub Remove_Click() 'Removing Distributions; Remarks Lance
+
+  Dim sBegDelim, sBegDelim1, sEndDelim, sEndDelim1 As String
+  Dim Ret As String
+  Dim iQuestion_Remove As Integer
+
+  Var.SELECT_REMOVE = ListBox1.Text
+  If Var.SELECT_REMOVE = Null Then
+    Message.Info("Please select a Distro from the list")
+  Else
+     iQuestion_Remove = Message.Question("Do you really want to uninstall " & Var.SELECT_REMOVE, " Uninstall ", " Quit ")
+  Endif
+  If iQuestion_Remove = 1 Then
+    If Var.SELECT_REMOVE = Null Then
+      Message("Please select a Distro from the list.")
+    Else
+      ListBox1.Clear
+      sBegDelim = "#" & Var.SELECT_REMOVE & " Start#"
+      sEndDelim = "#" & Var.SELECT_REMOVE & " End#"
+      sBegDelim1 = "#start " & Var.SELECT_REMOVE
+      sEndDelim1 = "#end " & Var.SELECT_REMOVE
+      TextLabel1.Text = "Removing Distro" 'edited by Lance
+      Wait
+      Shell "du -ck " & Var.USB_MOUNT & "/yumi/" & Var.SELECT_REMOVE & " " & "|grep total | cut -f1" To Var.sFolderSizeRemove 'Sets File Removal Progress value;Remarks, Lance 
+      status.FUN_PROGRESS_REMOVE
+      If Exist(Var.USB_MOUNT & "/yumi/syslinux.cfg") = True Then
+        Ret = File.Load(Var.USB_MOUNT & "/yumi/syslinux.cfg")
+        If InStr(Ret, sBegDelim) Then
+          Shell "sed -i \"/^" & sBegDelim & "/,/^" & sEndDelim & "/d\" " & Var.USB_MOUNT & "/yumi/syslinux.cfg" Wait 'Original Line
+        Else If InStr(Ret, sBegDelim1) Then
+          Shell "sed -i \"/^" & sBegDelim1 & "/,/^" & sEndDelim1 & "/d\" " & Var.USB_MOUNT & "/yumi/syslinux.cfg" Wait 'Original Line 
+        Endif
+      Endif
+          Shell "sed -i \'/./,/^$/!d\' " & Var.USB_MOUNT & "/yumi/syslinux.cfg" Wait 'remove only consecutive empty lines (keep it clean) 'Added by Lance 
+      'Shell "sed -i \'/./!d\' " & Var.USB_MOUNT & "/yumi/syslinux.cfg" Wait 'Original Line
+      Update.Update_List
+        Remove_Dist ' Check if we need to make the Remove Distro Button Visible/Invisible;Lance 
+      Exec ["sync"] Wait
+      'TextLabel1.Text = Null
+      TextLabel1.Text = "Distro Removed, Status OK"  'added by Lance
+      'Message.Info(Var.SELECT_REMOVE & "  is successfuly removed.")
+    Endif
+  Endif
+
+End
+''''''''''''''''''''''''''''''''''''''''''''''''''''EDIT SYSLINUX.CFG'''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Public Sub Edit_Click()
+
+  Dim Ret As String
+
+  If Var.USBSelect = Null Then
+    Message.Error("No USB found (Step 1).")
+  Else If Var.USB <> Null And If Var.USB_MOUNT <> Null Then
+    If Exist(Var.USB_MOUNT & "/yumi/syslinux.cfg") = False Then
+      Message.Error("syslinux.cfg file is not found in yumi directory.")
+    Else
+      Exec ["which", "kate"] To Ret
+      If InStr(Ret, "kate") Then
+        Shell "kate " & Var.USB_MOUNT & "/yumi/syslinux.cfg"
+      Else
+        Exec ["which", "gedit"] To Ret
+        If InStr(Ret, "gedit") Then
+          Shell "gedit " & Var.USB_MOUNT & "/yumi/syslinux.cfg"
+        Else
+          Exec ["which", "kwrite"] To Ret
+          If InStr(Ret, "kwrite") Then
+            Shell "kwrite " & Var.USB_MOUNT & "/yumi/syslinux.cfg"
+          Else
+            Message.Info("YUMI could not find default editor of host system. Edit syslinux.cfg file manually.\nPlease email to usbyumi@gmail.com for inclussion.")
+          Endif
+        Endif
+      Endif
+    Endif
+  Else If Var.USB <> Null And If Var.sUSBMntChk <> Null Then
+    If Exist(Var.USB_MOUNT & "/yumi/syslinux.cfg") = False Then
+      Message.Error("syslinux.cfg file is not found in yumi directory.")
+    Else
+      Exec ["which", "kate"] To Ret
+      If InStr(Ret, "kate") Then
+        Shell "kate " & Var.USB_MOUNT & "/yumi/syslinux.cfg"
+      Else
+        Exec ["which", "gedit"] To Ret
+        If InStr(Ret, "gedit") Then
+          Shell "gedit " & Var.USB_MOUNT & "/yumi/syslinux.cfg"
+        Else
+          Exec ["which", "kwrite"] To Ret
+          If InStr(Ret, "kwrite") Then
+            Shell "kwrite " & Var.USB_MOUNT & "/yumi/syslinux.cfg"
+          Endif
+        Endif
+      Endif
+    Endif
+  Endif
+
+End
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''INSTALL BUTTON'''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Public Sub Install_Click()
+
+  If Var.pFileCopy = Null Or If Var.pFileCopy.State = Process.Stopped Then
+    If Var.USBSelect = Null Then
+      Message.Error("No USB found (Step 1).")
+    Else
+       If Comp(Trim$(Var.sFile_System), "ext2") = 0 Or If Comp(Trim$(Var.sFile_System), "ext3") = 0 Or If Comp(Trim$(Var.sFile_System), "ext4") = 0 Or If Comp(Trim$(Var.sFile_System), "btrfs") = 0 Then
+          Shell "echo " & Var.Password & " | sudo -S dd bs=440 conv=notrunc count=1 if=/usr/lib/syslinux/mbr.bin of=" & Var.USB_DRIVE Wait
+          Shell "echo " & Var.Password & " | sudo -S sudo extlinux -i " & Var.USB_MOUNT & "/yumi" Wait
+          Shell "cp -vr " & Application.Path & "/yumi/." & " " & Var.USB_MOUNT & "/yumi/" Wait
+         Else
+          Shell "echo " & Var.Password & " | sudo -S dd bs=440 conv=notrunc count=1 if=/usr/lib/syslinux/mbr.bin of=" & Var.USB_DRIVE Wait
+          Shell "echo " & Var.Password & " | sudo -S syslinux -i -a -d /yumi " & Var.USBSelect Wait
+          Shell "cp -vr " & Application.Path & "/yumi/." & " " & Var.USB_MOUNT & "/yumi/" Wait
+       Endif
+        Message.Info("Syslinux Installed")
+    Endif
+  Else If Var.pFileCopy.state = Process.Running Then
+    Message.Info("Extracting ISO To USB.")
+  Endif
+
+End
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''QUIT'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Public Sub Form_Close()
+
+ If Distros.pDownload <> Null And If Distros.pDownload.state = Process.Running Then 
+ Distros.pDownload.Kill  'For Distros Wget Process by Lance
+ Message("You currently have Downloads progressing\nYou can resume them next time you run YUMI")
+ Endif
+                    
+  If Var.pFileCopy = Null Or If Var.pFileCopy.State = Process.Stopped Then
+    TextLabel1.Text = "Please Wait "
+    Wait
+    If Exist(Var.USB_MOUNT) = True Then
+      Exec ["sync"] Wait
+    Endif
+    If Exist(Var.LIVE_MOUNT) = True Then
+      Shell "echo " & Var.Password & " | sudo -S  sudo umount " & Var.LIVE_MOUNT Wait
+      Shell "rm -rf " & Var.LIVE_MOUNT Wait
+    Endif
+    If Exist(Var.PRO_DIR) = True Then
+      Shell "rm -rf " & Var.PRO_DIR Wait
+    Endif
+    Flush
+    FMain.Close
+    Quit
+  Else If Var.pFileCopy.state = Process.Running Then
+    Message.Info("Extracting ISO To USB.")
+  Endif
+   
+End
+
+Public Sub Close_Click()
+  
+  Form_Close
+  
+End
+
+Public Sub system_details()
+
+End
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''End'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Public Sub DistroBox_Click()
+  
+End
+
+Public Sub DistroBox_Select() ' Section by Lance
+'Dim USBSIZER As String
+'Dim iUSBSIZER As Integer
+ 'Shell "df -Pk | grep " & Var.USB_MOUNT & " | awk '{ print $4 }'" To USBSIZER
+  'iUSBSIZER = Val(USBSIZER)
+   'Message(iUSBSIZER) 
+'DistroBox.Refresh
+DistroBox.SetFocus 'Highlight the selected item
+Download.Visible = True
+HomePage.Visible = True
+
+ 'Lets set those Distro Variables
+Distros.DistroName = DistroBox.Text 'Current.Text is for newer gambas  versions, use .Text
+If DistroBox.Text = "4MLinux" Then Distros.DistroName = ("MLinux") 'remove the number 4 to access the MLinux variable 'Current.Text is for newer gambas  versions, use .Text
+Distros.DistroHome = (Eval("Distros." & Distros.DistroName & "[1]"))
+Distros.DistroDownload = (Eval("Distros." & Distros.DistroName & "[2]"))
+Distros.ISOName = (Eval("Distros." & Distros.DistroName & "[3]"))
+DistroFileName.Text = Distros.ISOName
+Distros.sDistroSize = (Eval("Distros." & Distros.DistroName & "[4]"))
+Distros.iDistroSize = Val(Distros.sDistroSize)  ' was  Distros.iDistroSize = Val(Replace$(Distros.sDistroSize, ", ", "")) ' but fixed further for translation
+'Message(Distros.iDistroSize)
+Distros.iTotalDistroSize = Distros.iDistroSize + Distros.iDistroSize 'Get Total Distro Size of Items Clicked ...do something with this (Overall Progressbar?)
+HomePage.Text = "Visit " & Distros.DistroName & " Homepage " 'Redraw the proper Distro Homepage on button
+Distros.DistroAbout = (Eval("Distros." & Distros.DistroName & "[6]"))
+'DistroInfo.Refresh
+DistroInfo.Text = Distros.DistroAbout
+ISOSize.Text = Distros.sDistroSize & " bytes"
+
+Set_Progress 'Find out How much of the file has been downloaded
+FMain.DownloadProgress.Value = Distros.iPercentage ' Draw Progress in Percentage on the Bar
+
+'Does the Download Exist
+If Exist(user.home & "/" & Distros.ISOName)
+ Distros.sDownSize = Stat(user.home & "/" & Distros.ISOName).Size
+ Distros.iDownSize = Val(Distros.sDownSize)
+'Shell "md5sum " & Distros.ISOName To Distros.MD5
+'Exec ["md5sum", Distros.ISOName] To Distros.MD5
+ 'Message(Distros.MD5)
+End If
+
+'Resume Download
+If Distros.iDownSize < Distros.iDistroSize And Distros.DownloadClicked = "Yes"
+Download.Enabled = False
+'Message(Distros.iDistroSize & "=" & Distros.iDownSize)
+Download.Text = "Now Downloading " & Distros.DistroName
+Else
+Download.Enabled = True
+'Message(Distros.iDistroSize & "=" & Distros.iDownSize)
+Download.Text = "Resume " & Distros.DistroName & " Download"
+End If
+
+'Download is Complete
+If Distros.iDownSize = Distros.iDistroSize
+'Message(Distros.iDistroSize & " = " & Distros.iDownSize)
+Download.Enabled = False
+Download.Text = Distros.DistroName & " Download Finished"
+End If
+
+If Not Exist(user.home & "/" & Distros.ISOName)
+'Download doesn't exist... let em Download
+Download.Enabled = True
+Download.Text = "Download  " & Distros.DistroName 'Redraw the proper Download Distro ISO on button
+End If
+  
+End
+
+Public Sub DistroInfo_MouseDown()
+  
+' If Mouse.Left = True Then
+' If Mouse.X >= 0 And Mouse.Y >= 0 And Mouse.X <= DistroInfo.Width And
+' Mouse.y <= DistroInfo.Height Then
+' Desktop.Open("http://" & Distros.DistroHome)
+' Endif
+' Endif
+  
+End
+
+Public Sub ISOFrame_MouseDown()
+  
+End
+
+Public Sub DownloadProgress_MouseDown()
+  
+End
+
+Public Sub ISOSize_MouseDown()
+  
+End
+
+Public Sub DistroFileName_MouseDown()
+  
+End
+
+Public Sub HomePage_Click()
+    
+        'Desktop.Open("http://" & Distros.DistroHome)' For newer Gambas
+        Shell "xdg-open http://" & Distros.DistroHome
+
+End
+
+Public Sub Download_Click()
+  
+  Distros.pDownload = Shell "wget -c -P " & User.Home & " " & Distros.DistroDownload ' Was Exec [" wget -c ", DIstros.Ubuntu_Desktop[2]]"
+  Distros.DownloadClicked = "Yes"
+  Download.Enabled = False 'DIsable (Grey Out) the Download Button
+  Download.Text = "Now Downloading " & Distros.DistroName ' Set Text to Downloading
+  'Message(Distros.pDownload.State)
+  Distros.Download_Progress 'Call Animation of Progress Bar
+  'Exec ["sync"] Wait
+  
+End
+
+Public Sub Set_Progress()
+  
+     If Exist(user.home & "/" & Distros.ISOName)
+      Distros.sCurrentSize = Stat(User.Home & "/" & Distros.ISOName).Size
+      Distros.iCurrentSize = Val(Distros.sCurrentSize)
+      Distros.iPercentage = (Distros.iCurrentSize / Distros.iDistroSize) 'Distros.DistroSize
+      Distros.iTotalCurrentSize = Distros.iCurrentSize + Distros.iCurrentSize ' Do something with this(Make an overall ProgressBar)
+      Else
+      Distros.iCurrentSize = 0
+      Distros.iPercentage = (Distros.iCurrentSize / Distros.iDistroSize) 'Distros.DistroSize
+      Distros.iTotalCurrentSize = Distros.iCurrentSize + Distros.iCurrentSize ' Do something with this(Make an overall ProgressB
+      Endif
+
+End
+
+Public Sub SysRebuild_Click()
+'Rebuild Syslinux or ExtLinux, and Mark partition active/bootable;Lance
+Dim iQuestion As Integer
+ iQuestion = Message.Question(User.Name & ", Rebuild Syslinux Boot on " "(" & Var.USBSelect & ")" "\n", "Rebuild", "Exit")
+    If iQuestion = 1 
+    
+         If Comp(Trim$(Var.sFile_System), "ext2") = 0 Or If Comp(Trim$(Var.sFile_System), "ext3") = 0 Or If Comp(Trim$(Var.sFile_System), "ext4") = 0 Or If Comp(Trim$(Var.sFile_System), "btrfs") = 0 Then
+          Shell "echo " & Var.Password & " | sudo -S dd bs=440 conv=notrunc count=1 if=/usr/lib/syslinux/mbr.bin of=" & Var.USB_DRIVE Wait
+          Shell "echo " & Var.Password & " | sudo -S sudo extlinux -i " & Var.USB_MOUNT & "/yumi" Wait
+          Shell "sudo fdisk -l | grep " & Var.USB_DRIVE & "|grep  -oe \'*\'" To Var.Bootable 'Works without echo of password?
+         Else
+          Shell "echo " & Var.Password & " | sudo -S dd bs=440 conv=notrunc count=1 if=/usr/lib/syslinux/mbr.bin of=" & Var.USB_DRIVE Wait
+          Shell "echo " & Var.Password & " | sudo -S syslinux -i -a -d /yumi " & Var.USBSelect Wait
+          Shell "sudo fdisk -l | grep " & Var.USB_DRIVE & "|grep  -oe \'*\'" To Var.Bootable 'Works without echo of password?
+         Endif
+         'Ok is the partition bootable?
+          If Var.Bootable = "*\n" 'Matched... already bootable
+          'Message.info(Var.USBSelect & " Already active,\nBoot Flag Exists!") 
+          Else 
+          'Message.warning(Var.USBSelect & " contains no Boot Flag,\nYUMI will mark it active!")
+          Shell "echo 'a\n 1\n w\n'|sudo fdisk " & Var.USB_DRIVE Wait 'Partition wasn't bootable, let's make it so
+          
+         Endif
+       
+        Message.Info("Syslinux rebuild finished!")
+ Endif
+End
+
+Public Sub FormatFat32_Click()
+
+'Format the drive as Fat32;Lance
+Dim iQuestion As Integer
+          iQuestion = Message.Question(User.Name & ", Are you ready to Fat32 format " "(" & Var.USBSelect & ")" "\n", "Fomat", "Exit")
+          If iQuestion = 1
+            Print ("Formatting as Fat32" & Var.USBSelect)
+              Shell "sudo umount " & Var.USBSelect Wait
+              Shell "echo " & Var.Password & " | sudo mkfs.vfat -F 32 -n YUMI " & Var.USBSelect Wait
+              Shell "sudo mkdir /media/" & User.Name & "/YUMItmp" Wait
+              Shell "sudo mount " & Var.USBSelect & " /media/" & User.Name & "/YUMItmp" Wait
+              
+                Shell "sudo fdisk -l | grep " & Var.USB_DRIVE & "|grep  -oe \'*\'" Wait To Var.Bootable
+                 If Var.Bootable <> "*\n" Then 
+                 Shell "echo 'a\n 1\n w\n'|sudo fdisk " & Var.USB_DRIVE Wait 'Partition wasn't bootable, let's make it so
+                 Endif
+              
+              Shell "sudo umount " & Var.USBSelect Wait
+              Shell "sudo rm -rf /media/" & User.Name & "/YUMItmp" Wait
+             Message(Var.USBSelect & " Formatted As Fat32\nPlease Remove and Reinsert the USB Drive\n Then, restart YUMI To refresh the drive.")
+          Endif
+
+End
+
+Public Sub FormatExt2_Click()
+
+  'Format the drive as Ext2;Lance... Not ready yet
+Dim iQuestion As Integer
+          iQuestion = Message.Question(User.Name & ", Are you ready to ext2 format " "(" & Var.USBSelect & ")" "\n", "Fomat", "Exit")
+          If iQuestion = 1
+            Print ("Formatting as Fat32" & Var.USBSelect)
+              Shell "echo 'd\n 1\n n\n p\n 1\n \n \n a\n 1\n w\n'|sudo fdisk " & Var.USB_DRIVE Wait ' Make partition and Make it active!
+              Shell "umount " & Var.USBSelect Wait
+              Shell "echo " & Var.Password & " | sudo mkfs.ext2 -L YUMI " & Var.USB_DRIVE & "1" Wait
+              Shell "echo " & Var.Password & " | chmod 0777 /media/" & User.Name & "/YUMI" Wait
+              'Shell "echo 'a\n 1\n w\n'|sudo fdisk " & Var.USB_DRIVE Wait ' Make it active!
+             Message(Var.USBSelect & " Formatted As ext2\nPlease Remove and Reinsert the USB Drive\n Then, restart YUMI To refresh the drive.")
+          Endif
+
+End
+
+Public Sub RefreshDrives_Click()
+
+  Dim hFile As File
+  Dim sInputLine As String
+  Dim lineCtr As Integer
+  Dim sTempScript As String
+  
+ If Exist(Var.PRO_DIR & "/USB_DETECTION.txt") = True Then
+    Shell "echo " & Var.Password & " | sudo -S  rm -rf " & Var.PRO_DIR & "/USB_DETECTION.txt" Wait
+    ComboBox1.Clear
+  Endif
+  
+  sTempScript = Temp$
+  Copy "detect-usb.sh" To sTempScript
+  Shell "chmod +x " & sTempScript Wait
+  Shell sTempScript Wait
+  
+  If Exist(Var.PRO_DIR & "/USB_DETECTION.txt") = True Then
+    hFile = Open Var.PRO_DIR & "/USB_DETECTION.txt" For Read
+    While Not Eof(hFile)
+      Line Input #hFile, sInputLine
+      Print Str(lineCtr) & Chr(9) & sInputLine
+      Inc lineCtr
+      ComboBox1.Add(sInputLine, lineCtr)
+    Wend
+    Close #hFile
+    Var.USB = Trim(ComboBox1.Text)
+    Var.USBSelect = String.Left(Var.USB, 9)
+    Var.USB_DRIVE = String.Left(Var.USB, 8)
+    Var.USB_LABLE = String.Mid(Var.USB, 11, 11)
+    Var.USB_PART = String.Mid(Var.USB, 6, 4)
+    Shell "ls -lQ /dev/disk/by-uuid/ | grep " & Var.USB_PART & " | cut -d \"" & "\\" & "\"" & "\"" & " -f2" To Var.USB_UUID
+    Shell "echo " & Var.Password & " | sudo -S  dd if=" & Var.USBSelect & " bs=1 count=4 skip=$((0x1b8))|hexdump -n4 -e " & "\'\"0x%x\"\'" To Var.MBID
+    Shell "df | grep " & Var.USBSelect To Var.sUSBMntChk
+    Shell "echo " & Var.Password & " | sudo -S  df | grep " & Var.USBSelect & " | awk '{ printf $6; }'" To Var.USB_MEDIA_MOUNT
+    Shell "mount | grep " & Var.USBSelect & " | cut -d \" \" -f5" To Var.sFile_System
+    
+    If Comp(Trim$(Var.sFile_System), "ext2") = 0 Or If Comp(Trim$(Var.sFile_System), "ext3") = 0 Or If Comp(Trim$(Var.sFile_System), "ext4") = 0 Or If Comp(Trim$(Var.sFile_System), "btrfs") = 0 Then
+      Message("YUMI currently only supports fat formatted drives!")
+    Endif
+      
+    Var.USB_MOUNT = Var.USB_MEDIA_MOUNT
+  Endif
+  
+  If Var.USB = Null Then
+    Message.Error("Still No USB found (Step 1).\nInsert a USB drive and click Refresh Drives.")
+  Else If Exist(Var.USB_MOUNT) = False Then
+    Message.Error("Drive " & Var.USBSelect & "(" & Var.USB_LABLE & ") is not mounted in /media.\nPlease mount usb via file manager and restart YUMI.")
+  Quit 'Still need to quit; Lance
+  Else If Var.USB <> Null Then
+    Update.Update_List
+  Endif
+  
+End

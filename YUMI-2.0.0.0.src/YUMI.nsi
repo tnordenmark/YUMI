@@ -115,13 +115,12 @@ Var Persistence
 !define MUI_HEADERIMAGE_BITMAP_NOSTRETCH
 !define MUI_HEADERIMAGE_RIGHT
 
-; Comment out licensing page for less clicks on load
 ; License Agreement Page
-; !define MUI_TEXT_LICENSE_SUBTITLE $(License_Subtitle)
-; !define MUI_LICENSEPAGE_TEXT_TOP $(License_Text_Top)
-; !define MUI_LICENSEPAGE_TEXT_BOTTOM $(License_Text_Bottom)
-; !define MUI_PAGE_CUSTOMFUNCTION_PRE License_PreFunction
-; !insertmacro MUI_PAGE_LICENSE "YUMI-Copying.txt"
+!define MUI_TEXT_LICENSE_SUBTITLE $(License_Subtitle)
+!define MUI_LICENSEPAGE_TEXT_TOP $(License_Text_Top)
+!define MUI_LICENSEPAGE_TEXT_BOTTOM $(License_Text_Bottom)
+!define MUI_PAGE_CUSTOMFUNCTION_PRE License_PreFunction
+!insertmacro MUI_PAGE_LICENSE "YUMI-Copying.txt"
 
 ; Distro Selection Page
 Page custom SelectionsPage
@@ -175,10 +174,9 @@ LangString Finish_Link ${LANG_ENGLISH} "Visit the YUMI Tutorial Page"
 !include DistroList.nsh ; List of Distributions
 !include "CasperScript.nsh" ; For creation of Persistent Casper-rw files
 
-; Comment out the Licensing page for less clicks on load
-;Function License_PreFunction
-;  StrCpy $R8 1 ;This is the 1st page
-;FunctionEnd
+Function License_PreFunction
+  StrCpy $R8 1 ;This is the 1st page
+FunctionEnd
 
 Function SelectionsPage
   StrCpy $R8 2
@@ -1012,17 +1010,13 @@ Function DoSyslinux ; Install Syslinux on USB
   CopyFiles "$PLUGINSDIR\vesamenu.c32" "$BootDir\multiboot\vesamenu.c32"
   CopyFiles "$PLUGINSDIR\menu.c32" "$BootDir\multiboot\menu.c32"  
   CopyFiles "$PLUGINSDIR\chain.c32" "$BootDir\multiboot\chain.c32"
-  CopyFiles "$PLUGINSDIR\memdisk" "$BootDir\multiboot\memdisk"   
-  CopyFiles "$PLUGINSDIR\libcom32.c32" "$BootDir\multiboot\libcom32.c32"	
-  CopyFiles "$PLUGINSDIR\libutil.c32" "$BootDir\multiboot\libutil.c32"	
+  CopyFiles "$PLUGINSDIR\memdisk" "$BootDir\multiboot\memdisk"
 ; Copy these files to multiboot\menu
   DetailPrint "Adding required files to the $BootDir\multiboot\menu directory..." 
   CopyFiles "$PLUGINSDIR\vesamenu.c32" "$BootDir\multiboot\menu\vesamenu.c32"
   CopyFiles "$PLUGINSDIR\menu.c32" "$BootDir\multiboot\menu\menu.c32"  
   CopyFiles "$PLUGINSDIR\chain.c32" "$BootDir\multiboot\menu\chain.c32"
   CopyFiles "$PLUGINSDIR\memdisk" "$BootDir\multiboot\menu\memdisk"   
-  CopyFiles "$PLUGINSDIR\libcom32.c32" "$BootDir\multiboot\menu\libcom32.c32"	
-  CopyFiles "$PLUGINSDIR\libutil.c32" "$BootDir\multiboot\menu\libutil.c32"
   
   Call AddDir    
   ${EndIf}  
@@ -1208,9 +1202,7 @@ StrCpy $R9 0 ; we start on page 0
   File /oname=$PLUGINSDIR\vesamenu.c32 "vesamenu.c32" 
   File /oname=$PLUGINSDIR\menu.c32 "menu.c32"    
   File /oname=$PLUGINSDIR\memdisk "memdisk" 
-  File /oname=$PLUGINSDIR\chain.c32 "chain.c32"
-  File /oname=$PLUGINSDIR\libcom32.c32 "libcom32.c32" 
-  File /oname=$PLUGINSDIR\libutil.c32 "libutil.c32" 
+  File /oname=$PLUGINSDIR\chain.c32 "chain.c32" 
 FunctionEnd
 
 Function onNotify_CasperSlider

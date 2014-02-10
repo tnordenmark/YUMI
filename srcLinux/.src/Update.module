@@ -1,0 +1,36 @@
+' Gambas module file
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''UPDATE LIST''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Public Sub Update_List()
+ 
+  Dim Installed_Distro As String
+  Dim hFile As File
+  Dim sInputLine As String
+  Dim lineCtr As Integer
+
+  With FMain.ListBox1
+    .Clear
+    If Exist(Var.PRO_DIR & "/Didtro_List.txt") = True Then
+      Shell "rm -r " & Var.PRO_DIR & "/Didtro_List.txt" Wait 'Allows New Installed (DIdtro_list.txt) to be created; Remarks, Lance 
+    Endif
+
+    If Exist(Var.USB_MOUNT & "/yumi/syslinux.cfg") = True Then
+      Installed_Distro = File.Load(Var.USB_MOUNT & "/yumi/syslinux.cfg") 'Where is Installed_Distro being used? Asks, Lance
+      If Exist(Var.PRO_DIR & "/Didtro_List.txt") = False Then
+         Shell "cat " & Var.USB_MOUNT & "/yumi/syslinux.cfg | grep ^#start | cut -d \" \" -f 2-5 > " & Var.PRO_DIR & "/Didtro_List.txt" Wait 'Populates Didtro_List.txt with what was installed on USB via Syslinux.cfg file : Remarks, Lance
+      Endif
+
+      If Exist(Var.PRO_DIR & "/Didtro_List.txt") = True Then
+        hFile = Open Var.PRO_DIR & "/Didtro_List.txt" For Read
+        While Not Eof(hFile)
+          Line Input #hFile, sInputLine
+          Inc lineCtr
+          .Add(sInputLine, lineCtr)
+        Wend
+        Close #hFile
+      Endif
+
+    Endif
+  End With
+  
+End

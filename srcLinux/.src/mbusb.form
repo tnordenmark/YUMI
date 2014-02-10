@@ -1,0 +1,42 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,51,43)
+  Text = ("YUMI")
+  Icon = Picture[".icon.png"]
+  Resizable = False
+  { Frame1 Frame
+    MoveScaled(1,1,49,28)
+    Text = ("DISCLAIMER")
+  }
+  { PassBox TextBox
+    MoveScaled(17,33,33,4)
+    Password = True
+  }
+  { Button1 Button
+    MoveScaled(34,38,16,4)
+    Text = ("Ok")
+  }
+  { Button2 Button
+    MoveScaled(1,38,16,4)
+    Text = ("Cancel")
+  }
+  { TextArea1 TextArea
+    MoveScaled(3,4,45,24)
+    Font = Font["-1"]
+    ToolTip = ("YUMI Disclaimer")
+    Text = ("\nBy proceeding to use YUMI, You agree to the following:\n\nTHERE IS NO WARRANTY FOR THIS PROGRAM, \nTO THE EXTENT PERMITTED BY APPLICABLE LAW. \n\nTHIS PROGRAM IS BEING PROVIDED \"AS IS\" WITHOUT \nWARRANTY, EXPRESSED OR IMPLIED, INCLUDING, \nBUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF \nMERCHANTABILITY AND FITNESS FOR A PARTICULAR \nPURPOSE.  \n\nTHE ENTIRE RISK AS TO THE QUALITY AND \nPERFORMANCE OF THIS PROGRAM IS WITH YOU.  \nSHOULD THE PROGRAM PROVE DEFECTIVE, YOU \nASSUME THE COST OF ALL NECESSARY SERVICING, \nREPAIR OR CORRECTION.\n\nIN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW \nOR AGREED TO IN WRITING WILL ANY COPYRIGHT \nHOLDER, OR ANY OTHER PARTY WHO MODIFIES AND\nOR CONVEYS THIS PROGRAM AS PERMITTED ABOVE, \nBE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY \nGENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL \nDAMAGES ARISING OUT OF THEUSE OR INABILITY TO \nUSE THE PROGRAM (INCLUDING BUT NOT LIMITED TO \nLOSS OF DATA OR DATA BEING RENDERED INACCURATE \nOR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A \nFAILURE OF THIS PROGRAM TO OPERATE WITH ANY \nOTHER PROGRAMS), EVEN IF SUCH HOLDER OR OTHER \nPARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH \nDAMAGES.")
+    Alignment = Align.Center
+    ReadOnly = True
+    Wrap = True
+    ScrollBar = Scroll.Vertical
+  }
+  { Label1 Label
+    MoveScaled(1,33,15,4)
+    Text = ("(sudo) password")
+  }
+  { Label2 Label
+    MoveScaled(1,29,49,3)
+    Text = ("Authentication required to Install Syslinux and Mount ISOs")
+  }
+}

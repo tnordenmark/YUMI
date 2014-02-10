@@ -1,0 +1,60 @@
+' Gambas module file
+
+'Copyleft 2013 Lance - Pendrivelinux.com
+'GNU GPL Version 3
+  
+' List those Distributions  [0=DistroName] [1=DistroHome] [2=DistroDownload] [3=ISOName] [4 =sDistroSize] [5=ConfigFile] [6=DistroAbout]
+Public Ubuntu As String[] = ["Ubuntu", "ubuntu.com", "http://releases.ubuntu.com/raring/ubuntu-13.04-desktop-i386.iso", "ubuntu-13.04-desktop-i386.iso", "832569344", "os.cfg", "A popular desktop distribution based on Debian, created by the Canonical team"]
+Public Slax As String[] = ["Slax", "slax.org", "slax.org/download/7.0.8/slax-English-US-7.0.8-i486.iso", "slax-English-US-7.0.8-i486.iso", "226568192", "os.cfg", "A relatively small Live desktop distribution based on Slackware, created by Thomas"]
+Public Debian As String[] = ["Debian", "live.debian.net", "http://cdimage.debian.org/debian-cd/current-live/i386/iso-hybrid/debian-live-7.0.0-i386-gnome-desktop.iso", "debian-live-7.0.0-i386-gnome-desktop.iso", "1318928384", "os.cfg", "A Live desktop distribution, purely based on Debian, and fully supported by Debian"]
+Public MLinux As String[] = ["4MLinux", "4mlinux.com", "http://superb-dca2.dl.sourceforge.net/project/linux4m/7.0/livecd/4MLinux-7.0-allinone-edition.iso", "4MLinux-7.0-allinone-edition.iso", "179396608", "os.cfg", "A Mini Live Linux distribution that includes features such as:<br><br>(1) Maintenance<br>(2) Multimedia<br>(3) Miniserver<br>(4) Mystery(Linux games)"]
+Public antiX As String[] = ["antiX", "antix.mepis.org", "http://download.tuxfamily.org/antix/releases/antiX-13.1/antiX-13.1_386-full.iso", "antiX-13.1_386-full.iso", "707788800", "os.cfg", "A fast, lightweight Live Linux distribution based on Debian Testing, but suitable for older computers"]
+
+
+' Other Variables for The List/Downloadlink/Hompage/Progressbar 
+Public DistroName As String
+Public DistroHome As String
+Public DistroDownload As String
+Public DistroAbout As String
+Public ISOName As String
+Public sDistroSize As String
+Public iDistroSize As Integer
+Public iTotalDistroSize As Integer
+Public sCurrentSize As String
+Public iCurrentSize As Integer
+Public iTotalCurrentSize As Integer
+Public iPercentage As Float
+Public iInitialSize As Integer
+Public pDownload As Process
+Public sDownSize As String
+Public iDownSize As Integer
+Public HowMuchOf As String
+Public DownloadClicked As String
+Public MD5 As String
+
+Public Sub Download_Progress() 'Animate The Progress Bar 
+'Set Initial Distribution Size
+  Distros.iInitialSize = Distros.iDistroSize + 0 ' DistroSize + 0
+
+  With FMain.DownloadProgress
+    FMain.DownloadProgress.Value = 0 ' Set Progress Value to 0 % until we're downloading
+    While Distros.pDownload.state = Process.Running ' While wget is running do these things
+      Wait 0.3
+      If Exist(user.home & "/" & Distros.ISOName)
+      Distros.sCurrentSize = Stat(user.home & "/" & Distros.ISOName).Size
+      Distros.iCurrentSize = Val(Distros.sCurrentSize)
+      Distros.iPercentage = (Distros.iCurrentSize / Distros.iDistroSize) 'Distros.DistroSize
+       FMain.DownloadProgress.Value = Distros.iPercentage ' Set the Progress Value
+      Else
+      Distros.iCurrentSize = 0
+      Distros.iPercentage = (Distros.iCurrentSize / Distros.iDistroSize) 'Distros.DistroSize
+      Endif
+      Distros.iTotalCurrentSize = Distros.iCurrentSize + Distros.iCurrentSize ' Do something with this(Make an overall ProgressBar)
+    Wend
+    Wait 0.6
+     FMain.DownloadProgress.Value = 1
+    Exec ["sync"]
+     FMain.DownloadProgress.Value = 0
+  End With
+  
+End

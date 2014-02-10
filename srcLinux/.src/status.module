@@ -1,0 +1,121 @@
+' Gambas module file
+
+Public Sub FUN_PROGRESS_REMOVE()
+
+  Dim iDummyValue As Integer
+  Dim iInitialFolerSize As Integer
+  Dim sInitialFolerSize As String
+  Dim iCurrentSizeRemove As Integer
+  Dim sCurrentSizeRemove As String
+  Dim iFolderSizeRemove As Integer
+  Dim iPercentageRemove As Float
+ 
+  Shell "du -ck " & Var.USB_MOUNT & " " & "|grep total | cut -f 1" To sInitialFolerSize
+  iInitialFolerSize = Val(sInitialFolerSize)
+  Var.pFileRemove = Shell "rm -rf " & Var.USB_MOUNT & "/yumi/" & Var.SELECT_REMOVE
+  If Var.SELECT_REMOVE = "WINDOWS-7" Then
+    Shell "du -ck " & Var.USB_MOUNT & "/sources" & " " & "|grep total | cut -f1" To Var.sFolderSizeRemove
+    Shell "rm -rf " & Var.USB_MOUNT & "/boot" Wait
+    Shell "rm -rf " & Var.USB_MOUNT & "/[boot]" Wait
+    Shell "rm -rf " & Var.USB_MOUNT & "/efi" Wait
+    Shell "rm -rf " & Var.USB_MOUNT & "/support" Wait
+    Shell "rm -rf " & Var.USB_MOUNT & "/upgrade" Wait
+    Shell "rm -rf " & Var.USB_MOUNT & "/autorun.inf" Wait
+    Shell "rm -rf " & Var.USB_MOUNT & "/bootmgr" Wait
+    Shell "rm -rf " & Var.USB_MOUNT & "/readme.txt" Wait
+    Shell "rm -rf " & Var.USB_MOUNT & "/setup.exe" Wait
+    Var.pFileRemove = Shell "rm -rf " & Var.USB_MOUNT & "/sources"
+  Endif
+  If Var.SELECT_REMOVE = "HBCD" Then
+    Shell "du -ck " & Var.USB_MOUNT & "/HBCD" & " " & "|grep total | cut -f1" To Var.sFolderSizeRemove
+    Var.pFileRemove = Shell "rm -rf " & Var.USB_MOUNT & "/HBCD"
+  Endif
+  If Var.SELECT_REMOVE = "IPFire" Then
+    Shell "du -ck " & Var.USB_MOUNT & "/*.tlz*" & " " & "|grep total | cut -f1" To Var.sFolderSizeRemove
+    Var.pFileRemove = Shell "rm -rf " & Var.USB_MOUNT & "/*.tlz"
+  Endif
+  If Var.SELECT_REMOVE = "Finnix" Then
+    Shell "du -ck " & Var.USB_MOUNT & "/finnix" & " " & "|grep total | cut -f1" To Var.sFolderSizeRemove
+    Var.pFileRemove = Shell "rm -rf " & Var.USB_MOUNT & "/finnix"
+  Endif
+  If Var.SELECT_REMOVE = "CDlinux" Then
+    Shell "du -ck " & Var.USB_MOUNT & "/CDlinux" & " " & "|grep total | cut -f1" To Var.sFolderSizeRemove
+    Var.pFileRemove = Shell "rm -rf " & Var.USB_MOUNT & "/CDlinux"
+  Endif
+  If Var.SELECT_REMOVE = "AntiX" Then
+    Shell "du -ck " & Var.USB_MOUNT & "/antiX" & " " & "|grep total | cut -f1" To Var.sFolderSizeRemove
+    Var.pFileRemove = Shell "rm -rf " & Var.USB_MOUNT & "/antiX"
+  Endif
+  If Var.SELECT_REMOVE = "Pardus" Then
+    Shell "du -ck " & Var.USB_MOUNT & "/*.img*" & " " & "|grep total | cut -f1" To Var.sFolderSizeRemove
+    Var.pFileRemove = Shell "rm -rf " & Var.USB_MOUNT & "/*.img"
+  Endif
+  If Var.SELECT_REMOVE = "FreeDOS" Then
+    Shell "du -ck " & Var.USB_MOUNT & "/freedos" & " " & "|grep total | cut -f1" To Var.sFolderSizeRemove
+    Var.pFileRemove = Shell "rm -rf " & Var.USB_MOUNT & "/freedos"
+  Endif
+  If Var.SELECT_REMOVE = "GeeXboX" Then
+    Shell "du -ck " & Var.USB_MOUNT & "/rootfs" & " " & "|grep total | cut -f1" To Var.sFolderSizeRemove
+    Var.pFileRemove = Shell "rm -rf " & Var.USB_MOUNT & "/rootfs"
+  Endif
+  If Var.SELECT_REMOVE = "ClearOS" Then
+    Shell "rm -rf " & Var.USB_MOUNT & "/images" Wait
+    Shell "rm -rf " & Var.USB_MOUNT & "/repodata" Wait
+    Shell "rm -rf " & Var.USB_MOUNT & "/repoview" Wait
+    Shell "du -ck " & Var.USB_MOUNT & "/Packages" & " " & "|grep total | cut -f1" To Var.sFolderSizeRemove
+    Var.pFileRemove = Shell "rm -rf " & Var.USB_MOUNT & "/Packages"
+  Endif
+  If Var.SELECT_REMOVE = "CTKArch" Then
+    Shell "du -ck " & Var.USB_MOUNT & "/*.sqfs*" & " " & "|grep total | cut -f1" To Var.sFolderSizeRemove
+    Var.pFileRemove = Shell "rm -rf " & Var.USB_MOUNT & "/*.sqfs"
+  Endif
+  If Var.SELECT_REMOVE = "BackTrack-04" Then
+    Shell "du -ck " & Var.USB_MOUNT & "/casper" & " " & "|grep total | cut -f1" To Var.sFolderSizeRemove
+    Var.pFileRemove = Shell "rm -rf " & Var.USB_MOUNT & "/casper"
+  Endif
+  If Var.SELECT_REMOVE = "Chakra-i686" Then
+    Shell "du -ck " & Var.USB_MOUNT & "/chakra" & " " & "|grep total | cut -f1" To Var.sFolderSizeRemove
+    Var.pFileRemove = Shell "rm -rf " & Var.USB_MOUNT & "/chakra"
+  Endif
+  If Var.SELECT_REMOVE = "Chakra-x86_64" Then
+    Shell "du -ck " & Var.USB_MOUNT & "/chakra" & " " & "|grep total | cut -f1" To Var.sFolderSizeRemove
+    Var.pFileRemove = Shell "rm -rf " & Var.USB_MOUNT & "/chakra"
+  Endif
+  If Var.SELECT_REMOVE = "Avira-Rescue" Then
+    Shell "rm -rf " & Var.USB_MOUNT & "/avupdate" Wait
+    Shell "du -ck " & Var.USB_MOUNT & "/antivir" & " " & "|grep total | cut -f1" To Var.sFolderSizeRemove
+    Var.pFileRemove = Shell "rm -rf " & Var.USB_MOUNT & "/antivir"
+  Endif
+  If Var.SELECT_REMOVE = "OpenSUSE" Then
+    Shell "rm -rf " & Var.USB_MOUNT & "/boot" Wait
+  Endif
+  If Var.SELECT_REMOVE = "KDE-Partition-Manager" Then
+    Shell "rm -rf " & Var.USB_MOUNT & "/boot" Wait
+  Endif
+  If Var.SELECT_REMOVE = "KDE-Four-Live" Then
+    Shell "rm -rf " & Var.USB_MOUNT & "/boot" Wait
+  Endif
+  If Exist(Var.USB_MOUNT & "/" & Var.SELECT_REMOVE & ".iso") = True Then
+    Shell "rm -rf " & Var.USB_MOUNT & "/" & Var.SELECT_REMOVE & ".iso" Wait
+  Endif
+  iFolderSizeRemove = Val(Var.sFolderSizeRemove)
+  If iFolderSizeRemove <> 0 Then
+    With FMain.ProgressBar1
+      .value = 0
+      While Var.pFileRemove.state = Process.Running
+        Wait 0.01
+        Shell "du -ck " & Var.USB_MOUNT & " " & "| grep total | cut -f 1" To sCurrentSizeRemove
+        iCurrentSizeRemove = Val(sCurrentSizeRemove)
+        iDummyValue = iInitialFolerSize - iCurrentSizeRemove
+        iPercentageRemove = (iDummyValue / iFolderSizeRemove)
+        .Value = iPercentageRemove
+      Wend
+
+      Wait 0.5
+      .value = 1
+      Exec ["sync"] Wait
+      .value = 0
+    End With
+  Endif
+
+End

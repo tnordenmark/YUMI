@@ -1,0 +1,622 @@
+' Gambas module file
+
+Public Sub ubuntu()
+
+  Dim sInitrd, sVmlinuz As String
+
+  Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name
+  If Exist(Var.DISTRO_DIR) = True Then
+    Message(Var.DISTRO_Name & " is already installed.")
+  Else
+    Shell "basename $(find " & Var.LIVE_MOUNT & " -iname \"*initrd*\")" Wait To sInitrd
+    Shell "basename $(find " & Var.LIVE_MOUNT & " -iname \"*vmlinuz*\")" Wait To sVmlinuz
+    Mkdir Var.DISTRO_DIR
+    Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/.[a-zA-Z0-9]* " & Var.DISTRO_DIR '/.[a-zA-Z0-9]* added by Lance to copy all files including .disk
+    Add.FUN_PROGRESS
+    var.sUpdate_Cfg = Temp$
+    Copy "update-cfg.sh" To var.sUpdate_Cfg
+    Shell "chmod +x " & var.sUpdate_Cfg Wait
+    Shell var.sUpdate_Cfg Wait
+    Var.LINE1 = "#start " & Var.DISTRO_Name
+    Var.LINE2 = "label " & Var.DISTRO_Name
+    Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name
+    Shell "cd " & Var.DISTRO_DIR & " ; find . -name \"syslinux.cfg\" | cut -d \".\" -f 2-3" Wait To var.sSearch_cfg_File
+    If var.sSearch_cfg_File = Null Then
+      Shell "cd " & Var.DISTRO_DIR & " ; find . -name \"isolinux.cfg\" | cut -d \".\" -f 2-3" Wait To var.sSearch_cfg_File
+    Endif
+    Var.LINE4 = "CONFIG /yumi/" & var.DISTRO_Name & var.sSearch_cfg_File
+    Shell "dirname " & var.sSearch_cfg_File Wait To var.sSearch_cfg_Dir
+    Var.LINE5 = "APPEND /yumi/" & var.DISTRO_Name & var.sSearch_cfg_Dir
+    'Var.LINE4 = "kernel /yumi/" & Var.DISTRO_Name & "/casper/vmlinuz"
+    'Var.LINE5 = "append cdrom-detect/try-usb=true noprompt boot=casper floppy.allowed_drive_mask=0 ignore_uuid live-media-path=/yumi/" & Var.DISTRO_Name & "/casper/ initrd=/yumi/" & Var.DISTRO_Name & "/casper/" & Trim$(sInitrd) & " --"
+    Var.LINE6 = "#end " & Var.DISTRO_Name
+    Add.Write_cfg
+  Endif
+
+End
+
+Public Sub debian()
+
+  Dim sInitrd, sVmlinuz As String
+
+  Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name
+  If Exist(Var.DISTRO_DIR) = True Then
+    Message(Var.DISTRO_Name & " is already installed.")
+  Else
+    Shell "basename $(find " & Var.LIVE_MOUNT & " -iname \"*initrd*\")" Wait To sInitrd
+    Shell "basename $(find " & Var.LIVE_MOUNT & " -iname \"*vmlinuz*\")" Wait To sVmlinuz
+    Mkdir Var.DISTRO_DIR
+    Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/.[a-zA-Z0-9]* " & Var.DISTRO_DIR '/ .[a-zA-Z0-9]* added by Lance to copy all files including .disk
+    Add.FUN_PROGRESS
+    var.sUpdate_Cfg = Temp$
+    Copy "update-cfg.sh" To var.sUpdate_Cfg
+    Shell "chmod +x " & var.sUpdate_Cfg Wait
+    Shell var.sUpdate_Cfg Wait
+    Var.LINE1 = "#start " & Var.DISTRO_Name
+    Var.LINE2 = "label " & Var.DISTRO_Name
+    Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name
+    Shell "cd " & Var.DISTRO_DIR & " ; find . -name \"syslinux.cfg\" | cut -d \".\" -f 2-3" Wait To var.sSearch_cfg_File
+    If var.sSearch_cfg_File = Null Then
+      Shell "cd " & Var.DISTRO_DIR & " ; find . -name \"isolinux.cfg\" | cut -d \".\" -f 2-3" Wait To var.sSearch_cfg_File
+    Endif
+    Var.LINE4 = "CONFIG " & var.sSearch_cfg_File
+    Shell "dirname " & var.sSearch_cfg_File Wait To var.sSearch_cfg_Dir
+    Var.LINE5 = "APPEND /yumi/" & var.DISTRO_Name & var.sSearch_cfg_Dir
+    Var.LINE6 = "#end " & Var.DISTRO_Name
+    Add.Write_cfg
+  Endif
+
+End
+
+Public Sub mepis()
+
+  Dim sInitrd, sVmlinuz As String
+
+  Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name
+  Shell "basename $(find " & Var.LIVE_MOUNT & " -iname \"*initrd*\")" To sInitrd
+  Shell "basename $(find " & Var.LIVE_MOUNT & " -iname \"*vmlinuz*\")" To sVmlinuz
+  If Exist(Var.DISTRO_DIR) = True Then
+    Message(Var.DISTRO_Name & " is already installed.")
+  Else
+    Mkdir Var.DISTRO_DIR
+    Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/.[a-zA-Z0-9]* " & Var.DISTRO_DIR '/.[a-zA-Z0-9]* added by Lance to copy all files including .disk
+    Add.FUN_PROGRESS
+    Var.LINE1 = "#start " & Var.DISTRO_Name
+    Var.LINE2 = "label " & Var.DISTRO_Name
+    Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name
+    Var.LINE4 = "kernel /yumi/" & Var.DISTRO_Name & "/boot/vmlinuz"
+    Var.LINE5 = "append initrd=/yumi/" & Var.DISTRO_Name & "/boot/" & Trim$(sInitrd) & " image_dir=/yumi/" & Var.DISTRO_Name & "/antiX init=/etc/init rw quiet splash"
+    Var.LINE6 = "#end " & Var.DISTRO_Name
+    Add.Write_cfg
+  Endif
+
+End
+
+Public Sub suse()
+
+  Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name
+  If Exist(Var.DISTRO_DIR) = True Then
+    Message(Var.DISTRO_Name & " is already installed.")
+  Else
+    Mkdir Var.DISTRO_DIR
+    Var.LINE1 = "#start " & Var.DISTRO_Name
+    Var.LINE2 = "label " & Var.DISTRO_Name
+    Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name
+    Var.LINE6 = "#end " & Var.DISTRO_Name
+    If InStr(Var.Search, "openSUSE-12.2") <> 0 Or If InStr(Var.Search, "openSUSE-12.3") <> 0 Then
+      If Exist(Var.LIVE_MOUNT & "/boot/i386/loader/linux") = True Then
+        Shell "cp -rv " & Var.LIVE_MOUNT & "/boot/i386/loader/linux " & Var.DISTRO_DIR Wait
+        Shell "cp -rv " & Var.LIVE_MOUNT & "/boot/i386/loader/initrd " & Var.DISTRO_DIR Wait
+      Else
+        Shell "cp -rv " & Var.LIVE_MOUNT & "/boot/x86_64/loader/linux " & Var.DISTRO_DIR Wait
+        Shell "cp -rv " & Var.LIVE_MOUNT & "/boot/x86_64/loader/initrd " & Var.DISTRO_DIR Wait
+      Endif
+      Var.pFileCopy = Shell "cp -rv " & Var.ISO_LINK & " " & Var.USB_MOUNT
+      Add.FUN_PROGRESS
+      Var.LINE4 = "kernel /yumi/" & Var.DISTRO_Name & "/linux"
+      Var.LINE5 = "append initrd=/yumi/" & Var.DISTRO_Name & "/initrd ramdisk_size=512000 ramdisk_blocksize=4096 isofrom=/dev/disk/by-uuid/" & Trim$(Var.USB_UUID) & ":/" & Var.ISO_NAME & " loader=syslinux splash=silent quiet showopts"
+      Add.Write_cfg
+      '  Endif
+    Else
+      Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/.[a-zA-Z0-9]* " & Var.DISTRO_DIR '/.[a-zA-Z0-9]* added by Lance to copy all files including .disk
+      Add.FUN_PROGRESS
+      Add.MODIFY_SUSE
+      If Exist(Var.LIVE_MOUNT & "/boot/i386/loader/linux") = True Then
+        Var.LINE4 = "kernel /yumi/" & Var.DISTRO_Name & "/boot/i386/loader/linux"
+        Var.LINE5 = "append initrd=/yumi/" & Var.DISTRO_Name & "/boot/i386/loader/initrd-mod ramdisk_size=512000 ramdisk_blocksize=4096 splash=silent livecd_config=cdrom/yumi/" & Var.DISTRO_Name & "/config.isoclient quiet preloadlog=/dev/null showopts"
+      Else
+        Var.LINE4 = "kernel /yumi/" & Var.DISTRO_Name & "/boot/x86_64/loader/linux"
+        Var.LINE5 = "append initrd=/yumi/" & Var.DISTRO_Name & "/boot/x86_64/loader/initrd-mod ramdisk_size=512000 ramdisk_blocksize=4096 splash=silent livecd_config=cdrom/yumi/" & Var.DISTRO_Name & "/config.isoclient quiet preloadlog=/dev/null showopts"
+      Endif
+    Endif
+  Endif
+
+End
+
+Public Sub Ophcrack()
+
+  Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name
+  If Exist(Var.DISTRO_DIR) = True Then
+    Message(Var.DISTRO_Name & " is already installed.")
+  Else
+    Mkdir Var.DISTRO_DIR
+    Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/.[a-zA-Z0-9]* " & Var.DISTRO_DIR '/.[a-zA-Z0-9]* Added by Lance
+    Add.FUN_PROGRESS
+    var.sUpdate_Cfg = Temp$
+    Copy "update-cfg.sh" To var.sUpdate_Cfg
+    Shell "chmod +x " & var.sUpdate_Cfg Wait
+    Shell var.sUpdate_Cfg Wait
+    Var.LINE1 = "#start " & Var.DISTRO_Name
+    Var.LINE2 = "label " & Var.DISTRO_Name
+    Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name
+    Shell "cd " & Var.DISTRO_DIR & " ; find . -name \"syslinux.cfg\" | cut -d \".\" -f 2-3" Wait To var.sSearch_cfg_File
+    If var.sSearch_cfg_File = Null Then
+      Shell "cd " & Var.DISTRO_DIR & " ; find . -name \"isolinux.cfg\" | cut -d \".\" -f 2-3" Wait To var.sSearch_cfg_File
+    Endif
+    Var.LINE4 = "CONFIG /yumi/" & var.DISTRO_Name & var.sSearch_cfg_File
+    Shell "dirname " & var.sSearch_cfg_File Wait To var.sSearch_cfg_Dir
+    Var.LINE5 = "APPEND /yumi/" & var.DISTRO_Name & var.sSearch_cfg_Dir
+    'Var.LINE4 = "kernel /yumi/" & Var.DISTRO_Name & "/boot/bzImage"
+    'Var.LINE5 = "append initrd=/yumi/" & Var.DISTRO_Name & "/boot/rootfs.gz rw root=/dev/null vga=normal lang=C kmap=us screen=1024x768x16 autologin"
+    Var.LINE6 = "#end " & Var.DISTRO_Name
+    Add.Write_cfg
+  Endif
+
+End
+
+Public Sub fedora()
+
+  Dim sInitrd, sVmlinuz As String
+
+  Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name
+  If Exist(Var.DISTRO_DIR) = True Then
+    Message(Var.DISTRO_Name & " is already installed.")
+  Else
+    Shell "basename $(find " & Var.LIVE_MOUNT & " -iname \"*initrd*\")" To sInitrd
+    Shell "basename $(find " & Var.LIVE_MOUNT & " -iname \"*vmlinuz*\")" To sVmlinuz
+    Mkdir Var.DISTRO_DIR
+    Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/.[a-zA-Z0-9]* " & Var.DISTRO_DIR '/.[a-zA-Z0-9]* added by Lance to support copy of all files
+    Add.FUN_PROGRESS
+    var.sUpdate_Cfg = Temp$
+    Copy "update-cfg.sh" To var.sUpdate_Cfg
+    Shell "chmod +x " & var.sUpdate_Cfg Wait
+    Shell var.sUpdate_Cfg Wait
+    Var.LINE1 = "#start " & Var.DISTRO_Name
+    Var.LINE2 = "label " & Var.DISTRO_Name
+    Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name
+    Shell "cd " & Var.DISTRO_DIR & " ; find . -name \"syslinux.cfg\" | cut -d \".\" -f 2-3" Wait To var.sSearch_cfg_File
+    If var.sSearch_cfg_File = Null Then
+      Shell "cd " & Var.DISTRO_DIR & " ; find . -name \"isolinux.cfg\" | cut -d \".\" -f 2-3" Wait To var.sSearch_cfg_File
+    Endif
+    Var.LINE4 = "CONFIG /yumi/" & var.DISTRO_Name & var.sSearch_cfg_File
+    Shell "dirname " & var.sSearch_cfg_File Wait To var.sSearch_cfg_Dir
+    Var.LINE5 = "APPEND /yumi/" & var.DISTRO_Name & var.sSearch_cfg_Dir
+    'Var.LINE4 = "kernel /yumi/" & Var.DISTRO_Name & "/isolinux/vmlinuz0"
+    Var.LINE6 = "#end " & Var.DISTRO_Name
+    Add.Write_cfg
+  Endif
+
+End
+
+Public Sub slax()
+
+  Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name
+  If Exist(Var.DISTRO_DIR) = True Then
+    Message(Var.DISTRO_Name & " is already installed.")
+  Else
+    Mkdir Var.DISTRO_DIR
+    Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/.[a-zA-Z0-9]* " & Var.DISTRO_DIR '/.[a-zA-Z0-9]*  added by Lance to support copy of all files
+    Add.FUN_PROGRESS
+    Var.LINE1 = "#start " & Var.DISTRO_Name
+    Var.LINE2 = "label " & Var.DISTRO_Name
+    Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name
+    If Exist(Var.LIVE_MOUNT & "/boot/vmlinuz") = True Then
+      Var.LINE4 = "KERNEL /yumi/" & Var.DISTRO_Name & "/boot/vmlinuz"
+      Var.LINE5 = "APPEND from=/yumi/" & Var.DISTRO_Name & "/ initrd=/yumi/" & Var.DISTRO_Name & "/boot/initrd.gz ramdisk_size=6666 root=/dev/ram0 rw autoexec=xconf;telinit~4"
+    Else
+      Var.LINE4 = "KERNEL /yumi/" & Var.DISTRO_Name & "/slax/boot/vmlinuz"
+      Var.LINE5 = "APPEND vga=773 initrd=/yumi/" & Var.DISTRO_Name & "/slax/boot/initrfs.img from=/yumi/" & Var.DISTRO_Name & "/slax/ load_ramdisk=1 prompt_ramdisk=0 rw printk.time=0 slax.flags=perch,xmode"
+    Endif
+
+    Var.LINE6 = "#end " & Var.DISTRO_Name
+    Add.Write_cfg
+    Var.search = Null
+
+  Endif
+
+End
+
+Public Sub slitaz()
+
+  Dim sSlitaz_Script As String
+
+  Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name
+  If Exist(Var.DISTRO_DIR) = True Then
+    Message(Var.DISTRO_Name & " is already installed.")
+  Else
+    Mkdir Var.DISTRO_DIR
+    sSlitaz_Script = Temp$
+    Copy "update2-cfg.sh" To sSlitaz_Script
+    Shell "chmod +x " & sSlitaz_Script Wait
+    Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/.[a-zA-Z0-9]* " & Var.DISTRO_DIR '/.[a-zA-Z0-9]*  added by Lance to support copy of all files
+    Add.FUN_PROGRESS
+    Shell sSlitaz_Script Wait
+    Var.LINE1 = "#start " & Var.DISTRO_Name
+    Var.LINE2 = "label " & Var.DISTRO_Name
+    Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name
+       Shell "cd " & Var.DISTRO_DIR & " ; find . -name \"syslinux.cfg\" | cut -d \".\" -f 2-3" Wait To var.sSearch_cfg_File
+    If var.sSearch_cfg_File = Null Then
+            Shell "cd " & Var.DISTRO_DIR & " ; find . -name \"isolinux.cfg\" | cut -d \".\" -f 2-3" Wait To var.sSearch_cfg_File
+    Endif
+    Var.LINE4 = "CONFIG /yumi/" & var.DISTRO_Name & var.sSearch_cfg_File
+    Shell "dirname " & var.sSearch_cfg_File Wait To var.sSearch_cfg_Dir
+    Var.LINE5 = "APPEND /yumi/" & var.DISTRO_Name & var.sSearch_cfg_Dir
+    'If Exist(Var.DISTRO_DIR & "/boot/rootfs1.gz") = True Then
+    'Var.LINE5 = "append initrd=/yumi/" & Var.DISTRO_Name & "/boot/rootfs4.gz,/yumi/" & Var.DISTRO_Name & "/boot/rootfs3.gz,/yumi/" & Var.DISTRO_Name & "/boot/rootfs2.gz,/yumi/" & Var.DISTRO_Name & "/boot/rootfs1.gz rw root=/dev/null vga=normal autologin kb=us"
+    'Else
+    ' Var.LINE5 = "append initrd=/yumi/" & Var.DISTRO_Name & "/boot/rootfs.gz rw root=/dev/null vga=normal kb=us autologin"
+    'Endif
+    Var.LINE6 = "#end " & Var.DISTRO_Name
+    Add.Write_cfg
+    Var.search = Null
+  Endif
+
+End
+
+Public Sub sidux()
+
+  Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name
+  If Exist(Var.DISTRO_DIR) = True Then
+    Message(Var.DISTRO_Name & " is already installed.")
+  Else
+    Mkdir Var.DISTRO_DIR
+    Shell "cp -rv " & Var.LIVE_MOUNT & "/boot " & Var.DISTRO_DIR Wait
+    Var.pFileCopy = Shell "cp -rv " & Var.ISO_LINK & " " & Var.DISTRO_DIR
+    Add.FUN_PROGRESS
+    Var.LINE1 = "#start " & Var.DISTRO_Name
+    Var.LINE2 = "label " & Var.DISTRO_Name
+    Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name
+    If Exist(Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name & "/boot/vmlinuz0.686") Then
+      Var.LINE4 = "kernel /yumi/" & Var.DISTRO_Name & "/boot/vmlinuz0.686"
+      Var.LINE5 = "append initrd=/yumi/" & Var.DISTRO_Name & "/boot/initrd0.686 boot=fll fromiso=/yumi/" & Var.DISTRO_Name & Var.ISO_NAME & " root=UUID=" & Trim$(Var.USB_UUID)
+    Else If Exist(Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name & "/boot/vmlinuz0.amd") Then
+      Var.LINE4 = "kernel /yumi/" & Var.DISTRO_Name & "/boot/vmlinuz0.amd"
+      Var.LINE5 = "append initrd=/yumi/" & Var.DISTRO_Name & "/boot/initrd0.amd boot=fll fromiso=/yumi/" & Var.DISTRO_Name & Var.ISO_NAME & " root=UUID=" & Trim$(Var.USB_UUID)
+    Endif
+    Var.LINE6 = "#end " & Var.DISTRO_Name
+    Add.Write_cfg
+    Var.search = Null
+
+  Endif
+
+End
+
+Public Sub cdlinux()
+
+  Var.DISTRO_DIR = Var.USB_MOUNT & "/CDlinux"
+  If Exist(Var.DISTRO_DIR) = True Then
+    Message(Var.DISTRO_Name & " is already installed.")
+  Else
+    Mkdir Var.DISTRO_DIR
+    Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/CDlinux/. " & Var.DISTRO_DIR
+    Add.FUN_PROGRESS
+    Var.LINE1 = "#start " & Var.DISTRO_Name
+    Var.LINE2 = "label " & Var.DISTRO_Name
+    Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name
+    Var.LINE4 = "kernel /CDlinux/bzImage"
+    Var.LINE5 = "append initrd=/CDlinux/initrd quiet CDL_DIR=/ CDL_DEV=UUID=" & Trim$(Var.USB_UUID)
+    Var.LINE6 = "#end " & Var.DISTRO_Name
+    Add.Write_cfg
+    Var.search = Null
+
+  Endif
+
+End
+
+Public Sub archlinux()
+
+  Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name
+  If Exist(Var.DISTRO_DIR) = True Then
+    Message(Var.DISTRO_Name & " is already installed.")
+  Else
+    Mkdir Var.DISTRO_DIR
+    Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/.[a-zA-Z0-9]* " & Var.DISTRO_DIR '/.[a-zA-Z0-9]*  added by Lance to support copy of all files
+    Add.FUN_PROGRESS
+    Var.LINE1 = "#start " & Var.DISTRO_Name
+    If Exist(Var.DISTRO_DIR & "/arch/boot/x86_64/vmlinuz") = True Then
+      Var.LINE2 = "label " & Var.DISTRO_Name & "x86_64"
+      Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name & "x86_64"
+      Var.LINE4 = "LINUX /yumi/" & Var.DISTRO_Name & "/arch/boot/x86_64/vmlinuz"
+      Var.LINE5 = "APPEND initrd=/yumi/" & Var.DISTRO_Name & "/arch/boot/x86_64/archiso.img archisobasedir=/yumi/" & Var.DISTRO_Name & "/arch archisolabel=" & Trim$(Var.USB_LABLE) & " rw_branch_size=75% locale=en_US.UTF-8)"
+    Else
+      Var.LINE2 = "label " & Var.DISTRO_Name & "i686"
+      Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name & "i686"
+      Var.LINE4 = "LINUX /yumi/" & Var.DISTRO_Name & "/arch/boot/i686/vmlinuz"
+      Var.LINE5 = "APPEND initrd=/yumi/" & Var.DISTRO_Name & "/arch/boot/i686/archiso.img archisobasedir=/yumi/" & Var.DISTRO_Name & "/arch archisolabel=" & Trim$(Var.USB_LABLE) & " rw_branch_size=75% locale=en_US.UTF-8)"
+      Var.LINE6 = "#end " & Var.DISTRO_Name
+      Add.Write_cfg
+      Var.search = Null
+    Endif
+  Endif
+
+End
+
+Public Sub archdual()
+
+  Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name
+  If Exist(Var.DISTRO_DIR) = True Then
+    Message(Var.DISTRO_Name & " is already installed.")
+  Else
+    Mkdir Var.DISTRO_DIR
+    Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/.[a-zA-Z0-9]* " & Var.DISTRO_DIR '/.[a-zA-Z0-9]*  added by Lance to support copy of all files
+    Add.FUN_PROGRESS
+    Var.LINE1 = "#start " & Var.DISTRO_Name
+    Var.LINE2 = "label " & Var.DISTRO_Name & " -64-bit"
+    Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name & " -64-bit"
+    Var.LINE4 = "LINUX /yumi/" & Var.DISTRO_Name & "/arch/boot/x86_64/vmlinuz"
+    Var.LINE5 = "APPEND initrd=/yumi/" & Var.DISTRO_Name & "/arch/boot/x86_64/archiso.img archisobasedir=/yumi/" & Var.DISTRO_Name & "/arch archisolabel=" & Trim$(Var.USB_LABLE) & " rw_branch_size=75% locale=en_US.UTF-8)"
+    Var.LINE6 = "label " & Var.DISTRO_Name & " -32-bit"
+    Var.LINE7 = "MENU LABEL" & Var.DISTRO_Name & " -32-bit"
+    Var.LINE8 = "LINUX /yumi/" & Var.DISTRO_Name & "/arch/boot/i686/vmlinuz"
+    Var.LINE9 = "APPEND initrd=/yumi/" & Var.DISTRO_Name & "/arch/boot/i686/archiso.img archisobasedir=/yumi/" & Var.DISTRO_Name & "/arch archisolabel=" & Trim$(Var.USB_LABLE) & " rw_branch_size=75% locale=en_US.UTF-8)"
+    Var.LINE10 = "#end " & Var.DISTRO_Name
+    Add.Write_cfg
+    Var.search = Null
+
+  Endif
+
+End
+
+Public Sub puppy()
+
+  Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name
+  If Exist(Var.DISTRO_DIR) = True Then
+    Message(Var.DISTRO_Name & " is already installed.")
+  Else
+    Mkdir Var.DISTRO_DIR
+    Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+    Add.FUN_PROGRESS
+    Var.LINE1 = "#start " & Var.DISTRO_Name
+    Var.LINE2 = "label " & Var.DISTRO_Name
+    Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name
+    Var.LINE4 = "KERNEL /yumi/" & Var.DISTRO_Name & "/vmlinuz"
+    Var.LINE5 = "append initrd=/yumi/" & Var.DISTRO_Name & "/initrd.gz psubdir=/yumi/" & Var.DISTRO_Name & " pmedia=usbflash"
+    Var.LINE6 = "#end " & Var.DISTRO_Name
+    Add.Write_cfg
+    Var.search = Null
+
+  Endif
+
+End
+
+Public Sub calculate()
+
+  Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name
+  If Exist(Var.DISTRO_DIR) = True Then
+    Message(Var.DISTRO_Name & " is already installed.")
+  Else
+    Mkdir Var.DISTRO_DIR
+    Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/.[a-zA-Z0-9]* " & Var.DISTRO_DIR '/.[a-zA-Z0-9]*  added by Lance to support copy of all files
+    Add.FUN_PROGRESS
+    Var.LINE1 = "#start " & Var.DISTRO_Name
+    Var.LINE2 = "label " & Var.DISTRO_Name
+    Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name
+    Var.LINE4 = "KERNEL /yumi/" & Var.DISTRO_Name & "/boot/vmlinuz"
+    Var.LINE5 = "append initrd=/yumi/" & Var.DISTRO_Name & "/boot/initrd subdir=/yumi/" & Var.DISTRO_Name & " root=/dev/ram0 init=/linuxrc dokeymap looptype=squashfs loop=/yumi/" & Var.DISTRO_Name & "/livecd.squashfs unionfs cdroot_type=vfat doload=vfat,nls_cp866,nls_utf8,squashfs,isofs,unionfs nodevfs cdroot video=uvesafb:ywrap,1024x768-32@60,mtrr:3,splash=silent,theme:tty1 console=tty1 udev quiet noresume doscsi scandelay=3"
+    Var.LINE6 = "#end " & Var.DISTRO_Name
+    Add.Write_cfg
+    Var.search = Null
+
+  Endif
+
+End
+
+Public Sub sabayon()
+
+  Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name
+  If Exist(Var.DISTRO_DIR) = True Then
+    Message(Var.DISTRO_Name & " is already installed.")
+  Else
+    Mkdir Var.DISTRO_DIR
+    Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/.[a-zA-Z0-9]* " & Var.DISTRO_DIR '/.[a-zA-Z0-9]*  added by Lance to support copy of all files
+    Add.FUN_PROGRESS
+    Var.LINE1 = "#start " & Var.DISTRO_Name
+    Var.LINE2 = "label " & Var.DISTRO_Name
+    Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name
+    Var.LINE4 = "KERNEL /yumi/" & Var.DISTRO_Name & "/boot/sabayon"
+    Var.LINE5 = "append initrd=/yumi/" & Var.DISTRO_Name & "/boot/sabayon.igz lang=en_US root=/dev/ram0 aufs init=/linuxrc cdroot subdir=/yumi/" & Var.DISTRO_Name & " looptype=squashfs max_loop=64 loop=/yumi/" & Var.DISTRO_Name & "/livecd.squashfs splash=silent,theme:sabayon console=tty1 quiet music --"
+    Var.LINE6 = "#end " & Var.DISTRO_Name
+    Add.Write_cfg
+    Var.search = Null
+
+  Endif
+
+End
+
+Public Sub grml()
+
+  Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name
+  If Exist(Var.DISTRO_DIR) = True Then
+    Message(Var.DISTRO_Name & " is already installed.")
+  Else
+    Mkdir Var.DISTRO_DIR
+    Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+    Add.FUN_PROGRESS
+    Var.LINE1 = "#start " & Var.DISTRO_Name
+    Var.LINE2 = "label " & Var.DISTRO_Name
+    Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name
+    If Exist(Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name & "/boot/grml64full/vmlinuz") = True Then
+      Var.LINE4 = "kernel /yumi/" & Var.DISTRO_Name & "/boot/grml64full/vmlinuz"
+      Var.LINE5 = "append initrd=/yumi/" & Var.DISTRO_Name & "/boot/grml64full/initrd.img live-media-path=/yumi/" & Var.DISTRO_Name & "/live/grml64-full/ ignore_bootid boot=live bootid=grml64full201205 apm=power-off vga=791 nomce persistent noprompt initcall nomce ignore_uuid cdrom-detect/try-usb=true"
+    Else
+      Var.LINE4 = "kernel /yumi/" & Var.DISTRO_Name & "/boot/grml/linux26"
+      Var.LINE5 = "append initrd=/yumi/" & Var.DISTRO_Name & "/boot/grml/initrd.gz live-media-path=/yumi/" & Var.DISTRO_Name & "/live ignore_bootid boot=live config apm=power-off vga=791 verbose debug=vc noprompt initcall nomce ignore_uuid cdrom-detect/try-usb=true"
+    Endif
+    Var.LINE6 = "#end " & Var.DISTRO_Name
+    Add.Write_cfg
+    Var.search = Null
+
+  Endif
+
+End
+
+Public Sub toorox()
+
+  Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name
+  If Exist(Var.DISTRO_DIR) = True Then
+    Message(Var.DISTRO_Name & " is already installed.")
+  Else
+    Mkdir Var.DISTRO_DIR
+    Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+    Add.FUN_PROGRESS
+    Var.LINE1 = "#start " & Var.DISTRO_Name
+    Var.LINE2 = "label " & Var.DISTRO_Name
+    Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name
+    Var.LINE4 = "kernel /yumi/" & Var.DISTRO_Name & "/boot/isolinux/linux"
+    Var.LINE5 = "append initrd=/yumi/" & Var.DISTRO_Name & "/boot/isolinux/minirt.gz BOOT_IMAGE=Toorox ramdisk_size=100000 init=/sbin/init lang=us nomce noapic bootfrom=/yumi/" & Var.DISTRO_Name & "/ rw rootdelay=10 root=UUID=" & Trim$(Var.USB_UUID)
+    Var.LINE6 = "#end " & Var.DISTRO_Name
+    Add.Write_cfg
+    Var.search = Null
+
+  Endif
+
+End
+
+Public Sub partedmagic()
+
+  Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name
+  If Exist(Var.DISTRO_DIR) = True Then
+    Message(Var.DISTRO_Name & " is already installed.")
+  Else
+    Mkdir Var.DISTRO_DIR
+    Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+    Add.FUN_PROGRESS
+    var.sUpdate_Cfg = Temp$
+    Copy "update-cfg.sh" To var.sUpdate_Cfg
+    Shell "chmod +x " & var.sUpdate_Cfg Wait
+    Shell var.sUpdate_Cfg Wait
+    Var.LINE1 = "#start " & Var.DISTRO_Name
+    Var.LINE2 = "label " & Var.DISTRO_Name
+    Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name
+    Shell "cd " & Var.DISTRO_DIR & " ; find . -name \"syslinux.cfg\" | cut -d \".\" -f 2-3" Wait To var.sSearch_cfg_File
+    If var.sSearch_cfg_File = Null Then
+      Shell "cd " & Var.DISTRO_DIR & " ; find . -name \"isolinux.cfg\" | cut -d \".\" -f 2-3" Wait To var.sSearch_cfg_File
+    Endif
+    Var.LINE4 = "CONFIG /yumi/" & var.DISTRO_Name & var.sSearch_cfg_File
+    Shell "dirname " & var.sSearch_cfg_File Wait To var.sSearch_cfg_Dir
+    Var.LINE5 = "APPEND /yumi/" & var.DISTRO_Name & var.sSearch_cfg_Dir
+
+    'Var.LINE4 = "kernel /yumi/" & Var.DISTRO_Name & "/pmagic/bzImage"
+    'If Exist(Var.DISTRO_DIR & "/pmagic/initrd.img") = True Then
+    ' Var.LINE5 = "append initrd=/yumi/" & Var.DISTRO_Name & "/pmagic/initrd.img edd=off noapic load_ramdisk=1 prompt_ramdisk=0 rw vga=788 loglevel=0 max_loop=256 directory=/yumi/" & Var.DISTRO_Name & "/"
+    'Else
+    ' Var.LINE5 = "append initrd=/yumi/" & Var.DISTRO_Name & "/pmagic/initramfs edd=off noapic load_ramdisk=1 prompt_ramdisk=0 rw vga=788 loglevel=0 max_loop=256 directory=/yumi/" & Var.DISTRO_Name & "/"
+    'Endif
+    Var.LINE6 = "#end " & Var.DISTRO_Name
+    Add.Write_cfg
+    Var.search = Null
+
+  Endif
+
+End
+
+Public Sub pclinuxos()
+
+  Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name
+  If Exist(Var.DISTRO_DIR) = True Then
+    Message(Var.DISTRO_Name & " is already installed.")
+  Else
+    Mkdir Var.DISTRO_DIR
+    Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+    Add.FUN_PROGRESS
+    Var.LINE1 = "#start " & Var.DISTRO_Name
+    Var.LINE2 = "label " & Var.DISTRO_Name
+    Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name
+    Var.LINE4 = "kernel /yumi/" & Var.DISTRO_Name & "/isolinux/vmlinuz"
+    Var.LINE5 = "append livecd=/yumi/" & Var.DISTRO_Name & "/livecd initrd=/yumi/" & Var.DISTRO_Name & "/isolinux/initrd.gz root=/dev/rd/3 apci=on vga=788 keyb=us vmalloc=256M splash=silent fromusb"
+    Var.LINE6 = "#end " & Var.DISTRO_Name
+    Add.Write_cfg
+    Var.search = Null
+
+  Endif
+
+End
+
+Public Sub systemrescuecd()
+
+  Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name
+  If Exist(Var.DISTRO_DIR) = True Then
+    Message(Var.DISTRO_Name & " is already installed.")
+  Else
+    Mkdir Var.DISTRO_DIR
+    Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+    Add.FUN_PROGRESS
+    var.sUpdate_Cfg = Temp$
+    Copy "update-cfg.sh" To var.sUpdate_Cfg
+    Shell "chmod +x " & var.sUpdate_Cfg Wait
+    Shell var.sUpdate_Cfg Wait
+    Var.LINE1 = "#start " & Var.DISTRO_Name
+    Var.LINE2 = "label " & Var.DISTRO_Name
+    Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name
+    Shell "cd " & Var.DISTRO_DIR & " ; find . -name \"syslinux.cfg\" | cut -d \".\" -f 2-3" Wait To var.sSearch_cfg_File
+    If var.sSearch_cfg_File = Null Then
+      Shell "cd " & Var.DISTRO_DIR & " ; find . -name \"isolinux.cfg\" | cut -d \".\" -f 2-3" Wait To var.sSearch_cfg_File
+    Endif
+    Var.LINE4 = "CONFIG /yumi/" & var.DISTRO_Name & var.sSearch_cfg_File
+    Shell "dirname " & var.sSearch_cfg_File Wait To var.sSearch_cfg_Dir
+    Var.LINE5 = "APPEND /yumi/" & var.DISTRO_Name & var.sSearch_cfg_Dir
+
+    'Var.LINE4 = "kernel /yumi/" & Var.DISTRO_Name & "/pmagic/bzImage"
+    'If Exist(Var.DISTRO_DIR & "/pmagic/initrd.img") = True Then
+    ' Var.LINE5 = "append initrd=/yumi/" & Var.DISTRO_Name & "/pmagic/initrd.img edd=off noapic load_ramdisk=1 prompt_ramdisk=0 rw vga=788 loglevel=0 max_loop=256 directory=/yumi/" & Var.DISTRO_Name & "/"
+    'Else
+    ' Var.LINE5 = "append initrd=/yumi/" & Var.DISTRO_Name & "/pmagic/initramfs edd=off noapic load_ramdisk=1 prompt_ramdisk=0 rw vga=788 loglevel=0 max_loop=256 directory=/yumi/" & Var.DISTRO_Name & "/"
+    'Endif
+    Var.LINE6 = "#end " & Var.DISTRO_Name
+    Add.Write_cfg
+    Var.search = Null
+
+  Endif
+
+End
+
+Public Sub generic()
+
+  Dim sVesa As String
+  Dim sVesa_Dir As String
+ 
+  Var.DISTRO_DIR = Var.USB_MOUNT & "/yumi/" & Var.DISTRO_Name
+  If Exist(Var.DISTRO_DIR) = True Then
+    Message(Var.DISTRO_Name & " is already installed.")
+  Else
+    Mkdir Var.DISTRO_DIR
+    Var.pFileCopy = Shell "cp -rv " & Var.LIVE_MOUNT & "/. " & Var.DISTRO_DIR
+    Add.FUN_PROGRESS
+    If Exist(Var.PRO_DIR & "/update2-cfg.sh") = True Then
+      Shell "rm -rf " & Var.PRO_DIR & "/update2-cfg.sh" Wait
+    Endif
+    Copy "update2-cfg.sh" To Var.PRO_DIR & "/update2-cfg.sh"
+    Print ("cd " & Var.PRO_DIR & ";chmod +x ./update2-cfg.sh ;./update2-cfg.sh " & Trim$(Var.sList_of_Distro) & " " & Trim$(Var.DISTRO_DIR))
+    Shell "cd " & Var.PRO_DIR & ";chmod +x ./update2-cfg.sh ;./update2-cfg.sh " & Trim$(Var.sList_of_Distro) & " " & Trim$(Var.DISTRO_DIR) Wait
+    Var.LINE1 = "\n#start " & Var.DISTRO_Name 'added \n for new line;Lance 
+    Var.LINE2 = "label " & Var.DISTRO_Name
+    Var.LINE3 = "MENU LABEL " & Var.DISTRO_Name
+    Shell "cd " & Var.DISTRO_DIR & " ; find . -name \"isolinux.cfg\" | cut -d \".\" -f 2-3" Wait To var.sSearch_cfg_File
+    If var.sSearch_cfg_File = Null Then
+      Shell "cd " & Var.DISTRO_DIR & " ; find . -name \"syslinux.cfg\" | cut -d \".\" -f 2-3" Wait To var.sSearch_cfg_File
+    Endif
+          Var.sSearch_cfg_File = Trim$(var.sSearch_cfg_File) 'Eliminate white space so that text remains on one line; Lance
+    Var.LINE4 = "CONFIG /yumi/" & var.DISTRO_Name & var.sSearch_cfg_File
+    Shell "dirname " & var.sSearch_cfg_File Wait To var.sSearch_cfg_Dir
+    Var.sSearch_cfg_Dir = Trim$(var.sSearch_cfg_Dir) 'Eliminate white space so that text remains on one line; Lance
+    Var.LINE5 = "APPEND /yumi/" & var.DISTRO_Name & var.sSearch_cfg_Dir
+    Var.LINE6 = "#end " & Var.DISTRO_Name
+    Shell "cd " & Var.DISTRO_DIR & " ; find . -name \"isolinux.cfg\" | cut -d \".\" -f 2-3" Wait To sVesa
+    Shell "dirname " & sVesa Wait To sVesa_Dir
+    Shell "cp -rv " & Var.USB_MOUNT & "/yumi/*.c32 " & var.USB_MOUNT & "/yumi/" & var.DISTRO_Name & sVesa_Dir Wait
+    Add.Write_cfg
+    Var.search = Null
+
+  Endif
+
+End
