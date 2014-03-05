@@ -144,6 +144,17 @@ FunctionEnd
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BootDir\" -y'
  ${WriteToFile} "#start $JustISOName$\r$\nLABEL $JustISOName$\r$\nMENU LABEL $JustISOName$\r$\nCONFIG /boot/isolinux/isolinux.cfg$\r$\nAPPEND /boot/isolinux$\r$\n#end $JustISOName" $R0
  
+ ; Linux Mint (New Method) 
+ ${ElseIf} $DistroName == "Linux Mint"
+ CopyFiles $ISOFile "$BootDir\multiboot\$JustISOName\$JustISO" ; Copy the ISO to ISO Directory
+ ExecWait '"$PLUGINSDIR\7zG.exe" e "$ISOFile" -ir!*nitrd.* -ir!*mlinuz -o"$BootDir\multiboot\$JustISOName\" -y'  
+ Rename "$BootDir\multiboot\$JustISOName\initrd.gz" "$BootDir\multiboot\$JustISOName\initrd.lz"  
+ ${WriteToFile} "#start $JustISOName$\r$\nLABEL $JustISOName$\r$\nMENU LABEL $JustISOName$\r$\nMENU INDENT 1$\r$\nKERNEL /multiboot/$JustISOName/vmlinuz$\r$\nAPPEND initrd=/multiboot/$JustISOName/initrd.lz cdrom-detect/try-usb=true persistent persistent-path=/multiboot/$JustISOName noprompt splash boot=casper iso-scan/filename=/multiboot/$JustISOName/$JustISO$\r$\n#end $JustISOName" $R0
+ 
+ ${If} $Casper != "0"
+ Call CasperScript
+ ${EndIf}
+ 
 ; OpenSUSE 32bit 
  ${ElseIf} $DistroName == "OpenSUSE 32bit"
  CopyFiles $ISOFile "$BootDir\multiboot\$JustISOName\$JustISO" ; Copy the ISO to ISO Directory
@@ -160,7 +171,7 @@ FunctionEnd
 
 ; OpenMediaVault - NOT WORKING YET
  ; ${ElseIf} $DistroName == "OpenMediaVault"
- ; CopyFiles $ISO\\nwhd2\Public\Images\LenovoThinkPadT420File "$BootDir\multiboot\$JustISOName\$JustISO" ; Copy the ISO to ISO Directory
+ ; CopyFiles $ISOFile "$BootDir\multiboot\$JustISOName\$JustISO" ; Copy the ISO to ISO Directory
  ; ExecWait '"$PLUGINSDIR\7zG.exe" e "$ISOFile" -ir!*nitrd -ir!*inux -o"$BootDir\multiboot\$JustISOName\" -y'  
  ; ${WriteToFile} "#start $JustISOName$\r$\nLABEL $JustISOName$\r$\nMENU LABEL $JustISOName$\r$\nMENU INDENT 1$\r$\nKERNEL /multiboot/$JustISOName/linux$\r$\nAPPEND initrd=/multiboot/$JustISOName/initrd ramdisk_size=512000 ramdisk_blocksize=4096 isofrom=/dev/disk/by-label/MULTIBOOT:/multiboot/$JustISOName/$JustISO isofrom_device=/dev/disk/by-label/MULTIBOOT isofrom_system=/multiboot/$JustISOName/$JustISO loader=syslinux$\r$\n#end $JustISOName" $R0 
  
@@ -500,9 +511,10 @@ FunctionEnd
    ${EndIf}   
    
 ; Archlinux
-   ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\arch\boot\syslinux\archiso.cfg"  
+   ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\arch\boot\syslinux\archiso.cfg"    
    !insertmacro ReplaceInFile "CONFIG /arch" "CONFIG /multiboot/$JustISOName/arch" "all" "all" "$BootDir\multiboot\$JustISOName\$CopyPath\$ConfigFile"  
    !insertmacro ReplaceInFile "APPEND /arch" "APPEND /multiboot/$JustISOName/arch" "all" "all" "$BootDir\multiboot\$JustISOName\$CopyPath\$ConfigFile" 
+      
    !insertmacro ReplaceInFile "archisobasedir=arch" "archisobasedir=/multiboot/$JustISOName/arch" "all" "all" "$BootDir\multiboot\$JustISOName\arch\boot\syslinux\archiso_pxe64.cfg"     
    !insertmacro ReplaceInFile "archisolabel=ARCH" "archisolabel=MULTIBOOT NULL=" "all" "all" "$BootDir\multiboot\$JustISOName\arch\boot\syslinux\archiso_pxe64.cfg"     
    !insertmacro ReplaceInFile "archisobasedir=arch" "archisobasedir=/multiboot/$JustISOName/arch" "all" "all" "$BootDir\multiboot\$JustISOName\arch\boot\syslinux\archiso_pxe32.cfg"     

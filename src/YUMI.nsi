@@ -9,7 +9,7 @@
 
 !define NAME "YUMI"
 !define FILENAME "YUMI"
-!define VERSION "2.0.0.0"
+!define VERSION "2.0.0.1"
 !define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\nsis1-install.ico"
 
 ; MoreInfo Plugin - Adds Version Tab fields to Properties. Plugin created by onad http://nsis.sourceforge.net/MoreInfo_plug-in
@@ -1033,13 +1033,17 @@ Function DoSyslinux ; Install Syslinux on USB
   CopyFiles "$PLUGINSDIR\vesamenu.c32" "$BootDir\multiboot\menu\vesamenu.c32"
   CopyFiles "$PLUGINSDIR\menu.c32" "$BootDir\multiboot\menu\menu.c32"  
   CopyFiles "$PLUGINSDIR\chain.c32" "$BootDir\multiboot\menu\chain.c32"
-  CopyFiles "$PLUGINSDIR\memdisk" "$BootDir\multiboot\menu\memdisk"   
+  CopyFiles "$PLUGINSDIR\memdisk" "$BootDir\multiboot\menu\memdisk"
+  CopyFiles "$PLUGINSDIR\libcom32.c32" "$BootDir\multiboot\menu\libcom32.c32"	
+  CopyFiles "$PLUGINSDIR\libutil.c32" "$BootDir\multiboot\menu\libutil.c32"  
   ${EndIf}    
 
 ; Check to ensure menu.c32 exists... now required for YUMI V2
   ${IfNot} ${FileExists} $BootDir\multiboot\menu.c32
    DetailPrint "Adding menu.c32. Required for YUMI V2"
-   CopyFiles "$PLUGINSDIR\menu.c32" "$BootDir\multiboot\menu.c32" 
+   CopyFiles "$PLUGINSDIR\menu.c32" "$BootDir\multiboot\menu.c32"
+   CopyFiles "$PLUGINSDIR\libcom32.c32" "$BootDir\multiboot\menu\libcom32.c32"	
+   CopyFiles "$PLUGINSDIR\libutil.c32" "$BootDir\multiboot\menu\libutil.c32" 
   ${EndIf}	  
 FunctionEnd
 

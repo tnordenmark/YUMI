@@ -24,6 +24,7 @@ Additional instructions for YUMI can be found HERE: http://www.pendrivelinux.com
 
 Changelog:
 
+02/20/14 Version 2.0.0.1: Fixed Linux Mint 16 Live Installer Crash!
 01/30/14 Version 2.0.0.0: Added support for JustBrowsing, Mythbuntu, Bugtraq II, and older pmagic_2013_05_01.iso.
 01/10/14 Version 1.9.9.9B: Added support for Fedora 20, LXLE Desktop. Fixed source compilation bug.
 12/11/13 Version 1.9.9.9: Re-enabled Dr.Web, Trinity, and RIP Linux. Support Elementary 32 bit.
